@@ -1,3 +1,7 @@
+# Data files
+.SAV
+.csv
+
 # History files
 .Rhistory
 .Rapp.history
