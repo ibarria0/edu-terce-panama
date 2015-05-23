@@ -1,0 +1,44 @@
+# Distribuciones de Resultados del TERCE
+
+Esta es una analisis de las distrubuciones resultados de las pruebas TERCE. El analisis fue hecho con R y las graficas con ggplot2.
+Para los histogramas se usarons bins de 20.
+
+## Loading y subsetting de datos
+```{r init,results="hide"}
+library(foreign)
+library(ggplot2)
+
+alumnos6 <- read.spss('QA6.SAV', to.data.frame=T)
+alumnos3 <- read.spss('QA3.SAV', to.data.frame=T)
+alumnos6$nivel <- '6'
+alumnos3$nivel <- '3'
+
+alumnos6_panama <- alumnos6[alumnos6$country == 'PAN',]
+alumnos3_panama <- alumnos3[alumnos3$country == 'PAN',]
+
+alumnos6_panama$DQA6IT01 <- as.factor(alumnos6_panama$DQA6IT01)
+alumnos3_panama$DQA3IT01 <- as.factor(alumnos3_panama$DQA3IT01)
+
+alumnos6_panama$DQA6IT02 <- as.factor(alumnos6_panama$DQA6IT02)
+alumnos3_panama$DQA3IT02 <- as.factor(alumnos3_panama$DQA3IT02)
+
+cols6 <- c("DQA6IT01","DQA6IT02","DQA6IT03_01","DQA6IT03_02","DQA6IT04_01","DQA6IT04_02","DQA6IT04_03","DQA6IT04_04","DQA6IT04_05","DQA6IT04_06","DQA6IT04a","DQA6IT04b","DQA6NIT05","DQA6IT06","DQA6NIT06a","DQA6IT07","DQA6IT07a","DQA6IT08","DQA6IT09","DQA6NIT10_01","DQA6NIT10_02","DQA6IT11_01","DQA6IT11_02","DQA6IT11_03","DQA6IT11_04","DQA6IT11_05","DQA6IT11_06","DQA6IT11_07","DQA6IT12_01","DQA6IT12_02","DQA6IT12_03","DQA6IT12_04","DQA6IT12_05","DQA6IT12_06","DQA6IT12_07","DQA6IT12_08","DQA6IT13","DQA6IT14","DQA6IT15_01","DQA6IT15_02","DQA6IT15_03","DQA6IT15_04","DQA6IT15_05","DQA6IT16","DQA6IT16a","DQA6IT17_01","DQA6IT17_02","DQA6IT17_03","DQA6IT17_04","DQA6IT17_05","DQA6IT17_06","DQA6IT17_07","DQA6IT17_08","DQA6IT17_09","DQA6IT17_10","DQA6IT17_11","DQA6IT17_12","DQA6IT17_13","DQA6IT17_14","DQA6IT17_15","DQA6IT17_16","DQA6IT17_17","DQA6IT17_18","DQA6IT17_19","DQA6IT17_20","DQA6IT17_21","DQA6IT17_22","DQA6IT17_23","DQA6IT17_24","DQA6IT17_25","DQA6IT17_26","DQA6IT17_27","DQA6IT17_28","DQA6IT17_29","DQA6IT18","DQA6IT19_01","DQA6IT19_02","DQA6IT19_03","DQA6IT19_04","DQA6IT19_05","DQA6IT19_06","DQA6IT20","DQA6IT21","DQA6IT22_01","DQA6IT22_02","DQA6IT22_03","DQA6IT22_04","DQA6IT23","DQA6IT24_01","DQA6IT24_02","DQA6IT24_03","DQA6IT24_04","DQA6IT25_01","DQA6IT25_02","DQA6IT25_03","DQA6IT25_04","DQA6IT25_05","DQA6IT25_06","DQA6IT25_07","DQA6IT25_08","DQA6IT26","DQA6IT26a","DQA6IT26b","DQA6IT27_01","DQA6IT27_02","DQA6IT27_03","DQA6IT27_04","DQA6IT27_05","DQA6IT28_01","DQA6IT28_02","DQA6IT28_03","DQA6IT28_04","DQA6IT28_05","DQA6IT29_01","DQA6IT29_02","DQA6IT30_01","DQA6IT30_02","DQA6IT31_01","DQA6IT31_02","DQA6IT31_03","DQA6IT31_04","DQA6IT31_05","DQA6IT31_06","DQA6IT32_01","DQA6IT32_02","DQA6IT32_03","DQA6IT32_04","DQA6IT32_05","DQA6IT32_06","DQA6IT32_07","DQA6IT32_08")
+
+
+cols3 <- c("DQA3IT01","DQA3IT02","DQA3IT03_01","DQA3IT03_02","DQA3IT04_01","DQA3IT04_02","DQA3IT04_03","DQA3IT04_04","DQA3IT04_05","DQA3IT04_06","DQA3IT05","DQA3IT06_01","DQA3IT06_02","DQA3IT06_03","DQA3IT06_04","DQA3IT06_05","DQA3IT07_01","DQA3IT07_02","DQA3IT07_03","DQA3IT07_04","DQA3IT07_05","DQA3IT08_01","DQA3IT08_02","DQA3IT08_03","DQA3IT09","DQA3IT10","DQA3IT11","DQA3IT12_01","DQA3IT12_02","DQA3IT12_03","DQA3IT12_04","DQA3IT12_05","DQA3IT12_06","DQA3IT12_07","DQA3IT12_08","DQA3IT12_09","DQA3IT13","DQA3IT13a","DQA3IT13b")
+```
+
+## ¿Como se ve la distribucion de estudiantes en terminos de edad y genero?
+### Estudiantes de 3to Grado
+```{r edad_genero_global_3, fig.width=12, fig.height=10}
+ggplot(alumnos3_panama, aes(x=DQA3IT01, fill=DQA3IT02)) + geom_histogram(alpha=.5, position="dodge") + scale_x_discrete(labels=c("7 años o menos","8 años","9 años", "10 años", "11 años", "12 años o mas", "NA")) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + scale_fill_discrete(labels=c("Niña","Niño")) + ylab("Cantidad de Estudiantes")
+```
+### Estudiantes de 6to Grado
+```{r edad_genero_global_6, fig.width=12, fig.height=10}
+ggplot(alumnos6_panama, aes(x=DQA6IT01, fill=DQA6IT02)) + geom_histogram(alpha=.5, position="dodge") + scale_x_discrete(labels=c("10 años o menos","11 años","12 años", "13 años", "14 años", "15 años o mas", "NA")) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + scale_fill_discrete(labels=c("Niña","Niño")) + ylab("Cantidad de Estudiantes")
+```
+
+## En tu sala, ¿hay un estante o caja con libros para que ustedes lean?
+```{r libros_3, fig.width=12, fig.height=10}
+ggplot(alumnos3_panama, aes(x=DQA3IT06_05, fill=)) + geom_histogram(alpha=.5, position="dodge") + scale_x_discrete(labels=c("No", "Si")) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + ylab("Cantidad de Estudiantes")
+```
