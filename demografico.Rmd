@@ -1,10 +1,9 @@
 # Distribuciones de Resultados del TERCE
 
 Esta es una analisis de las distrubuciones resultados de las pruebas TERCE. El analisis fue hecho con R y las graficas con ggplot2.
-Para los histogramas se usarons bins de 20.
 
 ## Loading y subsetting de datos
-```{r init,results="hide"}
+```{r init,results="hide",echo=F}
 library(foreign)
 library(ggplot2)
 
@@ -47,6 +46,9 @@ alumnos6_panama$DQA6IT02 <- as.factor(alumnos6_panama$DQA6IT02)
 alumnos3_panama$DQA3IT02 <- as.factor(alumnos3_panama$DQA3IT02)
 ```
 
+
+# Distribucion de Muestras
+
 ## ¿Como se ve la distribucion de escuelas en terminos de privada y publica?
 ### Escuelas de Estudiantes de 3er Grado
 ```{r ratio_publico_privado, fig.width=12, fig.height=10, echo=FALSE}
@@ -56,20 +58,6 @@ director3_panama <- director3[director3$country == 'PAN',]
 director3$dependencia = as.factor(director3$dependencia)
 ggplot(director3, aes(x=dependencia)) + geom_histogram() + facet_wrap( ~ country)
 ```
-
-## ¿Cuál de estos servicios tienes en tu hogar?_Conexión a Internet
-### Estudiantes de 6to Grado
-```{r internet, fig.width=12, fig.height=10, echo=FALSE}
-ggplot(alumnos6_panama, aes(x=factor(DQA6IT11_06),y=puntaje_estandar_mat)) + geom_boxplot()
-```
-
-## Puntaje Estandar de Matematicas vs Indice de uso recreacional de PC
-### Estudiantes de 6to Grado
-```{r puntaje_mat_indice_pcrecrea, fig.width=12, fig.height=10, echo=FALSE}
-ggplot(alumnos6_panama, aes(x=PCRECRA6,y=puntaje_estandar_mat)) + geom_point() + stat_smooth(se=F,method=loess)
-```
-
-
 
 ## ¿Como se ve la distribucion de estudiantes en terminos de edad y genero?
 ### Estudiantes de 3er Grado
@@ -81,6 +69,24 @@ ggplot(alumnos3_panama, aes(x=DQA3IT01, fill=DQA3IT02)) + geom_histogram(alpha=.
 ggplot(alumnos6_panama, aes(x=DQA6IT01, fill=DQA6IT02)) + geom_histogram(alpha=.5, position="dodge") + scale_x_discrete(labels=c("10 años o menos","11 años","12 años", "13 años", "14 años", "15 años o mas", "NA")) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + scale_fill_discrete(labels=c("Niña","Niño")) + ylab("Cantidad de Estudiantes")
 ```
 
-## En tu sala, ¿hay un estante o caja con libros para que ustedes lean?
-```{r libros_3, fig.width=12, fig.height=10}
+# Factores Asociados (Sexto Grado)
+
+## Distribucion de Puntaje Estandar por Tipo de pisos en casa
+```{r piso, fig.width=12, fig.height=10, echo=F}
+ggplot(alumnos6_panama, aes(x=factor(DQA6IT13),y=puntaje_estandar_mat,fill=factor(nina))) + geom_boxplot() + scale_x_discrete(labels=c("Tierra","Cemento","Madera sin pulir", "Baldosas, ceramica, o similar","Parquet, madera pulida, alfombra")) + xlab("¿De qué material es la mayor parte de los pisos de tu casa?") + ylab("Puntaje de Matematicas") + scale_fill_discrete(name="Genero",labels=c("Nino","Nina"))
+```
+
+## Distribucion de Puntaje Estandar por Repeticion de Cursos
+```{r repetido, fig.width=12, fig.height=10, echo=F}
+ggplot(alumnos6_panama, aes(x=factor(DQA6IT18),y=puntaje_estandar_mat,fill=factor(nina))) + geom_boxplot() + scale_x_discrete(labels=c("Nunca he repetido","Una Vez","Dos Veces","No Recuerdo","NA")) + xlab("¿Cuántas veces has repetido de curso?") + ylab("Puntaje de Matematicas") + scale_fill_discrete(name="Genero",labels=c("Nino","Nina"))
+```
+
+## Distribucion de Puntaje Estandar por Conexion a Internet
+```{r conexion_internet, fig.width=12, fig.height=10, echo=F}
+ggplot(alumnos6_panama, aes(x=factor(DQA6IT11_06),y=puntaje_estandar_mat,fill=factor(nina))) + geom_boxplot() + scale_x_discrete(labels=c("Si","No","NA")) + xlab("¿Tienex Conexión a Internet?") + ylab("Puntaje de Matematicas") + scale_fill_discrete(name="Genero",labels=c("Nino","Nina"))
+```
+
+## Puntaje Estandar de Matematicas vs Indice de uso recreacional de PC
+```{r puntaje_mat_indice_pcrecrea, fig.width=12, fig.height=10, echo=FALSE}
+ggplot(alumnos6_panama, aes(x=PCRECRA6,y=puntaje_estandar_mat)) + geom_point() + stat_smooth(se=F,method=loess)
 ```
