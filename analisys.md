@@ -51,6 +51,11 @@ benchmark <- function(x) {
 
 
 ## Prueba de Matematica
+
+### Puntaje promedio según ingreso per cápita
+![plot of chunk puntaje_prom_gdp](figure/puntaje_prom_gdp-1.png) 
+
+
 ### Histograma de Resultados Globales (incluyendo Panama)
 
 ```r
