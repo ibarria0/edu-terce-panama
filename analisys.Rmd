@@ -59,6 +59,17 @@ names(bench_lec_panama) <- c("benchmark","nivel", "estudiantes")
 ```
 
 ## Prueba de Matematica
+
+### Puntaje promedio según ingreso per cápita
+```{r puntaje_prom_gdp, fig.width=12, fig.height=10, echo=F}
+gdp <- read.csv('gdp.csv')
+names(gdp) <- c("Country_Name","country","gdp_2013")
+m <- merge(prueba_mat,gdp,by="country")
+a <- aggregate( puntaje_estandar ~ country + gdp_2013 + nivel, m, mean)
+ggplot(a, aes(x=gdp_2013, y=puntaje_estandar, fill=country, color=country, group=1)) + geom_point() + stat_smooth(method=loess, se=F) + geom_text(aes(label=country)) + facet_wrap( ~ nivel) 
+```
+
+
 ### Histograma de Resultados Globales (incluyendo Panama)
 ```{r histograma_m_global, fig.width=12, fig.height=10}
 ggplot(prueba_mat, aes(x=puntaje_estandar, fill=nivel)) + geom_histogram(alpha=.5, position="identity",binwidth=20)
