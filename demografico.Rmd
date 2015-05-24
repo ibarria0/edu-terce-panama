@@ -14,8 +14,7 @@ director3 <- read.spss('QD3.SAV', to.data.frame=T)
 alumnos6 <- read.spss('QA6.SAV', to.data.frame=T)
 alumnos3 <- read.spss('QA3.SAV', to.data.frame=T)
 
-alumnos6 <- merge(alumnos6,director6,by="idschool")
-alumnos3 <- merge(alumnos3,director3,by="idschool")
+
 
 alumnos6$nivel <- '6'
 alumnos3$nivel <- '3'
@@ -27,13 +26,21 @@ alumnos3_panama <- alumnos3[alumnos3$country == 'PAN',]
 alumnos6_panama$DQA6IT01 <- as.factor(alumnos6_panama$DQA6IT01)
 alumnos3_panama$DQA3IT01 <- as.factor(alumnos3_panama$DQA3IT01)
 
-alumnos6_panama$DQA6IT02 <- as.factor(alumnos6_panama$DQA6IT02)
-alumnos3_panama$DQA3IT02 <- as.factor(alumnos3_panama$DQA3IT02)
 
 ```
 
+## ¿Como se ve la distribucion de escuelas en terminos de privada y publica?
+### Escuelas de Estudiantes de 3er Grado
+```{r ratio_publico_privado, fig.width=12, fig.height=10, echo=FALSE}
+
+director6_panama <- director6[director6$country == 'PAN',]
+director3_panama <- director3[director3$country == 'PAN',]
+director3$dependencia = as.factor(director3$dependencia)
+ggplot(director3, aes(x=dependencia)) + geom_histogram() + facet_wrap( ~ country)
+```
+
 ## ¿Como se ve la distribucion de estudiantes en terminos de edad y genero?
-### Estudiantes de 3to Grado
+### Estudiantes de 3er Grado
 ```{r edad_genero_global_3, fig.width=12, fig.height=10}
 ggplot(alumnos3_panama, aes(x=DQA3IT01, fill=DQA3IT02)) + geom_histogram(alpha=.5, position="dodge") + scale_x_discrete(labels=c("7 años o menos","8 años","9 años", "10 años", "11 años", "12 años o mas", "NA")) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + scale_fill_discrete(labels=c("Niña","Niño")) + ylab("Cantidad de Estudiantes")
 ```
