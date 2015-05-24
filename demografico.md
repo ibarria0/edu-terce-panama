@@ -9,14 +9,16 @@ Esta es una analisis de las distrubuciones resultados de las pruebas TERCE. El a
 ```
 
 
-# Distribucion de Muestras
+## Distribucion de Muestras
 
-## ¿Como se ve la distribucion de escuelas en terminos de privada y publica?
-### Escuelas de Estudiantes de 3er Grado
+### ¿Como se ve la distribucion de escuelas en terminos de privada y publica?
+#### Escuelas de Estudiantes de 3er Grado
 ![plot of chunk ratio_publico_privado](figure/ratio_publico_privado-1.png) 
+#### Escuelas de Estudiantes de 3er Grado
+![plot of chunk ratio_publico_privado6](figure/ratio_publico_privado6-1.png) 
 
-## ¿Como se ve la distribucion de estudiantes en terminos de edad y genero?
-### Estudiantes de 3er Grado
+### ¿Como se ve la distribucion de estudiantes en terminos de edad y genero?
+#### Estudiantes de 3er Grado
 ![plot of chunk edad_genero_global_3](figure/edad_genero_global_3-1.png) 
 ### Estudiantes de 6to Grado
 ![plot of chunk edad_genero_global_6](figure/edad_genero_global_6-1.png) 
@@ -34,3 +36,15 @@ Esta es una analisis de las distrubuciones resultados de las pruebas TERCE. El a
 
 ## Puntaje Estandar de Matematicas vs Indice de uso recreacional de PC
 ![plot of chunk puntaje_mat_indice_pcrecrea](figure/puntaje_mat_indice_pcrecrea-1.png) 
+
+## Puntaje Estandar de Matematicas vs Indice de Condiciones de estudio en el hogar 
+![plot of chunk puntaje_mat_indice_condia6](figure/puntaje_mat_indice_condia6-1.png) 
+
+## Puntaje Estandar de Matematicas vs Indice de uso de libros en el hogar
+![plot of chunk puntaje_mat_indice_usolia6](figure/puntaje_mat_indice_usolia6-1.png) 
+
+## Puntaje Estandar de Matematicas vs Indice de actividades recreativas del hogar 
+![plot of chunk puntaje_mat_indice_tmpliba6](figure/puntaje_mat_indice_tmpliba6-1.png) 
+
+## Puntaje Estandar de Matematicas vs Indice de Asistencia del Docente 
+![plot of chunk puntaje_mat_indice_asisdoa6](figure/puntaje_mat_indice_asisdoa6-1.png) 
