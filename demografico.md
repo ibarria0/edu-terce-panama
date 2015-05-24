@@ -8,6 +8,14 @@ Esta es una analisis de las distrubuciones resultados de las pruebas TERCE. El a
 ## Loading required package: methods
 ```
 
+```
+## Error in `$<-.data.frame`(`*tmp*`, "dependencia", value = structure(integer(0), .Label = character(0), class = "factor")): replacement has 0 rows, data has 67730
+```
+
+```
+## Error in `$<-.data.frame`(`*tmp*`, "ruralidad", value = structure(integer(0), .Label = character(0), class = "factor")): replacement has 0 rows, data has 67730
+```
+
 
 ## Distribucion de Muestras
 
@@ -20,31 +28,43 @@ Esta es una analisis de las distrubuciones resultados de las pruebas TERCE. El a
 ### ¿Como se ve la distribucion de estudiantes en terminos de edad y genero?
 #### Estudiantes de 3er Grado
 ![plot of chunk edad_genero_global_3](figure/edad_genero_global_3-1.png) 
-### Estudiantes de 6to Grado
+#### Estudiantes de 6to Grado
 ![plot of chunk edad_genero_global_6](figure/edad_genero_global_6-1.png) 
 
-# Factores Asociados (Sexto Grado)
+### Distribucion de puntaje por ruralidad, dependencia y genero
+#### Estudiantes de 6to Grado
 
-## Distribucion de Puntaje Estandar por Tipo de pisos en casa
+```
+## stat_bin: binwidth defaulted to range/30. Use 'binwidth = x' to adjust this.
+## stat_bin: binwidth defaulted to range/30. Use 'binwidth = x' to adjust this.
+## stat_bin: binwidth defaulted to range/30. Use 'binwidth = x' to adjust this.
+## stat_bin: binwidth defaulted to range/30. Use 'binwidth = x' to adjust this.
+```
+
+![plot of chunk puntaje_dependendia_ruralidad_6](figure/puntaje_dependendia_ruralidad_6-1.png) 
+
+## Factores Asociados (Sexto Grado)
+
+### Distribucion de Puntaje Estandar por Tipo de pisos en casa
 ![plot of chunk piso](figure/piso-1.png) 
 
-## Distribucion de Puntaje Estandar por Repeticion de Cursos
+### Distribucion de Puntaje Estandar por Repeticion de Cursos
 ![plot of chunk repetido](figure/repetido-1.png) 
 
-## Distribucion de Puntaje Estandar por Conexion a Internet
+### Distribucion de Puntaje Estandar por Conexion a Internet
 ![plot of chunk conexion_internet](figure/conexion_internet-1.png) 
 
-## Puntaje Estandar de Matematicas vs Indice de uso recreacional de PC
+### Puntaje Estandar de Matematicas vs Indice de uso recreacional de PC
 ![plot of chunk puntaje_mat_indice_pcrecrea](figure/puntaje_mat_indice_pcrecrea-1.png) 
 
-## Puntaje Estandar de Matematicas vs Indice de Condiciones de estudio en el hogar 
+### Puntaje Estandar de Matematicas vs Indice de Condiciones de estudio en el hogar 
 ![plot of chunk puntaje_mat_indice_condia6](figure/puntaje_mat_indice_condia6-1.png) 
 
-## Puntaje Estandar de Matematicas vs Indice de uso de libros en el hogar
+### Puntaje Estandar de Matematicas vs Indice de uso de libros en el hogar
 ![plot of chunk puntaje_mat_indice_usolia6](figure/puntaje_mat_indice_usolia6-1.png) 
 
-## Puntaje Estandar de Matematicas vs Indice de actividades recreativas del hogar 
+### Puntaje Estandar de Matematicas vs Indice de actividades recreativas del hogar 
 ![plot of chunk puntaje_mat_indice_tmpliba6](figure/puntaje_mat_indice_tmpliba6-1.png) 
 
-## Puntaje Estandar de Matematicas vs Indice de Asistencia del Docente 
+### Puntaje Estandar de Matematicas vs Indice de Asistencia del Docente 
 ![plot of chunk puntaje_mat_indice_asisdoa6](figure/puntaje_mat_indice_asisdoa6-1.png) 

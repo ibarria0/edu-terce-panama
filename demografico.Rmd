@@ -31,6 +31,19 @@ names(pl3) <- c("sID","puntaje_estandar_lec")
 alumnos6 <- merge(alumnos6,pm6,by="sID")
 alumnos6 <- merge(alumnos6,pl6,by="sID")
 
+alumnos6$DQA6IT01 <- as.factor(alumnos6$DQA6IT01)
+alumnos3$DQA3IT01 <- as.factor(alumnos3$DQA3IT01)
+
+alumnos6$DQA6IT02 <- as.factor(alumnos6$DQA6IT02)
+alumnos3$DQA3IT02 <- as.factor(alumnos3$DQA3IT02)
+
+alumnos6$dependencia <- as.factor(alumnos6$dependencia)
+alumnos3$dependencia <- as.factor(alumnos3$dependencia)
+levels(alumnos6$dependencia) <- c("Publico","Privado")
+
+alumnos6$ruralidad <- as.factor(alumnos6$ruralidad)
+alumnos3$ruralidad <- as.factor(alumnos3$ruralidad)
+levels(alumnos6$ruralidad) <- c("Urbano","Rural")
 
 alumnos6$nivel <- '6'
 alumnos3$nivel <- '3'
@@ -38,12 +51,6 @@ alumnos3$nivel <- '3'
 alumnos6_panama <- alumnos6[alumnos6$country == 'PAN',]
 alumnos3_panama <- alumnos3[alumnos3$country == 'PAN',]
 
-
-alumnos6_panama$DQA6IT01 <- as.factor(alumnos6_panama$DQA6IT01)
-alumnos3_panama$DQA3IT01 <- as.factor(alumnos3_panama$DQA3IT01)
-
-alumnos6_panama$DQA6IT02 <- as.factor(alumnos6_panama$DQA6IT02)
-alumnos3_panama$DQA3IT02 <- as.factor(alumnos3_panama$DQA3IT02)
 
 director6_panama <- director6[director6$country == 'PAN',]
 director6$dependencia = as.factor(director6$dependencia)
@@ -70,49 +77,55 @@ ggplot(director6, aes(x=dependencia)) + geom_histogram() + facet_wrap( ~ country
 ```{r edad_genero_global_3, fig.width=12, fig.height=10, echo=F}
 ggplot(alumnos3_panama, aes(x=DQA3IT01, fill=DQA3IT02)) + geom_histogram(alpha=.5, position="dodge") + scale_x_discrete(labels=c("7 años o menos","8 años","9 años", "10 años", "11 años", "12 años o mas", "NA")) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + scale_fill_discrete(labels=c("Niña","Niño")) + ylab("Cantidad de Estudiantes")
 ```
-### Estudiantes de 6to Grado
+#### Estudiantes de 6to Grado
 ```{r edad_genero_global_6, fig.width=12, fig.height=10, echo=F}
 ggplot(alumnos6_panama, aes(x=DQA6IT01, fill=DQA6IT02)) + geom_histogram(alpha=.5, position="dodge") + scale_x_discrete(labels=c("10 años o menos","11 años","12 años", "13 años", "14 años", "15 años o mas", "NA")) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + scale_fill_discrete(labels=c("Niña","Niño")) + ylab("Cantidad de Estudiantes")
 ```
 
-# Factores Asociados (Sexto Grado)
+### Distribucion de puntaje por ruralidad, dependencia y genero
+#### Estudiantes de 6to Grado
+```{r puntaje_dependendia_ruralidad_6, fig.width=12, fig.height=10, echo=F}
+ggplot(alumnos6_panama, aes(x=puntaje_estandar_mat,fill=factor(nina))) + geom_histogram(alpha=.5, position="identity") + scale_fill_discrete(name="Genero",labels=c("Nino","Nina")) + facet_grid(ruralidad ~ dependencia)
+```
 
-## Distribucion de Puntaje Estandar por Tipo de pisos en casa
+## Factores Asociados (Sexto Grado)
+
+### Distribucion de Puntaje Estandar por Tipo de pisos en casa
 ```{r piso, fig.width=12, fig.height=10, echo=F}
 ggplot(alumnos6_panama, aes(x=factor(DQA6IT13),y=puntaje_estandar_mat,fill=factor(nina))) + geom_boxplot() + scale_x_discrete(labels=c("Tierra","Cemento","Madera sin pulir", "Baldosas, ceramica, o similar","Parquet, madera pulida, alfombra")) + xlab("¿De qué material es la mayor parte de los pisos de tu casa?") + ylab("Puntaje de Matematicas") + scale_fill_discrete(name="Genero",labels=c("Nino","Nina"))
 ```
 
-## Distribucion de Puntaje Estandar por Repeticion de Cursos
+### Distribucion de Puntaje Estandar por Repeticion de Cursos
 ```{r repetido, fig.width=12, fig.height=10, echo=F}
 ggplot(alumnos6_panama, aes(x=factor(DQA6IT18),y=puntaje_estandar_mat,fill=factor(nina))) + geom_boxplot() + scale_x_discrete(labels=c("Nunca he repetido","Una Vez","Dos Veces","No Recuerdo","NA")) + xlab("¿Cuántas veces has repetido de curso?") + ylab("Puntaje de Matematicas") + scale_fill_discrete(name="Genero",labels=c("Nino","Nina"))
 ```
 
-## Distribucion de Puntaje Estandar por Conexion a Internet
+### Distribucion de Puntaje Estandar por Conexion a Internet
 ```{r conexion_internet, fig.width=12, fig.height=10, echo=F}
 ggplot(alumnos6_panama, aes(x=factor(DQA6IT11_06),y=puntaje_estandar_mat,fill=factor(nina))) + geom_boxplot() + scale_x_discrete(labels=c("Si","No","NA")) + xlab("¿Tienex Conexión a Internet?") + ylab("Puntaje de Matematicas") + scale_fill_discrete(name="Genero",labels=c("Nino","Nina"))
 ```
 
-## Puntaje Estandar de Matematicas vs Indice de uso recreacional de PC
+### Puntaje Estandar de Matematicas vs Indice de uso recreacional de PC
 ```{r puntaje_mat_indice_pcrecrea, fig.width=12, fig.height=10, echo=FALSE}
 ggplot(alumnos6_panama, aes(x=PCRECRA6,y=puntaje_estandar_mat,color=factor(nina))) + geom_point() + stat_smooth(se=F,method=loess) + scale_colour_discrete(name="Genero",labels=c("Nino","Nina"))
 ```
 
-## Puntaje Estandar de Matematicas vs Indice de Condiciones de estudio en el hogar 
+### Puntaje Estandar de Matematicas vs Indice de Condiciones de estudio en el hogar 
 ```{r puntaje_mat_indice_condia6, fig.width=12, fig.height=10, echo=FALSE}
 ggplot(alumnos6_panama, aes(x=CONDIA6,y=puntaje_estandar_mat,color=factor(nina))) + geom_point() + stat_smooth(se=F,method=loess) + scale_colour_discrete(name="Genero",labels=c("Nino","Nina"))
 ```
 
-## Puntaje Estandar de Matematicas vs Indice de uso de libros en el hogar
+### Puntaje Estandar de Matematicas vs Indice de uso de libros en el hogar
 ```{r puntaje_mat_indice_usolia6, fig.width=12, fig.height=10, echo=FALSE}
 ggplot(alumnos6_panama, aes(x=USOLIA6,y=puntaje_estandar_mat,color=factor(nina))) + geom_point() + stat_smooth(se=F,method=loess) + scale_colour_discrete(name="Genero",labels=c("Nino","Nina"))
 ```
 
-## Puntaje Estandar de Matematicas vs Indice de actividades recreativas del hogar 
+### Puntaje Estandar de Matematicas vs Indice de actividades recreativas del hogar 
 ```{r puntaje_mat_indice_tmpliba6, fig.width=12, fig.height=10, echo=FALSE}
 ggplot(alumnos6_panama, aes(x=TMPLIBA6,y=puntaje_estandar_mat,color=factor(nina))) + geom_point() + stat_smooth(se=F,method=loess) + scale_colour_discrete(name="Genero",labels=c("Nino","Nina"))
 ```
 
-## Puntaje Estandar de Matematicas vs Indice de Asistencia del Docente 
+### Puntaje Estandar de Matematicas vs Indice de Asistencia del Docente 
 ```{r puntaje_mat_indice_asisdoa6, fig.width=12, fig.height=10, echo=FALSE}
 ggplot(alumnos6_panama, aes(x=ASISDOA6,y=puntaje_estandar_mat,color=factor(nina))) + geom_point() + stat_smooth(se=F,method=loess) + scale_colour_discrete(name="Genero",labels=c("Nino","Nina"))
 ```
