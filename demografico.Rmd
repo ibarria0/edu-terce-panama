@@ -107,25 +107,25 @@ ggplot(alumnos6_panama, aes(x=factor(DQA6IT11_06),y=puntaje_estandar_mat,fill=fa
 
 ### Puntaje Estandar de Matematicas vs Indice de uso recreacional de PC
 ```{r puntaje_mat_indice_pcrecrea, fig.width=12, fig.height=10, echo=FALSE}
-ggplot(alumnos6_panama, aes(x=PCRECRA6,y=puntaje_estandar_mat,color=factor(nina))) + geom_point() + stat_smooth(se=F,method=loess) + scale_colour_discrete(name="Genero",labels=c("Nino","Nina"))
+ggplot(alumnos6_panama, aes(x=PCRECRA6,y=puntaje_estandar_mat,color=factor(nina))) + geom_point() + stat_smooth(se=F,method=lm) + scale_colour_discrete(name="Genero",labels=c("Nino","Nina"))
 ```
 
 ### Puntaje Estandar de Matematicas vs Indice de Condiciones de estudio en el hogar 
 ```{r puntaje_mat_indice_condia6, fig.width=12, fig.height=10, echo=FALSE}
-ggplot(alumnos6_panama, aes(x=CONDIA6,y=puntaje_estandar_mat,color=factor(nina))) + geom_point() + stat_smooth(se=F,method=loess) + scale_colour_discrete(name="Genero",labels=c("Nino","Nina"))
+ggplot(alumnos6_panama, aes(x=CONDIA6,y=puntaje_estandar_mat,color=factor(nina))) + geom_point() + stat_smooth(se=F,method=lm) + scale_colour_discrete(name="Genero",labels=c("Nino","Nina"))
 ```
 
 ### Puntaje Estandar de Matematicas vs Indice de uso de libros en el hogar
 ```{r puntaje_mat_indice_usolia6, fig.width=12, fig.height=10, echo=FALSE}
-ggplot(alumnos6_panama, aes(x=USOLIA6,y=puntaje_estandar_mat,color=factor(nina))) + geom_point() + stat_smooth(se=F,method=loess) + scale_colour_discrete(name="Genero",labels=c("Nino","Nina"))
+ggplot(alumnos6_panama, aes(x=USOLIA6,y=puntaje_estandar_mat,color=factor(nina))) + geom_point() + stat_smooth(se=F,method=lm) + scale_colour_discrete(name="Genero",labels=c("Nino","Nina"))
 ```
 
 ### Puntaje Estandar de Matematicas vs Indice de actividades recreativas del hogar 
 ```{r puntaje_mat_indice_tmpliba6, fig.width=12, fig.height=10, echo=FALSE}
-ggplot(alumnos6_panama, aes(x=TMPLIBA6,y=puntaje_estandar_mat,color=factor(nina))) + geom_point() + stat_smooth(se=F,method=loess) + scale_colour_discrete(name="Genero",labels=c("Nino","Nina"))
+ggplot(alumnos6_panama, aes(x=TMPLIBA6,y=puntaje_estandar_mat,color=factor(nina))) + geom_point() + stat_smooth(se=F,method=lm) + scale_colour_discrete(name="Genero",labels=c("Nino","Nina"))
 ```
 
 ### Puntaje Estandar de Matematicas vs Indice de Asistencia del Docente 
 ```{r puntaje_mat_indice_asisdoa6, fig.width=12, fig.height=10, echo=FALSE}
-ggplot(alumnos6_panama, aes(x=ASISDOA6,y=puntaje_estandar_mat,color=factor(nina))) + geom_point() + stat_smooth(se=F,method=loess) + scale_colour_discrete(name="Genero",labels=c("Nino","Nina"))
+ggplot(alumnos6_panama, aes(x=ASISDOA6,y=puntaje_estandar_mat,color=factor(nina))) + geom_point() + stat_smooth(se=F,method=lm) + scale_colour_discrete(name="Genero",labels=c("Nino","Nina"))
 ```
