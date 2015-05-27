@@ -66,7 +66,7 @@ gdp <- read.csv('gdp.csv')
 names(gdp) <- c("Country_Name","country","gdp_2013")
 m <- merge(prueba_mat,gdp,by="country")
 a <- aggregate( puntaje_estandar ~ country + gdp_2013 + nivel, m, mean)
-ggplot(a, aes(x=gdp_2013, y=puntaje_estandar, fill=country, color=country, group=1)) + geom_point() + stat_smooth(method=loess, se=F) + geom_text(aes(label=country)) + facet_wrap( ~ nivel) 
+ggplot(a, aes(x=gdp_2013, y=puntaje_estandar, fill=country, color=country, group=1)) + geom_point() + stat_smooth(method=lm, se=F) + geom_text(aes(label=country)) + facet_wrap( ~ nivel) + xlab("Ingreso per Capita") + ylab("Puntaje Promedio") + ggtitle("Puntaje promedio de matematica según ingreso per cápita por nivel (3ro y 6to)")
 ```
 
 
