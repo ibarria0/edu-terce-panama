@@ -4,43 +4,56 @@ Esta es una analisis de las distrubuciones resultados de las pruebas TERCE. El a
 
 ## Loading y subsetting de datos
 
+```
+## Loading required package: methods
+```
+## Puntaje promedio por pais
+
+```
+## Error in ggplot(alumnos, aes(x = nivel_grado, y = puntaje_estandar_mat, : object 'alumnos' not found
+```
+
+```
+## Error in ggplot(alumnos, aes(x = nivel_grado, y = puntaje_estandar_lec, : object 'alumnos' not found
+```
+
+```
+## Error in multiplot(mat, lec): object 'mat' not found
+```
+
 
 ## Puntaje promedio según ingreso per cápita
 
 ### Matematica
-![plot of chunk puntaje_prom_gdp_mat](figure/puntaje_prom_gdp_mat-1.png) 
+
 
 ### Lectura
-![plot of chunk puntaje_prom_gdp_lec](figure/puntaje_prom_gdp_lec-1.png) 
 
 
 ## Distribucion de Muestras
 
-### ¿Como se ve la distribucion de escuelas en terminos de privada y publica?
-#### Escuelas de Estudiantes de 3er Grado
-![plot of chunk ratio_publico_privado](figure/ratio_publico_privado-1.png) 
-#### Escuelas de Estudiantes de 3er Grado
-![plot of chunk ratio_publico_privado6](figure/ratio_publico_privado6-1.png) 
-
 ### ¿Como se ve la distribucion de estudiantes en terminos de edad y genero?
 #### Estudiantes de 3er Grado
-![plot of chunk edad_genero_global_3](figure/edad_genero_global_3-1.png) 
+
+```
+## Error in exists(name, envir = env, mode = mode): argument "env" is missing, with no default
+```
 #### Estudiantes de 6to Grado
-![plot of chunk edad_genero_global_6](figure/edad_genero_global_6-1.png) 
+
+```
+## Error in exists(name, envir = env, mode = mode): argument "env" is missing, with no default
+```
 
 ### Distribucion de puntaje por ruralidad, dependencia y genero
 #### Estudiantes de 6to Grado
 
 ```
-## stat_bin: binwidth defaulted to range/30. Use 'binwidth = x' to adjust this.
-## stat_bin: binwidth defaulted to range/30. Use 'binwidth = x' to adjust this.
-## stat_bin: binwidth defaulted to range/30. Use 'binwidth = x' to adjust this.
-## stat_bin: binwidth defaulted to range/30. Use 'binwidth = x' to adjust this.
+## Error in `[.data.frame`(base, names(rows)): undefined columns selected
 ```
 
-![plot of chunk puntaje_dependendia_ruralidad_6](figure/puntaje_dependendia_ruralidad_6-1.png) 
-
 ## Factores Asociados (Sexto Grado)
+### Distribucion de Puntaje Estandar por tipo de relación laboral tiene con este centro educativo (profesor)
+![plot of chunk rel_prof](figure/rel_prof-1.png) 
 
 ### Distribucion de Puntaje Estandar por Tipo de pisos en casa
 ![plot of chunk piso](figure/piso-1.png) 
