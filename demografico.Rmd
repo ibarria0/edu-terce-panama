@@ -6,23 +6,23 @@ Esta es una analisis de las distrubuciones resultados de las pruebas TERCE. El a
 ```{r init,results="hide",echo=F}
 library(foreign)
 library(ggplot2)
+library(plyr)
 
-director6 <- read.spss('QD6.SAV', to.data.frame=T)
-director3 <- read.spss('QD3.SAV', to.data.frame=T)
+director6 <- read.spss('./data/Directores/QD6.SAV', to.data.frame=T)
+director3 <- read.spss('./data/Directores/QD3.SAV', to.data.frame=T)
 
-alumnos6 <- read.spss('QA6.SAV', to.data.frame=T)
-alumnos3 <- read.spss('QA3.SAV', to.data.frame=T)
+alumnos6 <- read.spss('./data/Alumnos/QA6.SAV', to.data.frame=T)
+alumnos3 <- read.spss('./data/Alumnos/QA3.SAV', to.data.frame=T)
 
-pm6 <- read.spss('PM6_TERCE.SAV', to.data.frame=T)
-pm3 <- read.spss('PM3_TERCE.SAV', to.data.frame=T)
-
+pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_TERCE.SAV', to.data.frame=T)
+pm3 <- read.spss('./data/Puntajes_Alumnos/PM3_TERCE.SAV', to.data.frame=T)
 pm6 <- pm6[,c("sID","puntaje_estandar")]
 pm3 <- pm3[,c("sID","puntaje_estandar")]
 names(pm6) <- c("sID","puntaje_estandar_mat")
 names(pm3) <- c("sID","puntaje_estandar_mat")
 
-pl6 <- read.spss('PL6_TERCE.SAV', to.data.frame=T)
-pl3 <- read.spss('PL3_TERCE.SAV', to.data.frame=T)
+pl6 <- read.spss('./data/Puntajes_Alumnos/PL6_TERCE.SAV', to.data.frame=T)
+pl3 <- read.spss('./data/Puntajes_Alumnos/PL3_TERCE.SAV', to.data.frame=T)
 pl6 <- pl6[,c("sID","puntaje_estandar")]
 pl3 <- pl3[,c("sID","puntaje_estandar")]
 names(pl6) <- c("sID","puntaje_estandar_lec")
@@ -31,6 +31,9 @@ names(pl3) <- c("sID","puntaje_estandar_lec")
 alumnos6 <- merge(alumnos6,pm6,by="sID")
 alumnos6 <- merge(alumnos6,pl6,by="sID")
 
+alumnos3 <- merge(alumnos3,pm3,by="sID")
+alumnos3 <- merge(alumnos3,pl3,by="sID")
+
 alumnos6$DQA6IT01 <- as.factor(alumnos6$DQA6IT01)
 alumnos3$DQA3IT01 <- as.factor(alumnos3$DQA3IT01)
 
@@ -38,11 +41,9 @@ alumnos6$DQA6IT02 <- as.factor(alumnos6$DQA6IT02)
 alumnos3$DQA3IT02 <- as.factor(alumnos3$DQA3IT02)
 
 alumnos6$dependencia <- as.factor(alumnos6$dependencia)
-alumnos3$dependencia <- as.factor(alumnos3$dependencia)
 levels(alumnos6$dependencia) <- c("Publico","Privado")
 
 alumnos6$ruralidad <- as.factor(alumnos6$ruralidad)
-alumnos3$ruralidad <- as.factor(alumnos3$ruralidad)
 levels(alumnos6$ruralidad) <- c("Urbano","Rural")
 
 alumnos6$nivel <- '6'
@@ -51,12 +52,34 @@ alumnos3$nivel <- '3'
 alumnos6_panama <- alumnos6[alumnos6$country == 'PAN',]
 alumnos3_panama <- alumnos3[alumnos3$country == 'PAN',]
 
+alumnos <- rbind.fill(alumnos6,alumnos3)
+alumnos_panama <- alumnos[alumnos$country == 'PAN',]
 
 director6_panama <- director6[director6$country == 'PAN',]
 director6$dependencia = as.factor(director6$dependencia)
 
 director3_panama <- director3[director3$country == 'PAN',]
 director3$dependencia = as.factor(director3$dependencia)
+
+gdp <- read.csv('./data/suplemental/gdp.csv') 
+names(gdp) <- c("Country_Name","country","gdp_2013") 
+
+```
+
+## Puntaje promedio según ingreso per cápita
+
+### Matematica
+```{r puntaje_prom_gdp_mat, fig.width=12, fig.height=10, echo=F}
+m <- merge(alumnos,gdp,by="country") 
+a <- aggregate( puntaje_estandar_mat ~ country + gdp_2013 + nivel, m, mean) 
+ggplot(a, aes(x=gdp_2013, y=puntaje_estandar_mat, fill=country, color=country, group=1)) + geom_point() + stat_smooth(method=lm, se=F) + geom_text(aes(label=country)) + facet_wrap( ~ nivel) + xlab("Ingreso per Capita") + ylab("Puntaje Promedio") + ggtitle("Puntaje promedio de matematica según ingreso per cápita por nivel (3ro y 6to)")
+```
+
+### Lectura
+```{r puntaje_prom_gdp_lec, fig.width=12, fig.height=10, echo=F}
+m <- merge(alumnos,gdp,by="country") 
+a <- aggregate( puntaje_estandar_lec ~ country + gdp_2013 + nivel, m, mean) 
+ggplot(a, aes(x=gdp_2013, y=puntaje_estandar_lec, fill=country, color=country, group=1)) + geom_point() + stat_smooth(method=lm, se=F) + geom_text(aes(label=country)) + facet_wrap( ~ nivel) + xlab("Ingreso per Capita") + ylab("Puntaje Promedio") + ggtitle("Puntaje promedio de matematica según ingreso per cápita por nivel (3ro y 6to)")
 ```
 
 

@@ -4,17 +4,14 @@ Esta es una analisis de las distrubuciones resultados de las pruebas TERCE. El a
 
 ## Loading y subsetting de datos
 
-```
-## Loading required package: methods
-```
 
-```
-## Error in `$<-.data.frame`(`*tmp*`, "dependencia", value = structure(integer(0), .Label = character(0), class = "factor")): replacement has 0 rows, data has 67730
-```
+## Puntaje promedio según ingreso per cápita
 
-```
-## Error in `$<-.data.frame`(`*tmp*`, "ruralidad", value = structure(integer(0), .Label = character(0), class = "factor")): replacement has 0 rows, data has 67730
-```
+### Matematica
+![plot of chunk puntaje_prom_gdp_mat](figure/puntaje_prom_gdp_mat-1.png) 
+
+### Lectura
+![plot of chunk puntaje_prom_gdp_lec](figure/puntaje_prom_gdp_lec-1.png) 
 
 
 ## Distribucion de Muestras
