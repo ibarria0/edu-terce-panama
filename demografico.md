@@ -10,46 +10,53 @@ Esta es una analisis de las distrubuciones resultados de las pruebas TERCE. El a
 ## Puntaje promedio por pais
 
 ```
-## Error in ggplot(alumnos, aes(x = nivel_grado, y = puntaje_estandar_mat, : object 'alumnos' not found
+## Warning: Removed 874 rows containing non-finite values (stat_boxplot).
 ```
 
-```
-## Error in ggplot(alumnos, aes(x = nivel_grado, y = puntaje_estandar_lec, : object 'alumnos' not found
-```
-
-```
-## Error in multiplot(mat, lec): object 'mat' not found
-```
+![plot of chunk prom_por_pais](figure/prom_por_pais-1.png) 
 
 
 ## Puntaje promedio según ingreso per cápita
 
 ### Matematica
 
+```
+## Error in fix.by(by.x, x): 'by' must specify a uniquely valid column
+```
+
+```
+## Error in eval(expr, envir, enclos): object 'm' not found
+```
+
+```
+## Error in ggplot(a, aes(x = gdp_2013, y = puntaje_estandar_mat, fill = country, : object 'a' not found
+```
 
 ### Lectura
 
+```
+## Error in fix.by(by.x, x): 'by' must specify a uniquely valid column
+```
+
+```
+## Error in eval(expr, envir, enclos): object 'm' not found
+```
+
+```
+## Error in ggplot(a, aes(x = gdp_2013, y = puntaje_estandar_lec, fill = country, : object 'a' not found
+```
 
 ## Distribucion de Muestras
 
 ### ¿Como se ve la distribucion de estudiantes en terminos de edad y genero?
 #### Estudiantes de 3er Grado
-
-```
-## Error in exists(name, envir = env, mode = mode): argument "env" is missing, with no default
-```
+![plot of chunk edad_genero_global_3](figure/edad_genero_global_3-1.png) 
 #### Estudiantes de 6to Grado
-
-```
-## Error in exists(name, envir = env, mode = mode): argument "env" is missing, with no default
-```
+![plot of chunk edad_genero_global_6](figure/edad_genero_global_6-1.png) 
 
 ### Distribucion de puntaje por ruralidad, dependencia y genero
 #### Estudiantes de 6to Grado
-
-```
-## Error in `[.data.frame`(base, names(rows)): undefined columns selected
-```
+![plot of chunk puntaje_dependendia_ruralidad_6](figure/puntaje_dependendia_ruralidad_6-1.png) 
 
 ## Factores Asociados (Sexto Grado)
 ### Distribucion de Puntaje Estandar por tipo de relación laboral tiene con este centro educativo (profesor)

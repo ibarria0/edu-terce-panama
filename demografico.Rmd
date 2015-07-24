@@ -72,8 +72,8 @@ alumnos6_panama <- alumnos6[alumnos6$country.x == 'PAN',]
 alumnos3_panama <- alumnos3[alumnos3$country.x == 'PAN',]
 
 
-#alumnos <- rbind.fill(alumnos6,alumnos3)
-#alumnos_panama <- alumnos[alumnos$country == 'PAN',]
+alumnos <- rbind.fill(alumnos6,alumnos3)
+alumnos_panama <- alumnos[alumnos$country == 'PAN',]
 
 gdp <- read.csv('./data/suplemental/gdp.csv') 
 names(gdp) <- c("Country_Name","country","gdp_2013") 
@@ -81,9 +81,9 @@ names(gdp) <- c("Country_Name","country","gdp_2013")
 ```
 ## Puntaje promedio por pais
 ```{r prom_por_pais, fig.width=12, fig.height=10, echo=F}
-mat <- ggplot(alumnos, aes(x=nivel_grado, y=puntaje_estandar_mat,fill=nivel_grado)) + geom_boxplot()
-lec <- ggplot(alumnos, aes(x=nivel_grado, y=puntaje_estandar_lec,fill=nivel_grado)) + geom_boxplot()
-multiplot(mat,lec)
+ggplot(alumnos, aes(x=nivel_grado, y=puntaje_estandar_mat,fill=nivel_grado)) + geom_boxplot()
+#lec <- ggplot(alumnos, aes(x=nivel_grado, y=puntaje_estandar_lec,fill=nivel_grado)) + geom_boxplot()
+#multiplot(mat,lec)
 ```
 
 
@@ -91,16 +91,16 @@ multiplot(mat,lec)
 
 ### Matematica
 ```{r puntaje_prom_gdp_mat, fig.width=12, fig.height=10, echo=F}
-#m <- merge(alumnos,gdp,by="country") 
-#a <- aggregate( puntaje_estandar_mat ~ country + gdp_2013 + nivel_grado, m, mean) 
-#ggplot(a, aes(x=gdp_2013, y=puntaje_estandar_mat, fill=country, color=country, group=1)) + geom_point() + stat_smooth(method=lm, se=F) + geom_text(aes(label=country)) + facet_wrap( ~ nivel_grado) + xlab("Ingreso per Capita") + ylab("Puntaje Promedio") + ggtitle("Puntaje promedio de matematica según ingreso per cápita por nivel_grado (3ro y 6to)")
+m <- merge(alumnos,gdp,by="country") 
+a <- aggregate( puntaje_estandar_mat ~ country + gdp_2013 + nivel_grado, m, mean) 
+ggplot(a, aes(x=gdp_2013, y=puntaje_estandar_mat, fill=country, color=country, group=1)) + geom_point() + stat_smooth(method=lm, se=F) + geom_text(aes(label=country)) + facet_wrap( ~ nivel_grado) + xlab("Ingreso per Capita") + ylab("Puntaje Promedio") + ggtitle("Puntaje promedio de matematica según ingreso per cápita por nivel_grado (3ro y 6to)")
 ```
 
 ### Lectura
 ```{r puntaje_prom_gdp_lec, fig.width=12, fig.height=10, echo=F}
-#m <- merge(alumnos,gdp,by="country") 
-#a <- aggregate( puntaje_estandar_lec ~ country + gdp_2013 + nivel_grado, m, mean) 
-#ggplot(a, aes(x=gdp_2013, y=puntaje_estandar_lec, fill=country, color=country, group=1)) + geom_point() + stat_smooth(method=lm, se=F) + geom_text(aes(label=country)) + facet_wrap( ~ nivel_grado) + xlab("Ingreso per Capita") + ylab("Puntaje Promedio") + ggtitle("Puntaje promedio de matematica según ingreso per cápita por nivel_grado (3ro y 6to)")
+m <- merge(alumnos,gdp,by="country") 
+a <- aggregate( puntaje_estandar_lec ~ country + gdp_2013 + nivel_grado, m, mean) 
+ggplot(a, aes(x=gdp_2013, y=puntaje_estandar_lec, fill=country, color=country, group=1)) + geom_point() + stat_smooth(method=lm, se=F) + geom_text(aes(label=country)) + facet_wrap( ~ nivel_grado) + xlab("Ingreso per Capita") + ylab("Puntaje Promedio") + ggtitle("Puntaje promedio de matematica según ingreso per cápita por nivel_grado (3ro y 6to)")
 ```
 
 ## Distribucion de Muestras
@@ -124,22 +124,22 @@ ggplot(alumnos6_panama, aes(x=factor(nina),y=puntaje_estandar_mat,fill=factor(ni
 ## Factores Asociados (Sexto Grado)
 ### Distribucion de Puntaje Estandar por tipo de relación laboral tiene con este centro educativo (profesor)
 ```{r rel_prof, fig.width=12, fig.height=10, echo=F}
-ggplot(alumnos6_panama, aes(x=factor(DQPIT08),y=puntaje_estandar_mat,fill=factor(nina))) + geom_boxplot() + scale_x_discrete(labels=c("Tierra","Cemento","Madera sin pulir", "Baldosas, ceramica, o similar","Parquet, madera pulida, alfombra","NA")) + xlab("¿De qué material es la mayor parte de los pisos de tu casa?") + ylab("Puntaje de Matematicas") + scale_fill_discrete(name="Genero",labels=c("Nino","Nina"))
+ggplot(alumnos6_panama, aes(x=factor(DQPIT08),y=puntaje_estandar_mat,fill=factor(nina))) + geom_boxplot() + scale_x_discrete(labels=c("Tiempo Indefinido","Plazo de un año o más","Plazo menor a un año", "Otro","NA")) + xlab("¿Qué tipo de relación laboral tiene con este centro educativo?") + ylab("Puntaje de Matematicas") + scale_fill_discrete(name="Genero",labels=c("Nino","Nina")) + theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ```
 
 ### Distribucion de Puntaje Estandar por Tipo de pisos en casa
 ```{r piso, fig.width=12, fig.height=10, echo=F}
-ggplot(alumnos6_panama, aes(x=factor(DQA6IT13),y=puntaje_estandar_mat,fill=factor(nina))) + geom_boxplot() + scale_x_discrete(labels=c("Tierra","Cemento","Madera sin pulir", "Baldosas, ceramica, o similar","Parquet, madera pulida, alfombra","NA")) + xlab("¿De qué material es la mayor parte de los pisos de tu casa?") + ylab("Puntaje de Matematicas") + scale_fill_discrete(name="Genero",labels=c("Nino","Nina"))
+ggplot(alumnos6_panama, aes(x=factor(DQA6IT13),y=puntaje_estandar_mat,fill=factor(nina))) + geom_boxplot() + scale_x_discrete(labels=c("Tierra","Cemento","Madera sin pulir", "Baldosas, ceramica, o similar","Parquet, madera pulida, alfombra","NA")) + xlab("¿De qué material es la mayor parte de los pisos de tu casa?") + ylab("Puntaje de Matematicas") + scale_fill_discrete(name="Genero",labels=c("Nino","Nina")) + facet_grid( ruralidad ~ dependencia )+ theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ```
 
 ### Distribucion de Puntaje Estandar por Repeticion de Cursos
 ```{r repetido, fig.width=12, fig.height=10, echo=F}
-ggplot(alumnos6_panama, aes(x=factor(DQA6IT18),y=puntaje_estandar_mat,fill=factor(nina))) + geom_boxplot() + scale_x_discrete(labels=c("Nunca he repetido","Una Vez","Dos Veces","No Recuerdo","NA")) + xlab("¿Cuántas veces has repetido de curso?") + ylab("Puntaje de Matematicas") + scale_fill_discrete(name="Genero",labels=c("Nino","Nina"))
+ggplot(alumnos6_panama, aes(x=factor(DQA6IT18),y=puntaje_estandar_mat,fill=factor(nina))) + geom_boxplot() + scale_x_discrete(labels=c("Nunca he repetido","Una Vez","Dos Veces","No Recuerdo","NA")) + xlab("¿Cuántas veces has repetido de curso?") + ylab("Puntaje de Matematicas") + scale_fill_discrete(name="Genero",labels=c("Nino","Nina")) + facet_grid( ruralidad ~ dependencia )
 ```
 
 ### Distribucion de Puntaje Estandar por Conexion a Internet
 ```{r conexion_internet, fig.width=12, fig.height=10, echo=F}
-ggplot(alumnos6_panama, aes(x=factor(DQA6IT11_06),y=puntaje_estandar_mat,fill=factor(nina))) + geom_boxplot() + scale_x_discrete(labels=c("No","Si","NA")) + xlab("¿Tienex Conexión a Internet?") + ylab("Puntaje de Matematicas") + scale_fill_discrete(name="Genero",labels=c("Nino","Nina"))
+ggplot(alumnos6_panama, aes(x=factor(DQA6IT11_06),y=puntaje_estandar_mat,fill=factor(nina))) + geom_boxplot() + scale_x_discrete(labels=c("No","Si","NA")) + xlab("¿Tienex Conexión a Internet?") + ylab("Puntaje de Matematicas") + scale_fill_discrete(name="Genero",labels=c("Nino","Nina")) + facet_grid( ruralidad ~ dependencia )
 ```
 
 ### Puntaje Estandar de Matematicas vs Indice de uso recreacional de PC
