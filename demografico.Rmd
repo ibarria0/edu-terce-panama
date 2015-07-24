@@ -23,15 +23,17 @@ alumnos3 <- read.spss('./data/Alumnos/QA3.SAV', to.data.frame=T)
 
 pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
 profmat6 <- read.spss('./data/Profesores/QP_M6.SAV', to.data.frame=T)
-pm6 <- pm6[,c("sID","puntaje_estandar","idschool")]
-names(pm6) <- c("sID","puntaje_estandar_mat","idschool")
+pm6 <- pm6[,c("sID","puntaje_estandar","idschool","nivel")]
+names(pm6) <- c("sID","puntaje_estandar_mat","idschool","nivel")
 pm6 <- merge(pm6,profmat6,by="idschool")
+pm6$country <- NULL
 
 pm3 <- read.spss('./data/Puntajes_Alumnos/PM3_all_TERCE.sav', to.data.frame=T)
 profmat3 <- read.spss('./data/Profesores/QP_M3.SAV', to.data.frame=T)
-pm3 <- pm3[,c("sID","puntaje_estandar","idschool")]
-names(pm3) <- c("sID","puntaje_estandar_mat","idschool")
+pm3 <- pm3[,c("sID","puntaje_estandar","idschool","nivel")]
+names(pm3) <- c("sID","puntaje_estandar_mat","idschool","nivel")
 pm3 <- merge(pm3,profmat3,by="idschool")
+pm3$country <- NULL
 
 #pl6 <- read.spss('./data/Puntajes_Alumnos/PL6_all_TERCE.sav', to.data.frame=T)
 #proflec6 <- read.spss('./data/Profesores/QP_L6.SAV', to.data.frame=T)
@@ -68,20 +70,22 @@ levels(alumnos6$ruralidad) <- c("Urbano","Rural")
 alumnos6$nivel_grado <- '6'
 alumnos3$nivel_grado <- '3'
 
-alumnos6_panama <- alumnos6[alumnos6$country.x == 'PAN',]
-alumnos3_panama <- alumnos3[alumnos3$country.x == 'PAN',]
+alumnos6_panama <- alumnos6[alumnos6$country == 'PAN',]
+alumnos3_panama <- alumnos3[alumnos3$country == 'PAN',]
 
 
-alumnos <- rbind.fill(alumnos6,alumnos3)
-alumnos_panama <- alumnos[alumnos$country == 'PAN',]
+#alumnos <- rbind.fill(alumnos6,alumnos3)
+alumnos_panama <- rbind.fill(alumnos6_panama,alumnos3_panama)
+#alumnos_panama <- alumnos[alumnos$country == 'PAN',]
 
-gdp <- read.csv('./data/suplemental/gdp.csv') 
-names(gdp) <- c("Country_Name","country","gdp_2013") 
+#gdp <- read.csv('./data/suplemental/gdp.csv') 
+#names(gdp) <- c("Country_Name","country","gdp_2013") 
 
 ```
 ## Puntaje promedio por pais
 ```{r prom_por_pais, fig.width=12, fig.height=10, echo=F}
-ggplot(alumnos, aes(x=nivel_grado, y=puntaje_estandar_mat,fill=nivel_grado)) + geom_boxplot()
+#promedio_pais <- aggregate(puntaje_estamdar_mat ~ country + nivel_grado, alumnos, mean)
+#ggplot(promedio_pais, aes(x=country, y=puntaje_estandar_mat,fill=nivel_grado)) + geom_bar(stat="identity")
 #lec <- ggplot(alumnos, aes(x=nivel_grado, y=puntaje_estandar_lec,fill=nivel_grado)) + geom_boxplot()
 #multiplot(mat,lec)
 ```
@@ -91,16 +95,15 @@ ggplot(alumnos, aes(x=nivel_grado, y=puntaje_estandar_mat,fill=nivel_grado)) + g
 
 ### Matematica
 ```{r puntaje_prom_gdp_mat, fig.width=12, fig.height=10, echo=F}
-m <- merge(alumnos,gdp,by="country") 
-a <- aggregate( puntaje_estandar_mat ~ country + gdp_2013 + nivel_grado, m, mean) 
-ggplot(a, aes(x=gdp_2013, y=puntaje_estandar_mat, fill=country, color=country, group=1)) + geom_point() + stat_smooth(method=lm, se=F) + geom_text(aes(label=country)) + facet_wrap( ~ nivel_grado) + xlab("Ingreso per Capita") + ylab("Puntaje Promedio") + ggtitle("Puntaje promedio de matematica según ingreso per cápita por nivel_grado (3ro y 6to)")
+#m <- merge(alumnos,gdp,by="country") 
+#a <- aggregate( puntaje_estandar_mat ~ country + gdp_2013 + nivel_grado, m, mean) 
+#ggplot(a, aes(x=gdp_2013, y=puntaje_estandar_mat, fill=country, color=country, group=1)) + geom_point() + stat_smooth(method=lm, se=F) + geom_text(aes(label=country)) + facet_wrap( ~ nivel_grado) + xlab("Ingreso per Capita") + ylab("Puntaje Promedio") + ggtitle("Puntaje promedio de matematica según ingreso per cápita por nivel_grado (3ro y 6to)")
 ```
 
-### Lectura
 ```{r puntaje_prom_gdp_lec, fig.width=12, fig.height=10, echo=F}
-m <- merge(alumnos,gdp,by="country") 
-a <- aggregate( puntaje_estandar_lec ~ country + gdp_2013 + nivel_grado, m, mean) 
-ggplot(a, aes(x=gdp_2013, y=puntaje_estandar_lec, fill=country, color=country, group=1)) + geom_point() + stat_smooth(method=lm, se=F) + geom_text(aes(label=country)) + facet_wrap( ~ nivel_grado) + xlab("Ingreso per Capita") + ylab("Puntaje Promedio") + ggtitle("Puntaje promedio de matematica según ingreso per cápita por nivel_grado (3ro y 6to)")
+#m <- merge(alumnos,gdp,by="country") 
+#a <- aggregate( puntaje_estandar_lec ~ country + gdp_2013 + nivel_grado, m, mean) 
+#ggplot(a, aes(x=gdp_2013, y=puntaje_estandar_lec, fill=country, color=country, group=1)) + geom_point() + stat_smooth(method=lm, se=F) + geom_text(aes(label=country)) + facet_wrap( ~ nivel_grado) + xlab("Ingreso per Capita") + ylab("Puntaje Promedio") + ggtitle("Puntaje promedio de matematica según ingreso per cápita por nivel_grado (3ro y 6to)")
 ```
 
 ## Distribucion de Muestras

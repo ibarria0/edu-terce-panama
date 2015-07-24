@@ -9,42 +9,14 @@ Esta es una analisis de las distrubuciones resultados de las pruebas TERCE. El a
 ```
 ## Puntaje promedio por pais
 
-```
-## Warning: Removed 874 rows containing non-finite values (stat_boxplot).
-```
-
-![plot of chunk prom_por_pais](figure/prom_por_pais-1.png) 
 
 
 ## Puntaje promedio según ingreso per cápita
 
 ### Matematica
 
-```
-## Error in fix.by(by.x, x): 'by' must specify a uniquely valid column
-```
 
-```
-## Error in eval(expr, envir, enclos): object 'm' not found
-```
 
-```
-## Error in ggplot(a, aes(x = gdp_2013, y = puntaje_estandar_mat, fill = country, : object 'a' not found
-```
-
-### Lectura
-
-```
-## Error in fix.by(by.x, x): 'by' must specify a uniquely valid column
-```
-
-```
-## Error in eval(expr, envir, enclos): object 'm' not found
-```
-
-```
-## Error in ggplot(a, aes(x = gdp_2013, y = puntaje_estandar_lec, fill = country, : object 'a' not found
-```
 
 ## Distribucion de Muestras
 
