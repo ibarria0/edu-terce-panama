@@ -1,18 +1,44 @@
 ```{r init,results="hide",echo=F, message=F, warning=F}
 library(foreign)
+
 library(ggplot2)
 library(plyr)
 
 # load factores alumnos
 qf3 <- read.spss('./data/Familia/QF3.SAV', to.data.frame=T)
 qf6 <- read.spss('./data/Familia/QF6.SAV', to.data.frame=T)
-
 qf <- rbind.fill(qf6,qf3)
+qf <- qf[qf$country == 'PAN',]
+
+qf <- qf[,c("idschool","idstud","ISECF","INVOLUCF","CSOCBARF")]
+
+
+# load factores alumnos
+qd3 <- read.spss('./data/Directores/QD3.SAV', to.data.frame=T)
+qd6 <- read.spss('./data/Directores/QD6.SAV', to.data.frame=T)
+qd <- qd[qd$country == 'PAN',]
+
+qd3 <- qd3[,c("idschool","ruralidad","dependencia")]
+qd6 <- qd6[,c("idschool","ruralidad","dependencia")]
+qd <- rbind.fill(qd6,qd3)
+
+
+qd$dependencia <- as.factor(qd$dependencia)
+qd$ruralidad <- as.factor(qd$ruralidad)
+levels(qd$dependencia) <- c("Publico","Privado")
+levels(qd$ruralidad) <- c("Urbano","Rural")
+
+qf <- merge(qf,qd,by='idschool')
+
 
 # load sexto grado puntajes
 pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
 pc6 <- read.spss('./data/Puntajes_Alumnos/PC6_all_TERCE.sav', to.data.frame=T)
 pl6 <- read.spss('./data/Puntajes_Alumnos/PL6_all_TERCE.sav', to.data.frame=T)
+
+pm6 <- pm6[,c("sID","puntaje_estandar","nivel","idstud","country")]
+pl6 <- pl6[,c("sID","puntaje_estandar","nivel","idstud","country")]
+pc6 <- pc6[,c("sID","puntaje_estandar","nivel","idstud","country")]
 
 # merge matematica, lectura y ciencias
 pm6$tipo <- 'matematica'
@@ -20,14 +46,22 @@ pl6$tipo <- 'lectura'
 pc6$tipo <- 'ciencias'
 p6 <- rbind.fill(pm6,pl6,pc6)
 
+p6 <- p6[p6$country == 'PAN',]
+
 # load tercer grado puntajes
 pm3 <- read.spss('./data/Puntajes_Alumnos/PM3_all_TERCE.sav', to.data.frame=T)
 pl3 <- read.spss('./data/Puntajes_Alumnos/PL3_all_TERCE.sav', to.data.frame=T)
+
+pm3 <- pm3[,c("sID","puntaje_estandar","nivel","idstud","country")]
+pl3 <- pm3[,c("sID","puntaje_estandar","nivel","idstud","country")]
+
 
 # merge matematica y lectura
 pm3$tipo <- 'matematica'
 pl3$tipo <- 'lectura'
 p3 <- rbind.fill(pm3,pl3)
+
+p3 <- p3[p3$country == 'PAN',]
 
 
 # merge grados
@@ -35,29 +69,20 @@ p3$grado <- '3'
 p6$grado <- '6'
 p <- rbind.fill(p6,p3)
 
-p <- p[,c("sID","puntaje_estandar","tipo","nivel","grado","idstud")]
-names(p) <- c("sID","puntaje_estandar","tipo","nivel","grado","idstud")
-
-
 # merge factores alumnos
 fp <-merge(p,qf,by='idstud')
-
-
-
-
-#panama
-fp_panama <- fp[fp$country == 'PAN',]
+p_panama <- fp[fp$country == 'PAN',]
 ```
 
 ## Índice de estatus socioeconómico y cultural (ISECF)
 
 ### Puntaje por asignatura
 ```{r puntaje_ISECF_simple, fig.width=12, fig.height=6, echo=F, message=F, warning=F}
-ggplot(fp_panama[!is.na(fp_panama$ISECF),], aes(x=ISECF,y=puntaje_estandar)) + geom_point(alpha = 0.00001) + stat_smooth(se=F,method=lm) + facet_grid( . ~ tipo)
+ggplot(fp[!is.na(fp$ISECF),], aes(x=ISECF,y=puntaje_estandar)) + geom_point(alpha = 0.00001) + stat_smooth(se=F,method=lm) + facet_grid( . ~ tipo)
 ```
 
 ### Puntaje por asignatura y genero
 ```{r puntaje_ISECF_genero, fig.width=12, fig.height=6, echo=F, message=F, warning=F}
-ggplot(fp_panama[!is.na(fp_panama$ISECF),], aes(x=ISECF,y=puntaje_estandar,color=nina)) + geom_point(alpha = 0.00001) + stat_smooth(se=F,method=lm) + facet_grid( . ~ tipo) + scale_colour_discrete(name="Genero",labels=c("Nino","Nina"))
+ggplot(fp[!is.na(fp$ISECF),], aes(x=ISECF,y=puntaje_estandar,color=nina)) + geom_point(alpha = 0.00001) + stat_smooth(se=F,method=lm) + facet_grid( . ~ tipo) + scale_colour_discrete(name="Genero",labels=c("Nino","Nina"))
 ```
 
