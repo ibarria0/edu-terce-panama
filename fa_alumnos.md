@@ -1,5 +1,21 @@
 
 
+# Diferencias segun etnia originaria
+
+![plot of chunk etnia](figure/etnia-1.png) 
+
+![plot of chunk etnia_rural](figure/etnia_rural-1.png) 
+
+
+
+
+# Diferencias Segun Genero
+
+![plot of chunk puntaje_dif_prom_sd](figure/puntaje_dif_prom_sd-1.png) 
+
+
+![plot of chunk puntaje_dist_genero](figure/puntaje_dist_genero-1.png) 
+
 # Analisis de Factores Asociado del Alumno
 
 ## Índice de condiciones de estudio en el hogar (CONDIA6)
