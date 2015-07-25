@@ -1,0 +1,112 @@
+```{r init,results="hide",echo=F, message=F, warning=F}
+library(foreign)
+library(ggplot2)
+library(plyr)
+
+# load factores alumnos
+qa3 <- read.spss('./data/Alumnos/QA3.SAV', to.data.frame=T)
+qa6 <- read.spss('./data/Alumnos/QA6.SAV', to.data.frame=T)
+
+qa <- rbind.fill(qa6,qa3)
+
+# load sexto grado puntajes
+pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
+pc6 <- read.spss('./data/Puntajes_Alumnos/PC6_all_TERCE.sav', to.data.frame=T)
+pl6 <- read.spss('./data/Puntajes_Alumnos/PL6_all_TERCE.sav', to.data.frame=T)
+
+# merge matematica, lectura y ciencias
+pm6$tipo <- 'matematica'
+pl6$tipo <- 'lectura'
+pc6$tipo <- 'ciencias'
+p6 <- rbind.fill(pm6,pl6,pc6)
+
+
+
+# load tercer grado puntajes
+pm3 <- read.spss('./data/Puntajes_Alumnos/PM3_all_TERCE.sav', to.data.frame=T)
+pl3 <- read.spss('./data/Puntajes_Alumnos/PL3_all_TERCE.sav', to.data.frame=T)
+
+# merge matematica y lectura
+pm3$tipo <- 'matematica'
+pl3$tipo <- 'lectura'
+p3 <- rbind.fill(pm3,pl3)
+
+
+# merge grados
+p3$grado <- '3'
+p6$grado <- '6'
+p <- rbind.fill(p6,p3)
+
+p <- p[,c("sID","puntaje_estandar","tipo","nivel","idstud")]
+names(p) <- c("sID","puntaje_estandar","tipo","nivel","idstud")
+
+
+# merge factores alumnos
+ap <-merge(p,qa,by='idstud')
+
+ap$dependencia <- as.factor(ap$dependencia)
+ap$ruralidad <- as.factor(ap$ruralidad)
+levels(ap$dependencia) <- c("Publico","Privado")
+levels(ap$ruralidad) <- c("Urbano","Rural")
+ap$nina <- as.factor(ap$nina)
+
+
+#panama
+
+ap_panama <- ap[ap$country == 'PAN',]
+#ggplot(ap_panama[!is.na(ap_panama$CONDIA6),], aes(x=CONDIA6,y=puntaje_estandar)) + geom_point() + stat_smooth(se=F,method=lm) + scale_colour_discrete(name="Genero",labels=c("Nino","Nina")) + facet_grid( . ~ tipo)
+```
+
+# Analisis de Factores Asociado del Alumno
+
+## Índice de condiciones de estudio en el hogar (CONDIA6)
+
+### Puntaje por asignatura
+```{r puntaje_CONDIA6_simple, fig.width=12, fig.height=6, echo=F, message=F, warning=F}
+ggplot(ap_panama[!is.na(ap_panama$CONDIA6),], aes(x=CONDIA6,y=puntaje_estandar)) + geom_point(alpha = 0.1) + stat_smooth(se=F,method=lm) + facet_grid( . ~ tipo)
+```
+
+### Puntaje por asignatura y genero
+```{r puntaje_CONDIA6_genero, fig.width=12, fig.height=6, echo=F, message=F, warning=F}
+ggplot(ap_panama[!is.na(ap_panama$CONDIA6),], aes(x=CONDIA6,y=puntaje_estandar,color=nina)) + geom_point(alpha = 0.1) + stat_smooth(se=F,method=lm) + facet_grid( . ~ tipo) + scale_colour_discrete(name="Genero",labels=c("Nino","Nina"))
+```
+
+### Puntaje por asignatura, dependencia y genero
+```{r puntaje_CONDIA6_dependencia_genero, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+ggplot(ap_panama[!is.na(ap_panama$CONDIA6),], aes(x=CONDIA6,y=puntaje_estandar,color=nina)) + geom_point(alpha = 0.1) + stat_smooth(se=F,method=lm) + facet_grid( dependencia ~ tipo) + scale_colour_discrete(name="Genero",labels=c("Nino","Nina"))
+```
+
+## Índice del uso de libros en el hogar (USOLIA6)
+
+### Puntaje por asignatura
+```{r puntaje_USOLIA6_simple, fig.width=12, fig.height=6, echo=F, message=F, warning=F}
+ggplot(ap_panama[!is.na(ap_panama$USOLIA6),], aes(x=USOLIA6,y=puntaje_estandar)) + geom_point(alpha = 0.1) + stat_smooth(se=F,method=lm) + facet_grid( . ~ tipo)
+```
+
+### Puntaje por asignatura y genero
+```{r puntaje_USOLIA6_genero, fig.width=12, fig.height=6, echo=F, message=F, warning=F}
+ggplot(ap_panama[!is.na(ap_panama$USOLIA6),], aes(x=USOLIA6,y=puntaje_estandar,color=nina)) + geom_point(alpha = 0.1) + stat_smooth(se=F,method=lm) + facet_grid( . ~ tipo) + scale_colour_discrete(name="Genero",labels=c("Nino","Nina"))
+```
+
+### Puntaje por asignatura, dependencia y genero
+```{r puntaje_USOLIA6_dependencia_genero, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+ggplot(ap_panama[!is.na(ap_panama$USOLIA6),], aes(x=USOLIA6,y=puntaje_estandar,color=nina)) + geom_point(alpha = 0.1) + stat_smooth(se=F,method=lm) + facet_grid( dependencia ~ tipo) + scale_colour_discrete(name="Genero",labels=c("Nino","Nina"))
+```
+
+## Índice de actividades recreativas en el hogar (TMPLIBA6)
+
+### Puntaje por asignatura
+```{r puntaje_TMPLIBA6_simple, fig.width=12, fig.height=6, echo=F, message=F, warning=F}
+ggplot(ap_panama[!is.na(ap_panama$TMPLIBA6),], aes(x=TMPLIBA6,y=puntaje_estandar)) + geom_point(alpha = 0.1) + stat_smooth(se=F,method=lm) + facet_grid( . ~ tipo)
+```
+
+### Puntaje por asignatura y genero
+```{r puntaje_TMPLIBA6_genero, fig.width=12, fig.height=6, echo=F, message=F, warning=F}
+ggplot(ap_panama[!is.na(ap_panama$TMPLIBA6),], aes(x=TMPLIBA6,y=puntaje_estandar,color=nina)) + geom_point(alpha = 0.1) + stat_smooth(se=F,method=lm) + facet_grid( . ~ tipo) + scale_colour_discrete(name="Genero",labels=c("Nino","Nina"))
+```
+
+### Puntaje por asignatura, dependencia y genero
+```{r puntaje_TMPLIBA6_dependencia_genero, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+ggplot(ap_panama[!is.na(ap_panama$TMPLIBA6),], aes(x=TMPLIBA6,y=puntaje_estandar,color=nina)) + geom_point(alpha = 0.1) + stat_smooth(se=F,method=lm) + facet_grid( dependencia ~ tipo) + scale_colour_discrete(name="Genero",labels=c("Nino","Nina"))
+```
+
