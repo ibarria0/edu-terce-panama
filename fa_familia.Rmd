@@ -1,8 +1,8 @@
 ```{r init,results="hide",echo=F, message=F, warning=F}
 library(foreign)
-
 library(ggplot2)
 library(plyr)
+source('multiplot.R')
 
 # load factores alumnos
 qf3 <- read.spss('./data/Familia/QF3.SAV', to.data.frame=T)
@@ -16,11 +16,10 @@ qf <- qf[,c("idschool","idstud","ISECF","INVOLUCF","CSOCBARF")]
 # load factores alumnos
 qd3 <- read.spss('./data/Directores/QD3.SAV', to.data.frame=T)
 qd6 <- read.spss('./data/Directores/QD6.SAV', to.data.frame=T)
+qd <- rbind.fill(qd6,qd3)
 qd <- qd[qd$country == 'PAN',]
 
-qd3 <- qd3[,c("idschool","ruralidad","dependencia")]
-qd6 <- qd6[,c("idschool","ruralidad","dependencia")]
-qd <- rbind.fill(qd6,qd3)
+qd <- qd[,c("idschool","ruralidad","dependencia")]
 
 
 qd$dependencia <- as.factor(qd$dependencia)
@@ -77,12 +76,22 @@ p_panama <- fp[fp$country == 'PAN',]
 ## Índice de estatus socioeconómico y cultural (ISECF)
 
 ### Puntaje por asignatura
-```{r puntaje_ISECF_simple, fig.width=12, fig.height=6, echo=F, message=F, warning=F}
-ggplot(fp[!is.na(fp$ISECF),], aes(x=ISECF,y=puntaje_estandar)) + geom_point(alpha = 0.00001) + stat_smooth(se=F,method=lm) + facet_grid( . ~ tipo)
+```{r puntaje_ISECF_simple, fig.width=12, fig.height=13, echo=F, message=F, warning=F}
+i <- ggplot(fp[!is.na(fp$ISECF),], aes(x=ISECF,y=puntaje_estandar,color=dependencia)) + geom_point(alpha = 0.00001) + stat_smooth(se=F,method=lm) + facet_grid( grado ~ tipo) + xlab('')
+o <- ggplot(fp[!is.na(fp$ISECF),], aes(x=ISECF,y=puntaje_estandar,color=ruralidad)) + geom_point(alpha = 0.00001) + stat_smooth(se=F,method=lm) + facet_grid( grado ~ tipo)
+multiplot(i,o)
 ```
 
-### Puntaje por asignatura y genero
-```{r puntaje_ISECF_genero, fig.width=12, fig.height=6, echo=F, message=F, warning=F}
-ggplot(fp[!is.na(fp$ISECF),], aes(x=ISECF,y=puntaje_estandar,color=nina)) + geom_point(alpha = 0.00001) + stat_smooth(se=F,method=lm) + facet_grid( . ~ tipo) + scale_colour_discrete(name="Genero",labels=c("Nino","Nina"))
+### Puntaje por asignatura
+```{r puntaje_INVOLUCF_simple, fig.width=12, fig.height=13, echo=F, message=F, warning=F}
+i <- ggplot(fp[!is.na(fp$INVOLUCF),], aes(x=INVOLUCF,y=puntaje_estandar,color=dependencia)) + geom_point(alpha = 0.00001) + stat_smooth(se=F,method=lm) + facet_grid( grado ~ tipo) + xlab('')
+o <- ggplot(fp[!is.na(fp$INVOLUCF),], aes(x=INVOLUCF,y=puntaje_estandar,color=ruralidad)) + geom_point(alpha = 0.00001) + stat_smooth(se=F,method=lm) + facet_grid( grado ~ tipo)
+multiplot(i,o)
 ```
 
+### Puntaje por asignatura
+```{r puntaje_CSOCBARF_simple, fig.width=12, fig.height=13, echo=F, message=F, warning=F}
+i <- ggplot(fp[!is.na(fp$CSOCBARF),], aes(x=CSOCBARF,y=puntaje_estandar,color=dependencia)) + geom_point(alpha = 0.00001) + stat_smooth(se=F,method=lm) + facet_grid( grado ~ tipo) + xlab('')
+o <- ggplot(fp[!is.na(fp$CSOCBARF),], aes(x=CSOCBARF,y=puntaje_estandar,color=ruralidad)) + geom_point(alpha = 0.00001) + stat_smooth(se=F,method=lm) + facet_grid( grado ~ tipo)
+multiplot(i,o)
+```
