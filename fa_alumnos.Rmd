@@ -64,11 +64,11 @@ ap_panama <- ap[ap$country == 'PAN',]
 # Diferencias segun etnia originaria
 
 ```{r etnia, fig.width=12, fig.height=6, echo=F, message=F, warning=F}
-ggplot(ap_panama, aes(x=tipo,y=puntaje_estandar,fill=DQA6IT06)) + geom_boxplot() + facet_grid( . ~ grado)
+ggplot(ap_panama, aes(x=tipo,y=puntaje_estandar,fill=DQA6IT06)) + geom_boxplot() + facet_grid( . ~ grado) + scale_colour_discrete(name="Genero",labels=c("No Indigena","Indigena","NA"))
 ```
 
 ```{r etnia_rural, fig.width=12, fig.height=6, echo=F, message=F, warning=F}
-ggplot(ap_panama[!is.na(ap_panama$ruralidad),], aes(x=tipo,y=puntaje_estandar,fill=DQA6IT06)) + geom_boxplot() + facet_grid( ruralidad ~ grado)
+ggplot(ap_panama[!is.na(ap_panama$ruralidad),], aes(x=tipo,y=puntaje_estandar,fill=DQA6IT06)) + geom_boxplot() + facet_grid( ruralidad ~ grado) + scale_colour_discrete(name="Genero",labels=c("No Indigena","Indigena","NA"))
 ```
 
 
