@@ -1,0 +1,28 @@
+# Distribuciones de Resultados del TERCE
+
+Esta es una analisis de las distrubuciones resultados de las pruebas TERCE. El analisis fue hecho con R y las graficas con ggplot2.
+
+
+## Loading y subsetting de datos
+```{r cache = TRUE, eval=FALSE, init }
+library(foreign)
+library(ggplot2)
+library(plyr)
+pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
+pm3 <- read.spss('./data/Puntajes_Alumnos/PM3_all_TERCE.sav', to.data.frame=T)
+qf6 <- read.spss('./data/Familia/QF6.SAV', to.data.frame=T)
+```
+
+```{r cache = TRUE}
+#promedio_de_puntaje_estandar_x_escuela
+a <- ddply(pm6,~idschool,summarise,puntaje_promedio=na.omit(mean(puntaje_estandar)))
+#promedio_de_isecf_x_escuela
+b <- ddply(qf6,~idschool, summarise, isecf_promedio=na.omit(mean(ISECF)))
+
+#merge de puntaje estandar e indice ISECF por escuela
+#se uso NA.OMIT para eliminar los records que no tienen valores.
+data <- na.omit(merge(promedio_de_indice_isecf_x_escuela,promedio_de_puntaje_estandar_x_escuela))
+
+
+
+```
