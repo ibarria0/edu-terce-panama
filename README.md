@@ -2,10 +2,10 @@
 Análisis de Resultados de TERCE
 
 ### R Libraries
-library(foreign)
-library(ggplot2)
-library(plyr)
-library(reshape2)
+- library(foreign)
+- library(ggplot2)
+- library(plyr)
+- library(reshape2)
 
 ### Formato propuesto
 1. Introducción
