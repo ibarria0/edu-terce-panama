@@ -19,7 +19,7 @@ qf6 <- read.spss('./data/Familia/QF6.SAV', to.data.frame=T)
 qf <- rbind.fill(qf6,qf3)
 qf <- qf[qf$country == 'PAN',]
 
-qf <- qf[,c("idschool","idstud","ISECF","INVOLUCF","CSOCBARF","SUPERVF","RECREAF","SERVBARF","VIOLBARF","MOTIVALF")]
+qf <- qf[,c("idschool","idstud","ISECF","INVOLUCF","CSOCBARF","SUPERVF","RECREAF","SERVBARF","VIOLBARF","MOTIVALF","subsgobf","padindig","madindig","DQFIT01","DQFIT25","DQFIT31","DQFIT34","DQFIT15_07","DQFIT18_02")]
 
 
 # load factores alumnos
@@ -54,6 +54,8 @@ pm6$tipo <- 'matematica'
 pl6$tipo <- 'lectura'
 pc6$tipo <- 'ciencias'
 p6 <- rbind.fill(pm6,pl6,pc6)
+p6$promedio_global <- mean(p6$puntaje_estandar, na.rm=T)
+p6$sd_global <- sd(p6$puntaje_estandar, na.rm=T)
 
 p6 <- p6[p6$country == 'PAN',]
 
@@ -69,6 +71,8 @@ pl3 <- pm3[,c("sID","puntaje_estandar","nivel","idstud","country")]
 pm3$tipo <- 'matematica'
 pl3$tipo <- 'lectura'
 p3 <- rbind.fill(pm3,pl3)
+p3$promedio_global <- mean(p3$puntaje_estandar, na.rm=T)
+p3$sd_global <- sd(p3$puntaje_estandar, na.rm=T)
 
 p3 <- p3[p3$country == 'PAN',]
 
@@ -80,6 +84,55 @@ p <- rbind.fill(p6,p3)
 
 # merge factores alumnos
 fp <-merge(p,qf,by='idstud')
+
+escuela_tipo <- function(r,d) { if(r == 'Urbano' & d == 'Privado') { return(0) } else if (r == 'Urbano' & d == 'Publico') { return(1) } else if (r == 'Rural' & d == 'Privado') {return(2)} else {return(3)}}
+fp$rd <- as.factor(mapply(escuela_tipo, fp$ruralidad, fp$dependencia))
+levels(fp$rd) <- c("Urbano/Privado", "Urbano/Publico", "Rural/Privado", "Rural/Publico")
+fp$indigena <- fp$madindig & fp$padindig
+fp$subsgobf <- as.factor(fp$subsgobf)
+
+mean_school <- aggregate(puntaje_estandar ~ idschool + rd + grado + promedio_global + sd_global, fp, mean)
+mean_isecf_school <- aggregate(ISECF ~ idschool + rd + grado + promedio_global + sd_global, fp, mean)
+m <- merge(mean_school, mean_isecf_school, by=c('idschool',"rd","grado", "promedio_global", "sd_global"))
+
+m$fsd <- 0
+m$fsd <- (m$ISECF - m$promedio_global) / m$sd_global
+
+
+```
+
+# Factores Asociados
+
+```{r puntaje_indigena, fig.width=12, fig.height=6, echo=F, message=F, warning=F}
+ggplot(fp, aes(x=indigena,y=puntaje_estandar)) + geom_boxplot() + ggtitle("Distribucion de Puntaje por Etnicidad Originaria") + xlab('') + scale_x_discrete(labels=c('No Indingena', 'Indingena'))
+```
+
+```{r puntaje_subsgobf, fig.width=12, fig.height=6, echo=F, message=F, warning=F}
+ggplot(fp, aes(x=subsgobf,y=puntaje_estandar,fill=dependencia)) + geom_boxplot() + ggtitle("Distribucion de Puntaje por Subsidio de Gobierno") + xlab('')  + scale_x_discrete(labels=c('Sin Subsidio', 'Con Subsidio'))
+```
+
+```{r puntaje_DQFIT01, fig.width=12, fig.height=6, echo=F, message=F, warning=F}
+ggplot(fp[!is.na(fp$DQFIT01),], aes(x=factor(DQFIT01),y=puntaje_estandar)) + geom_boxplot() + ggtitle("¿Cuál es su relación con el niño/la niña que está participando en la evaluación?") + xlab('')  + scale_x_discrete(labels=c('Madre', 'Padre','Abuelo/a','Hermano/a','Padrastro/Madrastra','Otro Familiar','No soy Familiar'))
+```
+
+```{r puntaje_DQFIT25, fig.width=12, fig.height=6, echo=F, message=F, warning=F}
+ggplot(fp[!is.na(fp$DQFIT25),], aes(x=factor(DQFIT25),y=puntaje_estandar)) + geom_boxplot() + ggtitle("¿Con qué frecuencia el estudiante ha faltado al colegio en los últimos seis meses?") + xlab('')  + scale_x_discrete(labels=c('Nunca','Par de veces por semestre','Par de veces por mes','Una vez por semana','Varios dias por semana','No se'))
+```
+```{r puntaje_DQFIT31, fig.width=12, fig.height=6, echo=F, message=F, warning=F}
+ggplot(fp[!is.na(fp$DQFIT31),], aes(x=factor(DQFIT31),y=puntaje_estandar)) + geom_boxplot() + ggtitle("Usted diría que la escuela a la que asiste el niño...") + xlab('')  + scale_x_discrete(labels=c('Unica opcion disponible','Primera opcion entre varias',"No era primera entre varias opciones")) + facet_grid( . ~ dependencia)
+```
+
+```{r puntaje_DQFIT34, fig.width=12, fig.height=6, echo=F, message=F, warning=F}
+ggplot(fp[!is.na(fp$DQFIT34),], aes(x=factor(DQFIT34),y=puntaje_estandar)) + geom_boxplot() + ggtitle("¿Para qué usa la información que le entrega la escuela?") + xlab('')  + scale_x_discrete(labels=c('Conocer el progreso del estudiante','Apoyar, llamar la atencion, felicitar'))
+```
+
+```{r puntaje_DQFIT15_07, fig.width=12, fig.height=6, echo=F, message=F, warning=F}
+fp$DQFIT15_07 <- factor(fp$DQFIT15_07)
+ggplot(fp[!is.na(fp$DQFIT15_07),], aes(x=factor(DQFIT15_07),y=puntaje_estandar)) + geom_boxplot() + ggtitle("¿Cuenta con Conexión a Internet?") + xlab('')  + scale_x_discrete(labels=c('No','Si'))
+```
+
+```{r puntaje_DQFIT18_02, fig.width=12, fig.height=6, echo=F, message=F, warning=F}
+ggplot(fp[!is.na(fp$DQFIT18_02),], aes(x=factor(DQFIT18_02),y=puntaje_estandar)) + geom_boxplot() + ggtitle("En el lugar donde está el hogar del niño, ¿disponen de Escuelas?") + xlab('')  + scale_x_discrete(labels=c('No hay','Si, pero lejos', 'Si, hay uno cerca', 'Si, hay varios cerca'))
 ```
 
 # Carnaval de Indices (publico vs privado)

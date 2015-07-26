@@ -1,5 +1,22 @@
 
 
+# Factores Asociados
+
+![plot of chunk puntaje_indigena](figure/puntaje_indigena-1.png) 
+
+![plot of chunk puntaje_subsgobf](figure/puntaje_subsgobf-1.png) 
+
+![plot of chunk puntaje_DQFIT01](figure/puntaje_DQFIT01-1.png) 
+
+![plot of chunk puntaje_DQFIT25](figure/puntaje_DQFIT25-1.png) 
+![plot of chunk puntaje_DQFIT31](figure/puntaje_DQFIT31-1.png) 
+
+![plot of chunk puntaje_DQFIT34](figure/puntaje_DQFIT34-1.png) 
+
+![plot of chunk puntaje_DQFIT15_07](figure/puntaje_DQFIT15_07-1.png) 
+
+![plot of chunk puntaje_DQFIT18_02](figure/puntaje_DQFIT18_02-1.png) 
+
 # Carnaval de Indices (publico vs privado)
 ## Índice de estatus socioeconómico y cultural (ISECF)
 
