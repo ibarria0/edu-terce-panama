@@ -8,6 +8,8 @@ source('multiplot.R')
 qa3 <- read.spss('./data/Alumnos/QA3.SAV', to.data.frame=T)
 qa6 <- read.spss('./data/Alumnos/QA6.SAV', to.data.frame=T)
 qa <- rbind.fill(qa6,qa3)
+qa <- qa[qa$country == 'PAN',]
+qa <- qa[,c("idstud","CONDIA6","USOLIA6","TMPLIBA6","CLAMBIA6","ASISDOA6","RECREA3","PDORGA3","ASISDOA3")]
 
 
 
@@ -17,7 +19,7 @@ qf6 <- read.spss('./data/Familia/QF6.SAV', to.data.frame=T)
 qf <- rbind.fill(qf6,qf3)
 qf <- qf[qf$country == 'PAN',]
 
-qf <- qf[,c("idschool","idstud","ISECF","INVOLUCF","CSOCBARF")]
+qf <- qf[,c("idschool","idstud","ISECF","INVOLUCF","CSOCBARF","SUPERVF","RECREAF","SERVBARF","VIOLBARF","MOTIVALF")]
 
 
 # load factores alumnos
@@ -26,7 +28,7 @@ qd6 <- read.spss('./data/Directores/QD6.SAV', to.data.frame=T)
 qd <- rbind.fill(qd6,qd3)
 qd <- qd[qd$country == 'PAN',]
 
-qd <- qd[,c("idschool","ruralidad","dependencia")]
+qd <- qd[,c("idschool","ruralidad","dependencia","pindigen")]
 
 
 qd$dependencia <- as.factor(qd$dependencia)
@@ -35,6 +37,7 @@ levels(qd$dependencia) <- c("Publico","Privado")
 levels(qd$ruralidad) <- c("Urbano","Rural")
 
 qf <- merge(qf,qd,by='idschool')
+qf <- merge(qf,qa,by='idstud')
 
 
 # load sexto grado puntajes
@@ -79,9 +82,9 @@ p <- rbind.fill(p6,p3)
 fp <-merge(p,qf,by='idstud')
 ```
 
+# Carnaval de Indices (publico vs privado)
 ## Índice de estatus socioeconómico y cultural (ISECF)
 
-### Puntaje por asignatura
 ```{r puntaje_ISECF_simple, fig.width=12, fig.height=13, echo=F, message=F, warning=F}
 i <- ggplot(fp[!is.na(fp$ISECF),], aes(x=ISECF,y=puntaje_estandar,color=dependencia)) + geom_point(alpha = 0.00001) + stat_smooth(se=F,method=lm) + facet_grid( grado ~ tipo) + xlab('')
 o <- ggplot(fp[!is.na(fp$ISECF),], aes(x=ISECF,y=puntaje_estandar,color=ruralidad)) + geom_point(alpha = 0.00001) + stat_smooth(se=F,method=lm) + facet_grid( grado ~ tipo)
@@ -89,19 +92,55 @@ multiplot(i,o)
 ```
 
 ```{r puntaje_ISECF_cool, fig.width=12, fig.height=13, echo=F, message=F, warning=F}
-ggplot(fp[!is.na(fp$ISECF) & fp$grado == 6,], aes(x=ISECF,y=puntaje_estandar,color=tipo)) + geom_point(alpha = 0.1) + stat_smooth(se=F,method=lm) + facet_grid( ruralidad ~ dependencia)
+ggplot(fp[!is.na(fp$ISECF) & fp$grado == 6,], aes(x=ISECF,y=puntaje_estandar,color=tipo)) + geom_point(alpha = 0) + stat_smooth(se=F,method=lm) + facet_grid( ruralidad ~ dependencia)
 ```
 
-### Puntaje por asignatura
-```{r puntaje_INVOLUCF_simple, fig.width=12, fig.height=13, echo=F, message=F, warning=F}
-i <- ggplot(fp[!is.na(fp$INVOLUCF),], aes(x=INVOLUCF,y=puntaje_estandar,color=dependencia)) + geom_point(alpha = 0.00001) + stat_smooth(se=F,method=lm) + facet_grid( grado ~ tipo) + xlab('')
-o <- ggplot(fp[!is.na(fp$INVOLUCF),], aes(x=INVOLUCF,y=puntaje_estandar,color=ruralidad)) + geom_point(alpha = 0.00001) + stat_smooth(se=F,method=lm) + facet_grid( grado ~ tipo)
-multiplot(i,o)
+## Índice de involucramiento de los padres en la escuela
+
+```{r puntaje_INVOLUCF_pubpriv, fig.width=12, fig.height=7, echo=F, message=F, warning=F}
+ggplot(fp[!is.na(fp$INVOLUCF),], aes(x=INVOLUCF,y=puntaje_estandar,color=dependencia)) + geom_point(alpha = 0) + stat_smooth(se=F,method=lm) + facet_grid( grado ~ tipo)
 ```
 
-### Puntaje por asignatura
-```{r puntaje_CSOCBARF_simple, fig.width=12, fig.height=13, echo=F, message=F, warning=F}
-i <- ggplot(fp[!is.na(fp$CSOCBARF),], aes(x=CSOCBARF,y=puntaje_estandar,color=dependencia)) + geom_point(alpha = 0.00001) + stat_smooth(se=F,method=lm) + facet_grid( grado ~ tipo) + xlab('')
-o <- ggplot(fp[!is.na(fp$CSOCBARF),], aes(x=CSOCBARF,y=puntaje_estandar,color=ruralidad)) + geom_point(alpha = 0.00001) + stat_smooth(se=F,method=lm) + facet_grid( grado ~ tipo)
-multiplot(i,o)
+## Índice de apoyo social en el barrio
+
+```{r puntaje_CSOCBARF_pubpriv, fig.width=12, fig.height=7, echo=F, message=F, warning=F}
+ggplot(fp[!is.na(fp$CSOCBARF),], aes(x=CSOCBARF,y=puntaje_estandar,color=dependencia)) + geom_point(alpha = 0) + stat_smooth(se=F,method=lm) + facet_grid( grado ~ tipo)
 ```
+
+## Índice de violencia en el barrio
+
+```{r puntaje_VIOLBARF_pubpriv, fig.width=12, fig.height=7, echo=F, message=F, warning=F}
+ggplot(fp[!is.na(fp$VIOLBARF),], aes(x=VIOLBARF,y=puntaje_estandar,color=dependencia)) + geom_point(alpha = 0) + stat_smooth(se=F,method=lm) + facet_grid( grado ~ tipo)
+```
+
+## Índice de motivación de lectura en el hogar
+
+```{r puntaje_MOTIVALF_pubpriv, fig.width=12, fig.height=7, echo=F, message=F, warning=F}
+ggplot(fp[!is.na(fp$MOTIVALF),], aes(x=MOTIVALF,y=puntaje_estandar,color=dependencia)) + geom_point(alpha = 0) + stat_smooth(se=F,method=lm) + facet_grid( grado ~ tipo)
+```
+
+##  Índice de control y supervisión de estudios en el hogar
+
+```{r puntaje_SUPERVF_pubpriv, fig.width=12, fig.height=7, echo=F, message=F, warning=F}
+ggplot(fp[!is.na(fp$SUPERVF),], aes(x=SUPERVF,y=puntaje_estandar,color=dependencia)) + geom_point(alpha = 0) + stat_smooth(se=F,method=lm) + facet_grid( grado ~ tipo)
+```
+
+## Porcentaje de niños indígenas
+
+```{r puntaje_pindigen_pubpriv, fig.width=12, fig.height=7, echo=F, message=F, warning=F}
+ggplot(fp[!is.na(fp$pindigen),], aes(x=pindigen,y=puntaje_estandar,color=dependencia)) + geom_point(alpha = 0) + stat_smooth(se=F,method=lm) + facet_grid( grado ~ tipo)
+```
+
+## Índice de asistencia y puntualidad docente
+
+#### Tercer Grado
+```{r puntaje_ASISDOA3_cool, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
+ggplot(fp[!is.na(fp$ASISDOA3),], aes(x=ASISDOA3,y=puntaje_estandar,color=dependencia)) + geom_point(alpha = 0) + stat_smooth(se=F,method=lm) + facet_grid( . ~ tipo)
+```
+
+#### Sexto Grado
+```{r puntaje_ASISDOA6_simple, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
+ggplot(fp[!is.na(fp$ASISDOA6),], aes(x=ASISDOA6,y=puntaje_estandar,color=dependencia)) + geom_point(alpha = 0) + stat_smooth(se=F,method=lm) + facet_grid( . ~ tipo)
+```
+
+
