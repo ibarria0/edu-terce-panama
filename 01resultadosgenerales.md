@@ -40,7 +40,7 @@ avg_per_country_math[3] <- "Mathematics"
 avg_per_country_lit[3] <- "Literature"
 # Sumar ambos resultados
 data <- rbind(avg_per_country_lit,avg_per_country_math)
-data.m <- ddply(data,~country,summarise,puntaje_promedio=mean(puntaje_promedio))
+data.m <- ddply(data,~country,puntaje_promedio=mean(puntaje_promedio))
 ```
 ### Gráfica - Resultados promedio totales de 3er grado por país.
 
@@ -55,7 +55,7 @@ ggplot(data.m, aes(reorder(country,puntaje_promedio),puntaje_promedio))+geom_bar
 
 ```r
 # Crear bar chart
-ggplot(data.m, aes(reorder(country,puntaje_promedio),puntaje_promedio)) + geom_bar(stat = "identity") 
+ggplot(data.m, aes(reorder(country,puntaje_promedio),puntaje_promedio)) + geom_bar(stat = "identity") + facet_grid(. ~ V3)+theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ```
 
 ![plot of chunk grafica3er_asignatura](figure/grafica3er_asignatura-1.png) 
