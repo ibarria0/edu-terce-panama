@@ -1,0 +1,36 @@
+# Distribuciones de Resultados del TERCE
+
+Esta es una analisis de las distrubuciones resultados de las pruebas TERCE. El analisis fue hecho con R y las graficas con ggplot2.
+
+
+## Loading y subsetting de datos
+```{r cache = TRUE, eval=FALSE, init }
+library(foreign)
+library(ggplot2)
+library(plyr)
+library(reshape2)
+pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
+pm3 <- read.spss('./data/Puntajes_Alumnos/PM3_all_TERCE.sav', to.data.frame=T)
+```
+
+```{r cache = TRUE}
+pm6_panama <- pm6[pm6$country == 'PAN',]
+pm6_otros <- pm6[pm6$country != 'PAN',]
+
+a <- aggregate(puntaje_estandar ~ nivel, pm6_panama, length)
+b <- aggregate(puntaje_estandar ~ nivel, pm6_otros, length)
+
+puntajePAN <- a[2]
+puntajeOTROS <- b[2]
+niveles <- a[1]
+
+
+data <- cbind(niveles,puntajePAN,puntajeOTROS)
+names(data) <- c("nivel", "puntaje_de_panama", "puntaje_de_otros")
+
+
+data.m <- melt(data, id.vars='nivel')
+
+ggplot(data.m, aes(x=nivel,y=value, fill=variable)) + geom_bar(stat="identity") + ggtitle("Cantidad de Estudiantes por Nivel (Matematicas 6to Grado)") + ylab("Cantidad de Estudiantes")
+
+```
