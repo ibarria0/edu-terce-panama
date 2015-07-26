@@ -6,6 +6,8 @@
 
 ![plot of chunk puntaje_subsgobf](figure/puntaje_subsgobf-1.png) 
 
+![plot of chunk puntaje_subsgobf_2](figure/puntaje_subsgobf_2-1.png) 
+
 ![plot of chunk puntaje_DQFIT01](figure/puntaje_DQFIT01-1.png) 
 
 ![plot of chunk puntaje_DQFIT25](figure/puntaje_DQFIT25-1.png) 

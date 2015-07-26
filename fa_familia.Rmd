@@ -90,6 +90,7 @@ fp$rd <- as.factor(mapply(escuela_tipo, fp$ruralidad, fp$dependencia))
 levels(fp$rd) <- c("Urbano/Privado", "Urbano/Publico", "Rural/Privado", "Rural/Publico")
 fp$indigena <- fp$madindig & fp$padindig
 fp$subsgobf <- as.factor(fp$subsgobf)
+levels(fp$subsgobf) <- c('Sin Subsidio', 'Con Subsidio')
 
 mean_school <- aggregate(puntaje_estandar ~ idschool + rd + grado + promedio_global + sd_global, fp, mean)
 mean_isecf_school <- aggregate(ISECF ~ idschool + rd + grado + promedio_global + sd_global, fp, mean)
@@ -109,6 +110,10 @@ ggplot(fp, aes(x=indigena,y=puntaje_estandar)) + geom_boxplot() + ggtitle("Distr
 
 ```{r puntaje_subsgobf, fig.width=12, fig.height=6, echo=F, message=F, warning=F}
 ggplot(fp, aes(x=subsgobf,y=puntaje_estandar,fill=dependencia)) + geom_boxplot() + ggtitle("Distribucion de Puntaje por Subsidio de Gobierno") + xlab('')  + scale_x_discrete(labels=c('Sin Subsidio', 'Con Subsidio'))
+```
+
+```{r puntaje_subsgobf_2, fig.width=12, fig.height=6, echo=F, message=F, warning=F}
+ggplot(fp, aes(x=dependencia,y=puntaje_estandar,fill=subsgobf)) + geom_boxplot() + ggtitle("Distribucion de Puntaje por Subsidio de Gobierno") + xlab('')  + scale_x_discrete(labels=c('Publico', 'Privado'))
 ```
 
 ```{r puntaje_DQFIT01, fig.width=12, fig.height=6, echo=F, message=F, warning=F}
