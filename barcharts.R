@@ -26,7 +26,7 @@ p <- rbind.fill(p6,p3)
 
 ispan <- function(x) { if(x == 'PAN') { return("PAN") } else { return("OTROS") } }
 p$countryp <- sapply(p$country,ispan)
-a <- aggregate(puntaje_estandar ~ nivel + countryp + tip + grado, p, length)
+a <- aggregate(puntaje_estandar ~ nivel + countryp + tipo + grado, p, length)
 calc_percent <- function(c,t,g,x) { return(100*(x/sum(a[a$countryp == c & a$tipo == t & a$grado == g,]$puntaje_estandar))) }
 a$dist <- mapply(calc_percent, a$countryp, a$tipo, a$grado, a$puntaje_estandar)
 
