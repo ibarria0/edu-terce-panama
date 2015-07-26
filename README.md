@@ -9,7 +9,7 @@ Análisis de Resultados de TERCE
 
 ### Formato propuesto
 1. Introducción
-2. Comparación de resultados generales: Panamá vs Otros
+2. Comparación de resultados generales - 01resultadosgenerales.md
   - Gráfica A:  3er grado
     - Gráfica A: matematica 3er grado
     - Gráfica A: lit 3er grado
