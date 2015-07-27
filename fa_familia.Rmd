@@ -104,40 +104,53 @@ m$fsd <- (m$ISECF - m$promedio_global) / m$sd_global
 
 # Factores Asociados
 
-```{r puntaje_indigena, fig.width=12, fig.height=6, echo=F, message=F, warning=F}
-ggplot(fp, aes(x=indigena,y=puntaje_estandar)) + geom_boxplot() + ggtitle("Distribucion de Puntaje por Etnicidad Originaria") + xlab('') + scale_x_discrete(labels=c('No Indingena', 'Indingena'))
+```{r puntaje_dependencia, fig.width=12, fig.height=6, echo=F, message=F, warning=F}
+ggplot(fp, aes(x=dependencia,y=puntaje_estandar)) + geom_boxplot() + ggtitle("Distribucion de Puntaje por Dependencia") + xlab('') + scale_y_continuous(limits=c(0,1000),breaks = sort(c(seq.int(0,1000, length.out=5), as.integer(mean(fp$puntaje_estandar,na.rm=T))))) + geom_hline(y=mean(fp$puntaje_estandar,na.rm=T), colour="red", linetype = "longdash")
 ```
 
+```{r puntaje_ruralidad, fig.width=12, fig.height=6, echo=F, message=F, warning=F}
+ggplot(fp, aes(x=ruralidad,y=puntaje_estandar)) + geom_boxplot() + ggtitle("Distribucion de Puntaje por Ruralidad") + xlab('') + scale_y_continuous(limits=c(0,1000),breaks = sort(c(seq.int(0,1000, length.out=5), as.integer(mean(fp$puntaje_estandar,na.rm=T))))) + geom_hline(y=mean(fp$puntaje_estandar,na.rm=T), colour="red", linetype = "longdash")
+```
+
+```{r puntaje_indigena, fig.width=12, fig.height=6, echo=F, message=F, warning=F}
+ggplot(fp, aes(x=indigena,y=puntaje_estandar)) + geom_boxplot() + ggtitle("Distribucion de Puntaje por Etnicidad Originaria") + xlab('') + scale_x_discrete(labels=c('No Indingena', 'Indingena')) + scale_y_continuous(limits=c(0,1000),breaks = sort(c(seq.int(0,1000, length.out=5), as.integer(mean(fp$puntaje_estandar,na.rm=T))))) + geom_hline(y=mean(fp$puntaje_estandar,na.rm=T), colour="red", linetype = "longdash")
+```
+
+```{r puntaje_indigena_ruralidad, fig.width=12, fig.height=6, echo=F, message=F, warning=F}
+ggplot(fp, aes(x=indigena,y=puntaje_estandar)) + geom_boxplot() + ggtitle("Distribucion de Puntaje por Etnicidad Originaria") + xlab('') + scale_x_discrete(labels=c('No Indingena', 'Indingena')) + scale_y_continuous(limits=c(0,1000),breaks = sort(c(seq.int(0,1000, length.out=5), as.integer(mean(fp$puntaje_estandar,na.rm=T))))) + geom_hline(y=mean(fp$puntaje_estandar,na.rm=T), colour="red", linetype = "longdash") + facet_grid( . ~ ruralidad)
+```
+
+
 ```{r puntaje_subsgobf, fig.width=12, fig.height=6, echo=F, message=F, warning=F}
-ggplot(fp, aes(x=subsgobf,y=puntaje_estandar,fill=dependencia)) + geom_boxplot() + ggtitle("Distribucion de Puntaje por Subsidio de Gobierno") + xlab('')  + scale_x_discrete(labels=c('Sin Subsidio', 'Con Subsidio'))
+ggplot(fp, aes(x=subsgobf,y=puntaje_estandar,fill=dependencia)) + geom_boxplot() + ggtitle("Distribucion de Puntaje por Subsidio de Gobierno") + xlab('')  + scale_x_discrete(labels=c('Sin Subsidio', 'Con Subsidio')) + scale_y_continuous(limits=c(0,1000),breaks = sort(c(seq.int(0,1000, length.out=5), as.integer(mean(fp$puntaje_estandar,na.rm=T))))) + geom_hline(y=mean(fp$puntaje_estandar,na.rm=T), colour="red", linetype = "longdash")
 ```
 
 ```{r puntaje_subsgobf_2, fig.width=12, fig.height=6, echo=F, message=F, warning=F}
-ggplot(fp, aes(x=dependencia,y=puntaje_estandar,fill=subsgobf)) + geom_boxplot() + ggtitle("Distribucion de Puntaje por Subsidio de Gobierno") + xlab('')  + scale_x_discrete(labels=c('Publico', 'Privado'))
+ggplot(fp, aes(x=dependencia,y=puntaje_estandar,fill=subsgobf)) + geom_boxplot() + ggtitle("Distribucion de Puntaje por Subsidio de Gobierno") + xlab('')  + scale_x_discrete(labels=c('Publico', 'Privado')) + scale_y_continuous(limits=c(0,1000),breaks = sort(c(seq.int(0,1000, length.out=5), as.integer(mean(fp$puntaje_estandar,na.rm=T))))) + geom_hline(y=mean(fp$puntaje_estandar,na.rm=T), colour="red", linetype = "longdash")
 ```
 
 ```{r puntaje_DQFIT01, fig.width=12, fig.height=6, echo=F, message=F, warning=F}
-ggplot(fp[!is.na(fp$DQFIT01),], aes(x=factor(DQFIT01),y=puntaje_estandar)) + geom_boxplot() + ggtitle("¿Cuál es su relación con el niño/la niña que está participando en la evaluación?") + xlab('')  + scale_x_discrete(labels=c('Madre', 'Padre','Abuelo/a','Hermano/a','Padrastro/Madrastra','Otro Familiar','No soy Familiar'))
+ggplot(fp[!is.na(fp$DQFIT01),], aes(x=factor(DQFIT01),y=puntaje_estandar)) + geom_boxplot() + ggtitle("¿Cuál es su relación con el niño/la niña que está participando en la evaluación?") + xlab('')  + scale_x_discrete(labels=c('Madre', 'Padre','Abuelo/a','Hermano/a','Padrastro/Madrastra','Otro Familiar','No soy Familiar')) + scale_y_continuous(limits=c(0,1000),breaks = sort(c(seq.int(0,1000, length.out=5), as.integer(mean(fp$puntaje_estandar,na.rm=T))))) + geom_hline(y=mean(fp$puntaje_estandar,na.rm=T), colour="red", linetype = "longdash")
 ```
 
 ```{r puntaje_DQFIT25, fig.width=12, fig.height=6, echo=F, message=F, warning=F}
-ggplot(fp[!is.na(fp$DQFIT25),], aes(x=factor(DQFIT25),y=puntaje_estandar)) + geom_boxplot() + ggtitle("¿Con qué frecuencia el estudiante ha faltado al colegio en los últimos seis meses?") + xlab('')  + scale_x_discrete(labels=c('Nunca','Par de veces por semestre','Par de veces por mes','Una vez por semana','Varios dias por semana','No se'))
+ggplot(fp[!is.na(fp$DQFIT25),], aes(x=factor(DQFIT25),y=puntaje_estandar)) + geom_boxplot() + ggtitle("¿Con qué frecuencia el estudiante ha faltado al colegio en los últimos seis meses?") + xlab('')  + scale_x_discrete(labels=c('Nunca','Par de veces por semestre','Par de veces por mes','Una vez por semana','Varios dias por semana','No se')) + scale_y_continuous(limits=c(0,1000),breaks = sort(c(seq.int(0,1000, length.out=5), as.integer(mean(fp$puntaje_estandar,na.rm=T))))) + geom_hline(y=mean(fp$puntaje_estandar,na.rm=T), colour="red", linetype = "longdash")
 ```
 ```{r puntaje_DQFIT31, fig.width=12, fig.height=6, echo=F, message=F, warning=F}
-ggplot(fp[!is.na(fp$DQFIT31),], aes(x=factor(DQFIT31),y=puntaje_estandar)) + geom_boxplot() + ggtitle("Usted diría que la escuela a la que asiste el niño...") + xlab('')  + scale_x_discrete(labels=c('Unica opcion disponible','Primera opcion entre varias',"No era primera entre varias opciones")) + facet_grid( . ~ dependencia)
+ggplot(fp[!is.na(fp$DQFIT31),], aes(x=factor(DQFIT31),y=puntaje_estandar)) + geom_boxplot() + ggtitle("Usted diría que la escuela a la que asiste el niño...") + xlab('')  + scale_x_discrete(labels=c('Unica opcion disponible','Primera opcion entre varias',"No era primera entre varias opciones")) + facet_grid( . ~ dependencia) + scale_y_continuous(limits=c(0,1000),breaks = sort(c(seq.int(0,1000, length.out=5), as.integer(mean(fp$puntaje_estandar,na.rm=T))))) + geom_hline(y=mean(fp$puntaje_estandar,na.rm=T), colour="red", linetype = "longdash")
 ```
 
 ```{r puntaje_DQFIT34, fig.width=12, fig.height=6, echo=F, message=F, warning=F}
-ggplot(fp[!is.na(fp$DQFIT34),], aes(x=factor(DQFIT34),y=puntaje_estandar)) + geom_boxplot() + ggtitle("¿Para qué usa la información que le entrega la escuela?") + xlab('')  + scale_x_discrete(labels=c('Conocer el progreso del estudiante','Apoyar, llamar la atencion, felicitar'))
+ggplot(fp[!is.na(fp$DQFIT34),], aes(x=factor(DQFIT34),y=puntaje_estandar)) + geom_boxplot() + ggtitle("¿Para qué usa la información que le entrega la escuela?") + xlab('')  + scale_x_discrete(labels=c('Conocer el progreso del estudiante','Apoyar, llamar la atencion, felicitar')) + scale_y_continuous(limits=c(0,1000),breaks = sort(c(seq.int(0,1000, length.out=5), as.integer(mean(fp$puntaje_estandar,na.rm=T))))) + geom_hline(y=mean(fp$puntaje_estandar,na.rm=T), colour="red", linetype = "longdash")
 ```
 
 ```{r puntaje_DQFIT15_07, fig.width=12, fig.height=6, echo=F, message=F, warning=F}
 fp$DQFIT15_07 <- factor(fp$DQFIT15_07)
-ggplot(fp[!is.na(fp$DQFIT15_07),], aes(x=factor(DQFIT15_07),y=puntaje_estandar)) + geom_boxplot() + ggtitle("¿Cuenta con Conexión a Internet?") + xlab('')  + scale_x_discrete(labels=c('No','Si'))
+ggplot(fp[!is.na(fp$DQFIT15_07),], aes(x=factor(DQFIT15_07),y=puntaje_estandar)) + geom_boxplot() + ggtitle("¿Cuenta con Conexión a Internet?") + xlab('')  + scale_x_discrete(labels=c('No','Si')) + scale_y_continuous(limits=c(0,1000),breaks = sort(c(seq.int(0,1000, length.out=5), as.integer(mean(fp$puntaje_estandar,na.rm=T))))) + geom_hline(y=mean(fp$puntaje_estandar,na.rm=T), colour="red", linetype = "longdash")
 ```
 
-```{r puntaje_DQFIT18_02, fig.width=12, fig.height=6, echo=F, message=F, warning=F}
-ggplot(fp[!is.na(fp$DQFIT18_02),], aes(x=factor(DQFIT18_02),y=puntaje_estandar)) + geom_boxplot() + ggtitle("En el lugar donde está el hogar del niño, ¿disponen de Escuelas?") + xlab('')  + scale_x_discrete(labels=c('No hay','Si, pero lejos', 'Si, hay uno cerca', 'Si, hay varios cerca'))
+```{r puntaje_DQFIT18_02, fig.width=12, fig.height=12, echo=F, message=F, warning=F}
+ggplot(fp[!is.na(fp$DQFIT18_02),], aes(x=factor(DQFIT18_02),y=puntaje_estandar)) + geom_boxplot() + ggtitle("En el lugar donde está el hogar del niño, ¿disponen de Escuelas?") + xlab('')  + scale_x_discrete(labels=c('No hay','Si, pero lejos', 'Si, hay uno cerca', 'Si, hay varios cerca')) + facet_grid( ruralidad ~ . ) + scale_y_continuous(limits=c(0,1000),breaks = sort(c(seq.int(0,1000, length.out=5), as.integer(mean(fp$puntaje_estandar,na.rm=T))))) + geom_hline(y=mean(fp$puntaje_estandar,na.rm=T), colour="red", linetype = "longdash")
 ```
 
 # Carnaval de Indices (publico vs privado)

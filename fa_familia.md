@@ -2,7 +2,14 @@
 
 # Factores Asociados
 
+![plot of chunk puntaje_dependencia](figure/puntaje_dependencia-1.png) 
+
+![plot of chunk puntaje_ruralidad](figure/puntaje_ruralidad-1.png) 
+
 ![plot of chunk puntaje_indigena](figure/puntaje_indigena-1.png) 
+
+![plot of chunk puntaje_indigena_ruralidad](figure/puntaje_indigena_ruralidad-1.png) 
+
 
 ![plot of chunk puntaje_subsgobf](figure/puntaje_subsgobf-1.png) 
 
