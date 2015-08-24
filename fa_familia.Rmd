@@ -28,7 +28,7 @@ qd6 <- read.spss('./data/Directores/QD6.SAV', to.data.frame=T)
 qd <- rbind.fill(qd6,qd3)
 qd <- qd[qd$country == 'PAN',]
 
-qd <- qd[,c("idschool","ruralidad","dependencia","pindigen")]
+qd <- qd[,c("idschool","ruralidad","dependencia","pindigen","DQDIT14_01","DQDIT14_02","DQDIT14_03","DQDIT14_04","DQDIT14_05","DQDIT14_06","DQDIT14_07","DQDIT14_08","DQDIT14_09","DQDIT14_10","DQDIT14_11","DQDIT17_01","DQDIT17_02","DQDIT17_03","DQDIT17_04","DQDIT17_05","DQDIT17_06","DQDIT17_07","DQDIT17_08","DQDIT17_09","DQDIT18_01","DQDIT18_02","DQDIT18_03","DQDIT18_04","DQDIT19_01","DQDIT19_02","DQDIT19_03","DQDIT19_04","DQDIT19_05","DQDIT19_06","DQDIT19_07","DQDIT19_08","DQDIT19_09","DQDIT20_01","DQDIT20_02","DQDIT20_03","DQDIT21","INFRAD","VIOLEND","CSOCIALD","AUTOADD","AUTOACD","CLAMBLD","totalum")]
 
 
 qd$dependencia <- as.factor(qd$dependencia)
@@ -48,6 +48,15 @@ pl6 <- read.spss('./data/Puntajes_Alumnos/PL6_all_TERCE.sav', to.data.frame=T)
 pm6 <- pm6[,c("sID","puntaje_estandar","nivel","idstud","country")]
 pl6 <- pl6[,c("sID","puntaje_estandar","nivel","idstud","country")]
 pc6 <- pc6[,c("sID","puntaje_estandar","nivel","idstud","country")]
+
+# load serce
+sm6 <- read.spss('./data/serce/m6.sav', to.data.frame=T)
+sc6 <- read.spss('./data/serce/c6.sav', to.data.frame=T)
+sl6 <- read.spss('./data/serce/l6.sav', to.data.frame=T)
+
+sm6 <- sm6[,c("id_alumno","PUNTAJE_ESTANDAR_FINAL","nivel","AdmRur","pais_num")]
+sl6 <- sl6[,c("id_alumno","PUNTAJE_ESTANDAR_FINAL","nivel","AdmRur","pais_num")]
+sc6 <- sc6[,c("id_alumno","PUNTAJE_ESTANDAR_FINAL","nivel","AdmRur","pais_num")]
 
 # merge matematica, lectura y ciencias
 pm6$tipo <- 'matematica'
@@ -90,16 +99,80 @@ fp$rd <- as.factor(mapply(escuela_tipo, fp$ruralidad, fp$dependencia))
 levels(fp$rd) <- c("Urbano/Privado", "Urbano/Publico", "Rural/Privado", "Rural/Publico")
 fp$indigena <- fp$madindig & fp$padindig
 fp$subsgobf <- as.factor(fp$subsgobf)
+fp$DQDIT14_01 <- as.factor(fp$DQDIT14_01)
+fp$DQDIT14_02 <- as.factor(fp$DQDIT14_02)
+fp$DQDIT14_03 <- as.factor(fp$DQDIT14_03)
+fp$DQDIT14_04 <- as.factor(fp$DQDIT14_04)
+fp$DQDIT14_05 <- as.factor(fp$DQDIT14_05)
+fp$DQDIT14_06 <- as.factor(fp$DQDIT14_06)
+fp$DQDIT14_07 <- as.factor(fp$DQDIT14_07)
+fp$DQDIT14_08 <- as.factor(fp$DQDIT14_08)
+fp$DQDIT14_09 <- as.factor(fp$DQDIT14_09)
+fp$DQDIT14_10 <- as.factor(fp$DQDIT14_10)
+fp$DQDIT14_11 <- as.factor(fp$DQDIT14_11)
 levels(fp$subsgobf) <- c('Sin Subsidio', 'Con Subsidio')
 
 mean_school <- aggregate(puntaje_estandar ~ idschool + rd + grado + promedio_global + sd_global, fp, mean)
-mean_isecf_school <- aggregate(ISECF ~ idschool + rd + grado + promedio_global + sd_global, fp, mean)
+mean_isecf_school <- aggregate(ISECF ~ idschool + DQDIT14_01 + DQDIT14_02 + DQDIT14_03 + DQDIT14_04 + DQDIT14_05 + DQDIT14_06 + DQDIT14_07 + DQDIT14_08 + DQDIT14_09 + DQDIT14_10 + INFRAD + rd + grado + promedio_global + sd_global + totalum, fp, mean)
 m <- merge(mean_school, mean_isecf_school, by=c('idschool',"rd","grado", "promedio_global", "sd_global"))
 
-m$fsd <- 0
-m$fsd <- (m$ISECF - m$promedio_global) / m$sd_global
+```
+## Distribucion por Niveles
+```{r dist_niveles, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+library(stringr)
+library(scales)
+
+a <- aggregate(puntaje_estandar ~  tipo, p6, length)
+a_nivel_terce <- aggregate(puntaje_estandar ~ nivel + tipo, p6, length)
+a_nivel_terce$percent_estudiantes <- 0
+
+a_nivel_terce[a_nivel_terce$tipo == 'lectura',]$percent_estudiantes <- a_nivel_terce[a_nivel_terce$tipo == 'lectura',]$puntaje_estandar / a[a$tipo == 'lectura',]$puntaje_estandar
+a_nivel_terce[a_nivel_terce$tipo == 'matematica',]$percent_estudiantes <- a_nivel_terce[a_nivel_terce$tipo == 'matematica',]$puntaje_estandar / a[a$tipo == 'matematica',]$puntaje_estandar
+a_nivel_terce[a_nivel_terce$tipo == 'ciencias',]$percent_estudiantes <- a_nivel_terce[a_nivel_terce$tipo == 'ciencias',]$puntaje_estandar / a[a$tipo == 'ciencias',]$puntaje_estandar
+
+#serce
+sm6 <- read.spss('./data/serce/m6.sav', to.data.frame=T)
+sc6 <- read.spss('./data/serce/c6.sav', to.data.frame=T)
+sl6 <- read.spss('./data/serce/l6.sav', to.data.frame=T)
+
+sm6 <- sm6[,c("id_alumno","PUNTAJE_ESTANDAR_FINAL","nivel","AdmRur","pais_num")]
+sl6 <- sl6[,c("id_alumno","PUNTAJE_ESTANDAR_FINAL","nivel","AdmRur","pais_num")]
+sc6 <- sc6[,c("id_alumno","PUNTAJE_ESTANDAR_FINAL","nivel","AdmRur","pais_num")]
+
+sm6$tipo <- 'matematica'
+sl6$tipo <- 'lectura'
+sc6$tipo <- 'ciencias'
+s6 <- rbind.fill(sm6,sl6,sc6)
+s6 <- s6[s6$pais_num == "Panam\xe1",]
+s6[s6$nivel == 'Debajo de I',]$nivel <- "I"
+
+a <- aggregate(PUNTAJE_ESTANDAR_FINAL ~ tipo, s6, length)
+a_nivel_serce <- aggregate(PUNTAJE_ESTANDAR_FINAL ~ nivel + tipo, s6, length)
+
+a_nivel_serce$percent_estudiantes <- 0
+
+a_nivel_serce[a_nivel_serce$tipo == 'lectura',]$percent_estudiantes <- a_nivel_serce[a_nivel_serce$tipo == 'lectura',]$PUNTAJE_ESTANDAR_FINAL / a[a$tipo == 'lectura',]$PUNTAJE_ESTANDAR_FINAL
+a_nivel_serce[a_nivel_serce$tipo == 'matematica',]$percent_estudiantes <- a_nivel_serce[a_nivel_serce$tipo == 'matematica',]$PUNTAJE_ESTANDAR_FINAL / a[a$tipo == 'matematica',]$PUNTAJE_ESTANDAR_FINAL
+a_nivel_serce[a_nivel_serce$tipo == 'ciencias',]$percent_estudiantes <- a_nivel_serce[a_nivel_serce$tipo == 'ciencias',]$PUNTAJE_ESTANDAR_FINAL / a[a$tipo == 'ciencias',]$PUNTAJE_ESTANDAR_FINAL
 
 
+a_nivel_terce$nivel <- str_trim(as.character(a_nivel_terce$nivel))
+a_nivel_serce$nivel <- str_trim(as.character(a_nivel_serce$nivel))
+a_nivel_serce$examen <- 'serce'
+a_nivel_terce$examen <- 'terce'
+
+a_nivel <- rbind.fill(a_nivel_serce,a_nivel_terce)
+
+
+a_nivel$nivel <- as.factor(a_nivel$nivel)
+a_nivel$examen <- as.factor(a_nivel$examen)
+levels(a_nivel$examen) <- c('2006','2013')
+
+ggplot(a_nivel, aes(x=nivel, y=percent_estudiantes, fill=examen)) + geom_bar(stat='identity', position="dodge") + scale_y_continuous(labels = percent) + facet_grid( . ~ examen) + xlab('') + ylab('') + ggtitle('Porcentaje de Estudiantes por Nivel (Panama)') + facet_grid( . ~ tipo )
+```
+
+```{r puntaje_rd, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+ggplot(m, aes(x=ISECF,y=puntaje_estandar,color=rd,size=totalum)) + geom_point(alpha=0.3) + stat_smooth(method=lm,se=F) + facet_grid(. ~ grado)
 ```
 
 # Factores Asociados
@@ -153,65 +226,62 @@ ggplot(fp[!is.na(fp$DQFIT15_07),], aes(x=factor(DQFIT15_07),y=puntaje_estandar))
 ggplot(fp[!is.na(fp$DQFIT18_02),], aes(x=factor(DQFIT18_02),y=puntaje_estandar)) + geom_boxplot() + ggtitle("En el lugar donde está el hogar del niño, ¿disponen de Escuelas?") + xlab('')  + scale_x_discrete(labels=c('No hay','Si, pero lejos', 'Si, hay uno cerca', 'Si, hay varios cerca')) + facet_grid( ruralidad ~ . ) + scale_y_continuous(limits=c(0,1000),breaks = sort(c(seq.int(0,1000, length.out=5), as.integer(mean(fp$puntaje_estandar,na.rm=T))))) + geom_hline(y=mean(fp$puntaje_estandar,na.rm=T), colour="red", linetype = "longdash")
 ```
 
-# Carnaval de Indices (publico vs privado)
 ## Índice de estatus socioeconómico y cultural (ISECF)
 
 ```{r puntaje_ISECF_simple, fig.width=12, fig.height=13, echo=F, message=F, warning=F}
-i <- ggplot(fp[!is.na(fp$ISECF),], aes(x=ISECF,y=puntaje_estandar,color=dependencia)) + geom_point(alpha = 0.00001) + stat_smooth(se=F,method=lm) + facet_grid( grado ~ tipo) + xlab('')
-o <- ggplot(fp[!is.na(fp$ISECF),], aes(x=ISECF,y=puntaje_estandar,color=ruralidad)) + geom_point(alpha = 0.00001) + stat_smooth(se=F,method=lm) + facet_grid( grado ~ tipo)
-multiplot(i,o)
+ggplot(fp[!is.na(fp$ISECF),], aes(x=ISECF,y=puntaje_estandar,color=ruralidad)) + geom_point(alpha = 0.00001) + stat_smooth(se=F,method=lm) + facet_grid( grado ~ tipo)
 ```
 
 ```{r puntaje_ISECF_cool, fig.width=12, fig.height=13, echo=F, message=F, warning=F}
-ggplot(fp[!is.na(fp$ISECF) & fp$grado == 6,], aes(x=ISECF,y=puntaje_estandar,color=tipo)) + geom_point(alpha = 0) + stat_smooth(se=F,method=lm) + facet_grid( ruralidad ~ dependencia)
+ggplot(fp[!is.na(fp$ISECF) & fp$grado == 6,], aes(x=ISECF,y=puntaje_estandar,color=tipo)) + geom_point(alpha = 0.05) + stat_smooth(se=F,method=lm) + facet_grid( ruralidad ~ dependencia)
 ```
 
 ## Índice de involucramiento de los padres en la escuela
 
 ```{r puntaje_INVOLUCF_pubpriv, fig.width=12, fig.height=7, echo=F, message=F, warning=F}
-ggplot(fp[!is.na(fp$INVOLUCF),], aes(x=INVOLUCF,y=puntaje_estandar,color=dependencia)) + geom_point(alpha = 0) + stat_smooth(se=F,method=lm) + facet_grid( grado ~ tipo)
+ggplot(fp[!is.na(fp$INVOLUCF),], aes(x=INVOLUCF,y=puntaje_estandar,color=dependencia)) + geom_point(alpha = 0.05) + stat_smooth(se=F,method=lm) + facet_grid( . ~ grado)
 ```
 
 ## Índice de apoyo social en el barrio
 
 ```{r puntaje_CSOCBARF_pubpriv, fig.width=12, fig.height=7, echo=F, message=F, warning=F}
-ggplot(fp[!is.na(fp$CSOCBARF),], aes(x=CSOCBARF,y=puntaje_estandar,color=dependencia)) + geom_point(alpha = 0) + stat_smooth(se=F,method=lm) + facet_grid( grado ~ tipo)
+ggplot(fp[!is.na(fp$CSOCBARF),], aes(x=CSOCBARF,y=puntaje_estandar,color=dependencia)) + geom_point(alpha = 0.05) + stat_smooth(se=F,method=lm) + facet_grid( . ~ grado)
+
 ```
 
 ## Índice de violencia en el barrio
 
 ```{r puntaje_VIOLBARF_pubpriv, fig.width=12, fig.height=7, echo=F, message=F, warning=F}
-ggplot(fp[!is.na(fp$VIOLBARF),], aes(x=VIOLBARF,y=puntaje_estandar,color=dependencia)) + geom_point(alpha = 0) + stat_smooth(se=F,method=lm) + facet_grid( grado ~ tipo)
+ggplot(fp[!is.na(fp$VIOLBARF),], aes(x=VIOLBARF,y=puntaje_estandar,color=dependencia)) + geom_point(alpha = 0.05) + stat_smooth(se=F,method=lm) + facet_grid( . ~ grado)
+
 ```
 
 ## Índice de motivación de lectura en el hogar
 
 ```{r puntaje_MOTIVALF_pubpriv, fig.width=12, fig.height=7, echo=F, message=F, warning=F}
-ggplot(fp[!is.na(fp$MOTIVALF),], aes(x=MOTIVALF,y=puntaje_estandar,color=dependencia)) + geom_point(alpha = 0) + stat_smooth(se=F,method=lm) + facet_grid( grado ~ tipo)
+ggplot(fp[!is.na(fp$MOTIVALF),], aes(x=MOTIVALF,y=puntaje_estandar,color=dependencia)) + geom_point(alpha = 0.05) + stat_smooth(se=F,method=lm) + facet_grid( . ~ grado)
+
 ```
 
 ##  Índice de control y supervisión de estudios en el hogar
 
 ```{r puntaje_SUPERVF_pubpriv, fig.width=12, fig.height=7, echo=F, message=F, warning=F}
-ggplot(fp[!is.na(fp$SUPERVF),], aes(x=SUPERVF,y=puntaje_estandar,color=dependencia)) + geom_point(alpha = 0) + stat_smooth(se=F,method=lm) + facet_grid( grado ~ tipo)
-```
+ggplot(fp[!is.na(fp$SUPERVF),], aes(x=SUPERVF,y=puntaje_estandar,color=dependencia)) + geom_point(alpha = 0.05) + stat_smooth(se=F,method=lm) + facet_grid( . ~ grado)
 
-## Porcentaje de niños indígenas
-
-```{r puntaje_pindigen_pubpriv, fig.width=12, fig.height=7, echo=F, message=F, warning=F}
-ggplot(fp[!is.na(fp$pindigen),], aes(x=pindigen,y=puntaje_estandar,color=dependencia)) + geom_point(alpha = 0) + stat_smooth(se=F,method=lm) + facet_grid( grado ~ tipo)
 ```
 
 ## Índice de asistencia y puntualidad docente
 
 #### Tercer Grado
 ```{r puntaje_ASISDOA3_cool, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
-ggplot(fp[!is.na(fp$ASISDOA3),], aes(x=ASISDOA3,y=puntaje_estandar,color=dependencia)) + geom_point(alpha = 0) + stat_smooth(se=F,method=lm) + facet_grid( . ~ tipo)
+ggplot(fp[!is.na(fp$ASISDOA3),], aes(x=ASISDOA3,y=puntaje_estandar,color=dependencia)) + geom_point(alpha = 0.05) + stat_smooth(se=F,method=lm)
+
 ```
 
 #### Sexto Grado
 ```{r puntaje_ASISDOA6_simple, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
-ggplot(fp[!is.na(fp$ASISDOA6),], aes(x=ASISDOA6,y=puntaje_estandar,color=dependencia)) + geom_point(alpha = 0) + stat_smooth(se=F,method=lm) + facet_grid( . ~ tipo)
+ggplot(fp[!is.na(fp$ASISDOA6),], aes(x=ASISDOA6,y=puntaje_estandar,color=dependencia)) + geom_point(alpha = 0.05) + stat_smooth(se=F,method=lm)
+
 ```
 
 

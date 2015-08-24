@@ -1,4 +1,8 @@
 
+## Distribucion por Niveles
+![plot of chunk dist_niveles](figure/dist_niveles-1.png) 
+
+![plot of chunk puntaje_rd](figure/puntaje_rd-1.png) 
 
 # Factores Asociados
 
@@ -26,7 +30,6 @@
 
 ![plot of chunk puntaje_DQFIT18_02](figure/puntaje_DQFIT18_02-1.png) 
 
-# Carnaval de Indices (publico vs privado)
 ## Índice de estatus socioeconómico y cultural (ISECF)
 
 ![plot of chunk puntaje_ISECF_simple](figure/puntaje_ISECF_simple-1.png) 
@@ -52,10 +55,6 @@
 ##  Índice de control y supervisión de estudios en el hogar
 
 ![plot of chunk puntaje_SUPERVF_pubpriv](figure/puntaje_SUPERVF_pubpriv-1.png) 
-
-## Porcentaje de niños indígenas
-
-![plot of chunk puntaje_pindigen_pubpriv](figure/puntaje_pindigen_pubpriv-1.png) 
 
 ## Índice de asistencia y puntualidad docente
 
