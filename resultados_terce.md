@@ -76,11 +76,30 @@ usar doughnut para ruralidad y oficialidad.  usar pastel para genero y para grup
    
 ## 5 Comparacion del desempeño en el Terce (2013?) con el Serce (2006)
 ### 5.1 Mejora en relación con los resultados serce, por materia
-......
+![plot of chunk serce_terce](figure/serce_terce-1.png) 
+
+![plot of chunk serce_terce_2](figure/serce_terce_2-1.png) 
 
 ## 6 Características de los resultados en Panamá
 ### 6.1 Desempeño por Genero 
+
+Las niñas obtuvieron mejores resultados que los niños en lectura y ciencias en 6to grado.    
+
+Aunque en realidad las niñas obtuvieron mayor puntaje promedio que los niños en todas las áreas de conocimiento y grados, solo lectura y ciencias en 6to grado permiten concluir confiablemente que la diferencia es real.  En los otros casos la diferencia es suficientemente pequeña para los resultados en Panama que no permite afirmar confiablemente que su desempeño es mejor.
+
+![plot of chunk demo_genero_puntaje](figure/demo_genero_puntaje-1.png) 
+
+![plot of chunk demo_genero_puntaje_desv](figure/demo_genero_puntaje_desv-1.png) 
+
 ### 6.2 Grupo Originario
+![plot of chunk demo_etnia_puntaje](figure/demo_etnia_puntaje-1.png) 
+
+![plot of chunk demo_etnia_puntaje_desv](figure/demo_etnia_puntaje_desv-1.png) 
+
+
+```
+## Error in eval(expr, envir, enclos): could not find function "gplot"
+```
 ### 6.3 Tipo de escuela: urbano, rural y particular; mas distrib normal de promedio socioecon de escuelas
 
 ## 7 Relacion entre desempeño y factores típicamente asociados al proceso de aprendizaje

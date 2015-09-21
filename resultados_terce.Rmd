@@ -210,16 +210,122 @@ calc_percent <- function(c,t,g,x) { return(100*(x/sum(a[a$countryp == c & a$tipo
 a$dist <- mapply(calc_percent, a$countryp, a$tipo, a$grado, a$puntaje_estandar)
 
 #####
-ggplot(a, aes(x=nivel,y=dist,fill=countryp)) + geom_bar(stat="identity", position=position_dodge(), colour="black") + ggtitle("Cantidad de Estudiantes por Nivel (Matematicas 6to Grado)") + facet_grid(tipo ~ .) + scale_fill_brewer(palette="Set1")
+ggplot(a[a$grado == 6,], aes(x=nivel,y=dist,fill=countryp)) + geom_bar(stat="identity", position=position_dodge(), colour="black") + ggtitle("Cantidad de Estudiantes por Nivel (6to Grado)") + facet_grid(tipo ~ .) + scale_fill_brewer(palette="Set1")
 ```
    
 ## 5 Comparacion del desempeño en el Terce (2013?) con el Serce (2006)
 ### 5.1 Mejora en relación con los resultados serce, por materia
-......
+```{r serce_terce, fig.width=12, fig.height=6, echo=F, message=F, warning=F}
+library(stringr)
+library(scales)
+
+a <- aggregate(puntaje_estandar ~  tipo, p6, length)
+a_nivel_terce <- aggregate(puntaje_estandar ~ nivel + tipo, p6, length)
+a_nivel_terce$percent_estudiantes <- 0
+
+a_nivel_terce[a_nivel_terce$tipo == 'lectura',]$percent_estudiantes <- a_nivel_terce[a_nivel_terce$tipo == 'lectura',]$puntaje_estandar / a[a$tipo == 'lectura',]$puntaje_estandar
+a_nivel_terce[a_nivel_terce$tipo == 'matematica',]$percent_estudiantes <- a_nivel_terce[a_nivel_terce$tipo == 'matematica',]$puntaje_estandar / a[a$tipo == 'matematica',]$puntaje_estandar
+a_nivel_terce[a_nivel_terce$tipo == 'ciencias',]$percent_estudiantes <- a_nivel_terce[a_nivel_terce$tipo == 'ciencias',]$puntaje_estandar / a[a$tipo == 'ciencias',]$puntaje_estandar
+
+#serce
+sm6 <- read.spss('./data/serce/m6.sav', to.data.frame=T)
+sc6 <- read.spss('./data/serce/c6.sav', to.data.frame=T)
+sl6 <- read.spss('./data/serce/l6.sav', to.data.frame=T)
+
+sm6 <- sm6[,c("id_alumno","PUNTAJE_ESTANDAR_FINAL","nivel","AdmRur","pais_num")]
+sl6 <- sl6[,c("id_alumno","PUNTAJE_ESTANDAR_FINAL","nivel","AdmRur","pais_num")]
+sc6 <- sc6[,c("id_alumno","PUNTAJE_ESTANDAR_FINAL","nivel","AdmRur","pais_num")]
+
+sm6$tipo <- 'matematica'
+sl6$tipo <- 'lectura'
+sc6$tipo <- 'ciencias'
+s6 <- rbind.fill(sm6,sl6,sc6)
+s6 <- s6[s6$pais_num == "Panam\xe1",]
+s6[s6$nivel == 'Debajo de I',]$nivel <- "I"
+
+a <- aggregate(PUNTAJE_ESTANDAR_FINAL ~ tipo, s6, length)
+a_nivel_serce <- aggregate(PUNTAJE_ESTANDAR_FINAL ~ nivel + tipo, s6, length)
+
+a_nivel_serce$percent_estudiantes <- 0
+
+a_nivel_serce[a_nivel_serce$tipo == 'lectura',]$percent_estudiantes <- a_nivel_serce[a_nivel_serce$tipo == 'lectura',]$PUNTAJE_ESTANDAR_FINAL / a[a$tipo == 'lectura',]$PUNTAJE_ESTANDAR_FINAL
+a_nivel_serce[a_nivel_serce$tipo == 'matematica',]$percent_estudiantes <- a_nivel_serce[a_nivel_serce$tipo == 'matematica',]$PUNTAJE_ESTANDAR_FINAL / a[a$tipo == 'matematica',]$PUNTAJE_ESTANDAR_FINAL
+a_nivel_serce[a_nivel_serce$tipo == 'ciencias',]$percent_estudiantes <- a_nivel_serce[a_nivel_serce$tipo == 'ciencias',]$PUNTAJE_ESTANDAR_FINAL / a[a$tipo == 'ciencias',]$PUNTAJE_ESTANDAR_FINAL
+
+
+a_nivel_terce$nivel <- str_trim(as.character(a_nivel_terce$nivel))
+a_nivel_serce$nivel <- str_trim(as.character(a_nivel_serce$nivel))
+a_nivel_serce$examen <- 'serce'
+a_nivel_terce$examen <- 'terce'
+
+a_nivel <- rbind.fill(a_nivel_serce,a_nivel_terce)
+
+
+a_nivel$nivel <- as.factor(a_nivel$nivel)
+a_nivel$examen <- as.factor(a_nivel$examen)
+levels(a_nivel$examen) <- c('2006','2013')
+
+ggplot(a_nivel, aes(x=nivel, y=percent_estudiantes, fill=examen)) + geom_bar(stat='identity', position="dodge") + scale_y_continuous(labels = percent) + facet_grid( . ~ examen) + xlab('') + ylab('') + ggtitle('Porcentaje de Estudiantes por Nivel (Panama)') + facet_grid( . ~ tipo )
+```
+
+```{r serce_terce_2, fig.width=12, fig.height=6, echo=F, message=F, warning=F}
+ggplot(a_nivel, aes(x=examen, y=percent_estudiantes, fill=nivel)) + geom_bar(stat='identity') + scale_y_continuous(labels = percent) + facet_grid( . ~ examen) + xlab('') + ylab('') + ggtitle('Porcentaje de Estudiantes por Nivel (Panama)') + facet_grid( . ~ tipo )
+```
 
 ## 6 Características de los resultados en Panamá
 ### 6.1 Desempeño por Genero 
+
+Las niñas obtuvieron mejores resultados que los niños en lectura y ciencias en 6to grado.    
+
+Aunque en realidad las niñas obtuvieron mayor puntaje promedio que los niños en todas las áreas de conocimiento y grados, solo lectura y ciencias en 6to grado permiten concluir confiablemente que la diferencia es real.  En los otros casos la diferencia es suficientemente pequeña para los resultados en Panama que no permite afirmar confiablemente que su desempeño es mejor.
+
+```{r demo_genero_puntaje, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+qa6 <- read.spss('./data/Alumnos/QA6.SAV', to.data.frame=T)
+qa6 <- qa6[qa6$country == 'PAN',]
+qa6$DQA6IT02 <- as.factor(qa6$DQA6IT02)
+
+genero <- merge(p6,qa6,by='idstud')
+a <- aggregate(puntaje_estandar ~ DQA6IT02, genero, mean)
+a$dif <- (a$puntaje_estandar - mean(p6$puntaje_estandar,na.rm=T))/sd(p6$puntaje_estandar,na.rm=T)
+levels(a$DQA6IT02) <- c("Niña","Niño")
+
+ggplot(a, aes(x=DQA6IT02,y=puntaje_estandar,fill=DQA6IT02)) + geom_bar(stat='identity')
+```
+
+```{r demo_genero_puntaje_desv, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+ggplot(a, aes(x=DQA6IT02,y=dif,fill=DQA6IT02)) + geom_bar(stat='identity') + ggtitle('Standard Deviation from Mean')
+```
+
 ### 6.2 Grupo Originario
+```{r demo_etnia_puntaje, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+qa6 <- read.spss('./data/Alumnos/QA6.SAV', to.data.frame=T)
+qa6 <- qa6[qa6$country == 'PAN',]
+qa6$DQA6IT06 <- as.factor(qa6$DQA6IT06)
+
+genero <- merge(p6,qa6,by='idstud')
+a <- aggregate(puntaje_estandar ~ DQA6IT06, genero, mean)
+a$dif <- (a$puntaje_estandar - mean(p6$puntaje_estandar,na.rm=T))/sd(p6$puntaje_estandar,na.rm=T)
+levels(a$DQA6IT06) <- c("No Indigena","Etnia Indigena")
+
+ggplot(a, aes(x=DQA6IT06,y=puntaje_estandar,fill=DQA6IT06)) + geom_bar(stat='identity')
+```
+
+```{r demo_etnia_puntaje_desv, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+ggplot(a, aes(x=DQA6IT06,y=dif,fill=DQA6IT06)) + geom_bar(stat='identity') + ggtitle('Standard Deviation from Mean')
+```
+
+```{r demo_etnia_puntaje_isecf, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+# load factores familia
+
+qf <- read.spss('./data/Familia/QF6.SAV', to.data.frame=T)
+qf <- qf[qf$country == 'PAN',]
+qf <- qf[,c("idstud","ISECF")]
+
+g <- merge(genero,qf,by='idstud')
+
+levels(g$DQA6IT06) <- c("No Indigena","Etnia Indigena")
+gplot(g[!is.na(g$DQA6IT06),], aes(x=ISECF,y=puntaje_estandar,color=DQA6IT06)) + geom_point(alpha=0.0) + stat_smooth(method=lm,se=F)
+```
 ### 6.3 Tipo de escuela: urbano, rural y particular; mas distrib normal de promedio socioecon de escuelas
 
 ## 7 Relacion entre desempeño y factores típicamente asociados al proceso de aprendizaje
