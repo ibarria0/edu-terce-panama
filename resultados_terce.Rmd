@@ -104,9 +104,12 @@ ggplot(a, aes(x=gdp_2013, y=puntaje_estandar, fill=country, color=country, group
 
 ### 2. Introduccion 
 
-Es posible evaluar de forma científica, es decir, de forma confinable….   Una cultura que valora información permite aprender y avanzar…
 
 La educación es el gran nivelador… en empleo, aceptación social, valerse por si mismos…
+
+Es posible evaluar de forma científica, es decir, de forma confinable….   Una cultura que valora información permite aprender y avanzar…
+
+Terce cubre extensamente la región de América Latina, con pocas excepciones.  No incluye al Caribe...
 
 Pruebas estandarizadas pueden ser criticadas desde varios angulos… pero son útiles y mucho mejor que avanzar a oscuras.   
 
@@ -114,10 +117,10 @@ Usar para aprender, no para criticar.
 
 no se va a poder explicar por region geografica
 
-Todos los países ded América Latina participaron con la excepción de Cuba[, y otros?].   También participó el estado de Nuevo León, México, como en la prueba Serce 2006.   
+ 
 
-### 3. Que es TERCE
-#### 3.1 En que consiste, quien participa
+### 3. La prueba Terce y participación de Panamá
+#### 3.1 Qué es la evaluación Terce
 
 Llece es un laboratorio latinoamericano con base en chile.  Administra evaluaciones comparativas y explicativas de las cuales el terce [tercer…] es la tercera….
 
@@ -125,16 +128,17 @@ Evaluar logros de aprendizaje usando metodos de ciencia empirica para poder comp
 
 La muestra se diseña segun las preguntas de interes para asegurar que la muestra es suficientemente representative para lograr estadisticas confiables.    Hay factores asociados de interes para todos y comparaciones entre grupos de interes para cada pais.  Panama pidio genero, originarios, areas de conocimiento y …
 
-Paises participantes [mapa terce y si es possible del serce y perce]
+Todos los países ded América Latina participaron con la excepción de Cuba[, y otros?].   También participó el estado de Nuevo León, México, como en la prueba Serce 2006.  
 
-La evaluación cubrió matemáticas y lectura para 3ero y 6 grado, ciencias para 6to grado y una prueba especial de escritura en 6to grado.   [explicar esa ultima.  No me queda clara.]
+La evaluación cubrió matemáticas y lectura para 3ero y 6 grado, ciencias para 6to grado y una prueba especial de escritura en 6to grado.   [JEV2JEV: averiguar de esa ultima.  No me queda clara.]
 
-#### 3.2 Demografía del terce en panamá y representatividad 
+#### 3.2 Características de las escuelas y alumnos participantes de Panamá
 
 [NUMERO DE ESCUELAS] participaron en la prueba Terce representando cuatro tipos de escuela así:  oficial urbana [No. OFC URB], oficial rural [No. OFC RRL], particular urbana [No. PRT URB], particular rural [No. PRT RRL].  En el total de escuelas, 3775 estudiantes correspondían a sexto grado y 3631 estudiantes a tercer grado.
 
 [JEV2IBG: usar cómo título "Distribución de escuelas por sector escolar"]
 [JEV2IBG: usar color azul para las barras en lugar de negro]
+[JEV2IBG: intentar barras más angostas en relación con el ancho de la figura: pienso que se ve "pesada"]
 [JEV2IBG: cambiar etiqueta de las barras por "Oficial" y "Particular", en lugar de "Publico" y "Privado"]
 [JEV2IBG: cambiar "dependencia" por "Sector escolar". Notar que por consistencia empieza con mayúscula]
 
@@ -146,6 +150,8 @@ ggplot(a, aes(x=dependencia, y=ruralidad)) + geom_bar(stat="identity") + ylab("C
 
 [JEV2IBG: usar cómo título "Distribución de escuelas por ruralidad]
 [JEV2IBG: En la siguiente gráfica usar mayúscula inicial en "ruralidad"]
+[JEV2IBG: usar color azul para las barras en lugar de negro]
+[JEV2IBG: intentar barras más angostas en relación con el ancho de la figura: pienso que se ve "pesada"]
 
 ```{r demo_ruralidad, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 a <- aggregate(dependencia ~ ruralidad, qd, length)
@@ -184,6 +190,8 @@ ggplot(qa6, aes(x=DQA6IT01, fill=DQA6IT02)) + geom_histogram(alpha=.5, position=
 [JEV2IBG: en los datos salen cuantos son realmente niñas y niños?   ...los lectores se preguntarán porqué no sabemos la cifra exacta si son estudiantes de Meduca.]
 [JEV2IBG: incluir título "Respuesta a la pertenencia de género"]
 [JEV2IBG: podríamos usar porcentajes en el eje Y en lugar de cantidad?]
+[JEV2IBG: usar color azul para las barras en lugar de negro]
+[JEV2IBG: intentar barras más angostas en relación con el ancho de la figura: pienso que se ve "pesada"]
 
 ```{r demo_genelaro, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 qa6 <- read.spss('./data/Alumnos/QA6.SAV', to.data.frame=T)
@@ -198,6 +206,8 @@ ggplot(qa6, aes(x=DQA6IT02)) + geom_histogram(alpha=.5, position="dodge")  + the
 [JEV2IBG: incluir título "Respuesta a la pertenencia de etnia originaria"]
 [JEV2IBG: podríamos usar porcentajes en el eje Y en lugar de cantidad?]
 [JEV2IBG: agregar tílde al término "índigena" en la leyenda del eje X]
+[JEV2IBG: usar color azul para las barras en lugar de negro]
+[JEV2IBG: intentar barras más angostas en relación con el ancho de la figura: pienso que se ve "pesada"]
 
 ```{r etnia, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 qa6 <- read.spss('./data/Alumnos/QA6.SAV', to.data.frame=T)
@@ -213,6 +223,8 @@ ggplot(qa6, aes(x=DQA6IT06)) + geom_histogram(alpha=.5, position="dodge")  + the
 ## 4. Comparacion con America Latina
 ### 4.1 Puntaje vs ingreso per capita (3er grado, 6to grado)
 
+Comparar resultados entre países es útil pero no lo principal. Es un error considerar la evaluación Terce como una competencia por el mayor puntaje promedio.   Sus resultados son sólo parte de la evidencia e información de cuánto logran aprender los alumnos.  Su valor principal está en intentar comprender qué acciones se pueden tomar para que la educación le de las mejores oportunidades de vida a los alumnos y países.   
+
 Entre los países participantes Chile obtuvo el mejor resultado seguido de Costa Rica y México.  Costa Rica sirve de ejemplo que un país de escala y ubicación como la nuestra puede obtener mejores resultados.     Las figuras [NO. 3ero PTJ VS PIB/CAP] Y [NO. 6ero PTJ VS PIB/CAP] siguientes muestran que Panamá obtiene resulados inferiores a lo esperado para su producto interno bruto per cápita.  Estos resultados son consistentes con otras pruebas internacionales en las que ha participado Panamá (pruebas Serce 2006 y Pisa 2009). El efecto es más pronunciado para sexto grado que para tercer grado.   Parece razonable esperar que con la prioridad social necesaria, la riqueza nacional nos permita lograr al menos los resultados esperados.   
 
 [JEV2IBG: Repetir la figura 2 arriba pero para los resultados de tercer grado primero]
@@ -226,6 +238,16 @@ Entre los países participantes Chile obtuvo el mejor resultado seguido de Costa
 [JEV2IBG: verificar que la leyenda del eje X dice "Producto (PIB) per cápita" y tílde en "cápita"]  
 
 ### 4.2 Desempeño en logros de aprendizaje
+
+Más relevante en primera instancia es saber si nuestros niños y niñas logran un aprendiza útil para su propio bienestar y la prosperidad de la nación. La evaluación Terce define cuatro niveles de logros de aprendizaje.  El nivel 1 se considera insuficiente preparación y el nivel 4 la mejor preparación educativa para la vida esperada de los participantes.  Corresponden a dominios progresivamente más eficaces del área de conocimiento y están explicados en el apéndice [No. APENDICE NIVELES].  
+
+[22?]% de nuestras niñas y niños muestran un logro de aprendizaje en el nivel inferior, o nivel 1, considerado inadecuado como preparación para su vida.   Para ciencias son [45?]% y para matemáticas [65?]%.   La figura [No. NIVELES] muestra como se comparan los porcentajes de alumnos de Panamá para cada nivel con los del resto de los alumnos de otros países. 
+
+[JEV2IBG: título "Niveles de logros de aprendizaje por área de conocimiento, comparados"]
+[JEV2IBG: cambiar la leyenda del eje Y a "Porcentaje de alumnos"]
+[JEV2IBG: cambiar la leyenda del eje Y a "Niveles de logro de aprendizaje"]
+[JEV2IBG: verificar que las leyendas del eje X y Y empiezan con mayúscula] 
+
 ```{r niveles_barcharts, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
 pc6 <- read.spss('./data/Puntajes_Alumnos/PC6_all_TERCE.sav', to.data.frame=T)
