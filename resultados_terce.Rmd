@@ -69,7 +69,10 @@ ggplot(m, aes(x=ISECF,y=puntaje_estandar,color=rd,size=totalum)) + geom_point(al
 
 A pesar de las grandes diferencias, algunas escuelas oficiales rurales con bajo índice socioeconómico y cultural logran resultados superiores al promedio internacional e iguales al de las mejores escuelas oficiales urbanas.   Esas escuelas podrían aportarnos lecciones sobre como mejorar el desempeño de otras escuelas.   
 
-En cuanto al desempeño comparativo, la figura siguiente confirma la tendencia conocida de que países con mayor ingreso per cápita obtienen mejores puntajes promedio. Sin embargo Panamá obtiene resultados por debajo de lo esperado.  Estos resultados son consistentes con otras pruebas internacionales en las que ha participado Panamá (pruebas Serce 2006 y Pisa 2009). Panamá puede y debe mejorar significativamente su desempeño.    
+En cuanto al desempeño comparativo, la figura siguiente confirma la tendencia conocida de que países con mayor ingreso per cápita obtienen mejores puntajes promedio. Sin embargo Panamá obtiene resultados por debajo de lo esperado tanto en tercero como en sexto grado ilustrado aquí.  Estos resultados son consistentes con otras pruebas internacionales en las que ha participado Panamá (pruebas Serce 2006 y Pisa 2009). Panamá puede y debe mejorar significativamente su desempeño.    
+
+[JEV2IBG: corregir la P mayúscula de "país" en el título]
+[JEV2IBG: agregar tílde en "Capita" en la leyenda del eje X]
 
 
 ```{r puntaje_gdp, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
@@ -123,6 +126,16 @@ Paises participantes [mapa terce y si es possible del serce y perce]
 La evaluación cubrió matemáticas y lectura para 3ero y 6 grado, ciencias para 6to grado y una prueba especial de escritura en 6to grado.   [explicar esa ultima.  No me queda clara.]
 
 #### 3.2 Demografía del terce en panamá y representatividad 
+
+[NUMERO DE ESCUELAS] participaron en la prueba Terce representando cuatro tipos de escuela así:  oficial urbana [No. OFC URB], oficial rural [No. OFC RRL], particular urbana [No. PRT URB], particular rural [No. PRT RRL].  
+
+[JEV2IBG: usar cómo título "Distribución de escuelas por sector escolar"]
+[JEV2IBG: usar color azul para las barras en lugar de negro]
+[JEV2IBG: cambiar etiqueta de las barras por "Oficial" y "Particular", en lugar de "Publico" y "Privado"]
+[JEV2IBG: cambiar "dependencia" por "Sector escolar". Notar que por consistencia empieza con mayúscula]
+
+[JEV2IBG: usar cómo título "Distribución de escuelas por ruralidad]
+[JEV2IBG: En la siguiente gráfica usar mayúscula inicial en "ruralidad"]
 
 ```{r demo_pub_priv, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 a <- aggregate(ruralidad ~ dependencia, qd, length)
