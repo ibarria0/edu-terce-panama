@@ -18,6 +18,7 @@ Las escuelas particulares mostraron mayor desempeño que las oficiales; y entre 
 
 [JEV2IBG: favor intentar incluir líneas que muestren el promedio y los cambios entre un nivel de aprendizaje y otro]
 [JEV2IBG: la grafica debe tener como titulo "logros de aprendizaje de escuelas particulares y oficiales, urbanas y rurales]
+[JEV2IBG: es importante y buena práctica que cada figura tenga un número (ej. "Figura 1.1") para facilitar referencias]  [JEV2IBG: Además, si la línea con número de figura permite texto explicativo, me gustaría saber, para agregarlo]
 
 
 ```{r puntaje_isecf_rd, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
@@ -69,9 +70,11 @@ ggplot(m, aes(x=ISECF,y=puntaje_estandar,color=rd,size=totalum)) + geom_point(al
 
 A pesar de las grandes diferencias, algunas escuelas oficiales rurales con bajo índice socioeconómico y cultural logran resultados superiores al promedio internacional e iguales al de las mejores escuelas oficiales urbanas.   Esas escuelas podrían aportarnos lecciones sobre como mejorar el desempeño de otras escuelas.   
 
-En cuanto al desempeño comparativo, la figura siguiente confirma la tendencia conocida de que países con mayor ingreso per cápita obtienen mejores puntajes promedio. Sin embargo Panamá obtiene resultados por debajo de lo esperado tanto en tercero como en sexto grado ilustrado aquí.  Estos resultados son consistentes con otras pruebas internacionales en las que ha participado Panamá (pruebas Serce 2006 y Pisa 2009). Panamá puede y debe mejorar significativamente su desempeño.    
+En cuanto al desempeño comparativo, la figura siguiente [para sexto grado] es representativa y confirma la tendencia conocida de que países con mayor ingreso per cápita obtienen mejores puntajes promedio; sin embargo Panamá obtiene resultados por debajo de lo esperado.  Estos resultados son consistentes con otras pruebas internacionales en las que ha participado Panamá (pruebas Serce 2006 y Pisa 2009). Panamá puede y debe mejorar significativamente su desempeño.    
 
+[JEV2IBG: cambiar el título de la figura por "Puntaje promedio según producto (PIB) per cápita por país, sexto grado"]
 [JEV2IBG: corregir la P mayúscula de "país" en el título]
+[JEV2IBG: cambiar la leyenda del eje X por "Producto (PIB) per cápita"]  
 [JEV2IBG: agregar tílde en "Capita" en la leyenda del eje X]
 
 
@@ -111,6 +114,7 @@ Usar para aprender, no para criticar.
 
 no se va a poder explicar por region geografica
 
+Todos los países ded América Latina participaron con la excepción de Cuba[, y otros?].   También participó el estado de Nuevo León, México, como en la prueba Serce 2006.   
 
 ### 3. Que es TERCE
 #### 3.1 En que consiste, quien participa
@@ -175,8 +179,13 @@ qa6$DQA6IT02 <- as.factor(qa6$DQA6IT02)
 
 ggplot(qa6, aes(x=DQA6IT01, fill=DQA6IT02)) + geom_histogram(alpha=.5, position="dodge") + scale_x_discrete(labels=c("10 años o menos","11 años","12 años", "13 años", "14 años", "15 años o mas", "NA")) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + scale_fill_discrete(labels=c("Niña","Niño")) + ylab("Cantidad de Estudiantes")
 ```
+[GENERO PORCENTAJE FEM]% de los alumnos indicó ser niña y  [GENERO PORCENTAJE N/A]% no contestó o no supo responder.    
 
-```{r demo_genero, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+[JEV2IBG: en los datos salen cuantos son realmente niñas y niños?   ...los lectores se preguntarán porqué no sabemos la cifra exacta si son estudiantes de Meduca.]
+[JEV2IBG: incluir título "Respuesta a la pertenencia de género"]
+[JEV2IBG: podríamos usar porcentajes en el eje Y en lugar de cantidad?]
+
+```{r demo_genelaro, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 qa6 <- read.spss('./data/Alumnos/QA6.SAV', to.data.frame=T)
 qa6 <- qa6[qa6$country == 'PAN',]
 qa6$DQA6IT02 <- as.factor(qa6$DQA6IT02)
@@ -184,7 +193,11 @@ levels(qa6$DQA6IT02) <- c("Niña","Niño")
 
 ggplot(qa6, aes(x=DQA6IT02)) + geom_histogram(alpha=.5, position="dodge")  + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + ylab("Cantidad de Estudiantes") + xlab("¿Eres niña o niño?")
 ```
+[ORGNR PORCENTAJE AFIRMATIVO]% de los alumnos indicó pertenecer a alguna etnia "originaria" y [ORGNR PORCENTAJE N/A]% no contestó o no supo responder.   
 
+[JEV2IBG: incluir título "Respuesta a la pertenencia de etnia originaria"]
+[JEV2IBG: podríamos usar porcentajes en el eje Y en lugar de cantidad?]
+[JEV2IBG: agregar tílde al término "índigena" en la leyenda del eje X]
 
 ```{r etnia, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 qa6 <- read.spss('./data/Alumnos/QA6.SAV', to.data.frame=T)
@@ -197,19 +210,20 @@ ggplot(qa6, aes(x=DQA6IT06)) + geom_histogram(alpha=.5, position="dodge")  + the
 ```
 
 
-
-[graficas que indiquen cuantos tomaron la prueba, que genero tenían, edades, tipo de área urbana o rural etc….]
-
-Se encuestaron 3775 estudiantes de sexto grado y 3631 estudiantes de tercer grado.
-
-usar doughnut para ruralidad y oficialidad.  usar pastel para genero y para grupos originarios (3 grupos).  dejar histogramas abajo para edad de estudiantes.  
-
 ## 4. Comparacion con America Latina
 ### 4.1 Puntaje vs ingreso per capita (3er grado, 6to grado)
-?????
-???
 
-???
+Entre los países participantes Chile obtuvo el mejor resultado seguido de Costa Rica y México.  Costa Rica sirve de ejemplo que un país de escala y ubicación como la nuestra puede obtener mejores resultados.     Las figuras [NO. 3ero PTJ VS PIB/CAP] Y [NO. 6ero PTJ VS PIB/CAP] siguientes muestran que Panamá obtiene resulados inferiores a lo esperado para su producto interno bruto per cápita.  Estos resultados son consistentes con otras pruebas internacionales en las que ha participado Panamá (pruebas Serce 2006 y Pisa 2009). El efecto es más pronunciado para sexto grado que para tercer grado.   Parece razonable esperar que con la prioridad social necesaria, la riqueza nacional nos permita lograr al menos los resultados esperados.   
+
+[JEV2IBG: Repetir la figura 2 arriba pero para los resultados de tercer grado primero]
+[JEV2IBG: título "Puntaje promedio según producto (PIB) per cápita por país, tercer grado"]
+[JEV2IBG: verificar p minúscula y tílde en "país" en el título]
+[JEV2IBG: verificar que la leyenda del eje X dice "Producto (PIB) per cápita" y tílde en "cápita"]  
+
+[JEV2IBG: Repetir la figura 2 (sexto grado)]
+[JEV2IBG: título "Puntaje promedio según producto (PIB) per cápita por país, sexto grado"]
+[JEV2IBG: verificar p minúscula y tílde en "país" en el título]
+[JEV2IBG: verificar que la leyenda del eje X dice "Producto (PIB) per cápita" y tílde en "cápita"]  
 
 ### 4.2 Desempeño en logros de aprendizaje
 ```{r niveles_barcharts, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
