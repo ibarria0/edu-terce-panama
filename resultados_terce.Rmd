@@ -117,6 +117,8 @@ Usar para aprender, no para criticar.
 
 no se va a poder explicar por region geografica
 
+Esta es la segunda divulgación en torno al Terce.   Previamente, en diciembre 2014, Unesco y Meduca [VERIFICAR] divulgaron aspectos sobresalientes de la comparación de resultados entre el Serce, 2006, y el Terce, 2013. Por supuesto, tanto los resultados sujeto de esta divulgación como los anteriores del Terce (2013), Pisa (2009), Sineca ([2008?]) y Serce (2006) deben continuar bajo análisis para mayor comprensión y divulgación.   
+
  
 
 ### 3. La prueba Terce y participación de Panamá
@@ -246,7 +248,9 @@ Más relevante en primera instancia es saber si nuestros niños y niñas logran 
 [JEV2IBG: título "Niveles de logros de aprendizaje por área de conocimiento, comparados"]
 [JEV2IBG: cambiar la leyenda del eje Y a "Porcentaje de alumnos"]
 [JEV2IBG: cambiar la leyenda del eje Y a "Niveles de logro de aprendizaje"]
-[JEV2IBG: verificar que las leyendas del eje X y Y empiezan con mayúscula] 
+[JEV2IBG: verificar que las leyendas del eje X y Y empiezan con mayúscula]
+[JEV2IBG: eliminar del margen derecho la etiqueta "countryp"]
+[JEV2IBG: si es posible, usar colores menos intensos para las barras, especialmente el rojo (asusta ;)]
 
 ```{r niveles_barcharts, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
@@ -284,6 +288,9 @@ ggplot(a[a$grado == 6,], aes(x=nivel,y=dist,fill=countryp)) + geom_bar(stat="ide
    
 ## 5 Comparacion del desempeño en el Terce (2013?) con el Serce (2006)
 ### 5.1 Mejora en relación con los resultados serce, por materia
+
+Al final, Gina dice que este informe debe ser solo del Terce.  Incluí texto referente al serce en la introducción.  Por tanto Eliminaremos esta seccion y correremos las secciones 6 en adelante.    
+
 ```{r serce_terce, fig.width=12, fig.height=6, echo=F, message=F, warning=F}
 library(stringr)
 library(scales)
@@ -344,7 +351,7 @@ ggplot(a_nivel, aes(x=examen, y=percent_estudiantes, fill=nivel)) + geom_bar(sta
 ## 6 Características de los resultados en Panamá
 ### 6.1 Desempeño por Genero 
 
-Las niñas obtuvieron mejores resultados que los niños en lectura y ciencias en 6to grado.    
+Las niñas obtuvieron mejores resultados que los niños en lectura de y ciencias en 6to grado.    
 
 Aunque en realidad las niñas obtuvieron mayor puntaje promedio que los niños en todas las áreas de conocimiento y grados, solo lectura y ciencias en 6to grado permiten concluir confiablemente que la diferencia es real.  En los otros casos la diferencia es suficientemente pequeña para los resultados en Panama que no permite afirmar confiablemente que su desempeño es mejor.
 
