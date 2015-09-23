@@ -10,7 +10,14 @@ source('multiplot.R')
 
 ### 1. Resumen
 
-Hay grandes diferencias de oportunidades para nuestros niños y niñas en material educativa.    Las escuelas particulares mostraron major desempeño que las oficiales, y entre estas oficiales las rurales típicamente no logran el mínimo nivel de desempeño deseado.     [Es importante notar que esta grafica muestra el promedio por escuela y no por estudiante… explicar implicaciones]
+Hay grandes diferencias de oportunidades para nuestra niñez en materia educativa.   La prueba Terce está diseñada para evaluar mediante el puntaje obtenido los logros educativos de los estudiantes.    
+
+Las diferencias de logros educativos desafortunadamente reflejan en forma marcada las diferencias socioeconómicas y culturales, representada en la prueba Terce por un índice socioeconómico  y cultural que sintetiza factores materiales y culturales del alumno y su entorno.  Idealmente, nuestro sistema educativo debería darle las mismas oportunidades de aprendizaje a nuestras niñas y niños independientemente de su nivel socioeconómico y cultural.    
+
+Las escuelas particulares mostraron mayor desempeño que las oficiales; y entre las oficiales, muchas no logran el mínimo nivel de desempeño adecuado, especialmente entre las rurales.     
+
+[JEV2IBG: favor intentar incluir líneas que muestren el promedio y los cambios entre un nivel de aprendizaje y otro]
+[JEV2IBG: la grafica debe tener como titulo "logros de aprendizaje de escuelas particulares y oficiales, urbanas y rurales]
 
 
 ```{r puntaje_isecf_rd, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
@@ -60,9 +67,9 @@ m <- merge(mean_school, mean_isecf_school, by=c('idschool'))
 ggplot(m, aes(x=ISECF,y=puntaje_estandar,color=rd,size=totalum)) + geom_point(alpha=0.7) + stat_smooth(method=lm,se=F) + scale_size(guide=FALSE) + xlab("Índice de estatus socioeconómico y cultural") + ylab("Puntaje Promedio por Escuela")
 ```
 
-Sin embargo es importante destacar que hay escuelas oficiales rurales que están logrando desempeño tan bueno como las mejores escuelas oficiales urbanas, e incluso logran desempeño igual al promedio de todos los estudiantes de la region latinoamericana que participaron.   Esto sugiere que esas escuelas pueden aportar lecciones sobre como mejorar el desempeño de otras escuelas de menor desempeño.   
+A pesar de las grandes diferencias, algunas escuelas oficiales rurales con bajo índice socioeconómico y cultural logran resultados superiores al promedio internacional e iguales al de las mejores escuelas oficiales urbanas.   Esas escuelas podrían aportarnos lecciones sobre como mejorar el desempeño de otras escuelas.   
 
-En cuanto al desempeño comparativo, los resultados son consistentes con otras pruebas internacionales en las que ha participado Panama (2006 y 2009): Panama puede y debe mejorar significativamente su desempeño, especialmente tomando en cuenta los recursos disponibles que implica su nivel de ingreso per capita.    
+En cuanto al desempeño comparativo, la figura siguiente confirma la tendencia conocida de que países con mayor ingreso per cápita obtienen mejores puntajes promedio. Sin embargo Panamá obtiene resultados por debajo de lo esperado.  Estos resultados son consistentes con otras pruebas internacionales en las que ha participado Panamá (pruebas Serce 2006 y Pisa 2009). Panamá puede y debe mejorar significativamente su desempeño.    
 
 
 ```{r puntaje_gdp, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
