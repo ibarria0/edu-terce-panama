@@ -214,14 +214,7 @@ Son factores selectos que plausiblemente podrian mostrar relacion con el desempe
 
 ![plot of chunk puntaje_prof_MOTIVP](figure/puntaje_prof_MOTIVP-1.png) 
 ![plot of chunk puntaje_prof_CLAMBP](figure/puntaje_prof_CLAMBP-1.png) 
-
-```
-## Error in eval(expr, envir, enclos): object 'RESALP' not found
-```
-
-```
-## Error in eval(expr, envir, enclos): object 'RESALP' not found
-```
+![plot of chunk puntaje_prof_RELSALP](figure/puntaje_prof_RELSALP-1.png) 
 ![plot of chunk puntaje_prof_RELDIRP](figure/puntaje_prof_RELDIRP-1.png) 
 ![plot of chunk puntaje_prof_VIOLENP](figure/puntaje_prof_VIOLENP-1.png) 
 ![plot of chunk puntaje_prof_APOYOP](figure/puntaje_prof_APOYOP-1.png) 
@@ -245,3 +238,57 @@ Son factores selectos que plausiblemente podrian mostrar relacion con el desempe
 
 ![plot of chunk puntaje_prof_DQPIT11](figure/puntaje_prof_DQPIT11-1.png) 
 
+![plot of chunk puntaje_prof_DQPIT12_01](figure/puntaje_prof_DQPIT12_01-1.png) 
+
+![plot of chunk puntaje_prof_DQPIT12_02](figure/puntaje_prof_DQPIT12_02-1.png) 
+
+![plot of chunk puntaje_prof_DQPIT12_07](figure/puntaje_prof_DQPIT12_07-1.png) 
+
+![plot of chunk puntaje_prof_DQPIT13](figure/puntaje_prof_DQPIT13-1.png) 
+
+![plot of chunk puntaje_prof_DQPIT14](figure/puntaje_prof_DQPIT14-1.png) 
+
+### Factores Asociados Familia
+
+
+
+#### Indices
+
+![plot of chunk puntaje_familia_SUPERVF](figure/puntaje_familia_SUPERVF-1.png) 
+![plot of chunk puntaje_familia_MOTIVALF](figure/puntaje_familia_MOTIVALF-1.png) 
+![plot of chunk puntaje_familia_RECREAF](figure/puntaje_familia_RECREAF-1.png) 
+![plot of chunk puntaje_familia_INVOLUCF](figure/puntaje_familia_INVOLUCF-1.png) 
+![plot of chunk puntaje_familia_SERVBARF](figure/puntaje_familia_SERVBARF-1.png) 
+![plot of chunk puntaje_familia_CSOCBARF](figure/puntaje_familia_CSOCBARF-1.png) 
+![plot of chunk puntaje_familia_VIOLBARF](figure/puntaje_familia_VIOLBARF-1.png) 
+
+#### Factores Asociados
+
+![plot of chunk puntaje_familia_DQFIT01](figure/puntaje_familia_DQFIT01-1.png) 
+
+Estos siguientes factores estan muy asociados al indice sociocultural.
+
+![plot of chunk puntaje_familia_DQFIT15_01](figure/puntaje_familia_DQFIT15_01-1.png) 
+![plot of chunk puntaje_familia_DQFIT15_02](figure/puntaje_familia_DQFIT15_02-1.png) 
+![plot of chunk puntaje_familia_DQFIT15_03](figure/puntaje_familia_DQFIT15_03-1.png) 
+![plot of chunk puntaje_familia_DQFIT15_04](figure/puntaje_familia_DQFIT15_04-1.png) 
+![plot of chunk puntaje_familia_DQFIT15_05](figure/puntaje_familia_DQFIT15_05-1.png) 
+![plot of chunk puntaje_familia_DQFIT15_06](figure/puntaje_familia_DQFIT15_06-1.png) 
+![plot of chunk puntaje_familia_DQFIT15_07](figure/puntaje_familia_DQFIT15_07-1.png) 
+
+
+![plot of chunk puntaje_familia_DQFIT32_01](figure/puntaje_familia_DQFIT32_01-1.png) 
+
+![plot of chunk puntaje_familia_DQFIT32_02](figure/puntaje_familia_DQFIT32_02-1.png) 
+
+![plot of chunk puntaje_familia_DQFIT32_03](figure/puntaje_familia_DQFIT32_03-1.png) 
+
+![plot of chunk puntaje_familia_DQFIT33_01](figure/puntaje_familia_DQFIT33_01-1.png) 
+
+![plot of chunk puntaje_familia_DQFIT33_02](figure/puntaje_familia_DQFIT33_02-1.png) 
+
+![plot of chunk puntaje_familia_DQFIT33_03](figure/puntaje_familia_DQFIT33_03-1.png) 
+
+![plot of chunk puntaje_familia_DQFIT33_04](figure/puntaje_familia_DQFIT33_04-1.png) 
+
+![plot of chunk puntaje_familia_DQFIT33_05](figure/puntaje_familia_DQFIT33_05-1.png) 

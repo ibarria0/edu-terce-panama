@@ -981,41 +981,41 @@ p6prof <- rbind.fill(pm6,pl6,pc6)
 
 ```{r puntaje_prof_MOTIVP, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 a <- aggregate(puntaje_estandar ~ idtealin + tipo + MOTIVP, p6prof, mean)
-ggplot(a, aes(x=MOTIVP,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + stat_smooth(method=lm,se=F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
+ggplot(a, aes(x=MOTIVP,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
 ```
 ```{r puntaje_prof_CLAMBP, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 a <- aggregate(puntaje_estandar ~ idtealin + tipo + CLAMBP, p6prof, mean)
-ggplot(a, aes(x=CLAMBP,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + stat_smooth(method=lm,se=F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
+ggplot(a, aes(x=CLAMBP,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
 ```
 ```{r puntaje_prof_RELSALP, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-a <- aggregate(puntaje_estandar ~ idtealin + tipo + RESALP, p6prof, mean)
-ggplot(a, aes(x=RESALP,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + stat_smooth(method=lm,se=F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
+a <- aggregate(puntaje_estandar ~ idtealin + tipo + RELSALP, p6prof, mean)
+ggplot(a, aes(x=RELSALP,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
 ```
 ```{r puntaje_prof_RELDIRP, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 a <- aggregate(puntaje_estandar ~ idtealin + tipo + RELDIRP, p6prof, mean)
-ggplot(a, aes(x=RELDIRP,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + stat_smooth(method=lm,se=F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
+ggplot(a, aes(x=RELDIRP,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
 ```
 ```{r puntaje_prof_VIOLENP, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 a <- aggregate(puntaje_estandar ~ idtealin + tipo + VIOLENP, p6prof, mean)
-ggplot(a, aes(x=VIOLENP,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + stat_smooth(method=lm,se=F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
+ggplot(a, aes(x=VIOLENP,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
 ```
 ```{r puntaje_prof_APOYOP, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 a <- aggregate(puntaje_estandar ~ idtealin + tipo + APOYOP, p6prof, mean)
-ggplot(a, aes(x=APOYOP,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + stat_smooth(method=lm,se=F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
+ggplot(a, aes(x=APOYOP,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
 ```
 ```{r puntaje_prof_LIDERAP, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 a <- aggregate(puntaje_estandar ~ idtealin + tipo + LIDERAP, p6prof, mean)
-ggplot(a, aes(x=LIDERAP,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + stat_smooth(method=lm,se=F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
+ggplot(a, aes(x=LIDERAP,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
 ```
 ```{r puntaje_prof_MONITOP, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 a <- aggregate(puntaje_estandar ~ idtealin + tipo + MONITOP, p6prof, mean)
-ggplot(a, aes(x=MONITOP,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + stat_smooth(method=lm,se=F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
+ggplot(a, aes(x=MONITOP,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
 ```
 
 #### Datos de Profesores
 ```{r puntaje_prof_DQPIT01, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 a <- aggregate(puntaje_estandar ~ idtealin + tipo + DQPIT01, p6prof, mean)
-ggplot(a, aes(x=DQPIT01,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + stat_smooth(method=lm,se=F) + xlab("Cual es su Edad?") + ylab("")
+ggplot(a, aes(x=DQPIT01,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + xlab("Cual es su Edad?") + ylab("")
 ```
 
 ```{r puntaje_prof_DQPIT02, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
@@ -1036,12 +1036,12 @@ ggplot(a, aes(x=tipo,y=dif,fill=DQPIT03)) + geom_bar(stat='identity',position='d
 
 ```{r puntaje_prof_DQPIT04, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 a <- aggregate(puntaje_estandar ~ idtealin + tipo + DQPIT04, p6prof, mean)
-ggplot(a, aes(x=DQPIT04,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + stat_smooth(method=lm,se=F) + xlab(" ¿Hace cuantos años trabaja como docente?") + ylab("")
+ggplot(a, aes(x=DQPIT04,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + xlab(" ¿Hace cuantos años trabaja como docente?") + ylab("")
 ```
 
 ```{r puntaje_prof_DQPIT05, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 a <- aggregate(puntaje_estandar ~ idtealin + tipo + DQPIT05, p6prof, mean)
-ggplot(a, aes(x=DQPIT05,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + stat_smooth(method=lm,se=F) + xlab("") + ylab("")
+ggplot(a, aes(x=DQPIT05,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + xlab("") + ylab("")
 ```
 
 ```{r puntaje_prof_DQPIT07, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
@@ -1067,3 +1067,220 @@ a$dif <- (a$puntaje_estandar - mean(p6prof$puntaje_estandar,na.rm=T))/sd(p6prof$
 ggplot(a, aes(x=tipo,y=dif,fill=DQPIT11)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('¿Cuál es el nivel educativo más alto que usted ha completado?')
 ```
 
+```{r puntaje_prof_DQPIT12_01, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
+p6prof$DQPIT12_01 <- as.factor(p6prof$DQPIT12_01)
+levels(p6prof$DQPIT12_01) <- c("No","Si")
+a <- aggregate(puntaje_estandar ~ DQPIT12_01 + tipo + DQPIT12_01, p6prof, mean)
+a$dif <- (a$puntaje_estandar - mean(p6prof$puntaje_estandar,na.rm=T))/sd(p6prof$puntaje_estandar,na.rm=T)
+ggplot(a, aes(x=tipo,y=dif,fill=DQPIT12_01)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('¿Ha participado en alguna de las siguientes actividades..._He realizado un magíster')
+```
+
+```{r puntaje_prof_DQPIT12_02, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
+p6prof$DQPIT12_02 <- as.factor(p6prof$DQPIT12_02)
+levels(p6prof$DQPIT12_02) <- c("No","Si")
+a <- aggregate(puntaje_estandar ~ DQPIT12_02 + tipo + DQPIT12_02, p6prof, mean)
+a$dif <- (a$puntaje_estandar - mean(p6prof$puntaje_estandar,na.rm=T))/sd(p6prof$puntaje_estandar,na.rm=T)
+ggplot(a, aes(x=tipo,y=dif,fill=DQPIT12_02)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('¿Ha participado en alguna de las siguientes actividades..._He realizado un diplomado')
+```
+
+```{r puntaje_prof_DQPIT12_07, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
+p6prof$DQPIT12_07 <- as.factor(p6prof$DQPIT12_07)
+levels(p6prof$DQPIT12_07) <- c("No","Si")
+a <- aggregate(puntaje_estandar ~ DQPIT12_07 + tipo + DQPIT12_07, p6prof, mean)
+a$dif <- (a$puntaje_estandar - mean(p6prof$puntaje_estandar,na.rm=T))/sd(p6prof$puntaje_estandar,na.rm=T)
+ggplot(a, aes(x=tipo,y=dif,fill=DQPIT12_07)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('No he realizado ninguna actividad de perfeccionamiento')
+```
+
+```{r puntaje_prof_DQPIT13, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
+p6prof$DQPIT13 <- as.factor(p6prof$DQPIT13)
+levels(p6prof$DQPIT13) <- c("Si, un mes", "Si, dos meses", "Si tres o mas meses", "No")
+a <- aggregate(puntaje_estandar ~ DQPIT13 + tipo + DQPIT13, p6prof, mean)
+a$dif <- (a$puntaje_estandar - mean(p6prof$puntaje_estandar,na.rm=T))/sd(p6prof$puntaje_estandar,na.rm=T)
+ggplot(a, aes(x=tipo,y=dif,fill=DQPIT13)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('¿ha recibido usted alguna vez el apoyo y supervisión directa de un docente')
+```
+
+```{r puntaje_prof_DQPIT14, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
+p6prof$DQPIT14 <- as.factor(p6prof$DQPIT14)
+levels(p6prof$DQPIT14) <- c("No","Si")
+a <- aggregate(puntaje_estandar ~ DQPIT14 + tipo + DQPIT14, p6prof, mean)
+a$dif <- (a$puntaje_estandar - mean(p6prof$puntaje_estandar,na.rm=T))/sd(p6prof$puntaje_estandar,na.rm=T)
+ggplot(a, aes(x=tipo,y=dif,fill=DQPIT14)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('No he realizado ninguna actividad de perfeccionamiento')
+```
+
+### Factores Asociados Familia
+
+```{r echo=F,messages=F,warnings=F}
+# load sexto grado puntajes
+pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
+pc6 <- read.spss('./data/Puntajes_Alumnos/PC6_all_TERCE.sav', to.data.frame=T)
+pl6 <- read.spss('./data/Puntajes_Alumnos/PL6_all_TERCE.sav', to.data.frame=T)
+
+pm6 <- pm6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+pl6 <- pl6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+pc6 <- pc6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+
+# merge matematica, lectura y ciencias
+pm6$tipo <- 'matematica'
+pl6$tipo <- 'lectura'
+pc6$tipo <- 'ciencias'
+p6 <- rbind.fill(pm6,pl6,pc6)
+
+p6 <- p6[p6$country == 'PAN',]
+
+# load factores familia
+qf <- read.spss('./data/Familia/QF6.SAV', to.data.frame=T)
+qf <- qf[qf$country == 'PAN',]
+
+pest <- merge(p6,qf,by='idstud')
+```
+
+#### Indices
+
+```{r puntaje_familia_SUPERVF, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+ggplot(pest, aes(x=SUPERVF,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + xlab("Índice de control y supervisión de estudios en el hogar") + ylab("")
+```
+```{r puntaje_familia_MOTIVALF, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+ggplot(pest, aes(x=MOTIVALF,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + xlab("Índice de motivación de lectura en el hogar") + ylab("")
+```
+```{r puntaje_familia_RECREAF, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+ggplot(pest, aes(x=RECREAF,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + xlab("Índice de actividades recreativas con la familia") + ylab("")
+```
+```{r puntaje_familia_INVOLUCF, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+ggplot(pest, aes(x=INVOLUCF,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + xlab("Índice de involucramiento de los padres en la escuela") + ylab("")
+```
+```{r puntaje_familia_SERVBARF, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+ggplot(pest, aes(x=SERVBARF,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + xlab("Índice de servicios en el barrio") + ylab("")
+```
+```{r puntaje_familia_CSOCBARF, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+ggplot(pest, aes(x=CSOCBARF,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + xlab("Índice de apoyo social en el barrio") + ylab("")
+```
+```{r puntaje_familia_VIOLBARF, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+ggplot(pest, aes(x=VIOLBARF,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + xlab("Índice de violencia en el barrio") + ylab("")
+```
+
+#### Factores Asociados
+
+```{r puntaje_familia_DQFIT01, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+pest$DQFIT01 <- as.factor(pest$DQFIT01)
+levels(pest$DQFIT01) <- c("Madre","Padre","Abuelo","Hermano","Pareja del padre/madre", "Otro Familiar","Apoderado/Tutor")
+a <- aggregate(puntaje_estandar ~ DQFIT01, pest, mean)
+a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
+ggplot(a, aes(x=DQFIT01,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('¿Cuál es su relación con el niño/la niña que está participando en la evaluación?') + coord_flip()
+```
+
+Estos siguientes factores estan muy asociados al indice sociocultural.
+
+```{r puntaje_familia_DQFIT15_01, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
+pest$DQFIT15_01 <- as.factor(pest$DQFIT15_01)
+levels(pest$DQFIT15_01) <- c("No","Si")
+a <- aggregate(puntaje_estandar ~ DQFIT15_01, pest, mean)
+a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
+ggplot(a, aes(x=DQFIT15_01,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('¿Cuenta con alguno de los siguientes servicios en su hogar?_Luz eléctrica')
+```
+```{r puntaje_familia_DQFIT15_02, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
+pest$DQFIT15_02 <- as.factor(pest$DQFIT15_02)
+levels(pest$DQFIT15_02) <- c("No","Si")
+a <- aggregate(puntaje_estandar ~ DQFIT15_02, pest, mean)
+a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
+ggplot(a, aes(x=DQFIT15_02,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('¿Cuenta con alguno de los siguientes servicios en su hogar?_Agua Potable')
+```
+```{r puntaje_familia_DQFIT15_03, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
+pest$DQFIT15_03 <- as.factor(pest$DQFIT15_03)
+levels(pest$DQFIT15_03) <- c("No","Si")
+a <- aggregate(puntaje_estandar ~ DQFIT15_03, pest, mean)
+a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
+ggplot(a, aes(x=DQFIT15_03,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('¿Cuenta con alguno de los siguientes servicios en su hogar?_Desague o Alcantarillado')
+```
+```{r puntaje_familia_DQFIT15_04, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
+pest$DQFIT15_04 <- as.factor(pest$DQFIT15_04)
+levels(pest$DQFIT15_04) <- c("No","Si")
+a <- aggregate(puntaje_estandar ~ DQFIT15_04, pest, mean)
+a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
+ggplot(a, aes(x=DQFIT15_04,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('¿Cuenta con alguno de los siguientes servicios en su hogar?_Recoleccion de Basura')
+```
+```{r puntaje_familia_DQFIT15_05, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
+pest$DQFIT15_05 <- as.factor(pest$DQFIT15_05)
+levels(pest$DQFIT15_05) <- c("No","Si")
+a <- aggregate(puntaje_estandar ~ DQFIT15_05, pest, mean)
+a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
+ggplot(a, aes(x=DQFIT15_05,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('¿Cuenta con alguno de los siguientes servicios en su hogar?_Telefono Fijo')
+```
+```{r puntaje_familia_DQFIT15_06, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
+pest$DQFIT15_06 <- as.factor(pest$DQFIT15_06)
+levels(pest$DQFIT15_06) <- c("No","Si")
+a <- aggregate(puntaje_estandar ~ DQFIT15_06, pest, mean)
+a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
+ggplot(a, aes(x=DQFIT15_06,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('¿Cuenta con alguno de los siguientes servicios en su hogar?_Television por Cable o Satelital')
+```
+```{r puntaje_familia_DQFIT15_07, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
+pest$DQFIT15_07 <- as.factor(pest$DQFIT15_07)
+levels(pest$DQFIT15_07) <- c("No","Si")
+a <- aggregate(puntaje_estandar ~ DQFIT15_07, pest, mean)
+a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
+ggplot(a, aes(x=DQFIT15_07,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('¿Cuenta con alguno de los siguientes servicios en su hogar?_Internet')
+```
+
+
+```{r puntaje_familia_DQFIT32_01, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
+pest$DQFIT32_01 <- as.factor(pest$DQFIT32_01)
+levels(pest$DQFIT32_01) <- c("Nunca o casi nunca","Algunas veces","Siempre o casi siempre")
+a <- aggregate(puntaje_estandar ~ DQFIT32_01, pest, mean)
+a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
+ggplot(a, aes(x=DQFIT32_01,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('Me aseguro que el estudiante haya hecho todas las tareas escolares')
+```
+
+```{r puntaje_familia_DQFIT32_02, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
+pest$DQFIT32_02 <- as.factor(pest$DQFIT32_02)
+levels(pest$DQFIT32_02) <- c("Nunca o casi nunca","Algunas veces","Siempre o casi siempre")
+a <- aggregate(puntaje_estandar ~ DQFIT32_02, pest, mean)
+a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
+ggplot(a, aes(x=DQFIT32_02,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('Le pregunto al estudiante qué hizo en la escuela')
+```
+
+```{r puntaje_familia_DQFIT32_03, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
+pest$DQFIT32_03 <- as.factor(pest$DQFIT32_03)
+levels(pest$DQFIT32_03) <- c("Nunca o casi nunca","Algunas veces","Siempre o casi siempre")
+a <- aggregate(puntaje_estandar ~ DQFIT32_03, pest, mean)
+a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
+ggplot(a, aes(x=DQFIT32_03,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('Le pregunto al estudiante qué notas ha obtenido en la escuela')
+```
+
+```{r puntaje_familia_DQFIT33_01, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
+pest$DQFIT33_01 <- as.factor(pest$DQFIT33_01)
+levels(pest$DQFIT33_01) <- c("Nunca o casi nunca","Algunas veces","Siempre o casi siempre")
+a <- aggregate(puntaje_estandar ~ DQFIT33_01, pest, mean)
+a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
+ggplot(a, aes(x=DQFIT33_01,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('Recibo informes con las notas del estudiante')
+```
+
+```{r puntaje_familia_DQFIT33_02, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
+pest$DQFIT33_02 <- as.factor(pest$DQFIT33_02)
+levels(pest$DQFIT33_02) <- c("Nunca o casi nunca","Algunas veces","Siempre o casi siempre")
+a <- aggregate(puntaje_estandar ~ DQFIT33_02, pest, mean)
+a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
+ggplot(a, aes(x=DQFIT33_02,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('Recibo informes o comunicaciones sobre la conducta')
+```
+
+```{r puntaje_familia_DQFIT33_03, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
+pest$DQFIT33_03 <- as.factor(pest$DQFIT33_03)
+levels(pest$DQFIT33_03) <- c("Nunca o casi nunca","Algunas veces","Siempre o casi siempre")
+a <- aggregate(puntaje_estandar ~ DQFIT33_03, pest, mean)
+a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
+ggplot(a, aes(x=DQFIT33_03,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('Recibo informes sobre el desempeño de la escuela en pruebas..')
+```
+
+```{r puntaje_familia_DQFIT33_04, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
+pest$DQFIT33_04 <- as.factor(pest$DQFIT33_04)
+levels(pest$DQFIT33_04) <- c("Nunca o casi nunca","Algunas veces","Siempre o casi siempre")
+a <- aggregate(puntaje_estandar ~ DQFIT33_04, pest, mean)
+a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
+ggplot(a, aes(x=DQFIT33_04,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('Debo firmar las pruebas del estudiante')
+```
+
+```{r puntaje_familia_DQFIT33_05, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
+pest$DQFIT33_05 <- as.factor(pest$DQFIT33_05)
+levels(pest$DQFIT33_05) <- c("Nunca o casi nunca","Algunas veces","Siempre o casi siempre")
+a <- aggregate(puntaje_estandar ~ DQFIT33_05, pest, mean)
+a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
+ggplot(a, aes(x=DQFIT33_05,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('De la escuela me citan para hablar sobre el estudiante')
+```
