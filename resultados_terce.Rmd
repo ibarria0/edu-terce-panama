@@ -461,11 +461,13 @@ Una observación de suma importancia es que hay un grupo de escuelas oficiales r
 [JEV2IBG: intentar incluir los niveles de aprendizaje, o al menos el nivel 1]
 
 ## 7 Relacion entre desempeño y factores típicamente asociados al proceso de aprendizaje
-## 7.1 Que son factores asociados
+## 7.1 ¿Qué son factores asociados?
 
-Son factores selectos que plausiblemente podrian mostrar relación con los logros de aprendizaje.  El que muestren relación no significa por si solo que sea garantía ni incluso causa de los logros; pero sugiere que es conveniente explorar la relación.   
+Son características o circumstancias cuantificables que podrían mostrar relación con los logros de aprendizaje.  El que muestren relación no significa por si solo que sea garantía ni causa de los logros, pero sugiere que es conveniente explorar la relación.   
 
-## 7.2 Logros según nivel socioeconómico y cultural
+## 7.2 Logros según factores asociados a la escuela
+
+[JEV2IBG: esta grafica la podemos suprimir porque la siguiente cuenta la misma historia en más detalle]
 
 ```{r puntaje_INFRAD, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 # load sexto grado puntajes
@@ -512,6 +514,8 @@ m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
 
 ggplot(m, aes(x=INFRAD,y=puntaje_estandar)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice de infraestructura de la escuela") + ylab("Puntaje Promedio por Escuela")
 ```
+Los logros de aprendizaje, evaluados a través de los puntajes Terce, muestran una relación clara con La infraestructura de la escuela.  Esto por si solo no permite concluir que una mejor infraestructura genera mejores logros; por ejemplo, una mejor situación socioeconómica y cultural da la oportunidad de asistir a una mejor escuela tanto en infraestructura como en eficacia, sin que sea claro cual es el factor principal que logra esa eficacia. Comprender la relación entre infraestructura y logros requiere mayor análisis para determinar hasta que punto la infraestructura influye en los logros. 
+
 
 ```{r puntaje_INFRAD_rd, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 # load sexto grado puntajes
@@ -553,6 +557,8 @@ m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
 
 ggplot(m, aes(x=INFRAD,y=puntaje_estandar,color=rd)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice de infraestructura de la escuela") + ylab("Puntaje Promedio por Escuela")
 ```
+
+[JEV2IBG: esta grafica la podemos suprimir porque la siguiente cuenta la misma historia en más detalle]
 
 
 ```{r puntaje_VIOLEND, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
@@ -600,6 +606,7 @@ m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
 
 ggplot(m, aes(x=VIOLEND,y=puntaje_estandar)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice de violencia en el entorno de la escuela") + ylab("Puntaje Promedio por Escuela")
 ```
+La figura siguiente ilustra que no se ve una relación clara entre la violencia del entorno escolar y los logros de aprendizaje.   
 
 ```{r puntaje_VIOLEND_rd, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 # load sexto grado puntajes
@@ -641,6 +648,8 @@ m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
 
 ggplot(m, aes(x=VIOLEND,y=puntaje_estandar,color=rd)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice de violencia en el entorno de la escuela") + ylab("Puntaje Promedio por Escuela")
 ```
+
+[JEV2IBG: esta grafica la podemos suprimir porque la siguiente cuenta la misma historia en más detalle]
 
 ```{r puntaje_CSOCIALD, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 # load sexto grado puntajes
@@ -687,6 +696,7 @@ m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
 
 ggplot(m, aes(x=CSOCIALD,y=puntaje_estandar)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice del capital social en el entorno de la escuela") + ylab("Puntaje Promedio por Escuela")
 ```
+Tampoco se ve una relación clara entre el capital social en el entorno escolar y los logros de aprendizaje. 
 
 ```{r puntaje_CSOCIALD_rd, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 # load sexto grado puntajes
@@ -728,6 +738,7 @@ m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
 
 ggplot(m, aes(x=CSOCIALD,y=puntaje_estandar,color=rd)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice del capital social en el entorno de la escuela") + ylab("Puntaje Promedio por Escuela")
 ```
+[JEV2IBG: esta grafica la podemos suprimir porque la siguiente cuenta la misma historia en más detalle]
 
 ```{r puntaje_AUTOADD, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 # load sexto grado puntajes
@@ -774,6 +785,7 @@ m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
 
 ggplot(m, aes(x=AUTOADD,y=puntaje_estandar)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice de autonomía administrativa de la escuela") + ylab("Puntaje Promedio por Escuela")
 ```
+Sí se nota una relación entre la autonimía administrativa de la escuela y los logros de aprendizaje.  [JEV2IBG: creo que en esta figura el signo del indice de autonomiase invirtio: pensaria que las escuelas particulares tienen mas autonomia.  Sera un indice de "falta de autonomia"?]
 
 ```{r puntaje_AUTOADD_rd, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 # load sexto grado puntajes
@@ -815,6 +827,9 @@ m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
 
 ggplot(m, aes(x=AUTOADD,y=puntaje_estandar,color=rd)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice de autonomía administrativa de la escuela") + ylab("Puntaje Promedio por Escuela")
 ```
+
+[JEV2IBG: esta grafica la podemos suprimir porque la siguiente cuenta la misma historia en más detalle]
+
 ```{r puntaje_AUTOACD, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 # load sexto grado puntajes
 pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
@@ -860,6 +875,7 @@ m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
 
 ggplot(m, aes(x=AUTOACD,y=puntaje_estandar)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice de autonomía académica de la escuela") + ylab("Puntaje Promedio por Escuela")
 ```
+Hay algún grado de relación entre la autonomía académica y los logros de aprendizaje.   [JEV2IBG: tambien pienso que se invirtio el signo del indice de autonomia academica]
 
 ```{r puntaje_AUTOACD_rd, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 # load sexto grado puntajes
@@ -901,6 +917,7 @@ m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
 
 ggplot(m, aes(x=AUTOACD,y=puntaje_estandar,color=rd)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice de autonomía académica de la escuela") + ylab("Puntaje Promedio por Escuela")
 ```
+[JEV2IBG: esta grafica la podemos suprimir porque la siguiente cuenta la misma historia en más detalle]
 
 ```{r puntaje_CLAMBLD, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 # load sexto grado puntajes
@@ -947,6 +964,7 @@ m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
 
 ggplot(m, aes(x=CLAMBLD,y=puntaje_estandar)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice de calidad de ambiente laboral en la escuela (Director)") + ylab("Puntaje Promedio por Escuela")
 ```
+Hay relación clara entre la calidad de ambiente laboral en la escuela (Director) y los logros de aprendizaje. 
 
 ```{r puntaje_CLAMBLD_rd, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 # load sexto grado puntajes
@@ -989,9 +1007,9 @@ m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
 ggplot(m, aes(x=CLAMBLD,y=puntaje_estandar,color=rd)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice de calidad de ambiente laboral en la escuela (Director)") + ylab("Puntaje Promedio por Escuela")
 ```
 
-### Factores Asociados de Profesores
+### 7.3 Factores Asociados de Profesores
 
-#### Indices
+#### 7.3.1 Índices
 
 ```{r echo=F,message=F,warning=F}
 pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
@@ -1068,7 +1086,7 @@ a <- aggregate(puntaje_estandar ~ idtealin + tipo + MONITOP, p6prof, mean)
 ggplot(a, aes(x=MONITOP,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
 ```
 
-#### Datos de Profesores
+#### 7.3.2 Datos de Profesores
 ```{r puntaje_prof_DQPIT01, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 a <- aggregate(puntaje_estandar ~ idtealin + tipo + DQPIT01, p6prof, mean)
 ggplot(a, aes(x=DQPIT01,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + xlab("Cual es su Edad?") + ylab("")
@@ -1163,7 +1181,7 @@ a$dif <- (a$puntaje_estandar - mean(p6prof$puntaje_estandar,na.rm=T))/sd(p6prof$
 ggplot(a, aes(x=tipo,y=dif,fill=DQPIT14)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('No he realizado ninguna actividad de perfeccionamiento')
 ```
 
-### Factores Asociados Familia
+### 7.4 Factores Asociados Familia
 
 ```{r echo=F,messages=F,warnings=F}
 # load sexto grado puntajes
@@ -1190,7 +1208,7 @@ qf <- qf[qf$country == 'PAN',]
 pest <- merge(p6,qf,by='idstud')
 ```
 
-#### Indices
+#### 7.4.1 Indices
 
 ```{r puntaje_familia_SUPERVF, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 ggplot(pest, aes(x=SUPERVF,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + xlab("Índice de control y supervisión de estudios en el hogar") + ylab("")
@@ -1214,7 +1232,7 @@ ggplot(pest, aes(x=CSOCBARF,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0
 ggplot(pest, aes(x=VIOLBARF,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + xlab("Índice de violencia en el barrio") + ylab("")
 ```
 
-#### Factores Asociados
+#### 7.4.2 Características de interés en las familias
 
 ```{r puntaje_familia_DQFIT01, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 pest$DQFIT01 <- as.factor(pest$DQFIT01)
