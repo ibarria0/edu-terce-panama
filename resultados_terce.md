@@ -20,11 +20,6 @@ A pesar de las grandes diferencias, algunas escuelas oficiales rurales con bajo 
 
 En cuanto al desempeño comparativo, la figura siguiente [para sexto grado] es representativa y confirma la tendencia conocida de que países con mayor ingreso per cápita obtienen mejores puntajes promedio; sin embargo Panamá obtiene resultados por debajo de lo esperado.  Estos resultados son consistentes con otras pruebas internacionales en las que ha participado Panamá (pruebas Serce 2006 y Pisa 2009). Panamá puede y debe mejorar significativamente su desempeño.    
 
-[JEV2IBG: cambiar el título de la figura por "Puntaje promedio según producto (PIB) per cápita por país, sexto grado"]
-[JEV2IBG: corregir la P mayúscula de "país" en el título]
-[JEV2IBG: cambiar la leyenda del eje X por "Producto (PIB) per cápita"]  
-[JEV2IBG: agregar tílde en "Capita" en la leyenda del eje X]
-
 
 ![plot of chunk puntaje_gdp](figure/puntaje_gdp-1.png) 
 
@@ -64,28 +59,13 @@ La evaluación cubrió matemáticas y lectura para 3ero y 6 grado, ciencias para
 
 #### 3.2 Características de las escuelas y alumnos participantes de Panamá
 
-[NUMERO DE ESCUELAS] participaron en la prueba Terce representando cuatro tipos de escuela así:  oficial urbana [No. OFC URB], oficial rural [No. OFC RRL], particular urbana [No. PRT URB], particular rural [No. PRT RRL].  En el total de escuelas, 3775 estudiantes correspondían a sexto grado y 3631 estudiantes a tercer grado.
-
-[JEV2IBG: usar cómo título "Distribución de escuelas por sector escolar"]
-[JEV2IBG: usar color azul para las barras en lugar de negro]
-[JEV2IBG: intentar barras más angostas en relación con el ancho de la figura: pienso que se ve "pesada"]
-[JEV2IBG: cambiar etiqueta de las barras por "Oficial" y "Particular", en lugar de "Publico" y "Privado"]
-[JEV2IBG: cambiar "dependencia" por "Sector escolar". Notar que por consistencia empieza con mayúscula]
+187 participaron en la prueba Terce representando cuatro tipos de escuela así:  oficial urbana 27, oficial rural 113, particular urbana 46, particular rural 1.  En el total de escuelas, 3775 estudiantes correspondían a sexto grado y 3631 estudiantes a tercer grado.
 
 
 ![plot of chunk demo_pub_priv](figure/demo_pub_priv-1.png) 
 
-[JEV2IBG: usar cómo título "Distribución de escuelas por ruralidad]
-[JEV2IBG: En la siguiente gráfica usar mayúscula inicial en "ruralidad"]
-[JEV2IBG: usar color azul para las barras en lugar de negro]
-[JEV2IBG: intentar barras más angostas en relación con el ancho de la figura: pienso que se ve "pesada"]
-
 ![plot of chunk demo_ruralidad](figure/demo_ruralidad-1.png) 
 Las escuelas participantes de Panamá están principalmente concentradas en el promedio del índice socioeconómico y cultural (0.0) de toda la región latinoamericana, en cuanto el índice promedio de sus alumnos.  
-
-[JEV2IBG: En la siguiente gráfica (distribucion isec por pais) mostrar solo CHL, PAN, NIC, para simplificar]
-[JEV2IBG: Usar título "Concentración de escuelas (distribución) según índice socioeconómico y cultural para tres países de la prueba.] 
-[JEV2IBG: cambiar "ISECF" en la leyenda por "Índice socioeconómico y cultural"]
 
 ![plot of chunk demo_isecf](figure/demo_isecf-1.png) 
 Las dos figuras siguientes muestran la cantidad de estudiantes participantes por edad en tercer grado y sexto grado.  
@@ -93,8 +73,6 @@ Las dos figuras siguientes muestran la cantidad de estudiantes participantes por
 [JEV2IBG: supongo que la siguiente grafica es de 6to grado.  falta 3er grado? Incluirla primero]
 
 [JEV2IBG: usar como título "Número de estudiantes de sexto grado por edad"]
-[JEV2IBG: cambiar en la leyenda del eje X "DQA6IT01" por "Edad"]
-[JEV2IBG: eliminar en la leyenda del margen derecho la etiqueta "DQA6IT01"]
 
 ![plot of chunk demo_genero_edad](figure/demo_genero_edad-1.png) 
 [GENERO PORCENTAJE FEM]% de los alumnos indicó ser niña y  [GENERO PORCENTAJE N/A]% no contestó o no supo responder.    
