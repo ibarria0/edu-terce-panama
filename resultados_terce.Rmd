@@ -65,7 +65,7 @@ mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
 mean_isecf_school <- aggregate(ISECF ~ idschool, qf, mean)
 m <- merge(mean_school, mean_isecf_school, by=c('idschool'))
 
-ggplot(m, aes(x=ISECF,y=puntaje_estandar,color=rd,size=totalum)) + geom_point(alpha=0.7) + stat_smooth(method=lm,se=F) + scale_size(guide=FALSE) + xlab("Índice de estatus socioeconómico y cultural") + ylab("Puntaje Promedio por Escuela")
+ggplot(m, aes(x=ISECF,y=puntaje_estandar,color=rd,size=totalum)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice de estatus socioeconómico y cultural") + ylab("Puntaje Promedio por Escuela")
 ```
 
 A pesar de las grandes diferencias, algunas escuelas oficiales rurales con bajo índice socioeconómico y cultural logran resultados superiores al promedio internacional e iguales al de las mejores escuelas oficiales urbanas.   Esas escuelas podrían aportarnos lecciones sobre como mejorar el desempeño de otras escuelas.   
@@ -98,7 +98,7 @@ gdp <- read.csv('./data/suplemental/gdp.csv')
 names(gdp) <- c("Country_Name","country","gdp_2013")
 m <- merge(p6,gdp,by="country")
 a <- aggregate( puntaje_estandar ~ country + gdp_2013, m, mean)
-ggplot(a, aes(x=gdp_2013, y=puntaje_estandar, fill=country, color=country, group=1)) + geom_point() + stat_smooth(method=lm, se=F) + geom_text(aes(label=country)) + xlab("Ingreso per Capita") + ylab("Puntaje Promedio") + ggtitle("Puntaje promedio según ingreso per cápita por Pais (sexto grado)") + scale_x_continuous(label=dollar)
+ggplot(a, aes(x=gdp_2013, y=puntaje_estandar, fill=country, color=country, group=1)) + geom_point() + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + geom_text(aes(label=country)) + xlab("Ingreso per Capita") + ylab("Puntaje Promedio") + ggtitle("Puntaje promedio según ingreso per cápita por Pais (sexto grado)") + scale_x_continuous(label=dollar)
 
 ```
 
@@ -437,7 +437,7 @@ qf <- qf[,c("idstud","ISECF")]
 g <- merge(genero,qf,by='idstud')
 
 levels(g$DQA6IT06) <- c("No Indigena","Etnia Indigena")
-ggplot(g[!is.na(g$DQA6IT06),], aes(x=ISECF,y=puntaje_estandar,color=DQA6IT06)) + geom_point(alpha=0.0) + stat_smooth(method=lm,se=F)
+ggplot(g[!is.na(g$DQA6IT06),], aes(x=ISECF,y=puntaje_estandar,color=DQA6IT06)) + geom_point(alpha=0.0) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F)
 ```
 ### 6.3 Logros según tipo de escuela
 
@@ -510,7 +510,7 @@ mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
 mean_infrad_school <- aggregate(INFRAD ~ idschool, qd, mean)
 m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
 
-ggplot(m, aes(x=INFRAD,y=puntaje_estandar)) + geom_point(alpha=0.7) + stat_smooth(method=lm,se=F) + scale_size(guide=FALSE) + xlab("Índice de infraestructura de la escuela") + ylab("Puntaje Promedio por Escuela")
+ggplot(m, aes(x=INFRAD,y=puntaje_estandar)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice de infraestructura de la escuela") + ylab("Puntaje Promedio por Escuela")
 ```
 
 ```{r puntaje_INFRAD_rd, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
@@ -551,7 +551,7 @@ mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
 mean_infrad_school <- aggregate(INFRAD ~ idschool, qd, mean)
 m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
 
-ggplot(m, aes(x=INFRAD,y=puntaje_estandar,color=rd)) + geom_point(alpha=0.7) + stat_smooth(method=lm,se=F) + scale_size(guide=FALSE) + xlab("Índice de infraestructura de la escuela") + ylab("Puntaje Promedio por Escuela")
+ggplot(m, aes(x=INFRAD,y=puntaje_estandar,color=rd)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice de infraestructura de la escuela") + ylab("Puntaje Promedio por Escuela")
 ```
 
 
@@ -598,7 +598,7 @@ mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
 mean_infrad_school <- aggregate(VIOLEND ~ idschool, qd, mean)
 m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
 
-ggplot(m, aes(x=VIOLEND,y=puntaje_estandar)) + geom_point(alpha=0.7) + stat_smooth(method=lm,se=F) + scale_size(guide=FALSE) + xlab("Índice de violencia en el entorno de la escuela") + ylab("Puntaje Promedio por Escuela")
+ggplot(m, aes(x=VIOLEND,y=puntaje_estandar)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice de violencia en el entorno de la escuela") + ylab("Puntaje Promedio por Escuela")
 ```
 
 ```{r puntaje_VIOLEND_rd, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
@@ -639,7 +639,7 @@ mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
 mean_infrad_school <- aggregate(VIOLEND ~ idschool, qd, mean)
 m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
 
-ggplot(m, aes(x=VIOLEND,y=puntaje_estandar,color=rd)) + geom_point(alpha=0.7) + stat_smooth(method=lm,se=F) + scale_size(guide=FALSE) + xlab("Índice de violencia en el entorno de la escuela") + ylab("Puntaje Promedio por Escuela")
+ggplot(m, aes(x=VIOLEND,y=puntaje_estandar,color=rd)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice de violencia en el entorno de la escuela") + ylab("Puntaje Promedio por Escuela")
 ```
 
 ```{r puntaje_CSOCIALD, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
@@ -685,7 +685,7 @@ mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
 mean_infrad_school <- aggregate(CSOCIALD ~ idschool, qd, mean)
 m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
 
-ggplot(m, aes(x=CSOCIALD,y=puntaje_estandar)) + geom_point(alpha=0.7) + stat_smooth(method=lm,se=F) + scale_size(guide=FALSE) + xlab("Índice del capital social en el entorno de la escuela") + ylab("Puntaje Promedio por Escuela")
+ggplot(m, aes(x=CSOCIALD,y=puntaje_estandar)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice del capital social en el entorno de la escuela") + ylab("Puntaje Promedio por Escuela")
 ```
 
 ```{r puntaje_CSOCIALD_rd, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
@@ -726,7 +726,7 @@ mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
 mean_infrad_school <- aggregate(CSOCIALD ~ idschool, qd, mean)
 m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
 
-ggplot(m, aes(x=CSOCIALD,y=puntaje_estandar,color=rd)) + geom_point(alpha=0.7) + stat_smooth(method=lm,se=F) + scale_size(guide=FALSE) + xlab("Índice del capital social en el entorno de la escuela") + ylab("Puntaje Promedio por Escuela")
+ggplot(m, aes(x=CSOCIALD,y=puntaje_estandar,color=rd)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice del capital social en el entorno de la escuela") + ylab("Puntaje Promedio por Escuela")
 ```
 
 ```{r puntaje_AUTOADD, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
@@ -772,7 +772,7 @@ mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
 mean_infrad_school <- aggregate(AUTOADD ~ idschool, qd, mean)
 m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
 
-ggplot(m, aes(x=AUTOADD,y=puntaje_estandar)) + geom_point(alpha=0.7) + stat_smooth(method=lm,se=F) + scale_size(guide=FALSE) + xlab("Índice de autonomía administrativa de la escuela") + ylab("Puntaje Promedio por Escuela")
+ggplot(m, aes(x=AUTOADD,y=puntaje_estandar)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice de autonomía administrativa de la escuela") + ylab("Puntaje Promedio por Escuela")
 ```
 
 ```{r puntaje_AUTOADD_rd, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
@@ -813,7 +813,7 @@ mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
 mean_infrad_school <- aggregate(AUTOADD ~ idschool, qd, mean)
 m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
 
-ggplot(m, aes(x=AUTOADD,y=puntaje_estandar,color=rd)) + geom_point(alpha=0.7) + stat_smooth(method=lm,se=F) + scale_size(guide=FALSE) + xlab("Índice de autonomía administrativa de la escuela") + ylab("Puntaje Promedio por Escuela")
+ggplot(m, aes(x=AUTOADD,y=puntaje_estandar,color=rd)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice de autonomía administrativa de la escuela") + ylab("Puntaje Promedio por Escuela")
 ```
 ```{r puntaje_AUTOACD, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 # load sexto grado puntajes
@@ -858,7 +858,7 @@ mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
 mean_infrad_school <- aggregate(AUTOACD ~ idschool, qd, mean)
 m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
 
-ggplot(m, aes(x=AUTOACD,y=puntaje_estandar)) + geom_point(alpha=0.7) + stat_smooth(method=lm,se=F) + scale_size(guide=FALSE) + xlab("Índice de autonomía académica de la escuela") + ylab("Puntaje Promedio por Escuela")
+ggplot(m, aes(x=AUTOACD,y=puntaje_estandar)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice de autonomía académica de la escuela") + ylab("Puntaje Promedio por Escuela")
 ```
 
 ```{r puntaje_AUTOACD_rd, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
@@ -899,7 +899,7 @@ mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
 mean_infrad_school <- aggregate(AUTOACD ~ idschool, qd, mean)
 m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
 
-ggplot(m, aes(x=AUTOACD,y=puntaje_estandar,color=rd)) + geom_point(alpha=0.7) + stat_smooth(method=lm,se=F) + scale_size(guide=FALSE) + xlab("Índice de autonomía académica de la escuela") + ylab("Puntaje Promedio por Escuela")
+ggplot(m, aes(x=AUTOACD,y=puntaje_estandar,color=rd)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice de autonomía académica de la escuela") + ylab("Puntaje Promedio por Escuela")
 ```
 
 ```{r puntaje_CLAMBLD, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
@@ -945,7 +945,7 @@ mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
 mean_infrad_school <- aggregate(CLAMBLD ~ idschool, qd, mean)
 m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
 
-ggplot(m, aes(x=CLAMBLD,y=puntaje_estandar)) + geom_point(alpha=0.7) + stat_smooth(method=lm,se=F) + scale_size(guide=FALSE) + xlab("Índice de calidad de ambiente laboral en la escuela (Director)") + ylab("Puntaje Promedio por Escuela")
+ggplot(m, aes(x=CLAMBLD,y=puntaje_estandar)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice de calidad de ambiente laboral en la escuela (Director)") + ylab("Puntaje Promedio por Escuela")
 ```
 
 ```{r puntaje_CLAMBLD_rd, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
@@ -986,7 +986,7 @@ mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
 mean_infrad_school <- aggregate(CLAMBLD ~ idschool, qd, mean)
 m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
 
-ggplot(m, aes(x=CLAMBLD,y=puntaje_estandar,color=rd)) + geom_point(alpha=0.7) + stat_smooth(method=lm,se=F) + scale_size(guide=FALSE) + xlab("Índice de calidad de ambiente laboral en la escuela (Director)") + ylab("Puntaje Promedio por Escuela")
+ggplot(m, aes(x=CLAMBLD,y=puntaje_estandar,color=rd)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice de calidad de ambiente laboral en la escuela (Director)") + ylab("Puntaje Promedio por Escuela")
 ```
 
 ### Factores Asociados de Profesores

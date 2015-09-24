@@ -43,6 +43,8 @@ Usar para aprender, no para criticar.
 
 no se va a poder explicar por region geografica
 
+Minimizamos las interpretaciones porque las mismas necesitan estudios y validaciones rigurosas.  Más bien esta divulgación es una invitación a todos los especialistas e interesados a anaizar los resultados disponibles, con la responsabilidad de rigor implicita en el estudio y divulgación de resultados sociales.   
+
 Esta es la segunda divulgación en torno al Terce.   Previamente, en diciembre 2014, Unesco y Meduca [VERIFICAR] divulgaron aspectos sobresalientes de la comparación de resultados entre el Serce, 2006, y el Terce, 2013. Por supuesto, tanto los resultados sujeto de esta divulgación como los anteriores del Terce (2013), Pisa (2009), Sineca ([2008?]) y Serce (2006) deben continuar bajo análisis para mayor comprensión y divulgación.   
 
  
@@ -140,7 +142,7 @@ Más relevante en primera instancia es saber si nuestros niños y niñas logran 
 
 [JEV2IBG: título "Niveles de logros de aprendizaje por área de conocimiento, comparados"]
 [JEV2IBG: cambiar la leyenda del eje Y a "Porcentaje de alumnos"]
-[JEV2IBG: cambiar la leyenda del eje Y a "Niveles de logro de aprendizaje"]
+[JEV2IBG: cambiar la leyenda del eje X a "Niveles de logro de aprendizaje"]
 [JEV2IBG: verificar que las leyendas del eje X y Y empiezan con mayúscula]
 [JEV2IBG: eliminar del margen derecho la etiqueta "countryp"]
 [JEV2IBG: si es posible, usar colores menos intensos para las barras, especialmente el rojo (asusta ;)]
@@ -150,37 +152,91 @@ Más relevante en primera instancia es saber si nuestros niños y niñas logran 
 ## 5 Comparacion del desempeño en el Terce (2013?) con el Serce (2006)
 ### 5.1 Mejora en relación con los resultados serce, por materia
 
-Al final, Gina dice que este informe debe ser solo del Terce.  Incluí texto referente al serce en la introducción.  Por tanto Eliminaremos esta seccion y correremos las secciones 6 en adelante.    
+[JEV2IBG: Al final, Gina dice que este informe debe ser solo del Terce.  Incluí texto referente al serce en la introducción.  Por tanto Eliminaremos esta seccion y correremos las secciones 6 en adelante.]    
 
 ![plot of chunk serce_terce](figure/serce_terce-1.png) 
 
 ![plot of chunk serce_terce_2](figure/serce_terce_2-1.png) 
 
 ## 6 Características de los resultados en Panamá
-### 6.1 Desempeño por Genero 
+### 6.1 Logros por Genero 
 
-Las niñas obtuvieron mejores resultados que los niños en lectura de y ciencias en 6to grado.    
+Las niñas obtuvieron mejores resultados que los niños en lectura de tercer grado, sexto grado y en ciencias de sexto grado. En matemáticas, aunque las niñas obtuvieron mejor resultado, la diferencia es tan pequeña que no permite afirmar que sus logros de aprendizaje son mejores.   
 
-Aunque en realidad las niñas obtuvieron mayor puntaje promedio que los niños en todas las áreas de conocimiento y grados, solo lectura y ciencias en 6to grado permiten concluir confiablemente que la diferencia es real.  En los otros casos la diferencia es suficientemente pequeña para los resultados en Panama que no permite afirmar confiablemente que su desempeño es mejor.
+Las figuras [No. PTJ POR GNR] y [No. STD DEV GNR] comparan los puntajes promedio obtenidos por cada género, la primera, y la diferencia entre niños y niñas, la segunda, expresada en desviaciones estándar 
+
+[JEV2IBG: La figura de desviacion estandar quisiera conversarla, porque la comparacion deberia ser una sola barra.  La barra indicaría la diferencia entre los puntajes de cada género expresado en desviaciones estandar.]
+[JEV2IBG: como procesaste aquellos que respondieron N/A]
+
+
+[JEV2IBG: título "Puntaje promedio comparado entre géneros"]
+[JEV2IBG: cambiar la leyenda del eje Y a "Puntaje promedio"]
+[JEV2IBG: cambiar la leyenda del eje X a "Género"] 
+[JEV2IBG: eliminar del margen derecho la etiqueta "DQASIT02"] 
 
 ![plot of chunk demo_genero_puntaje](figure/demo_genero_puntaje-1.png) 
+[JEV2IBG: título "Diferencia diminuta de puntaje promedio a favor de las niñas"]
+[JEV2IBG: esta gráfica debería ser una sola barra de valores positivos a favor de las niñas, indicando la diferencia entre el puntaje de niñas menos el de niños expresada en desviaciones estándar]
+[JEV2IBG: cambiar la leyenda del eje Y a "Desviaciones estandar"]
+[JEV2IBG: cambiar la leyenda del eje X a "Diferencia"] 
+[JEV2IBG: eliminar del margen derecho la etiqueta "DQASIT02"] 
 
 ![plot of chunk demo_genero_puntaje_desv](figure/demo_genero_puntaje_desv-1.png) 
 
-### 6.2 Grupo Originario
+### 6.2 Logros de grupos originarios
+
+Los alumnos que se reconocen como miembros de etnias originarias logran menor puntaje que los que no se consideran miembros.  Las figuras [No. PTJ POR ETN] y [No. STD DEV ETN] comparan los puntajes promedio y diferencia según si la alumna o alumno se reconoce o no como miembro de grupos originarios.    
+
+[JEV2IBG: título "Puntaje promedio comparado según pertenencia a grupos originarios"]
+[JEV2IBG: cambiar la leyenda del eje Y a "Puntaje promedio"]
+[JEV2IBG: cambiar "DQA6IT06" en la leyenda del eje X por "Etnia"] 
+[JEV2IBG: cambiar las etiquetas en el eje X por "No originarios" y "Originarios"]
+[JEV2IBG: eliminar del margen derecho la etiqueta "DQA6IT06"] 
+[JEV2IBG: como procesaste aquellos que respondieron N/A]
+
 ![plot of chunk demo_etnia_puntaje](figure/demo_etnia_puntaje-1.png) 
+[JEV2IBG: título "Diferencia de puntaje promedio desfavorece a los grupos originarios"]
+[JEV2IBG: esta gráfica debería ser una sola barra de valores negativos en contra  de los grupos originarios, indicando la diferencia entre el puntaje de originarios menos el de los no originarios expresada en desviaciones estándar]
+[JEV2IBG: cambiar la leyenda del eje Y a "Desviaciones estandar"]
+[JEV2IBG: cambiar la leyenda del eje X a "Diferencia"] 
+[JEV2IBG: eliminar del margen derecho la etiqueta "DQA6IT06"] 
 
 ![plot of chunk demo_etnia_puntaje_desv](figure/demo_etnia_puntaje_desv-1.png) 
+Adicionalmente, el índice socioeconómico y cultural muestra menor relación con el puntaje promedio obtenido para alumnos que se consideran miembros de grupos originarios que para aquellos que no.   Esto lo ilustra la figura [No. PTJ VS ISECF ORGN] en la que cada línea muestra la correspondencia entre puntaje promedio obtenido y el índice del alúmno.  La diferencia de puntaje entre alumnos de menor y mayor índices es más pronunciada para alumnos que se declaran no originarios.  
+
+[JEV2IBG: título "Relación entre logros e índice socioeconómico y cultural según etnia"]
+[JEV2IBG: cambiar la leyenda del eje Y a "Puntaje promedio"]
+[JEV2IBG: cambiar la leyenda del eje X a "Índice socioeconómico y cultural"] 
+[JEV2IBG: eliminar del margen derecho la etiqueta "DQA6IT06"] 
 
 ![plot of chunk demo_etnia_puntaje_isecf](figure/demo_etnia_puntaje_isecf-1.png) 
-### 6.3 Tipo de escuela: urbano, rural y particular; mas distrib normal de promedio socioecon de escuelas
+### 6.3 Logros según tipo de escuela
+
+Las oportunidades de educación y salud muestran un altísimo grado de influencia en el bienestar de un individuo. Cuándo los logros de aprendizaje dependen marcadamente del poder adquisitivo de una persona es difícil argumentar que la sociedad brinda oportunidades justas a todos sus residentes.  En Panamá, la diferencia de logros entre escuelas particulares, escuelas oficiales urbanas y escuelas oficiales rurales es muy marcada.   
+
+Las figuras [No. PTJ VS ISEC 3ero] y [No. PTJ VS ISEC 6to] muestran para cada escuela participante de Panamá el puntaje promedio obtenido por sus alumnos en el eje vertical y el índice socioeconómico y cultural promedio de sus alumnos en el eje horizontal. Las líneas representan el puntaje promedio de alumnos de todos los países, incluyendo Panamá, en la prueba Terce y el puntaje debajo del cual se define el nivel 1 de aprendizaje, considerado inadecuado para las situaciones de vida esperadas. [PORCENTAJE NIVEL 1]% de las niñas y niños obtuvieron puntajes correspondientes al nivel 1.   
+
+[JEV2IBG: las 2 figuras aqui son las versiones de 3ero y 6to grado de la figura 1 en el resumen ejecutivo]
+[JEV2IBG: Pregunta: las figuras de puntaje vs isec por escuela pueden indcar un solo puntaje para definir el nivel 1 de todas las áreas de conocimiento, o el puntaje que define el nivel 1 cambia de área a área]
+
+Una observación de suma importancia es que hay un grupo de escuelas oficiales rurales cuyos logros promedio son iguales o superiores a los de las escuelas oficiales urbanas a pesar de tener índices socioeconómicos y culturales menores en promedio. Estas escuelas probablemente tienen lecciones que aportar en cuanto a cómo mejorar los logros educativos en las áreas menos favorecidas del país.    
+
+[JEV2IBG: titulo "logros de aprendizaje de escuelas particulares y oficiales, urbanas y rurales, tercer grado]
+[JEV2IBG: cambiar la leyenda del eje Y a "Puntaje promedio"]
+[JEV2IBG: cambiar la leyenda del eje X a "Índice socioeconómico y cultural"]
+[JEV2IBG: intentar incluir los niveles de aprendizaje, o al menos el nivel 1]
+
+[JEV2IBG: titulo "logros de aprendizaje de escuelas particulares y oficiales, urbanas y rurales, sexto grado]
+[JEV2IBG: cambiar la leyenda del eje Y a "Puntaje promedio"]
+[JEV2IBG: cambiar la leyenda del eje X a "Índice socioeconómico y cultural"]
+[JEV2IBG: intentar incluir los niveles de aprendizaje, o al menos el nivel 1]
 
 ## 7 Relacion entre desempeño y factores típicamente asociados al proceso de aprendizaje
 ## 7.1 Que son factores asociados
 
-Son factores selectos que plausiblemente podrian mostrar relacion con el desempeño.  Esto no significa que son la causa que explica el desempeño, pero sirven para explorar explicaciones plausibles e intentar validarlas
+Son factores selectos que plausiblemente podrian mostrar relación con los logros de aprendizaje.  El que muestren relación no significa por si solo que sea garantía ni incluso causa de los logros; pero sugiere que es conveniente explorar la relación.   
 
-## 7.2 Desempeño según nivel socioeconómico y cultural
+## 7.2 Logros según nivel socioeconómico y cultural
 
 ![plot of chunk puntaje_INFRAD](figure/puntaje_INFRAD-1.png) 
 
