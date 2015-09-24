@@ -232,39 +232,57 @@ Una observación de suma importancia es que hay un grupo de escuelas oficiales r
 [JEV2IBG: intentar incluir los niveles de aprendizaje, o al menos el nivel 1]
 
 ## 7 Relacion entre desempeño y factores típicamente asociados al proceso de aprendizaje
-## 7.1 Que son factores asociados
+## 7.1 ¿Qué son factores asociados?
 
-Son factores selectos que plausiblemente podrian mostrar relación con los logros de aprendizaje.  El que muestren relación no significa por si solo que sea garantía ni incluso causa de los logros; pero sugiere que es conveniente explorar la relación.   
+Son características o circumstancias cuantificables que podrían mostrar relación con los logros de aprendizaje.  El que muestren relación no significa por si solo que sea garantía ni causa de los logros, pero sugiere que es conveniente explorar la relación.   
 
-## 7.2 Logros según nivel socioeconómico y cultural
+## 7.2 Logros según factores asociados a la escuela
+
+[JEV2IBG: esta grafica la podemos suprimir porque la siguiente cuenta la misma historia en más detalle]
 
 ![plot of chunk puntaje_INFRAD](figure/puntaje_INFRAD-1.png) 
+Los logros de aprendizaje, evaluados a través de los puntajes Terce, muestran una relación clara con La infraestructura de la escuela.  Esto por si solo no permite concluir que una mejor infraestructura genera mejores logros; por ejemplo, una mejor situación socioeconómica y cultural da la oportunidad de asistir a una mejor escuela tanto en infraestructura como en eficacia, sin que sea claro cual es el factor principal que logra esa eficacia. Comprender la relación entre infraestructura y logros requiere mayor análisis para determinar hasta que punto la infraestructura influye en los logros. 
+
 
 ![plot of chunk puntaje_INFRAD_rd](figure/puntaje_INFRAD_rd-1.png) 
 
+[JEV2IBG: esta grafica la podemos suprimir porque la siguiente cuenta la misma historia en más detalle]
+
 
 ![plot of chunk puntaje_VIOLEND](figure/puntaje_VIOLEND-1.png) 
+La figura siguiente ilustra que no se ve una relación clara entre la violencia del entorno escolar y los logros de aprendizaje.   
 
 ![plot of chunk puntaje_VIOLEND_rd](figure/puntaje_VIOLEND_rd-1.png) 
 
+[JEV2IBG: esta grafica la podemos suprimir porque la siguiente cuenta la misma historia en más detalle]
+
 ![plot of chunk puntaje_CSOCIALD](figure/puntaje_CSOCIALD-1.png) 
+Tampoco se ve una relación clara entre el capital social en el entorno escolar y los logros de aprendizaje. 
 
 ![plot of chunk puntaje_CSOCIALD_rd](figure/puntaje_CSOCIALD_rd-1.png) 
+[JEV2IBG: esta grafica la podemos suprimir porque la siguiente cuenta la misma historia en más detalle]
 
 ![plot of chunk puntaje_AUTOADD](figure/puntaje_AUTOADD-1.png) 
+Sí se nota una relación entre la autonimía administrativa de la escuela y los logros de aprendizaje.  [JEV2IBG: creo que en esta figura el signo del indice de autonomiase invirtio: pensaria que las escuelas particulares tienen mas autonomia.  Sera un indice de "falta de autonomia"?]
 
 ![plot of chunk puntaje_AUTOADD_rd](figure/puntaje_AUTOADD_rd-1.png) 
+
+[JEV2IBG: esta grafica la podemos suprimir porque la siguiente cuenta la misma historia en más detalle]
+
 ![plot of chunk puntaje_AUTOACD](figure/puntaje_AUTOACD-1.png) 
+Hay algún grado de relación entre la autonomía académica y los logros de aprendizaje.   [JEV2IBG: tambien pienso que se invirtio el signo del indice de autonomia academica]
 
 ![plot of chunk puntaje_AUTOACD_rd](figure/puntaje_AUTOACD_rd-1.png) 
+[JEV2IBG: esta grafica la podemos suprimir porque la siguiente cuenta la misma historia en más detalle]
 
 ![plot of chunk puntaje_CLAMBLD](figure/puntaje_CLAMBLD-1.png) 
+Hay relación clara entre la calidad de ambiente laboral en la escuela (Director) y los logros de aprendizaje. 
 
 ![plot of chunk puntaje_CLAMBLD_rd](figure/puntaje_CLAMBLD_rd-1.png) 
 
-### Factores Asociados de Profesores
+### 7.3 Factores Asociados de Profesores
 
-#### Indices
+#### 7.3.1 Índices
 
 
 
@@ -277,7 +295,7 @@ Son factores selectos que plausiblemente podrian mostrar relación con los logro
 ![plot of chunk puntaje_prof_LIDERAP](figure/puntaje_prof_LIDERAP-1.png) 
 ![plot of chunk puntaje_prof_MONITOP](figure/puntaje_prof_MONITOP-1.png) 
 
-#### Datos de Profesores
+#### 7.3.2 Datos de Profesores
 ![plot of chunk puntaje_prof_DQPIT01](figure/puntaje_prof_DQPIT01-1.png) 
 
 ![plot of chunk puntaje_prof_DQPIT02](figure/puntaje_prof_DQPIT02-1.png) 
@@ -304,11 +322,11 @@ Son factores selectos que plausiblemente podrian mostrar relación con los logro
 
 ![plot of chunk puntaje_prof_DQPIT14](figure/puntaje_prof_DQPIT14-1.png) 
 
-### Factores Asociados Familia
+### 7.4 Factores Asociados Familia
 
 
 
-#### Indices
+#### 7.4.1 Indices
 
 ![plot of chunk puntaje_familia_SUPERVF](figure/puntaje_familia_SUPERVF-1.png) 
 ![plot of chunk puntaje_familia_MOTIVALF](figure/puntaje_familia_MOTIVALF-1.png) 
@@ -318,7 +336,7 @@ Son factores selectos que plausiblemente podrian mostrar relación con los logro
 ![plot of chunk puntaje_familia_CSOCBARF](figure/puntaje_familia_CSOCBARF-1.png) 
 ![plot of chunk puntaje_familia_VIOLBARF](figure/puntaje_familia_VIOLBARF-1.png) 
 
-#### Factores Asociados
+#### 7.4.2 Características de interés en las familias
 
 ![plot of chunk puntaje_familia_DQFIT01](figure/puntaje_familia_DQFIT01-1.png) 
 
