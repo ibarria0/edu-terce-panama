@@ -400,7 +400,7 @@ qf <- qf[,c("idstud","ISECF")]
 g <- merge(genero,qf,by='idstud')
 
 levels(g$DQA6IT06) <- c("No Indigena","Etnia Indigena")
-gplot(g[!is.na(g$DQA6IT06),], aes(x=ISECF,y=puntaje_estandar,color=DQA6IT06)) + geom_point(alpha=0.0) + stat_smooth(method=lm,se=F)
+ggplot(g[!is.na(g$DQA6IT06),], aes(x=ISECF,y=puntaje_estandar,color=DQA6IT06)) + geom_point(alpha=0.0) + stat_smooth(method=lm,se=F)
 ```
 ### 6.3 Tipo de escuela: urbano, rural y particular; mas distrib normal de promedio socioecon de escuelas
 
@@ -932,3 +932,138 @@ m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
 
 ggplot(m, aes(x=CLAMBLD,y=puntaje_estandar,color=rd)) + geom_point(alpha=0.7) + stat_smooth(method=lm,se=F) + scale_size(guide=FALSE) + xlab("Índice de calidad de ambiente laboral en la escuela (Director)") + ylab("Puntaje Promedio por Escuela")
 ```
+
+### Factores Asociados de Profesores
+
+#### Indices
+
+```{r echo=F,message=F,warning=F}
+pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
+profmat6 <- read.spss('./data/Profesores/QP_M6.SAV', to.data.frame=T)
+
+pm6 <- pm6[pm6$country == 'PAN',]
+profmat6 <- profmat6[profmat6$country == 'PAN',]
+
+pm6 <- pm6[,c("sID","puntaje_estandar","idschool","nivel")]
+names(pm6) <- c("sID","puntaje_estandar","idschool","nivel")
+
+pm6 <- merge(pm6,profmat6,by="idschool")
+
+pl6 <- read.spss('./data/Puntajes_Alumnos/PL6_all_TERCE.sav', to.data.frame=T)
+proflec6 <- read.spss('./data/Profesores/QP_L6.SAV', to.data.frame=T)
+
+pl6 <- pl6[pl6$country == 'PAN',]
+proflec6 <- proflec6[proflec6$country == 'PAN',]
+
+pl6 <- pl6[,c("sID","puntaje_estandar","idschool","nivel")]
+names(pl6) <- c("sID","puntaje_estandar","idschool","nivel")
+
+pl6 <- merge(pl6,proflec6,by="idschool")
+
+
+pc6 <- read.spss('./data/Puntajes_Alumnos/PC6_all_TERCE.sav', to.data.frame=T)
+profcien6 <- read.spss('./data/Profesores/QP_M6.SAV', to.data.frame=T)
+
+pc6 <- pc6[pc6$country == 'PAN',]
+profcien6 <- profcien6[profcien6$country == 'PAN',]
+
+pc6 <- pc6[,c("sID","puntaje_estandar","idschool","nivel")]
+names(pc6) <- c("sID","puntaje_estandar","idschool","nivel")
+
+pc6 <- merge(pc6,profcien6,by="idschool")
+
+# merge matematica, lectura y ciencias
+pm6$tipo <- 'matematica'
+pl6$tipo <- 'lectura'
+pc6$tipo <- 'ciencias'
+p6prof <- rbind.fill(pm6,pl6,pc6)
+```
+
+```{r puntaje_prof_MOTIVP, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+a <- aggregate(puntaje_estandar ~ idtealin + tipo + MOTIVP, p6prof, mean)
+ggplot(a, aes(x=MOTIVP,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + stat_smooth(method=lm,se=F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
+```
+```{r puntaje_prof_CLAMBP, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+a <- aggregate(puntaje_estandar ~ idtealin + tipo + CLAMBP, p6prof, mean)
+ggplot(a, aes(x=CLAMBP,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + stat_smooth(method=lm,se=F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
+```
+```{r puntaje_prof_RELSALP, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+a <- aggregate(puntaje_estandar ~ idtealin + tipo + RESALP, p6prof, mean)
+ggplot(a, aes(x=RESALP,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + stat_smooth(method=lm,se=F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
+```
+```{r puntaje_prof_RELDIRP, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+a <- aggregate(puntaje_estandar ~ idtealin + tipo + RELDIRP, p6prof, mean)
+ggplot(a, aes(x=RELDIRP,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + stat_smooth(method=lm,se=F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
+```
+```{r puntaje_prof_VIOLENP, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+a <- aggregate(puntaje_estandar ~ idtealin + tipo + VIOLENP, p6prof, mean)
+ggplot(a, aes(x=VIOLENP,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + stat_smooth(method=lm,se=F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
+```
+```{r puntaje_prof_APOYOP, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+a <- aggregate(puntaje_estandar ~ idtealin + tipo + APOYOP, p6prof, mean)
+ggplot(a, aes(x=APOYOP,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + stat_smooth(method=lm,se=F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
+```
+```{r puntaje_prof_LIDERAP, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+a <- aggregate(puntaje_estandar ~ idtealin + tipo + LIDERAP, p6prof, mean)
+ggplot(a, aes(x=LIDERAP,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + stat_smooth(method=lm,se=F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
+```
+```{r puntaje_prof_MONITOP, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+a <- aggregate(puntaje_estandar ~ idtealin + tipo + MONITOP, p6prof, mean)
+ggplot(a, aes(x=MONITOP,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + stat_smooth(method=lm,se=F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
+```
+
+#### Datos de Profesores
+```{r puntaje_prof_DQPIT01, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+a <- aggregate(puntaje_estandar ~ idtealin + tipo + DQPIT01, p6prof, mean)
+ggplot(a, aes(x=DQPIT01,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + stat_smooth(method=lm,se=F) + xlab("Cual es su Edad?") + ylab("")
+```
+
+```{r puntaje_prof_DQPIT02, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
+p6prof$DQPIT02 <- as.factor(p6prof$DQPIT02)
+levels(p6prof$DQPIT02) <- c("Hombre","Mujer")
+a <- aggregate(puntaje_estandar ~ DQPIT02 + tipo + DQPIT02, p6prof, mean)
+a$dif <- (a$puntaje_estandar - mean(p6prof$puntaje_estandar,na.rm=T))/sd(p6prof$puntaje_estandar,na.rm=T)
+ggplot(a, aes(x=tipo,y=dif,fill=DQPIT02)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('Puntaje Promedio por Genero de Profesor')
+```
+
+```{r puntaje_prof_DQPIT03, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
+p6prof$DQPIT03 <- as.factor(p6prof$DQPIT03)
+levels(p6prof$DQPIT03) <- c("Castellano","Lengua Extranjera","Lengua Indigena 1","Lengua Indigena 2", "Otra Lengua")
+a <- aggregate(puntaje_estandar ~ DQPIT03 + tipo + DQPIT03, p6prof, mean)
+a$dif <- (a$puntaje_estandar - mean(p6prof$puntaje_estandar,na.rm=T))/sd(p6prof$puntaje_estandar,na.rm=T)
+ggplot(a, aes(x=tipo,y=dif,fill=DQPIT03)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('Puntaje Promedio por Genero de Profesor')
+```
+
+```{r puntaje_prof_DQPIT04, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+a <- aggregate(puntaje_estandar ~ idtealin + tipo + DQPIT04, p6prof, mean)
+ggplot(a, aes(x=DQPIT04,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + stat_smooth(method=lm,se=F) + xlab(" ¿Hace cuantos años trabaja como docente?") + ylab("")
+```
+
+```{r puntaje_prof_DQPIT05, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+a <- aggregate(puntaje_estandar ~ idtealin + tipo + DQPIT05, p6prof, mean)
+ggplot(a, aes(x=DQPIT05,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + stat_smooth(method=lm,se=F) + xlab("") + ylab("")
+```
+
+```{r puntaje_prof_DQPIT07, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
+p6prof$DQPIT07 <- as.factor(p6prof$DQPIT07)
+levels(p6prof$DQPIT07) <- c("En la mañana","En la tarde","Jornada completa","Otra jornada")
+a <- aggregate(puntaje_estandar ~ DQPIT07 + tipo + DQPIT07, p6prof, mean)
+a$dif <- (a$puntaje_estandar - mean(p6prof$puntaje_estandar,na.rm=T))/sd(p6prof$puntaje_estandar,na.rm=T)
+ggplot(a, aes(x=tipo,y=dif,fill=DQPIT07)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('¿En qué jornada asisten los estudiantes del aula evaluada?')
+```
+
+```{r puntaje_prof_DQPIT08, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
+p6prof$DQPIT08 <- as.factor(p6prof$DQPIT08)
+levels(p6prof$DQPIT08) <- c("Por tiempo indefinido","A plazo de 1yr","Menor a 1yr","Otro")
+a <- aggregate(puntaje_estandar ~ DQPIT08 + tipo + DQPIT08, p6prof, mean)
+a$dif <- (a$puntaje_estandar - mean(p6prof$puntaje_estandar,na.rm=T))/sd(p6prof$puntaje_estandar,na.rm=T)
+ggplot(a, aes(x=tipo,y=dif,fill=DQPIT08)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('¿Qué tipo de relación laboral tiene con este centro educativo?')
+```
+
+```{r puntaje_prof_DQPIT11, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
+p6prof$DQPIT11 <- as.factor(p6prof$DQPIT11)
+a <- aggregate(puntaje_estandar ~ DQPIT11 + tipo + DQPIT11, p6prof, mean)
+a$dif <- (a$puntaje_estandar - mean(p6prof$puntaje_estandar,na.rm=T))/sd(p6prof$puntaje_estandar,na.rm=T)
+ggplot(a, aes(x=tipo,y=dif,fill=DQPIT11)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('¿Cuál es el nivel educativo más alto que usted ha completado?')
+```
+
