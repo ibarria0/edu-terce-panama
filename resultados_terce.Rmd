@@ -138,10 +138,8 @@ qa6 <- read.spss('./data/Alumnos/QA6.SAV', to.data.frame=T)
 qa6 <- qa6[qa6$country == 'PAN',]
 qa6$DQA6IT01 <- as.factor(qa6$DQA6IT01)
 qa6$DQA6IT02 <- as.factor(qa6$DQA6IT02)
-qa6$DQA6IT03 <- as.factor(qa6$DQA6IT03)
 levels(qa6$DQA6IT01) <- c("10 años o menos","11 años","12 años", "13 años", "14 años", "15 años o mas", "NA")
 levels(qa6$DQA6IT02) <- c("Niña","Niño")
-levels(qa6$DQA6IT03) <- c("No","Si")
 
 ggplot(qa6, aes(x=DQA6IT01, fill=DQA6IT02)) + geom_histogram(alpha=.5, position="dodge") + scale_x_discrete(labels=c("10 años o menos","11 años","12 años", "13 años", "14 años", "15 años o mas", "NA")) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + scale_fill_discrete(labels=c("Niña","Niño")) + ylab("Cantidad de Estudiantes") + scale_fill_discrete(guide=FALSE) + xlab("Edad") + ggtitle("Número de estudiantes de sexto grado por edad")
 ```
