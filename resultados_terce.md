@@ -12,9 +12,9 @@ En el Terce las escuelas particulares mostraron mejores logros que las oficiales
 
 ![plot of chunk puntaje_isecf_rd](figure/puntaje_isecf_rd-1.png) 
 
-Más importante que lamentarnos por los resultados pobres que podamos observar sería enfocarnos en oportunidades de mejora. Por ejemplo, algunas escuelas oficiales rurales con bajo índice socioeconómico y cultural lograron puntajes superiores al promedio internacional del Terce, equivalente a 700 puntos, e incluso mayores que las escuelas oficiales urbanas.   Estas escuelas podrían aportarnos lecciones importantes para el resto del sistema educativo.  Este enfoque representa la aspiración de este análisis y su divulgación.   
+Más importante que lamentarnos por los resultados pobres que podamos observar es enfocarnos en oportunidades de mejora. Por ejemplo, algunas escuelas oficiales rurales con bajo índice socioeconómico y cultural lograron puntajes superiores al promedio internacional del Terce, equivalente a 700 puntos, e incluso mayores que las escuelas oficiales urbanas.   Estas escuelas podrían aportarnos lecciones importantes para el resto del sistema educativo.  Este enfoque representa la aspiración de este análisis y su divulgación.   
 
-En el contexto latinoamericano, Panamá obtiene resultados por debajo de lo esperado.  La figura 1.2 confirma la tendencia conocida de que los alumnos de países con mayor producto interno bruto (PIB) per cápita obtienen mejores puntajes en promedio. Panamá obtuvo 40 puntos menos de lo esperado para su PIB per cápita, usando como referencia la línea que representa la relación típica entre logros y PIB per cápita en la figura.   Estos resultados son consistentes con los resultados que obtuvimos en evaluaciones internacionales previas: Serce 2006, Sineca 2008 y Pisa 2009. Panamá puede y debe mejorar significativamente sus logros de aprendizaje.    
+En el contexto latinoamericano, Panamá obtiene resultados por debajo de lo esperado.  La figura 1.2 confirma la tendencia conocida de que los alumnos de países con mayor producto interno bruto (PIB) per cápita obtienen mejores puntajes en promedio. Panamá obtuvo 40 puntos menos de lo esperado para su PIB per cápita, usando como referencia la línea que representa la relación típica entre logros y PIB per cápita en la figura.   Estos resultados son consistentes con los resultados que obtuvimos en evaluaciones internacionales previas: Serce 2006, Sineca 2008 y Pisa 2009. Es decir, Panamá puede y debe mejorar significativamente sus logros de aprendizaje.    
 
 
 ![plot of chunk puntaje_gdp](figure/puntaje_gdp-1.png) 
@@ -28,37 +28,30 @@ Nuestro sistema educativo dista mucho de este ideal.   Afortunadamente es posibl
 
 Evaluaciones como el Terce, basadas en pruebas estandarizadas, tienen limitaciones propias del esquema de items, o preguntas que utilizan, y están sujetas a ser perfeccionadas, pero sirven como insumos valiosos para las políticas educativas cuando son analizados en contexto y junto con información relevante apropiada.    
 
-Esta es la segunda divulgación en torno al Terce. Este documento presenta sólo algunos de los aspectos sobresalientes, sin intentar ser exhaustivo, para lograr un documento más conciso y accesible.  Previamente en 2014, Unesco y Meduca divulgaron la comparación de resultados entre el Segundo Estudio Regional Comparativo y Explicativo (Serce, 2006) y el Terce, 2013.   
+Esta es la segunda divulgación en torno al Terce. Este documento presenta sólo algunos de los aspectos sobresalientes para lograr un documento más conciso y accesible, sin intentar ser exhaustivo.  Previamente, en 2014, Unesco y Meduca divulgaron la comparación de resultados entre el Segundo Estudio Regional Comparativo y Explicativo, o Serce 2006, y el Terce 2013.   
 
 Con esta divulgación Meduca invita a todos los interesados, especialmente aquellos familiarizados con métodos de evaluación educativa, a iniciar un gran movimiento de exploración de los datos educativos disponibles, especialmente los resultados de las evaluaciones Serce 2006, Sineca 2008, Pisa 2009 y Terce 2013.   
 
 ### 3. Terce y la participación de Panamá
-#### 3.1 ¿Qué es la evaluación Terce?
 
-El Laboratorio Latinoamericano de Evaluación de la Calidad de la Educación, Llece, es una organización con sede en Chile que  diseña y administra evaluaciones a nivel regional.  Terce es la tercera evaluación.   Cada país revisa y edita los ítems o preguntas de la evaluación para asegurar que son apropiadas para el contexto propio.     
+El Laboratorio Latinoamericano de Evaluación de la Calidad de la Educación, Llece, es una organización con sede en Chile que  diseña y administra evaluaciones a nivel regional.  Terce es la tercera evaluación.   Cada país revisa y edita los items o preguntas de la evaluación para asegurar que son apropiadas para su contexto nacional.     
 
-El Terce evaluó 15 países de América Latina, listados en el margen derecho de la figura 1.2, y la región de Nuevo León de México, omitida de la figura porque la información estándar del PIB utilizada sólo incluye países.  La evaluación cubrió las áreas de lectura de tercero y sexto grado, matemáticas de tercero y sexto grado, y ciencias de sexto grado.   También incluyó una nueva prueba de escritura que será sujeto de divulgación posterior.  
+El Terce evaluó 15 países de América Latina, listados en el margen derecho de la figura 1.2, y a la región de Nuevo León de México, omitida de la figura 1.2 porque la información estándar del PIB utilizada sólo incluye PIB de países.  El Terce cubrió las áreas de lectura de tercero y sexto grado, escritura de tercero y sexto grado, matemáticas de tercero y sexto grado, y ciencias de sexto grado.  Los resultados de escritura serán sujeto de una divulgación posterior.   
 
-La muestra de alumnos y escuelas por país es representativa, aunque la muestra que elaboró Panamá no fue diseñada para comparar algunos aspectos de interés como la comparación de resultados entre provincias o comarcas, por ejemplo.  Comprendemos que en el futuro debemos ampliar los aspectos que puedan ser explorados confiablemente en las evaluaciones educativas del país.    
+La muestra de alumnos y escuelas por país es representativa.  La muestra que elaboró Panamá no permite comparar resultados entre provincias o comarcas, por ejemplo, pero sí entre el sector oficial y particular, por ejemplo.  Comprendemos que en el futuro debemos ampliar los aspectos que puedan ser explorados confiablemente en las evaluaciones educativas del país.    
 
-El Terce también incluye factores potencialmente relacionados con los logros de aprendizaje, conocidos como factores asociados. La evaluación formula preguntas a los alumnos, docentes y hogares de cada alumno sobre el entorno y situación individual para poder explorar el impacto de estos factores.    Aquí solo presentamos una selección de los factores asociados con efectos más interesantes, sin intentar profundizar en sus explicaciones o implicaciones pues esas conclusiones deben ser resultado de un debate académico riguroso más amplio. 
+El Terce incluyó cuestionarios a los alumnos, docentes y hogares de cada alumno sobre su entorno y situación individual para poder explorar el impacto de ciertos factores que podrían mostrar relación con los logros de aprendizaje, conocidos como factores asociados. Para ser conciso, este documento sólo muestra una selección de los factores asociados y su efecto, sin intentar profundizar en sus implicaciones pues esas conclusiones deben ser resultado de un debate académico riguroso. 
 
-#### 3.2 Características de las escuelas y alumnos participantes de Panamá
-
-187 participaron en la prueba Terce representando cuatro tipos de escuela así:  oficial urbana 27, oficial rural 113, particular urbana 46, particular rural 1.  En el total de escuelas, 3775 estudiantes correspondían a sexto grado y 3631 estudiantes a tercer grado.
+187 escuelas participaron en la prueba Terce representando cuatro tipos:  oficial urbana 27, oficial rural 113, particular urbana 46, particular rural 1.  En el total de escuelas, 3775 estudiantes correspondían a sexto grado y 3631 estudiantes a tercer grado.
 
 
 ![plot of chunk demo_pub_priv](figure/demo_pub_priv-1.png) 
 
 ![plot of chunk demo_ruralidad](figure/demo_ruralidad-1.png) 
-Las escuelas participantes de Panamá están principalmente concentradas en el promedio del índice socioeconómico y cultural (0.0) de toda la región latinoamericana, en cuanto el índice promedio de sus alumnos.  
+Las escuelas de Panamá representan el caso típico de América Latina en cuanto a condiciones de vida.  Por ejemplo, la figura 3.3 compara nuestra situación con la de cuatro países de interés.  La distribución de nuestras escuelas según el índice socioeconómico y cultural promedio de sus alumnos se concentra alrededor del promedio de la región, es decir, en torno al valor 0.0 del índice. [EDITAR FIGURA: TITULO Y LEYENDAS]
 
 ![plot of chunk demo_isecf](figure/demo_isecf-1.png) 
-Las dos figuras siguientes muestran la cantidad de estudiantes participantes por edad en tercer grado y sexto grado.  
-
-[JEV2IBG: supongo que la siguiente grafica es de 6to grado.  falta 3er grado? Incluirla primero]
-
-[JEV2IBG: usar como título "Número de estudiantes de sexto grado por edad"]
+Las edades de los participantes de tercero y sexto grado muestran un grupo importante sobre la edad esperada para el grado.   [AÑADIR LEYENDA DE COLORES DE GENERO Y DEPURAR LEYENDAS DE LOS EJES.  INTENTAR USAR % EN VEZ DE NUMEROS] 
 
 ![plot of chunk demo_genero_edad](figure/demo_genero_edad-1.png) 
 
@@ -73,8 +66,7 @@ Las dos figuras siguientes muestran la cantidad de estudiantes participantes por
 |15 años o mas   |  1.5894040|
 |NA              |  0.0000000|
 |NA's            |  9.0860927|
-
-[JEV2IBG: podríamos usar porcentajes en el eje Y en lugar de cantidad?]
+Las figuras 3.6 y 3.7 muestran las respuestas a las preguntas de a qué genero pertenecen y si pertenecen a una etnia originaria de Panamá.  [INTENTAR UTILIZAR EJE VERTICAL CON PORCENTAJES]
 
 ![plot of chunk demo_genelaro](figure/demo_genelaro-1.png) 
 
@@ -84,10 +76,6 @@ Las dos figuras siguientes muestran la cantidad de estudiantes participantes por
 |Niña |  46.437086|
 |Niño |  44.476821|
 |NA's |   9.086093|
-[ORGNR PORCENTAJE AFIRMATIVO]% de los alumnos indicó pertenecer a alguna etnia "originaria" y [ORGNR PORCENTAJE N/A]% no contestó o no supo responder.   
-
-[JEV2IBG: podríamos usar porcentajes en el eje Y en lugar de cantidad?]
-[JEV2IBG: agregar tílde al término "índigena" en la leyenda del eje X]
 
 ![plot of chunk etnia](figure/etnia-1.png) 
 
@@ -99,22 +87,16 @@ Las dos figuras siguientes muestran la cantidad de estudiantes participantes por
 |NA's |    16.42384|
 
 
-## 4. Comparacion con America Latina
-### 4.1 Puntaje vs ingreso per capita (3er grado, 6to grado)
+## 4. Comparacion con América Latina
 
-Comparar resultados entre países es útil pero no lo principal. Es un error considerar la evaluación Terce como una competencia por el mayor puntaje promedio.   Sus resultados son sólo parte de la evidencia e información de cuánto logran aprender los alumnos.  Su valor principal está en intentar comprender qué acciones se pueden tomar para que la educación le de las mejores oportunidades de vida a los alumnos y países.   
+Comparar resultados entre países es útil pero no lo principal. El Terce no es una competencia por el mayor puntaje promedio.   Su valor principal está en comprender la dinámica educativa para tomar acción.   
 
-Entre los países participantes Chile obtuvo el mejor resultado seguido de Costa Rica y México.  Costa Rica sirve de ejemplo que un país de escala y ubicación como la nuestra puede obtener mejores resultados.     Las figuras [NO. 3ero PTJ VS PIB/CAP] Y [NO. 6ero PTJ VS PIB/CAP] siguientes muestran que Panamá obtiene resulados inferiores a lo esperado para su producto interno bruto per cápita.  Estos resultados son consistentes con otras pruebas internacionales en las que ha participado Panamá (pruebas Serce 2006 y Pisa 2009). El efecto es más pronunciado para sexto grado que para tercer grado.   Parece razonable esperar que con la prioridad social necesaria, la riqueza nacional nos permita lograr al menos los resultados esperados.   
+Entre los países participantes Chile obtuvo el mejor resultado seguido de Costa Rica y México, como muestran las figuras 4.1 y 4.2 para tercero y sexto grado respectivamente. La figura 4.2 es la figura 1.2, repetida aquí por conveniencia.  Panamá obtiene resulados inferiores a lo esperado para su PIB per cápita y estos resultados son consistentes con los que obtuvimos en las evaluaciones Serce 2006 y Pisa 2009. El efecto es más pronunciado para sexto grado que para tercer grado.   En esas figuras, Costa Rica sirve como ejemplo de que un país de escala y ubicación similar a la nuestra puede obtener mejores resultados.     Por tanto parece razonable confiar que con nuestra riqueza nacional podemos lograr mejores resultados, siempre y cuando le demos la prioridad social necesaria.   
 
 ![plot of chunk puntaje_gdp_3](figure/puntaje_gdp_3-1.png) 
+Más relevante en primera instancia es saber si nuestros niños y niñas logran un aprendiza útil para su propio bienestar y la prosperidad de la nación. La evaluación Terce define cuatro niveles de logros de aprendizaje.  El nivel 1 se considera poca  preparación para la vida esperada de los participantes y el nivel 4 la mejor preparación.  Corresponden a un dominio progresivamente más eficaz del área de conocimiento de interés y están explicados en el apéndice 1.  
 
-![plot of chunk puntaje_gdp_6](figure/puntaje_gdp_6-1.png) 
-
-### 4.2 Desempeño en logros de aprendizaje
-
-Más relevante en primera instancia es saber si nuestros niños y niñas logran un aprendiza útil para su propio bienestar y la prosperidad de la nación. La evaluación Terce define cuatro niveles de logros de aprendizaje.  El nivel 1 se considera insuficiente preparación y el nivel 4 la mejor preparación educativa para la vida esperada de los participantes.  Corresponden a dominios progresivamente más eficaces del área de conocimiento y están explicados en el apéndice [No. APENDICE NIVELES].  
-
-[22?]% de nuestras niñas y niños muestran un logro de aprendizaje en el nivel inferior, o nivel 1, considerado inadecuado como preparación para su vida.   Para ciencias son [45?]% y para matemáticas [65?]%.   La figura [No. NIVELES] muestra como se comparan los porcentajes de alumnos de Panamá para cada nivel con los del resto de los alumnos de otros países. 
+[22?]% de nuestras niñas y niños muestran un logro de aprendizaje en el nivel inferior, o nivel 1, considerado inadecuado como preparación para su vida.   Para ciencias son [45?]% y para matemáticas [65?]%.   La figura 4.3 muestra como se comparan los porcentajes de alumnos de Panamá para cada nivel con los del resto de los alumnos de otros países. 
 
 [JEV2IBG: título "Niveles de logros de aprendizaje por área de conocimiento, comparados"]
 [JEV2IBG: cambiar la leyenda del eje Y a "Porcentaje de alumnos"]
@@ -152,7 +134,15 @@ Los alumnos que se reconocen como miembros de etnias originarias logran menor pu
 [JEV2IBG: eliminar del margen derecho la etiqueta "DQA6IT06"] 
 [JEV2IBG: como procesaste aquellos que respondieron N/A]
 
-![plot of chunk demo_etnia_puntaje](figure/demo_etnia_puntaje-1.png) 
+
+```
+## Error in matrix(value, n, p): 'data' must be of a vector type, was 'NULL'
+```
+[JEV2IBG: título "Diferencia de puntaje promedio desfavorece a los grupos originarios"]
+[JEV2IBG: esta gráfica debería ser una sola barra de valores negativos en contra  de los grupos originarios, indicando la diferencia entre el puntaje de originarios menos el de los no originarios expresada en desviaciones estándar]
+[JEV2IBG: cambiar la leyenda del eje Y a "Desviaciones estandar"]
+[JEV2IBG: cambiar la leyenda del eje X a "Diferencia"] 
+[JEV2IBG: eliminar del margen derecho la etiqueta "DQA6IT06"] 
 
 ![plot of chunk demo_etnia_puntaje_desv](figure/demo_etnia_puntaje_desv-1.png) 
 Adicionalmente, el índice socioeconómico y cultural muestra menor relación con el puntaje promedio obtenido para alumnos que se consideran miembros de grupos originarios que para aquellos que no.   Esto lo ilustra la figura [No. PTJ VS ISECF ORGN] en la que cada línea muestra la correspondencia entre puntaje promedio obtenido y el índice del alúmno.  La diferencia de puntaje entre alumnos de menor y mayor índices es más pronunciada para alumnos que se declaran no originarios.  
@@ -169,12 +159,12 @@ Las oportunidades de educación y salud muestran un altísimo grado de influenci
 
 Las figuras [No. PTJ VS ISEC 3ero] y [No. PTJ VS ISEC 6to] muestran para cada escuela participante de Panamá el puntaje promedio obtenido por sus alumnos en el eje vertical y el índice socioeconómico y cultural promedio de sus alumnos en el eje horizontal. Las líneas representan el puntaje promedio de alumnos de todos los países, incluyendo Panamá, en la prueba Terce y el puntaje debajo del cual se define el nivel 1 de aprendizaje, considerado inadecuado para las situaciones de vida esperadas. [PORCENTAJE NIVEL 1]% de las niñas y niños obtuvieron puntajes correspondientes al nivel 1.   
 
-![plot of chunk puntaje_isecf_rd_3](figure/puntaje_isecf_rd_3-1.png) 
-
 [JEV2IBG: las 2 figuras aqui son las versiones de 3ero y 6to grado de la figura 1 en el resumen ejecutivo]
 [JEV2IBG: Pregunta: las figuras de puntaje vs isec por escuela pueden indcar un solo puntaje para definir el nivel 1 de todas las áreas de conocimiento, o el puntaje que define el nivel 1 cambia de área a área]
 
 Una observación de suma importancia es que hay un grupo de escuelas oficiales rurales cuyos logros promedio son iguales o superiores a los de las escuelas oficiales urbanas a pesar de tener índices socioeconómicos y culturales menores en promedio. Estas escuelas probablemente tienen lecciones que aportar en cuanto a cómo mejorar los logros educativos en las áreas menos favorecidas del país.    
+
+![plot of chunk puntaje_isecf_rd_3](figure/puntaje_isecf_rd_3-1.png) 
 
 [JEV2IBG: titulo "logros de aprendizaje de escuelas particulares y oficiales, urbanas y rurales, tercer grado]
 [JEV2IBG: cambiar la leyenda del eje Y a "Puntaje promedio"]
@@ -300,57 +290,58 @@ Estos siguientes factores estan muy asociados al indice sociocultural.
 ![plot of chunk puntaje_familia_DQFIT33_04](figure/puntaje_familia_DQFIT33_04-1.png) 
 
 ![plot of chunk puntaje_familia_DQFIT33_05](figure/puntaje_familia_DQFIT33_05-1.png) 
+ 
+		
+### 6.5 Factores Asociados Alumnos		
+		
 
-### 6.5 Factores Asociados Alumnos
-
-
-
-#### 6.5.1 Indices
-
+		
+#### 6.5.1 Indices		
+		
 ![plot of chunk puntaje_alumno_CONDIA6](figure/puntaje_alumno_CONDIA6-1.png) 
-
+		
 ![plot of chunk puntaje_alumno_USOLIA6](figure/puntaje_alumno_USOLIA6-1.png) 
-
+		
 ![plot of chunk puntaje_alumno_TMPLIBA6](figure/puntaje_alumno_TMPLIBA6-1.png) 
-
+		
 ![plot of chunk puntaje_alumno_CLAMBIA6](figure/puntaje_alumno_CLAMBIA6-1.png) 
-
+		
 ![plot of chunk puntaje_alumno_ASISDOA6](figure/puntaje_alumno_ASISDOA6-1.png) 
-
+		
 ![plot of chunk puntaje_alumno_PDORGCA6](figure/puntaje_alumno_PDORGCA6-1.png) 
-
+		
 ![plot of chunk puntaje_alumno_PRACEDA6](figure/puntaje_alumno_PRACEDA6-1.png) 
-
+		
 ![plot of chunk puntaje_alumno_PRACE2A6](figure/puntaje_alumno_PRACE2A6-1.png) 
-
+		
 ![plot of chunk puntaje_alumno_PCEDUCA6](figure/puntaje_alumno_PCEDUCA6-1.png) 
-
+		
 ![plot of chunk puntaje_alumno_PCRECRA6](figure/puntaje_alumno_PCRECRA6-1.png) 
-
-#### 6.4.2 Características de interés en las alumnos
-
+		
+#### 6.4.2 Características de interés en las alumnos		
+		
 ![plot of chunk puntaje_alumno_trabaja](figure/puntaje_alumno_trabaja-1.png) 
-
+		
 ![plot of chunk puntaje_alumno_DQA6IT26](figure/puntaje_alumno_DQA6IT26-1.png) 
-
+		
 ![plot of chunk puntaje_alumno_DQA6IT26a](figure/puntaje_alumno_DQA6IT26a-1.png) 
-
+		
 
 ```
 ## Error in `levels<-.factor`(`*tmp*`, value = c("Si", "No", "No, pero me dan cosas": number of levels differs
 ```
 
 ![plot of chunk puntaje_alumno_DQA6IT26b](figure/puntaje_alumno_DQA6IT26b-1.png) 
-
-#### Cuando no estás en clases, ¿qué haces con tu tiempo libre?
-
+		
+#### Cuando no estás en clases, ¿qué haces con tu tiempo libre?		
+		
 ![plot of chunk puntaje_alumno_DQA6IT25_01](figure/puntaje_alumno_DQA6IT25_01-1.png) 
-
+		
 ![plot of chunk puntaje_alumno_DQA6IT25_02](figure/puntaje_alumno_DQA6IT25_02-1.png) 
 ![plot of chunk puntaje_alumno_DQA6IT25_03](figure/puntaje_alumno_DQA6IT25_03-1.png) 
 ![plot of chunk puntaje_alumno_DQA6IT25_04](figure/puntaje_alumno_DQA6IT25_04-1.png) 
 ![plot of chunk puntaje_alumno_DQA6IT25_05](figure/puntaje_alumno_DQA6IT25_05-1.png) 
 ![plot of chunk puntaje_alumno_DQA6IT25_06](figure/puntaje_alumno_DQA6IT25_06-1.png) 
 ![plot of chunk puntaje_alumno_DQA6IT25_07](figure/puntaje_alumno_DQA6IT25_07-1.png) 
-
+		
 ![plot of chunk puntaje_alumno_DQA6IT25_08](figure/puntaje_alumno_DQA6IT25_08-1.png) 
