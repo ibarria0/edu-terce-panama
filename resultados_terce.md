@@ -3,59 +3,43 @@
 ### 1. Resumen
 
 
-Hay grandes diferencias de oportunidades para nuestra niñez en materia educativa.   La prueba Terce está diseñada para evaluar mediante el puntaje obtenido los logros educativos de los estudiantes.    
+Hay grandes diferencias de oportunidades para nuestra niñez en materia educativa.   El Tercer Estudio Regional Comparativo y Explicativo (Terce, 2013) está diseñado para evaluar los logros educativos de los estudiantes mediante el puntaje obtenido en preguntas sobre lectura, matemáticas y ciencias.  Este estudio muestra que las diferencias de logros entre nuestros alumnos reflejan en forma marcada sus diferencias socioeconómicas y culturales, es decir, la inequidad.    
 
-Las diferencias de logros educativos desafortunadamente reflejan en forma marcada las diferencias socioeconómicas y culturales, representada en la prueba Terce por un índice socioeconómico  y cultural que sintetiza factores materiales y culturales del alumno y su entorno.  Idealmente, nuestro sistema educativo debería darle las mismas oportunidades de aprendizaje a nuestras niñas y niños independientemente de su nivel socioeconómico y cultural.    
+Este documento de divulgación es principalmente un llamado a analizar los datos Terce disponibles en la página Web de Meduca y un reto a la voluntad nacional por crear un sistema educativo justo, capaz de brindar igualdad de oportunidades.   
 
-Las escuelas particulares mostraron mayor desempeño que las oficiales; y entre las oficiales, muchas no logran el mínimo nivel de desempeño adecuado, especialmente entre las rurales.     
-
-[JEV2IBG: favor intentar incluir líneas que muestren el promedio y los cambios entre un nivel de aprendizaje y otro]
-[JEV2IBG: la grafica debe tener como titulo "logros de aprendizaje de escuelas particulares y oficiales, urbanas y rurales]
-[JEV2IBG: es importante y buena práctica que cada figura tenga un número (ej. "Figura 1.1") para facilitar referencias]  [JEV2IBG: Además, si la línea con número de figura permite texto explicativo, me gustaría saber, para agregarlo]
+Las escuelas particulares mostraron mejores logros que las oficiales y muchas de nuestras escuelas oficiales no logran un puntaje promedio con el nivel mínimo de aprendizaje considerado adecuado, equivalente a [PUNTAJE NIVEL 1], especialmente entre las escuelas rurales oficiales. La figura 1.1 ilustra la relación estrecha entre aprendizaje y condiciones de vida. Para esto usa el promedio de puntajes y el promedio del índice socioeconómico y cultural de los alumnos de cada escuela.  Este índice se construye con base en respuestas sobre las condiciones de vida de cada alumno: a mayor índice las condiciones son más cómodas. El tamaño de cada punto es proporcional al número de alumnos en la escuela que representa.   
 
 
 ![plot of chunk puntaje_isecf_rd](figure/puntaje_isecf_rd-1.png) 
 
-A pesar de las grandes diferencias, algunas escuelas oficiales rurales con bajo índice socioeconómico y cultural logran resultados superiores al promedio internacional e iguales al de las mejores escuelas oficiales urbanas.   Esas escuelas podrían aportarnos lecciones sobre como mejorar el desempeño de otras escuelas.   
+Más útil que lamentarnos por resultados débiles será analizarlos para mejorar. Por ejemplo, algunas escuelas oficiales rurales con bajo índice socioeconómico y cultural en la figura logran puntajes superiores al promedio internacional del Terce, equivalente a 700 puntos, e incluso mayores que las escuelas oficiales urbanas.   Estas escuelas podrían aportarnos lecciones importantes para el resto del sistema educativo.   
 
-En cuanto al desempeño comparativo, la figura siguiente [para sexto grado] es representativa y confirma la tendencia conocida de que países con mayor ingreso per cápita obtienen mejores puntajes promedio; sin embargo Panamá obtiene resultados por debajo de lo esperado.  Estos resultados son consistentes con otras pruebas internacionales en las que ha participado Panamá (pruebas Serce 2006 y Pisa 2009). Panamá puede y debe mejorar significativamente su desempeño.    
+En el contexto latinoamericano, Panamá obtiene resultados por debajo de lo esperado.  La figura 1.2 confirma la tendencia conocida de que los alumnos de países con mayor producto interno bruto per cápita obtienen mejores puntajes en promedio. La figura muestra que Panamá obtuvo 40 puntos menos de lo esperado para su PIB per cápita.   Estos resultados son consistentes con los resultados obtenidos en evaluaciones internacionales previas en las que ha participado Panamá: Serce 2006, [Sineca 2008] y Pisa 2009. Panamá puede y debe mejorar significativamente sus logros de aprendizaje.    
 
 
 ![plot of chunk puntaje_gdp](figure/puntaje_gdp-1.png) 
 
-### 2. Introduccion 
+### 2. Introducción 
 
 
-La educación es el gran nivelador… en empleo, aceptación social, valerse por si mismos…
+La educación nacional debe servir como un gran equalizador hacia las mejores oportunidades de bienestar para todos, que renueve en cada generación las posibilidades de realización personal y de un país próspero sostenible.  
 
-Es posible evaluar de forma científica, es decir, de forma confinable….   Una cultura que valora información permite aprender y avanzar…
+Nuestro sistema educativo dista mucho de este ideal.   Afortunadamente es posible evaluar los logros del sistema con métodos científicos que permitan recomendaciones más confiables de como mejorar.   Una cultura que valora la información puede aprender de sus propios errores.    
 
-Terce cubre extensamente la región de América Latina, con pocas excepciones.  No incluye al Caribe...
+El Terce cubre 15 países de América Latina, listados en el margen derecho de la figura 1.2, y la región de Nuevo León de México, omitida en la figura porque versa sobre países.  La evaluación cubrió las áreas de lectura de tercero y sexto grado, matemáticas de tercero y sexto grado, y ciencias de sexto grado.   También incluyó una nueva prueba de escritura, que será sujeto de divulgación posterior.  
 
-Pruebas estandarizadas pueden ser criticadas desde varios angulos… pero son útiles y mucho mejor que avanzar a oscuras.   
+Las pruebas estandarizadas como el Terce son técnicas sujetas a ser perfeccionadas, con limitaciones propias del esquema de items o preguntas que utilizan.  Sin embargo los resultados de estas pruebas son insumos valiosos para las políticas educativas cuando son analizados en contexto y junto con información relevante apropiada.    
 
-Usar para aprender, no para criticar.   
+La muestra de escuelas por país es representativa pero en el caso de Panamá no estuvo seleccionada para comparar resultados entre provincias y comarcas, por ejemplo.  Este documento presenta algunos de los aspectos más sobreslientes de la evaluación para contribuir al debate, sin intentar ser exhaustivo.     
 
-no se va a poder explicar por region geografica
+Esta es la segunda divulgación en torno al Terce.   Previamente, en [diciembre?] 2014, Unesco y Meduca divulgaron la comparación de resultados entre el Segundo Estudio Regional Comparativo y Explicativo, Serce, 2006, y el Terce, 2013. Todo análisis serio del Terce (2013), Pisa (2009), Sineca ([2008?]) y Serce (2006) contribuirá a la mejora educativa del país.   
 
-Minimizamos las interpretaciones porque las mismas necesitan estudios y validaciones rigurosas.  Más bien esta divulgación es una invitación a todos los especialistas e interesados a anaizar los resultados disponibles, con la responsabilidad de rigor implicita en el estudio y divulgación de resultados sociales.   
+### 3. Terce y la participación de Panamá
+#### 3.1 ¿Qué es la evaluación Terce?
 
-Esta es la segunda divulgación en torno al Terce.   Previamente, en diciembre 2014, Unesco y Meduca [VERIFICAR] divulgaron aspectos sobresalientes de la comparación de resultados entre el Serce, 2006, y el Terce, 2013. Por supuesto, tanto los resultados sujeto de esta divulgación como los anteriores del Terce (2013), Pisa (2009), Sineca ([2008?]) y Serce (2006) deben continuar bajo análisis para mayor comprensión y divulgación.   
+El Laboratorio Latinoamericano de Evaluación de la Calidad de la Educación, Llece, es una organización con sede en Chile que  diseña y administra evaluaciones a nivel regional.  Terce es la tercera evaluación.   Cada país revisa y edita los ítems o preguntas de la evaluación para asegurar que son apropiadas para el contexto propio.     
 
- 
-
-### 3. La prueba Terce y participación de Panamá
-#### 3.1 Qué es la evaluación Terce
-
-Llece es un laboratorio latinoamericano con base en chile.  Administra evaluaciones comparativas y explicativas de las cuales el terce [tercer…] es la tercera….
-
-Evaluar logros de aprendizaje usando metodos de ciencia empirica para poder comparar paises, regions y grupos y para intentar entender los factores que explican los resultados.  
-
-La muestra se diseña segun las preguntas de interes para asegurar que la muestra es suficientemente representative para lograr estadisticas confiables.    Hay factores asociados de interes para todos y comparaciones entre grupos de interes para cada pais.  Panama pidio genero, originarios, areas de conocimiento y …
-
-Todos los países ded América Latina participaron con la excepción de Cuba[, y otros?].   También participó el estado de Nuevo León, México, como en la prueba Serce 2006.  
-
-La evaluación cubrió matemáticas y lectura para 3ero y 6 grado, ciencias para 6to grado y una prueba especial de escritura en 6to grado.   [JEV2JEV: averiguar de esa ultima.  No me queda clara.]
+La muestra de alumnos se diseña  para poder contar con datos suficientes que permitan conclusiones confiables sobre las preguntas de interés.    Hay factores potencialmente relacionados con los logros de aprendizaje. La evaluación formula preguntas a los alumnos, docentes y hogares de cada alumno sobre el entorno y situación individual para poder explorar el impacto de estos factores.    Aquí solo presentamos una seleccón de los factores con efectos más interesantes, sin intentar profundizar en los resultados e implicaciones. 
 
 #### 3.2 Características de las escuelas y alumnos participantes de Panamá
 
