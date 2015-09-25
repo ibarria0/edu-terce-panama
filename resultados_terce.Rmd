@@ -65,7 +65,7 @@ mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
 mean_isecf_school <- aggregate(ISECF ~ idschool, qf, mean)
 m <- merge(mean_school, mean_isecf_school, by=c('idschool'))
 
-ggplot(m, aes(x=ISECF,y=puntaje_estandar,color=rd,size=totalum)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice de estatus socioeconómico y cultural") + ylab("Puntaje Promedio por Escuela") + ggtitle('Logros de aprendizaje de escuelas particulares y oficiales, urbanas y rurales')
+ggplot(m, aes(x=ISECF,y=puntaje_estandar,color=rd,group=1,size=totalum)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice de estatus socioeconómico y cultural") + ylab("Puntaje Promedio por Escuela") + ggtitle('Logros de aprendizaje de escuelas particulares y oficiales, urbanas y rurales')
 ```
 
 A pesar de las grandes diferencias, algunas escuelas oficiales rurales con bajo índice socioeconómico y cultural logran resultados superiores al promedio internacional e iguales al de las mejores escuelas oficiales urbanas.   Esas escuelas podrían aportarnos lecciones sobre como mejorar el desempeño de otras escuelas.   
@@ -74,18 +74,6 @@ En cuanto al desempeño comparativo, la figura siguiente [para sexto grado] es r
 
 
 ```{r puntaje_gdp, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
-pc6 <- read.spss('./data/Puntajes_Alumnos/PC6_all_TERCE.sav', to.data.frame=T)
-pl6 <- read.spss('./data/Puntajes_Alumnos/PL6_all_TERCE.sav', to.data.frame=T)
-
-pm6 <- pm6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
-pl6 <- pl6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
-pc6 <- pc6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
-
-# merge matematica, lectura y ciencias
-pm6$tipo <- 'matematica'
-pl6$tipo <- 'lectura'
-pc6$tipo <- 'ciencias'
 p6 <- rbind.fill(pm6,pl6,pc6)
 
 
@@ -93,7 +81,7 @@ gdp <- read.csv('./data/suplemental/gdp.csv')
 names(gdp) <- c("Country_Name","country","gdp_2013")
 m <- merge(p6,gdp,by="country")
 a <- aggregate( puntaje_estandar ~ country + gdp_2013, m, mean)
-ggplot(a, aes(x=gdp_2013, y=puntaje_estandar, fill=country, color=country, group=1)) + geom_point() + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + geom_text(aes(label=country)) + xlab("Producto (PIB) per cápita") + ylab("Puntaje Promedio") + ggtitle("Puntaje promedio según producto (PIB) per cápita por país, sexto grado") + scale_x_continuous(label=dollar)
+ggplot(a, aes(x=gdp_2013, y=puntaje_estandar, fill=country, color=country, group=1)) + geom_point() + geom_smooth(method = "lm", se = F) + geom_text(aes(label=country)) + xlab("Producto (PIB) per cápita") + ylab("Puntaje Promedio") + ggtitle("Puntaje promedio según producto (PIB) per cápita por país, sexto grado") + scale_x_continuous(label=dollar)
 
 ```
 
@@ -164,16 +152,20 @@ qa6 <- read.spss('./data/Alumnos/QA6.SAV', to.data.frame=T)
 qa6 <- qa6[qa6$country == 'PAN',]
 qa6$DQA6IT01 <- as.factor(qa6$DQA6IT01)
 qa6$DQA6IT02 <- as.factor(qa6$DQA6IT02)
+qa6$DQA6IT03 <- as.factor(qa6$DQA6IT03)
+levels(qa6$DQA6IT01) <- c("10 años o menos","11 años","12 años", "13 años", "14 años", "15 años o mas", "NA")
+levels(qa6$DQA6IT02) <- c("Niña","Niño")
+levels(qa6$DQA6IT03) <- c("No","Si")
 
 ggplot(qa6, aes(x=DQA6IT01, fill=DQA6IT02)) + geom_histogram(alpha=.5, position="dodge") + scale_x_discrete(labels=c("10 años o menos","11 años","12 años", "13 años", "14 años", "15 años o mas", "NA")) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + scale_fill_discrete(labels=c("Niña","Niño")) + ylab("Cantidad de Estudiantes") + scale_fill_discrete(guide=FALSE) + xlab("Edad") + ggtitle("Número de estudiantes de sexto grado por edad")
 ```
-[GENERO PORCENTAJE FEM]% de los alumnos indicó ser niña y  [GENERO PORCENTAJE N/A]% no contestó o no supo responder.    
 
-[JEV2IBG: en los datos salen cuantos son realmente niñas y niños?   ...los lectores se preguntarán porqué no sabemos la cifra exacta si son estudiantes de Meduca.]
-[JEV2IBG: incluir título "Respuesta a la pertenencia de género"]
+```{r edad_summary, echo=F, message=F, warning=F}
+my.summary <- (summary(qa6$DQA6IT01)/sum(summary(qa6$DQA6IT01)))*100
+kable(data.frame(porcentaje=my.summary))
+```
+
 [JEV2IBG: podríamos usar porcentajes en el eje Y en lugar de cantidad?]
-[JEV2IBG: usar color azul para las barras en lugar de negro]
-[JEV2IBG: intentar barras más angostas en relación con el ancho de la figura: pienso que se ve "pesada"]
 
 ```{r demo_genelaro, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 qa6 <- read.spss('./data/Alumnos/QA6.SAV', to.data.frame=T)
@@ -181,15 +173,17 @@ qa6 <- qa6[qa6$country == 'PAN',]
 qa6$DQA6IT02 <- as.factor(qa6$DQA6IT02)
 levels(qa6$DQA6IT02) <- c("Niña","Niño")
 
-ggplot(qa6, aes(x=DQA6IT02)) + geom_histogram(alpha=.5, position="dodge")  + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + ylab("Cantidad de Estudiantes") + xlab("¿Eres niña o niño?")
+ggplot(qa6, aes(x=DQA6IT02)) + geom_histogram(fill='#0072B2',width=0.5,position="dodge")  + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + ylab("Cantidad de Estudiantes") + xlab("¿Eres niña o niño?") + ggtitle("Respuesta a la pertenencia de género")
+```
+
+```{r genero_summary, echo=F, message=F, warning=F}
+my.summary <- (summary(qa6$DQA6IT02)/sum(summary(qa6$DQA6IT02)))*100
+kable(data.frame(porcentaje=my.summary))
 ```
 [ORGNR PORCENTAJE AFIRMATIVO]% de los alumnos indicó pertenecer a alguna etnia "originaria" y [ORGNR PORCENTAJE N/A]% no contestó o no supo responder.   
 
-[JEV2IBG: incluir título "Respuesta a la pertenencia de etnia originaria"]
 [JEV2IBG: podríamos usar porcentajes en el eje Y en lugar de cantidad?]
 [JEV2IBG: agregar tílde al término "índigena" en la leyenda del eje X]
-[JEV2IBG: usar color azul para las barras en lugar de negro]
-[JEV2IBG: intentar barras más angostas en relación con el ancho de la figura: pienso que se ve "pesada"]
 
 ```{r etnia, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 qa6 <- read.spss('./data/Alumnos/QA6.SAV', to.data.frame=T)
@@ -197,8 +191,12 @@ qa6 <- qa6[qa6$country == 'PAN',]
 qa6$DQA6IT06 <- as.factor(qa6$DQA6IT06)
 levels(qa6$DQA6IT06) <- c("No","Si")
 
-ggplot(qa6, aes(x=DQA6IT06)) + geom_histogram(alpha=.5, position="dodge")  + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + ylab("Cantidad de Estudiantes") + xlab("¿Perteneces a alguna etnia indígena?")
+ggplot(qa6, aes(x=DQA6IT06)) + geom_histogram(fill='#0072B2',width=0.5, position="dodge")  + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + ylab("Cantidad de Estudiantes") + xlab("¿Perteneces a alguna etnia indígena?") + ggtitle("Respuesta a la pertenencia de etnia originaria")
+```
 
+```{r etnia_summary, echo=F, message=F, warning=F}
+my.summary <- (summary(qa6$DQA6IT06)/sum(summary(qa6$DQA6IT06)))*100
+kable(data.frame(porcentajes=my.summary))
 ```
 
 
@@ -233,14 +231,6 @@ Más relevante en primera instancia es saber si nuestros niños y niñas logran 
 [JEV2IBG: si es posible, usar colores menos intensos para las barras, especialmente el rojo (asusta ;)]
 
 ```{r niveles_barcharts, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
-pc6 <- read.spss('./data/Puntajes_Alumnos/PC6_all_TERCE.sav', to.data.frame=T)
-pl6 <- read.spss('./data/Puntajes_Alumnos/PL6_all_TERCE.sav', to.data.frame=T)
-
-pm6$tipo <- 'matematica'
-pl6$tipo <- 'lectura'
-pc6$tipo <- 'ciencias'
-
 p6 <- rbind.fill(pm6,pl6,pc6)
 p6$grado <- '6'
 
@@ -263,69 +253,7 @@ calc_percent <- function(c,t,g,x) { return(100*(x/sum(a[a$countryp == c & a$tipo
 a$dist <- mapply(calc_percent, a$countryp, a$tipo, a$grado, a$puntaje_estandar)
 
 #####
-ggplot(a[a$grado == 6,], aes(x=nivel,y=dist,fill=countryp)) + geom_bar(stat="identity", position=position_dodge(), colour="black") + ggtitle("Cantidad de Estudiantes por Nivel (6to Grado)") + facet_grid(tipo ~ .) + scale_fill_brewer(palette="Set1")
-```
-   
-## 5 Comparacion del desempeño en el Terce (2013?) con el Serce (2006)
-### 5.1 Mejora en relación con los resultados serce, por materia
-
-[JEV2IBG: Al final, Gina dice que este informe debe ser solo del Terce.  Incluí texto referente al serce en la introducción.  Por tanto Eliminaremos esta seccion y correremos las secciones 6 en adelante.]    
-
-```{r serce_terce, fig.width=12, fig.height=6, echo=F, message=F, warning=F}
-library(stringr)
-library(scales)
-
-a <- aggregate(puntaje_estandar ~  tipo, p6, length)
-a_nivel_terce <- aggregate(puntaje_estandar ~ nivel + tipo, p6, length)
-a_nivel_terce$percent_estudiantes <- 0
-
-a_nivel_terce[a_nivel_terce$tipo == 'lectura',]$percent_estudiantes <- a_nivel_terce[a_nivel_terce$tipo == 'lectura',]$puntaje_estandar / a[a$tipo == 'lectura',]$puntaje_estandar
-a_nivel_terce[a_nivel_terce$tipo == 'matematica',]$percent_estudiantes <- a_nivel_terce[a_nivel_terce$tipo == 'matematica',]$puntaje_estandar / a[a$tipo == 'matematica',]$puntaje_estandar
-a_nivel_terce[a_nivel_terce$tipo == 'ciencias',]$percent_estudiantes <- a_nivel_terce[a_nivel_terce$tipo == 'ciencias',]$puntaje_estandar / a[a$tipo == 'ciencias',]$puntaje_estandar
-
-#serce
-sm6 <- read.spss('./data/serce/m6.sav', to.data.frame=T)
-sc6 <- read.spss('./data/serce/c6.sav', to.data.frame=T)
-sl6 <- read.spss('./data/serce/l6.sav', to.data.frame=T)
-
-sm6 <- sm6[,c("id_alumno","PUNTAJE_ESTANDAR_FINAL","nivel","AdmRur","pais_num")]
-sl6 <- sl6[,c("id_alumno","PUNTAJE_ESTANDAR_FINAL","nivel","AdmRur","pais_num")]
-sc6 <- sc6[,c("id_alumno","PUNTAJE_ESTANDAR_FINAL","nivel","AdmRur","pais_num")]
-
-sm6$tipo <- 'matematica'
-sl6$tipo <- 'lectura'
-sc6$tipo <- 'ciencias'
-s6 <- rbind.fill(sm6,sl6,sc6)
-s6 <- s6[s6$pais_num == "Panam\xe1",]
-s6[s6$nivel == 'Debajo de I',]$nivel <- "I"
-
-a <- aggregate(PUNTAJE_ESTANDAR_FINAL ~ tipo, s6, length)
-a_nivel_serce <- aggregate(PUNTAJE_ESTANDAR_FINAL ~ nivel + tipo, s6, length)
-
-a_nivel_serce$percent_estudiantes <- 0
-
-a_nivel_serce[a_nivel_serce$tipo == 'lectura',]$percent_estudiantes <- a_nivel_serce[a_nivel_serce$tipo == 'lectura',]$PUNTAJE_ESTANDAR_FINAL / a[a$tipo == 'lectura',]$PUNTAJE_ESTANDAR_FINAL
-a_nivel_serce[a_nivel_serce$tipo == 'matematica',]$percent_estudiantes <- a_nivel_serce[a_nivel_serce$tipo == 'matematica',]$PUNTAJE_ESTANDAR_FINAL / a[a$tipo == 'matematica',]$PUNTAJE_ESTANDAR_FINAL
-a_nivel_serce[a_nivel_serce$tipo == 'ciencias',]$percent_estudiantes <- a_nivel_serce[a_nivel_serce$tipo == 'ciencias',]$PUNTAJE_ESTANDAR_FINAL / a[a$tipo == 'ciencias',]$PUNTAJE_ESTANDAR_FINAL
-
-
-a_nivel_terce$nivel <- str_trim(as.character(a_nivel_terce$nivel))
-a_nivel_serce$nivel <- str_trim(as.character(a_nivel_serce$nivel))
-a_nivel_serce$examen <- 'serce'
-a_nivel_terce$examen <- 'terce'
-
-a_nivel <- rbind.fill(a_nivel_serce,a_nivel_terce)
-
-
-a_nivel$nivel <- as.factor(a_nivel$nivel)
-a_nivel$examen <- as.factor(a_nivel$examen)
-levels(a_nivel$examen) <- c('2006','2013')
-
-ggplot(a_nivel, aes(x=nivel, y=percent_estudiantes, fill=examen)) + geom_bar(stat='identity', position="dodge") + scale_y_continuous(labels = percent) + facet_grid( . ~ examen) + xlab('') + ylab('') + ggtitle('Porcentaje de Estudiantes por Nivel (Panama)') + facet_grid( . ~ tipo )
-```
-
-```{r serce_terce_2, fig.width=12, fig.height=6, echo=F, message=F, warning=F}
-ggplot(a_nivel, aes(x=examen, y=percent_estudiantes, fill=nivel)) + geom_bar(stat='identity') + scale_y_continuous(labels = percent) + facet_grid( . ~ examen) + xlab('') + ylab('') + ggtitle('Porcentaje de Estudiantes por Nivel (Panama)') + facet_grid( . ~ tipo )
+ggplot(a[a$grado == 6,], aes(x=nivel,y=dist,fill=countryp)) + geom_bar(stat="identity", position=position_dodge(), colour="black") + ggtitle("Cantidad de Estudiantes por Nivel (6to Grado)") + facet_grid(tipo ~ .) + scale_fill_brewer(palette="Spectral")
 ```
 
 ## 6 Características de los resultados en Panamá
@@ -339,14 +267,11 @@ Las figuras [No. PTJ POR GNR] y [No. STD DEV GNR] comparan los puntajes promedio
 [JEV2IBG: como procesaste aquellos que respondieron N/A]
 
 
-[JEV2IBG: título "Puntaje promedio comparado entre géneros"]
 [JEV2IBG: cambiar la leyenda del eje Y a "Puntaje promedio"]
 [JEV2IBG: cambiar la leyenda del eje X a "Género"] 
 [JEV2IBG: eliminar del margen derecho la etiqueta "DQASIT02"] 
 
 ```{r demo_genero_puntaje, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-qa6 <- read.spss('./data/Alumnos/QA6.SAV', to.data.frame=T)
-qa6 <- qa6[qa6$country == 'PAN',]
 qa6$DQA6IT02 <- as.factor(qa6$DQA6IT02)
 
 genero <- merge(p6,qa6,by='idstud')
@@ -354,16 +279,12 @@ a <- aggregate(puntaje_estandar ~ DQA6IT02, genero, mean)
 a$dif <- (a$puntaje_estandar - mean(p6$puntaje_estandar,na.rm=T))/sd(p6$puntaje_estandar,na.rm=T)
 levels(a$DQA6IT02) <- c("Niña","Niño")
 
-ggplot(a, aes(x=DQA6IT02,y=puntaje_estandar,fill=DQA6IT02)) + geom_bar(stat='identity')
+ggplot(a, aes(x=DQA6IT02,y=puntaje_estandar,fill=DQA6IT02)) + geom_bar(stat='identity') + ggtitle("Puntaje promedio comparado entre géneros") + ylab("Puntaje promedio") + xlab("Género") + scale_fill_discrete(guide=F)
 ```
-[JEV2IBG: título "Diferencia diminuta de puntaje promedio a favor de las niñas"]
 [JEV2IBG: esta gráfica debería ser una sola barra de valores positivos a favor de las niñas, indicando la diferencia entre el puntaje de niñas menos el de niños expresada en desviaciones estándar]
-[JEV2IBG: cambiar la leyenda del eje Y a "Desviaciones estandar"]
-[JEV2IBG: cambiar la leyenda del eje X a "Diferencia"] 
-[JEV2IBG: eliminar del margen derecho la etiqueta "DQASIT02"] 
 
 ```{r demo_genero_puntaje_desv, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-ggplot(a, aes(x=DQA6IT02,y=dif,fill=DQA6IT02)) + geom_bar(stat='identity') + ggtitle('Standard Deviation from Mean')
+ggplot(a, aes(x=DQA6IT02,y=dif,fill=DQA6IT02)) + geom_bar(stat='identity') + ggtitle('Diferencia diminuta de puntaje promedio a favor de las niñas') + ylab("Desviaciones estandar") + xlab("Diferencia")+ scale_fill_discrete(guide=F)
 ```
 
 ### 6.2 Logros de grupos originarios
@@ -378,16 +299,14 @@ Los alumnos que se reconocen como miembros de etnias originarias logran menor pu
 [JEV2IBG: como procesaste aquellos que respondieron N/A]
 
 ```{r demo_etnia_puntaje, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-qa6 <- read.spss('./data/Alumnos/QA6.SAV', to.data.frame=T)
-qa6 <- qa6[qa6$country == 'PAN',]
 qa6$DQA6IT06 <- as.factor(qa6$DQA6IT06)
 
 genero <- merge(p6,qa6,by='idstud')
 a <- aggregate(puntaje_estandar ~ DQA6IT06, genero, mean)
 a$dif <- (a$puntaje_estandar - mean(p6$puntaje_estandar,na.rm=T))/sd(p6$puntaje_estandar,na.rm=T)
-levels(a$DQA6IT06) <- c("No Indigena","Etnia Indigena")
+levels(a$DQA6IT06) <- c("No originarios","Originarios")
 
-ggplot(a, aes(x=DQA6IT06,y=puntaje_estandar,fill=DQA6IT06)) + geom_bar(stat='identity')
+ggplot(a, aes(x=DQA6IT06,y=puntaje_estandar,fill=DQA6IT06)) + geom_bar(stat='identity') + ggtitle("Puntaje promedio comparado según pertenencia a grupos originarios") + ylab("Puntaje promedio") + xlab("Etnia") + scale_fill_discrete(guide=F)
 ```
 [JEV2IBG: título "Diferencia de puntaje promedio desfavorece a los grupos originarios"]
 [JEV2IBG: esta gráfica debería ser una sola barra de valores negativos en contra  de los grupos originarios, indicando la diferencia entre el puntaje de originarios menos el de los no originarios expresada en desviaciones estándar]
@@ -448,23 +367,7 @@ Son características o circumstancias cuantificables que podrían mostrar relaci
 [JEV2IBG: esta grafica la podemos suprimir porque la siguiente cuenta la misma historia en más detalle]
 
 ```{r puntaje_INFRAD, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-# load sexto grado puntajes
-pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
-pc6 <- read.spss('./data/Puntajes_Alumnos/PC6_all_TERCE.sav', to.data.frame=T)
-pl6 <- read.spss('./data/Puntajes_Alumnos/PL6_all_TERCE.sav', to.data.frame=T)
-
-pm6 <- pm6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
-pl6 <- pl6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
-pc6 <- pc6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
-
-# merge matematica, lectura y ciencias
-pm6$tipo <- 'matematica'
-pl6$tipo <- 'lectura'
-pc6$tipo <- 'ciencias'
 p6 <- rbind.fill(pm6,pl6,pc6)
-p6$promedio_global <- mean(p6$puntaje_estandar, na.rm=T)
-p6$sd_global <- sd(p6$puntaje_estandar, na.rm=T)
-
 p6 <- p6[p6$country == 'PAN',]
 
 # load factores alumnos
@@ -495,70 +398,7 @@ ggplot(m, aes(x=INFRAD,y=puntaje_estandar)) + geom_point(alpha=0.7) + geom_smoot
 Los logros de aprendizaje, evaluados a través de los puntajes Terce, muestran una relación clara con La infraestructura de la escuela.  Esto por si solo no permite concluir que una mejor infraestructura genera mejores logros; por ejemplo, una mejor situación socioeconómica y cultural da la oportunidad de asistir a una mejor escuela tanto en infraestructura como en eficacia, sin que sea claro cual es el factor principal que logra esa eficacia. Comprender la relación entre infraestructura y logros requiere mayor análisis para determinar hasta que punto la infraestructura influye en los logros. 
 
 
-```{r puntaje_INFRAD_rd, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-# load sexto grado puntajes
-pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
-pc6 <- read.spss('./data/Puntajes_Alumnos/PC6_all_TERCE.sav', to.data.frame=T)
-pl6 <- read.spss('./data/Puntajes_Alumnos/PL6_all_TERCE.sav', to.data.frame=T)
-
-pm6 <- pm6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
-pl6 <- pl6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
-pc6 <- pc6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
-
-# merge matematica, lectura y ciencias
-pm6$tipo <- 'matematica'
-pl6$tipo <- 'lectura'
-pc6$tipo <- 'ciencias'
-p6 <- rbind.fill(pm6,pl6,pc6)
-p6$promedio_global <- mean(p6$puntaje_estandar, na.rm=T)
-p6$sd_global <- sd(p6$puntaje_estandar, na.rm=T)
-
-p6 <- p6[p6$country == 'PAN',]
-
-# load factores alumnos
-qd <- read.spss('./data/Directores/QD6.SAV', to.data.frame=T)
-qd <- qd[qd$country == 'PAN',]
-
-qd$dependencia <- as.factor(qd$dependencia)
-qd$ruralidad <- as.factor(qd$ruralidad)
-levels(qd$dependencia) <- c("Oficial","Particular")
-levels(qd$ruralidad) <- c("Urbano","Rural")
-
-pe <- merge(p6,qd,by='idschool')
-escuela_tipo <- function(r,d) { if(r == 'Urbano' & d == 'Particular') { return(0) } else if (r == 'Urbano' & d == 'Oficial') { return(1) } else if (r == 'Rural' & d == 'Particular') {return(2)} else {return(3)}}
-pe$rd <- as.factor(mapply(escuela_tipo, pe$ruralidad, pe$dependencia))
-levels(pe$rd) <- c("Urbano/Particular", "Urbano/Oficial", "Rural/Particular", "Rural/Oficial")
-
-mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
-mean_infrad_school <- aggregate(INFRAD ~ idschool, qd, mean)
-m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
-
-ggplot(m, aes(x=INFRAD,y=puntaje_estandar,color=rd)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice de infraestructura de la escuela") + ylab("Puntaje Promedio por Escuela")
-```
-
-[JEV2IBG: esta grafica la podemos suprimir porque la siguiente cuenta la misma historia en más detalle]
-
-
 ```{r puntaje_VIOLEND, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-# load sexto grado puntajes
-pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
-pc6 <- read.spss('./data/Puntajes_Alumnos/PC6_all_TERCE.sav', to.data.frame=T)
-pl6 <- read.spss('./data/Puntajes_Alumnos/PL6_all_TERCE.sav', to.data.frame=T)
-
-pm6 <- pm6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
-pl6 <- pl6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
-pc6 <- pc6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
-
-# merge matematica, lectura y ciencias
-pm6$tipo <- 'matematica'
-pl6$tipo <- 'lectura'
-pc6$tipo <- 'ciencias'
-p6 <- rbind.fill(pm6,pl6,pc6)
-p6$promedio_global <- mean(p6$puntaje_estandar, na.rm=T)
-p6$sd_global <- sd(p6$puntaje_estandar, na.rm=T)
-
-p6 <- p6[p6$country == 'PAN',]
-
 # load factores alumnos
 qd <- read.spss('./data/Directores/QD6.SAV', to.data.frame=T)
 qd <- qd[qd$country == 'PAN',]
@@ -586,68 +426,7 @@ ggplot(m, aes(x=VIOLEND,y=puntaje_estandar)) + geom_point(alpha=0.7) + geom_smoo
 ```
 La figura siguiente ilustra que no se ve una relación clara entre la violencia del entorno escolar y los logros de aprendizaje.   
 
-```{r puntaje_VIOLEND_rd, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-# load sexto grado puntajes
-pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
-pc6 <- read.spss('./data/Puntajes_Alumnos/PC6_all_TERCE.sav', to.data.frame=T)
-pl6 <- read.spss('./data/Puntajes_Alumnos/PL6_all_TERCE.sav', to.data.frame=T)
-
-pm6 <- pm6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
-pl6 <- pl6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
-pc6 <- pc6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
-
-# merge matematica, lectura y ciencias
-pm6$tipo <- 'matematica'
-pl6$tipo <- 'lectura'
-pc6$tipo <- 'ciencias'
-p6 <- rbind.fill(pm6,pl6,pc6)
-p6$promedio_global <- mean(p6$puntaje_estandar, na.rm=T)
-p6$sd_global <- sd(p6$puntaje_estandar, na.rm=T)
-
-p6 <- p6[p6$country == 'PAN',]
-
-# load factores alumnos
-qd <- read.spss('./data/Directores/QD6.SAV', to.data.frame=T)
-qd <- qd[qd$country == 'PAN',]
-
-qd$dependencia <- as.factor(qd$dependencia)
-qd$ruralidad <- as.factor(qd$ruralidad)
-levels(qd$dependencia) <- c("Oficial","Particular")
-levels(qd$ruralidad) <- c("Urbano","Rural")
-
-pe <- merge(p6,qd,by='idschool')
-escuela_tipo <- function(r,d) { if(r == 'Urbano' & d == 'Particular') { return(0) } else if (r == 'Urbano' & d == 'Oficial') { return(1) } else if (r == 'Rural' & d == 'Particular') {return(2)} else {return(3)}}
-pe$rd <- as.factor(mapply(escuela_tipo, pe$ruralidad, pe$dependencia))
-levels(pe$rd) <- c("Urbano/Particular", "Urbano/Oficial", "Rural/Particular", "Rural/Oficial")
-
-mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
-mean_infrad_school <- aggregate(VIOLEND ~ idschool, qd, mean)
-m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
-
-ggplot(m, aes(x=VIOLEND,y=puntaje_estandar,color=rd)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice de violencia en el entorno de la escuela") + ylab("Puntaje Promedio por Escuela")
-```
-
-[JEV2IBG: esta grafica la podemos suprimir porque la siguiente cuenta la misma historia en más detalle]
-
 ```{r puntaje_CSOCIALD, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-# load sexto grado puntajes
-pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
-pc6 <- read.spss('./data/Puntajes_Alumnos/PC6_all_TERCE.sav', to.data.frame=T)
-pl6 <- read.spss('./data/Puntajes_Alumnos/PL6_all_TERCE.sav', to.data.frame=T)
-
-pm6 <- pm6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
-pl6 <- pl6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
-pc6 <- pc6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
-
-# merge matematica, lectura y ciencias
-pm6$tipo <- 'matematica'
-pl6$tipo <- 'lectura'
-pc6$tipo <- 'ciencias'
-p6 <- rbind.fill(pm6,pl6,pc6)
-p6$promedio_global <- mean(p6$puntaje_estandar, na.rm=T)
-p6$sd_global <- sd(p6$puntaje_estandar, na.rm=T)
-
-p6 <- p6[p6$country == 'PAN',]
 
 # load factores alumnos
 qd <- read.spss('./data/Directores/QD6.SAV', to.data.frame=T)
@@ -676,68 +455,7 @@ ggplot(m, aes(x=CSOCIALD,y=puntaje_estandar)) + geom_point(alpha=0.7) + geom_smo
 ```
 Tampoco se ve una relación clara entre el capital social en el entorno escolar y los logros de aprendizaje. 
 
-```{r puntaje_CSOCIALD_rd, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-# load sexto grado puntajes
-pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
-pc6 <- read.spss('./data/Puntajes_Alumnos/PC6_all_TERCE.sav', to.data.frame=T)
-pl6 <- read.spss('./data/Puntajes_Alumnos/PL6_all_TERCE.sav', to.data.frame=T)
-
-pm6 <- pm6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
-pl6 <- pl6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
-pc6 <- pc6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
-
-# merge matematica, lectura y ciencias
-pm6$tipo <- 'matematica'
-pl6$tipo <- 'lectura'
-pc6$tipo <- 'ciencias'
-p6 <- rbind.fill(pm6,pl6,pc6)
-p6$promedio_global <- mean(p6$puntaje_estandar, na.rm=T)
-p6$sd_global <- sd(p6$puntaje_estandar, na.rm=T)
-
-p6 <- p6[p6$country == 'PAN',]
-
-# load factores alumnos
-qd <- read.spss('./data/Directores/QD6.SAV', to.data.frame=T)
-qd <- qd[qd$country == 'PAN',]
-
-qd$dependencia <- as.factor(qd$dependencia)
-qd$ruralidad <- as.factor(qd$ruralidad)
-levels(qd$dependencia) <- c("Oficial","Particular")
-levels(qd$ruralidad) <- c("Urbano","Rural")
-
-pe <- merge(p6,qd,by='idschool')
-escuela_tipo <- function(r,d) { if(r == 'Urbano' & d == 'Particular') { return(0) } else if (r == 'Urbano' & d == 'Oficial') { return(1) } else if (r == 'Rural' & d == 'Particular') {return(2)} else {return(3)}}
-pe$rd <- as.factor(mapply(escuela_tipo, pe$ruralidad, pe$dependencia))
-levels(pe$rd) <- c("Urbano/Particular", "Urbano/Oficial", "Rural/Particular", "Rural/Oficial")
-
-mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
-mean_infrad_school <- aggregate(CSOCIALD ~ idschool, qd, mean)
-m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
-
-ggplot(m, aes(x=CSOCIALD,y=puntaje_estandar,color=rd)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice del capital social en el entorno de la escuela") + ylab("Puntaje Promedio por Escuela")
-```
-[JEV2IBG: esta grafica la podemos suprimir porque la siguiente cuenta la misma historia en más detalle]
-
 ```{r puntaje_AUTOADD, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-# load sexto grado puntajes
-pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
-pc6 <- read.spss('./data/Puntajes_Alumnos/PC6_all_TERCE.sav', to.data.frame=T)
-pl6 <- read.spss('./data/Puntajes_Alumnos/PL6_all_TERCE.sav', to.data.frame=T)
-
-pm6 <- pm6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
-pl6 <- pl6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
-pc6 <- pc6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
-
-# merge matematica, lectura y ciencias
-pm6$tipo <- 'matematica'
-pl6$tipo <- 'lectura'
-pc6$tipo <- 'ciencias'
-p6 <- rbind.fill(pm6,pl6,pc6)
-p6$promedio_global <- mean(p6$puntaje_estandar, na.rm=T)
-p6$sd_global <- sd(p6$puntaje_estandar, na.rm=T)
-
-p6 <- p6[p6$country == 'PAN',]
-
 # load factores alumnos
 qd <- read.spss('./data/Directores/QD6.SAV', to.data.frame=T)
 qd <- qd[qd$country == 'PAN',]
@@ -765,69 +483,7 @@ ggplot(m, aes(x=AUTOADD,y=puntaje_estandar)) + geom_point(alpha=0.7) + geom_smoo
 ```
 Sí se nota una relación entre la autonimía administrativa de la escuela y los logros de aprendizaje.  [JEV2IBG: creo que en esta figura el signo del indice de autonomiase invirtio: pensaria que las escuelas particulares tienen mas autonomia.  Sera un indice de "falta de autonomia"?]
 
-```{r puntaje_AUTOADD_rd, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-# load sexto grado puntajes
-pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
-pc6 <- read.spss('./data/Puntajes_Alumnos/PC6_all_TERCE.sav', to.data.frame=T)
-pl6 <- read.spss('./data/Puntajes_Alumnos/PL6_all_TERCE.sav', to.data.frame=T)
-
-pm6 <- pm6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
-pl6 <- pl6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
-pc6 <- pc6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
-
-# merge matematica, lectura y ciencias
-pm6$tipo <- 'matematica'
-pl6$tipo <- 'lectura'
-pc6$tipo <- 'ciencias'
-p6 <- rbind.fill(pm6,pl6,pc6)
-p6$promedio_global <- mean(p6$puntaje_estandar, na.rm=T)
-p6$sd_global <- sd(p6$puntaje_estandar, na.rm=T)
-
-p6 <- p6[p6$country == 'PAN',]
-
-# load factores alumnos
-qd <- read.spss('./data/Directores/QD6.SAV', to.data.frame=T)
-qd <- qd[qd$country == 'PAN',]
-
-qd$dependencia <- as.factor(qd$dependencia)
-qd$ruralidad <- as.factor(qd$ruralidad)
-levels(qd$dependencia) <- c("Oficial","Particular")
-levels(qd$ruralidad) <- c("Urbano","Rural")
-
-pe <- merge(p6,qd,by='idschool')
-escuela_tipo <- function(r,d) { if(r == 'Urbano' & d == 'Particular') { return(0) } else if (r == 'Urbano' & d == 'Oficial') { return(1) } else if (r == 'Rural' & d == 'Particular') {return(2)} else {return(3)}}
-pe$rd <- as.factor(mapply(escuela_tipo, pe$ruralidad, pe$dependencia))
-levels(pe$rd) <- c("Urbano/Particular", "Urbano/Oficial", "Rural/Particular", "Rural/Oficial")
-
-mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
-mean_infrad_school <- aggregate(AUTOADD ~ idschool, qd, mean)
-m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
-
-ggplot(m, aes(x=AUTOADD,y=puntaje_estandar,color=rd)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice de autonomía administrativa de la escuela") + ylab("Puntaje Promedio por Escuela")
-```
-
-[JEV2IBG: esta grafica la podemos suprimir porque la siguiente cuenta la misma historia en más detalle]
-
 ```{r puntaje_AUTOACD, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-# load sexto grado puntajes
-pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
-pc6 <- read.spss('./data/Puntajes_Alumnos/PC6_all_TERCE.sav', to.data.frame=T)
-pl6 <- read.spss('./data/Puntajes_Alumnos/PL6_all_TERCE.sav', to.data.frame=T)
-
-pm6 <- pm6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
-pl6 <- pl6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
-pc6 <- pc6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
-
-# merge matematica, lectura y ciencias
-pm6$tipo <- 'matematica'
-pl6$tipo <- 'lectura'
-pc6$tipo <- 'ciencias'
-p6 <- rbind.fill(pm6,pl6,pc6)
-p6$promedio_global <- mean(p6$puntaje_estandar, na.rm=T)
-p6$sd_global <- sd(p6$puntaje_estandar, na.rm=T)
-
-p6 <- p6[p6$country == 'PAN',]
-
 # load factores alumnos
 qd <- read.spss('./data/Directores/QD6.SAV', to.data.frame=T)
 qd <- qd[qd$country == 'PAN',]
@@ -855,68 +511,7 @@ ggplot(m, aes(x=AUTOACD,y=puntaje_estandar)) + geom_point(alpha=0.7) + geom_smoo
 ```
 Hay algún grado de relación entre la autonomía académica y los logros de aprendizaje.   [JEV2IBG: tambien pienso que se invirtio el signo del indice de autonomia academica]
 
-```{r puntaje_AUTOACD_rd, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-# load sexto grado puntajes
-pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
-pc6 <- read.spss('./data/Puntajes_Alumnos/PC6_all_TERCE.sav', to.data.frame=T)
-pl6 <- read.spss('./data/Puntajes_Alumnos/PL6_all_TERCE.sav', to.data.frame=T)
-
-pm6 <- pm6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
-pl6 <- pl6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
-pc6 <- pc6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
-
-# merge matematica, lectura y ciencias
-pm6$tipo <- 'matematica'
-pl6$tipo <- 'lectura'
-pc6$tipo <- 'ciencias'
-p6 <- rbind.fill(pm6,pl6,pc6)
-p6$promedio_global <- mean(p6$puntaje_estandar, na.rm=T)
-p6$sd_global <- sd(p6$puntaje_estandar, na.rm=T)
-
-p6 <- p6[p6$country == 'PAN',]
-
-# load factores alumnos
-qd <- read.spss('./data/Directores/QD6.SAV', to.data.frame=T)
-qd <- qd[qd$country == 'PAN',]
-
-qd$dependencia <- as.factor(qd$dependencia)
-qd$ruralidad <- as.factor(qd$ruralidad)
-levels(qd$dependencia) <- c("Oficial","Particular")
-levels(qd$ruralidad) <- c("Urbano","Rural")
-
-pe <- merge(p6,qd,by='idschool')
-escuela_tipo <- function(r,d) { if(r == 'Urbano' & d == 'Particular') { return(0) } else if (r == 'Urbano' & d == 'Oficial') { return(1) } else if (r == 'Rural' & d == 'Particular') {return(2)} else {return(3)}}
-pe$rd <- as.factor(mapply(escuela_tipo, pe$ruralidad, pe$dependencia))
-levels(pe$rd) <- c("Urbano/Particular", "Urbano/Oficial", "Rural/Particular", "Rural/Oficial")
-
-mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
-mean_infrad_school <- aggregate(AUTOACD ~ idschool, qd, mean)
-m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
-
-ggplot(m, aes(x=AUTOACD,y=puntaje_estandar,color=rd)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice de autonomía académica de la escuela") + ylab("Puntaje Promedio por Escuela")
-```
-[JEV2IBG: esta grafica la podemos suprimir porque la siguiente cuenta la misma historia en más detalle]
-
 ```{r puntaje_CLAMBLD, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-# load sexto grado puntajes
-pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
-pc6 <- read.spss('./data/Puntajes_Alumnos/PC6_all_TERCE.sav', to.data.frame=T)
-pl6 <- read.spss('./data/Puntajes_Alumnos/PL6_all_TERCE.sav', to.data.frame=T)
-
-pm6 <- pm6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
-pl6 <- pl6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
-pc6 <- pc6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
-
-# merge matematica, lectura y ciencias
-pm6$tipo <- 'matematica'
-pl6$tipo <- 'lectura'
-pc6$tipo <- 'ciencias'
-p6 <- rbind.fill(pm6,pl6,pc6)
-p6$promedio_global <- mean(p6$puntaje_estandar, na.rm=T)
-p6$sd_global <- sd(p6$puntaje_estandar, na.rm=T)
-
-p6 <- p6[p6$country == 'PAN',]
-
 # load factores alumnos
 qd <- read.spss('./data/Directores/QD6.SAV', to.data.frame=T)
 qd <- qd[qd$country == 'PAN',]
@@ -943,47 +538,6 @@ m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
 ggplot(m, aes(x=CLAMBLD,y=puntaje_estandar)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice de calidad de ambiente laboral en la escuela (Director)") + ylab("Puntaje Promedio por Escuela")
 ```
 Hay relación clara entre la calidad de ambiente laboral en la escuela (Director) y los logros de aprendizaje. 
-
-```{r puntaje_CLAMBLD_rd, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-# load sexto grado puntajes
-pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
-pc6 <- read.spss('./data/Puntajes_Alumnos/PC6_all_TERCE.sav', to.data.frame=T)
-pl6 <- read.spss('./data/Puntajes_Alumnos/PL6_all_TERCE.sav', to.data.frame=T)
-
-pm6 <- pm6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
-pl6 <- pl6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
-pc6 <- pc6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
-
-# merge matematica, lectura y ciencias
-pm6$tipo <- 'matematica'
-pl6$tipo <- 'lectura'
-pc6$tipo <- 'ciencias'
-p6 <- rbind.fill(pm6,pl6,pc6)
-p6$promedio_global <- mean(p6$puntaje_estandar, na.rm=T)
-p6$sd_global <- sd(p6$puntaje_estandar, na.rm=T)
-
-p6 <- p6[p6$country == 'PAN',]
-
-# load factores alumnos
-qd <- read.spss('./data/Directores/QD6.SAV', to.data.frame=T)
-qd <- qd[qd$country == 'PAN',]
-
-qd$dependencia <- as.factor(qd$dependencia)
-qd$ruralidad <- as.factor(qd$ruralidad)
-levels(qd$dependencia) <- c("Oficial","Particular")
-levels(qd$ruralidad) <- c("Urbano","Rural")
-
-pe <- merge(p6,qd,by='idschool')
-escuela_tipo <- function(r,d) { if(r == 'Urbano' & d == 'Particular') { return(0) } else if (r == 'Urbano' & d == 'Oficial') { return(1) } else if (r == 'Rural' & d == 'Particular') {return(2)} else {return(3)}}
-pe$rd <- as.factor(mapply(escuela_tipo, pe$ruralidad, pe$dependencia))
-levels(pe$rd) <- c("Urbano/Particular", "Urbano/Oficial", "Rural/Particular", "Rural/Oficial")
-
-mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
-mean_infrad_school <- aggregate(CLAMBLD ~ idschool, qd, mean)
-m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
-
-ggplot(m, aes(x=CLAMBLD,y=puntaje_estandar,color=rd)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice de calidad de ambiente laboral en la escuela (Director)") + ylab("Puntaje Promedio por Escuela")
-```
 
 ### 7.3 Factores Asociados de Profesores
 
@@ -1093,7 +647,7 @@ ggplot(a, aes(x=DQPIT04,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) 
 
 ```{r puntaje_prof_DQPIT05, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 a <- aggregate(puntaje_estandar ~ idtealin + tipo + DQPIT05, p6prof, mean)
-ggplot(a, aes(x=DQPIT05,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + xlab("") + ylab("")
+ggplot(a, aes(x=DQPIT05,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + xlab("") + ylab("") + ggtitle("¿Ha recibido usted alguna vez un incentivo económico por desempeño docente?")
 ```
 
 ```{r puntaje_prof_DQPIT07, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
@@ -1156,7 +710,7 @@ p6prof$DQPIT14 <- as.factor(p6prof$DQPIT14)
 levels(p6prof$DQPIT14) <- c("No","Si")
 a <- aggregate(puntaje_estandar ~ DQPIT14 + tipo + DQPIT14, p6prof, mean)
 a$dif <- (a$puntaje_estandar - mean(p6prof$puntaje_estandar,na.rm=T))/sd(p6prof$puntaje_estandar,na.rm=T)
-ggplot(a, aes(x=tipo,y=dif,fill=DQPIT14)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('No he realizado ninguna actividad de perfeccionamiento')
+ggplot(a, aes(x=tipo,y=dif,fill=DQPIT14)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('¿Ha recibido usted alguna vez un incentivo económico por desempeño docente?')
 ```
 
 ### 7.4 Factores Asociados Familia

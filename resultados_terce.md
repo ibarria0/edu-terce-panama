@@ -74,25 +74,52 @@ Las dos figuras siguientes muestran la cantidad de estudiantes participantes por
 
 [JEV2IBG: usar como título "Número de estudiantes de sexto grado por edad"]
 
-![plot of chunk demo_genero_edad](figure/demo_genero_edad-1.png) 
-[GENERO PORCENTAJE FEM]% de los alumnos indicó ser niña y  [GENERO PORCENTAJE N/A]% no contestó o no supo responder.    
 
-[JEV2IBG: en los datos salen cuantos son realmente niñas y niños?   ...los lectores se preguntarán porqué no sabemos la cifra exacta si son estudiantes de Meduca.]
-[JEV2IBG: incluir título "Respuesta a la pertenencia de género"]
+```
+## Error in `$<-.data.frame`(`*tmp*`, "DQA6IT03", value = structure(integer(0), .Label = character(0), class = "factor")): replacement has 0 rows, data has 3775
+```
+
+```
+## Error in levels(qa6$DQA6IT03) <- c("No", "Si"): attempt to set an attribute on NULL
+```
+
+![plot of chunk demo_genero_edad](figure/demo_genero_edad-1.png) 
+
+
+|                | porcentaje|
+|:---------------|----------:|
+|10 años o menos |  0.5298013|
+|11 años         | 30.6754967|
+|12 años         | 46.6490066|
+|13 años         |  8.3973510|
+|14 años         |  3.0728477|
+|15 años o mas   |  1.5894040|
+|NA              |  0.0000000|
+|NA's            |  9.0860927|
+
 [JEV2IBG: podríamos usar porcentajes en el eje Y en lugar de cantidad?]
-[JEV2IBG: usar color azul para las barras en lugar de negro]
-[JEV2IBG: intentar barras más angostas en relación con el ancho de la figura: pienso que se ve "pesada"]
 
 ![plot of chunk demo_genelaro](figure/demo_genelaro-1.png) 
+
+
+|     | porcentaje|
+|:----|----------:|
+|Niña |  46.437086|
+|Niño |  44.476821|
+|NA's |   9.086093|
 [ORGNR PORCENTAJE AFIRMATIVO]% de los alumnos indicó pertenecer a alguna etnia "originaria" y [ORGNR PORCENTAJE N/A]% no contestó o no supo responder.   
 
-[JEV2IBG: incluir título "Respuesta a la pertenencia de etnia originaria"]
 [JEV2IBG: podríamos usar porcentajes en el eje Y en lugar de cantidad?]
 [JEV2IBG: agregar tílde al término "índigena" en la leyenda del eje X]
-[JEV2IBG: usar color azul para las barras en lugar de negro]
-[JEV2IBG: intentar barras más angostas en relación con el ancho de la figura: pienso que se ve "pesada"]
 
 ![plot of chunk etnia](figure/etnia-1.png) 
+
+
+|     | porcentajes|
+|:----|-----------:|
+|No   |    71.92053|
+|Si   |    11.65563|
+|NA's |    16.42384|
 
 
 ## 4. Comparacion con America Latina
@@ -126,15 +153,6 @@ Más relevante en primera instancia es saber si nuestros niños y niñas logran 
 [JEV2IBG: si es posible, usar colores menos intensos para las barras, especialmente el rojo (asusta ;)]
 
 ![plot of chunk niveles_barcharts](figure/niveles_barcharts-1.png) 
-   
-## 5 Comparacion del desempeño en el Terce (2013?) con el Serce (2006)
-### 5.1 Mejora en relación con los resultados serce, por materia
-
-[JEV2IBG: Al final, Gina dice que este informe debe ser solo del Terce.  Incluí texto referente al serce en la introducción.  Por tanto Eliminaremos esta seccion y correremos las secciones 6 en adelante.]    
-
-![plot of chunk serce_terce](figure/serce_terce-1.png) 
-
-![plot of chunk serce_terce_2](figure/serce_terce_2-1.png) 
 
 ## 6 Características de los resultados en Panamá
 ### 6.1 Logros por Genero 
@@ -147,17 +165,12 @@ Las figuras [No. PTJ POR GNR] y [No. STD DEV GNR] comparan los puntajes promedio
 [JEV2IBG: como procesaste aquellos que respondieron N/A]
 
 
-[JEV2IBG: título "Puntaje promedio comparado entre géneros"]
 [JEV2IBG: cambiar la leyenda del eje Y a "Puntaje promedio"]
 [JEV2IBG: cambiar la leyenda del eje X a "Género"] 
 [JEV2IBG: eliminar del margen derecho la etiqueta "DQASIT02"] 
 
 ![plot of chunk demo_genero_puntaje](figure/demo_genero_puntaje-1.png) 
-[JEV2IBG: título "Diferencia diminuta de puntaje promedio a favor de las niñas"]
 [JEV2IBG: esta gráfica debería ser una sola barra de valores positivos a favor de las niñas, indicando la diferencia entre el puntaje de niñas menos el de niños expresada en desviaciones estándar]
-[JEV2IBG: cambiar la leyenda del eje Y a "Desviaciones estandar"]
-[JEV2IBG: cambiar la leyenda del eje X a "Diferencia"] 
-[JEV2IBG: eliminar del margen derecho la etiqueta "DQASIT02"] 
 
 ![plot of chunk demo_genero_puntaje_desv](figure/demo_genero_puntaje_desv-1.png) 
 
@@ -222,41 +235,20 @@ Son características o circumstancias cuantificables que podrían mostrar relaci
 Los logros de aprendizaje, evaluados a través de los puntajes Terce, muestran una relación clara con La infraestructura de la escuela.  Esto por si solo no permite concluir que una mejor infraestructura genera mejores logros; por ejemplo, una mejor situación socioeconómica y cultural da la oportunidad de asistir a una mejor escuela tanto en infraestructura como en eficacia, sin que sea claro cual es el factor principal que logra esa eficacia. Comprender la relación entre infraestructura y logros requiere mayor análisis para determinar hasta que punto la infraestructura influye en los logros. 
 
 
-![plot of chunk puntaje_INFRAD_rd](figure/puntaje_INFRAD_rd-1.png) 
-
-[JEV2IBG: esta grafica la podemos suprimir porque la siguiente cuenta la misma historia en más detalle]
-
-
 ![plot of chunk puntaje_VIOLEND](figure/puntaje_VIOLEND-1.png) 
 La figura siguiente ilustra que no se ve una relación clara entre la violencia del entorno escolar y los logros de aprendizaje.   
-
-![plot of chunk puntaje_VIOLEND_rd](figure/puntaje_VIOLEND_rd-1.png) 
-
-[JEV2IBG: esta grafica la podemos suprimir porque la siguiente cuenta la misma historia en más detalle]
 
 ![plot of chunk puntaje_CSOCIALD](figure/puntaje_CSOCIALD-1.png) 
 Tampoco se ve una relación clara entre el capital social en el entorno escolar y los logros de aprendizaje. 
 
-![plot of chunk puntaje_CSOCIALD_rd](figure/puntaje_CSOCIALD_rd-1.png) 
-[JEV2IBG: esta grafica la podemos suprimir porque la siguiente cuenta la misma historia en más detalle]
-
 ![plot of chunk puntaje_AUTOADD](figure/puntaje_AUTOADD-1.png) 
 Sí se nota una relación entre la autonimía administrativa de la escuela y los logros de aprendizaje.  [JEV2IBG: creo que en esta figura el signo del indice de autonomiase invirtio: pensaria que las escuelas particulares tienen mas autonomia.  Sera un indice de "falta de autonomia"?]
-
-![plot of chunk puntaje_AUTOADD_rd](figure/puntaje_AUTOADD_rd-1.png) 
-
-[JEV2IBG: esta grafica la podemos suprimir porque la siguiente cuenta la misma historia en más detalle]
 
 ![plot of chunk puntaje_AUTOACD](figure/puntaje_AUTOACD-1.png) 
 Hay algún grado de relación entre la autonomía académica y los logros de aprendizaje.   [JEV2IBG: tambien pienso que se invirtio el signo del indice de autonomia academica]
 
-![plot of chunk puntaje_AUTOACD_rd](figure/puntaje_AUTOACD_rd-1.png) 
-[JEV2IBG: esta grafica la podemos suprimir porque la siguiente cuenta la misma historia en más detalle]
-
 ![plot of chunk puntaje_CLAMBLD](figure/puntaje_CLAMBLD-1.png) 
 Hay relación clara entre la calidad de ambiente laboral en la escuela (Director) y los logros de aprendizaje. 
-
-![plot of chunk puntaje_CLAMBLD_rd](figure/puntaje_CLAMBLD_rd-1.png) 
 
 ### 7.3 Factores Asociados de Profesores
 
