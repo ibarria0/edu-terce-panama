@@ -61,12 +61,12 @@ mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
 mean_isecf_school <- aggregate(ISECF ~ idschool, qf, mean)
 m <- merge(mean_school, mean_isecf_school, by=c('idschool'))
 
-ggplot(m, aes(x=ISECF,y=puntaje_estandar,color=rd,group=1,size=totalum)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice de estatus socioeconómico y cultural") + ylab("Puntaje Promedio por Escuela") + ggtitle('Logros de aprendizaje de escuelas particulares y oficiales, urbanas y rurales')
+ggplot(m, aes(x=ISECF,y=puntaje_estandar,color=rd,group=1,size=totalum)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice de estatus socioeconómico y cultural promedio de los alumnos de la escuela") + ylab("Puntaje promedio de los alumnos de la escuela") + ggtitle('Logros de aprendizaje por tipo de escuela')
 ```
 
-A pesar de las grandes diferencias, algunas escuelas oficiales rurales con bajo índice socioeconómico y cultural logran resultados superiores al promedio internacional e iguales al de las mejores escuelas oficiales urbanas.   Esas escuelas podrían aportarnos lecciones sobre como mejorar el desempeño de otras escuelas.   
+Más útil que lamentarnos por resultados débiles será analizarlos para mejorar. Por ejemplo, algunas escuelas oficiales rurales con bajo índice socioeconómico y cultural en la figura logran puntajes superiores al promedio internacional del Terce, equivalente a 700 puntos, e incluso mayores que las escuelas oficiales urbanas.   Estas escuelas podrían aportarnos lecciones importantes para el resto del sistema educativo.   
 
-En cuanto al desempeño comparativo, la figura siguiente [para sexto grado] es representativa y confirma la tendencia conocida de que países con mayor ingreso per cápita obtienen mejores puntajes promedio; sin embargo Panamá obtiene resultados por debajo de lo esperado.  Estos resultados son consistentes con otras pruebas internacionales en las que ha participado Panamá (pruebas Serce 2006 y Pisa 2009). Panamá puede y debe mejorar significativamente su desempeño.    
+En el contexto latinoamericano, Panamá obtiene resultados por debajo de lo esperado.  La figura 1.2 confirma la tendencia conocida de que los alumnos de países con mayor producto interno bruto per cápita obtienen mejores puntajes en promedio. La figura muestra que Panamá obtuvo 40 puntos menos de lo esperado para su PIB per cápita.   Estos resultados son consistentes con los resultados obtenidos en evaluaciones internacionales previas en las que ha participado Panamá: Serce 2006, Sineca 2008 y Pisa 2009. Panamá puede y debe mejorar significativamente sus logros de aprendizaje.    
 
 
 ```{r puntaje_gdp, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
@@ -77,7 +77,7 @@ gdp <- read.csv('./data/suplemental/gdp.csv')
 names(gdp) <- c("Country_Name","country","gdp_2013")
 m <- merge(p6,gdp,by="country")
 a <- aggregate( puntaje_estandar ~ country + gdp_2013, m, mean)
-ggplot(a, aes(x=gdp_2013, y=puntaje_estandar, fill=country, color=country, group=1)) + geom_point() + geom_smooth(method = "lm", se = F) + geom_text(aes(label=country)) + xlab("Producto (PIB) per cápita") + ylab("Puntaje Promedio") + ggtitle("Puntaje promedio según producto (PIB) per cápita por país, sexto grado") + scale_x_continuous(label=dollar)
+ggplot(a, aes(x=gdp_2013, y=puntaje_estandar, fill=country, color=country, group=1)) + geom_point() + geom_smooth(method = "lm", se = F) + geom_text(aes(label=country)) + xlab("Producto (PIB) per cápita") + ylab("Puntaje promedio") + ggtitle("Figura 1.2. Logros de aprendizaje en 6to grado según producto (PIB) per cápita por país") + scale_x_continuous(label=dollar)
 
 ```
 
