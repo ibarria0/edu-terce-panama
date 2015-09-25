@@ -86,22 +86,24 @@ ggplot(a, aes(x=gdp_2013, y=puntaje_estandar, fill=country, color=country, group
 
 La educación nacional debe servir como un gran equalizador hacia las mejores oportunidades de bienestar para todos, que renueve en cada generación las posibilidades de realización personal y de un país próspero sostenible.  
 
-Nuestro sistema educativo dista mucho de este ideal.   Afortunadamente es posible evaluar los logros del sistema con métodos científicos que permitan recomendaciones más confiables de como mejorar.   Una cultura que valora la información puede aprender de sus propios errores.    
+Nuestro sistema educativo dista mucho de este ideal.   Afortunadamente es posible evaluar los logros del sistema con métodos científicos que permitan recomendaciones confiables de como mejorar.   Una cultura que valora la información puede aprender de sus propios errores.    
 
-El Terce cubre 15 países de América Latina, listados en el margen derecho de la figura 1.2, y la región de Nuevo León de México, omitida en la figura porque versa sobre países.  La evaluación cubrió las áreas de lectura de tercero y sexto grado, matemáticas de tercero y sexto grado, y ciencias de sexto grado.   También incluyó una nueva prueba de escritura, que será sujeto de divulgación posterior.  
+Evaluaciones como el Terce, basadas en pruebas estandarizadas, tienen limitaciones propias del esquema de items, o preguntas que utilizan, y están sujetas a ser perfeccionadas, pero sirven como insumos valiosos para las políticas educativas cuando son analizados en contexto y junto con información relevante apropiada.    
 
-Las pruebas estandarizadas como el Terce son técnicas sujetas a ser perfeccionadas, con limitaciones propias del esquema de items o preguntas que utilizan.  Sin embargo los resultados de estas pruebas son insumos valiosos para las políticas educativas cuando son analizados en contexto y junto con información relevante apropiada.    
+Esta es la segunda divulgación en torno al Terce. Este documento presenta sólo algunos de los aspectos sobresalientes, sin intentar ser exhaustivo, para lograr un documento más conciso y accesible.  Previamente en 2014, Unesco y Meduca divulgaron la comparación de resultados entre el Segundo Estudio Regional Comparativo y Explicativo (Serce, 2006) y el Terce, 2013.   
 
-La muestra de escuelas por país es representativa pero en el caso de Panamá no estuvo seleccionada para comparar resultados entre provincias y comarcas, por ejemplo.  Este documento presenta algunos de los aspectos más sobreslientes de la evaluación para contribuir al debate, sin intentar ser exhaustivo.     
-
-Esta es la segunda divulgación en torno al Terce.   Previamente, en [diciembre?] 2014, Unesco y Meduca divulgaron la comparación de resultados entre el Segundo Estudio Regional Comparativo y Explicativo, Serce, 2006, y el Terce, 2013. Todo análisis serio del Terce (2013), Pisa (2009), Sineca ([2008?]) y Serce (2006) contribuirá a la mejora educativa del país.   
+Con esta divulgación Meduca invita a todos los interesados, especialmente aquellos familiarizados con métodos de evaluación educativa, a iniciar un gran movimiento de exploración de los datos educativos disponibles, especialmente los resultados de las evaluaciones Serce 2006, Sineca 2008, Pisa 2009 y Terce 2013.   
 
 ### 3. Terce y la participación de Panamá
 #### 3.1 ¿Qué es la evaluación Terce?
 
 El Laboratorio Latinoamericano de Evaluación de la Calidad de la Educación, Llece, es una organización con sede en Chile que  diseña y administra evaluaciones a nivel regional.  Terce es la tercera evaluación.   Cada país revisa y edita los ítems o preguntas de la evaluación para asegurar que son apropiadas para el contexto propio.     
 
-La muestra de alumnos se diseña  para poder contar con datos suficientes que permitan conclusiones confiables sobre las preguntas de interés.    Hay factores potencialmente relacionados con los logros de aprendizaje. La evaluación formula preguntas a los alumnos, docentes y hogares de cada alumno sobre el entorno y situación individual para poder explorar el impacto de estos factores.    Aquí solo presentamos una seleccón de los factores con efectos más interesantes, sin intentar profundizar en los resultados e implicaciones. 
+El Terce evaluó 15 países de América Latina, listados en el margen derecho de la figura 1.2, y la región de Nuevo León de México, omitida de la figura porque la información estándar del PIB utilizada sólo incluye países.  La evaluación cubrió las áreas de lectura de tercero y sexto grado, matemáticas de tercero y sexto grado, y ciencias de sexto grado.   También incluyó una nueva prueba de escritura que será sujeto de divulgación posterior.  
+
+La muestra de alumnos y escuelas por país es representativa, aunque la muestra que elaboró Panamá no fue diseñada para comparar algunos aspectos de interés como la comparación de resultados entre provincias o comarcas, por ejemplo.  Comprendemos que en el futuro debemos ampliar los aspectos que puedan ser explorados confiablemente en las evaluaciones educativas del país.    
+
+El Terce también incluye factores potencialmente relacionados con los logros de aprendizaje, conocidos como factores asociados. La evaluación formula preguntas a los alumnos, docentes y hogares de cada alumno sobre el entorno y situación individual para poder explorar el impacto de estos factores.    Aquí solo presentamos una selección de los factores asociados con efectos más interesantes, sin intentar profundizar en sus explicaciones o implicaciones pues esas conclusiones deben ser resultado de un debate académico riguroso más amplio. 
 
 #### 3.2 Características de las escuelas y alumnos participantes de Panamá
 
