@@ -106,15 +106,9 @@ Comparar resultados entre países es útil pero no lo principal. Es un error con
 
 Entre los países participantes Chile obtuvo el mejor resultado seguido de Costa Rica y México.  Costa Rica sirve de ejemplo que un país de escala y ubicación como la nuestra puede obtener mejores resultados.     Las figuras [NO. 3ero PTJ VS PIB/CAP] Y [NO. 6ero PTJ VS PIB/CAP] siguientes muestran que Panamá obtiene resulados inferiores a lo esperado para su producto interno bruto per cápita.  Estos resultados son consistentes con otras pruebas internacionales en las que ha participado Panamá (pruebas Serce 2006 y Pisa 2009). El efecto es más pronunciado para sexto grado que para tercer grado.   Parece razonable esperar que con la prioridad social necesaria, la riqueza nacional nos permita lograr al menos los resultados esperados.   
 
-[JEV2IBG: Repetir la figura 2 arriba pero para los resultados de tercer grado primero]
-[JEV2IBG: título "Puntaje promedio según producto (PIB) per cápita por país, tercer grado"]
-[JEV2IBG: verificar p minúscula y tílde en "país" en el título]
-[JEV2IBG: verificar que la leyenda del eje X dice "Producto (PIB) per cápita" y tílde en "cápita"]  
+![plot of chunk puntaje_gdp_3](figure/puntaje_gdp_3-1.png) 
 
-[JEV2IBG: Repetir la figura 2 (sexto grado)]
-[JEV2IBG: título "Puntaje promedio según producto (PIB) per cápita por país, sexto grado"]
-[JEV2IBG: verificar p minúscula y tílde en "país" en el título]
-[JEV2IBG: verificar que la leyenda del eje X dice "Producto (PIB) per cápita" y tílde en "cápita"]  
+![plot of chunk puntaje_gdp_6](figure/puntaje_gdp_6-1.png) 
 
 ### 4.2 Desempeño en logros de aprendizaje
 
@@ -159,11 +153,6 @@ Los alumnos que se reconocen como miembros de etnias originarias logran menor pu
 [JEV2IBG: como procesaste aquellos que respondieron N/A]
 
 ![plot of chunk demo_etnia_puntaje](figure/demo_etnia_puntaje-1.png) 
-[JEV2IBG: título "Diferencia de puntaje promedio desfavorece a los grupos originarios"]
-[JEV2IBG: esta gráfica debería ser una sola barra de valores negativos en contra  de los grupos originarios, indicando la diferencia entre el puntaje de originarios menos el de los no originarios expresada en desviaciones estándar]
-[JEV2IBG: cambiar la leyenda del eje Y a "Desviaciones estandar"]
-[JEV2IBG: cambiar la leyenda del eje X a "Diferencia"] 
-[JEV2IBG: eliminar del margen derecho la etiqueta "DQA6IT06"] 
 
 ![plot of chunk demo_etnia_puntaje_desv](figure/demo_etnia_puntaje_desv-1.png) 
 Adicionalmente, el índice socioeconómico y cultural muestra menor relación con el puntaje promedio obtenido para alumnos que se consideran miembros de grupos originarios que para aquellos que no.   Esto lo ilustra la figura [No. PTJ VS ISECF ORGN] en la que cada línea muestra la correspondencia entre puntaje promedio obtenido y el índice del alúmno.  La diferencia de puntaje entre alumnos de menor y mayor índices es más pronunciada para alumnos que se declaran no originarios.  
@@ -179,6 +168,8 @@ Adicionalmente, el índice socioeconómico y cultural muestra menor relación co
 Las oportunidades de educación y salud muestran un altísimo grado de influencia en el bienestar de un individuo. Cuándo los logros de aprendizaje dependen marcadamente del poder adquisitivo de una persona es difícil argumentar que la sociedad brinda oportunidades justas a todos sus residentes.  En Panamá, la diferencia de logros entre escuelas particulares, escuelas oficiales urbanas y escuelas oficiales rurales es muy marcada.   
 
 Las figuras [No. PTJ VS ISEC 3ero] y [No. PTJ VS ISEC 6to] muestran para cada escuela participante de Panamá el puntaje promedio obtenido por sus alumnos en el eje vertical y el índice socioeconómico y cultural promedio de sus alumnos en el eje horizontal. Las líneas representan el puntaje promedio de alumnos de todos los países, incluyendo Panamá, en la prueba Terce y el puntaje debajo del cual se define el nivel 1 de aprendizaje, considerado inadecuado para las situaciones de vida esperadas. [PORCENTAJE NIVEL 1]% de las niñas y niños obtuvieron puntajes correspondientes al nivel 1.   
+
+![plot of chunk puntaje_isecf_rd_3](figure/puntaje_isecf_rd_3-1.png) 
 
 [JEV2IBG: las 2 figuras aqui son las versiones de 3ero y 6to grado de la figura 1 en el resumen ejecutivo]
 [JEV2IBG: Pregunta: las figuras de puntaje vs isec por escuela pueden indcar un solo puntaje para definir el nivel 1 de todas las áreas de conocimiento, o el puntaje que define el nivel 1 cambia de área a área]
