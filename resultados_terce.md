@@ -131,8 +131,8 @@ Más relevante en primera instancia es saber si nuestros niños y niñas logran 
 
 ![plot of chunk niveles_barcharts](figure/niveles_barcharts-1.png) 
 
-## 6 Características de los resultados en Panamá
-### 6.1 Logros por Genero 
+## 5 Características de los resultados en Panamá
+### 5.1 Logros por Genero 
 
 Las niñas obtuvieron mejores resultados que los niños en lectura de tercer grado, sexto grado y en ciencias de sexto grado. En matemáticas, aunque las niñas obtuvieron mejor resultado, la diferencia es tan pequeña que no permite afirmar que sus logros de aprendizaje son mejores.   
 
@@ -147,7 +147,7 @@ Las figuras [No. PTJ POR GNR] y [No. STD DEV GNR] comparan los puntajes promedio
 
 ![plot of chunk demo_genero_puntaje_desv](figure/demo_genero_puntaje_desv-1.png) 
 
-### 6.2 Logros de grupos originarios
+### 5.2 Logros de grupos originarios
 
 Los alumnos que se reconocen como miembros de etnias originarias logran menor puntaje que los que no se consideran miembros.  Las figuras [No. PTJ POR ETN] y [No. STD DEV ETN] comparan los puntajes promedio y diferencia según si la alumna o alumno se reconoce o no como miembro de grupos originarios.    
 
@@ -174,7 +174,7 @@ Adicionalmente, el índice socioeconómico y cultural muestra menor relación co
 [JEV2IBG: eliminar del margen derecho la etiqueta "DQA6IT06"] 
 
 ![plot of chunk demo_etnia_puntaje_isecf](figure/demo_etnia_puntaje_isecf-1.png) 
-### 6.3 Logros según tipo de escuela
+### 5.3 Logros según tipo de escuela
 
 Las oportunidades de educación y salud muestran un altísimo grado de influencia en el bienestar de un individuo. Cuándo los logros de aprendizaje dependen marcadamente del poder adquisitivo de una persona es difícil argumentar que la sociedad brinda oportunidades justas a todos sus residentes.  En Panamá, la diferencia de logros entre escuelas particulares, escuelas oficiales urbanas y escuelas oficiales rurales es muy marcada.   
 
@@ -195,12 +195,12 @@ Una observación de suma importancia es que hay un grupo de escuelas oficiales r
 [JEV2IBG: cambiar la leyenda del eje X a "Índice socioeconómico y cultural"]
 [JEV2IBG: intentar incluir los niveles de aprendizaje, o al menos el nivel 1]
 
-## 7 Relacion entre desempeño y factores típicamente asociados al proceso de aprendizaje
-## 7.1 ¿Qué son factores asociados?
+## 6 Relacion entre desempeño y factores típicamente asociados al proceso de aprendizaje
+## 6.1 ¿Qué son factores asociados?
 
 Son características o circumstancias cuantificables que podrían mostrar relación con los logros de aprendizaje.  El que muestren relación no significa por si solo que sea garantía ni causa de los logros, pero sugiere que es conveniente explorar la relación.   
 
-## 7.2 Logros según factores asociados a la escuela
+## 6.2 Logros según factores asociados a la escuela
 
 [JEV2IBG: esta grafica la podemos suprimir porque la siguiente cuenta la misma historia en más detalle]
 
@@ -223,9 +223,9 @@ Hay algún grado de relación entre la autonomía académica y los logros de apr
 ![plot of chunk puntaje_CLAMBLD](figure/puntaje_CLAMBLD-1.png) 
 Hay relación clara entre la calidad de ambiente laboral en la escuela (Director) y los logros de aprendizaje. 
 
-### 7.3 Factores Asociados de Profesores
+### 6.3 Factores Asociados de Profesores
 
-#### 7.3.1 Índices
+#### 6.3.1 Índices
 
 
 
@@ -238,7 +238,7 @@ Hay relación clara entre la calidad de ambiente laboral en la escuela (Director
 ![plot of chunk puntaje_prof_LIDERAP](figure/puntaje_prof_LIDERAP-1.png) 
 ![plot of chunk puntaje_prof_MONITOP](figure/puntaje_prof_MONITOP-1.png) 
 
-#### 7.3.2 Datos de Profesores
+#### 6.3.2 Datos de Profesores
 ![plot of chunk puntaje_prof_DQPIT01](figure/puntaje_prof_DQPIT01-1.png) 
 
 ![plot of chunk puntaje_prof_DQPIT02](figure/puntaje_prof_DQPIT02-1.png) 
@@ -265,11 +265,11 @@ Hay relación clara entre la calidad de ambiente laboral en la escuela (Director
 
 ![plot of chunk puntaje_prof_DQPIT14](figure/puntaje_prof_DQPIT14-1.png) 
 
-### 7.4 Factores Asociados Familia
+### 6.4 Factores Asociados Familia
 
 
 
-#### 7.4.1 Indices
+#### 6.4.1 Indices
 
 ![plot of chunk puntaje_familia_SUPERVF](figure/puntaje_familia_SUPERVF-1.png) 
 ![plot of chunk puntaje_familia_MOTIVALF](figure/puntaje_familia_MOTIVALF-1.png) 
@@ -279,7 +279,7 @@ Hay relación clara entre la calidad de ambiente laboral en la escuela (Director
 ![plot of chunk puntaje_familia_CSOCBARF](figure/puntaje_familia_CSOCBARF-1.png) 
 ![plot of chunk puntaje_familia_VIOLBARF](figure/puntaje_familia_VIOLBARF-1.png) 
 
-#### 7.4.2 Características de interés en las familias
+#### 6.4.2 Características de interés en las familias
 
 ![plot of chunk puntaje_familia_DQFIT01](figure/puntaje_familia_DQFIT01-1.png) 
 

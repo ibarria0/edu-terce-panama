@@ -240,8 +240,8 @@ a$dist <- mapply(calc_percent, a$countryp, a$tipo, a$grado, a$puntaje_estandar)
 ggplot(a[a$grado == 6,], aes(x=nivel,y=dist,fill=countryp)) + geom_bar(stat="identity", position=position_dodge(), colour="black") + ggtitle("Cantidad de Estudiantes por Nivel (6to Grado)") + facet_grid(tipo ~ .) + scale_fill_brewer(palette="Spectral")
 ```
 
-## 6 Características de los resultados en Panamá
-### 6.1 Logros por Genero 
+## 5 Características de los resultados en Panamá
+### 5.1 Logros por Genero 
 
 Las niñas obtuvieron mejores resultados que los niños en lectura de tercer grado, sexto grado y en ciencias de sexto grado. En matemáticas, aunque las niñas obtuvieron mejor resultado, la diferencia es tan pequeña que no permite afirmar que sus logros de aprendizaje son mejores.   
 
@@ -269,7 +269,7 @@ ggplot(a, aes(x=DQA6IT02,y=puntaje_estandar,fill=DQA6IT02)) + geom_bar(stat='ide
 ggplot(dif, aes(x=genero,y=std_mean)) + geom_bar(stat='identity',fill="#f8766d",width=.5) + ggtitle('Diferencia diminuta de puntaje promedio a favor de las niñas') + ylab("Desviaciones estandar") + xlab("Diferencia")+ scale_fill_discrete(guide=F)
 ```
 
-### 6.2 Logros de grupos originarios
+### 5.2 Logros de grupos originarios
 
 Los alumnos que se reconocen como miembros de etnias originarias logran menor puntaje que los que no se consideran miembros.  Las figuras [No. PTJ POR ETN] y [No. STD DEV ETN] comparan los puntajes promedio y diferencia según si la alumna o alumno se reconoce o no como miembro de grupos originarios.    
 
@@ -319,7 +319,7 @@ g <- merge(genero,qf,by='idstud')
 levels(g$DQA6IT06) <- c("No Indigena","Etnia Indigena")
 ggplot(g[!is.na(g$DQA6IT06),], aes(x=ISECF,y=puntaje_estandar,color=DQA6IT06)) + geom_point(alpha=0.0) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F)
 ```
-### 6.3 Logros según tipo de escuela
+### 5.3 Logros según tipo de escuela
 
 Las oportunidades de educación y salud muestran un altísimo grado de influencia en el bienestar de un individuo. Cuándo los logros de aprendizaje dependen marcadamente del poder adquisitivo de una persona es difícil argumentar que la sociedad brinda oportunidades justas a todos sus residentes.  En Panamá, la diferencia de logros entre escuelas particulares, escuelas oficiales urbanas y escuelas oficiales rurales es muy marcada.   
 
@@ -340,12 +340,12 @@ Una observación de suma importancia es que hay un grupo de escuelas oficiales r
 [JEV2IBG: cambiar la leyenda del eje X a "Índice socioeconómico y cultural"]
 [JEV2IBG: intentar incluir los niveles de aprendizaje, o al menos el nivel 1]
 
-## 7 Relacion entre desempeño y factores típicamente asociados al proceso de aprendizaje
-## 7.1 ¿Qué son factores asociados?
+## 6 Relacion entre desempeño y factores típicamente asociados al proceso de aprendizaje
+## 6.1 ¿Qué son factores asociados?
 
 Son características o circumstancias cuantificables que podrían mostrar relación con los logros de aprendizaje.  El que muestren relación no significa por si solo que sea garantía ni causa de los logros, pero sugiere que es conveniente explorar la relación.   
 
-## 7.2 Logros según factores asociados a la escuela
+## 6.2 Logros según factores asociados a la escuela
 
 [JEV2IBG: esta grafica la podemos suprimir porque la siguiente cuenta la misma historia en más detalle]
 
@@ -520,9 +520,9 @@ ggplot(m, aes(x=CLAMBLD,y=puntaje_estandar,color=rd,group=1)) + geom_point(alpha
 ```
 Hay relación clara entre la calidad de ambiente laboral en la escuela (Director) y los logros de aprendizaje. 
 
-### 7.3 Factores Asociados de Profesores
+### 6.3 Factores Asociados de Profesores
 
-#### 7.3.1 Índices
+#### 6.3.1 Índices
 
 ```{r echo=F,message=F,warning=F}
 pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
@@ -599,7 +599,7 @@ a <- aggregate(puntaje_estandar ~ idtealin + tipo + MONITOP, p6prof, mean)
 ggplot(a, aes(x=MONITOP,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm",  se = F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
 ```
 
-#### 7.3.2 Datos de Profesores
+#### 6.3.2 Datos de Profesores
 ```{r puntaje_prof_DQPIT01, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 a <- aggregate(puntaje_estandar ~ idtealin + tipo + DQPIT01, p6prof, mean)
 ggplot(a, aes(x=DQPIT01,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm",  se = F) + xlab("Cual es su Edad?") + ylab("")
@@ -694,7 +694,7 @@ a$dif <- (a$puntaje_estandar - mean(p6prof$puntaje_estandar,na.rm=T))/sd(p6prof$
 ggplot(a, aes(x=tipo,y=dif,fill=DQPIT14)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('¿Ha recibido usted alguna vez un incentivo económico por desempeño docente?')
 ```
 
-### 7.4 Factores Asociados Familia
+### 6.4 Factores Asociados Familia
 
 ```{r echo=F,messages=F,warnings=F}
 # load sexto grado puntajes
@@ -721,7 +721,7 @@ qf <- qf[qf$country == 'PAN',]
 pest <- merge(p6,qf,by='idstud')
 ```
 
-#### 7.4.1 Indices
+#### 6.4.1 Indices
 
 ```{r puntaje_familia_SUPERVF, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 ggplot(pest, aes(x=SUPERVF,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice de control y supervisión de estudios en el hogar") + ylab("")
@@ -745,7 +745,7 @@ ggplot(pest, aes(x=CSOCBARF,y=puntaje_estandar,,group=1,color=tipo)) + geom_poin
 ggplot(pest, aes(x=VIOLBARF,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice de violencia en el barrio") + ylab("")
 ```
 
-#### 7.4.2 Características de interés en las familias
+#### 6.4.2 Características de interés en las familias
 
 ```{r puntaje_familia_DQFIT01, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 pest$DQFIT01 <- as.factor(pest$DQFIT01)
