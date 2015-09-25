@@ -10,15 +10,11 @@ library(plyr)
 source('multiplot.R')
 ```
 
-Hay grandes diferencias de oportunidades para nuestra niñez en materia educativa.   La prueba Terce está diseñada para evaluar mediante el puntaje obtenido los logros educativos de los estudiantes.    
+Hay grandes diferencias de oportunidades para nuestra niñez en materia educativa.   El Tercer Estudio Regional Comparativo y Explicativo (Terce, 2013) está diseñado para evaluar los logros educativos de los estudiantes mediante el puntaje obtenido en preguntas sobre lectura, matemáticas y ciencias.  Este estudio muestra que las diferencias de logros entre nuestros alumnos reflejan en forma marcada sus diferencias socioeconómicas y culturales, es decir, la inequidad.    
 
-Las diferencias de logros educativos desafortunadamente reflejan en forma marcada las diferencias socioeconómicas y culturales, representada en la prueba Terce por un índice socioeconómico  y cultural que sintetiza factores materiales y culturales del alumno y su entorno.  Idealmente, nuestro sistema educativo debería darle las mismas oportunidades de aprendizaje a nuestras niñas y niños independientemente de su nivel socioeconómico y cultural.    
+Este documento de divulgación es principalmente un llamado a analizar los datos Terce disponibles en la página Web de Meduca y un reto a la voluntad nacional por crear un sistema educativo justo, capaz de brindar igualdad de oportunidades.   
 
-Las escuelas particulares mostraron mayor desempeño que las oficiales; y entre las oficiales, muchas no logran el mínimo nivel de desempeño adecuado, especialmente entre las rurales.     
-
-[JEV2IBG: favor intentar incluir líneas que muestren el promedio y los cambios entre un nivel de aprendizaje y otro]
-[JEV2IBG: la grafica debe tener como titulo "logros de aprendizaje de escuelas particulares y oficiales, urbanas y rurales]
-[JEV2IBG: es importante y buena práctica que cada figura tenga un número (ej. "Figura 1.1") para facilitar referencias]  [JEV2IBG: Además, si la línea con número de figura permite texto explicativo, me gustaría saber, para agregarlo]
+Las escuelas particulares mostraron mejores logros que las oficiales y muchas de nuestras escuelas oficiales no logran un puntaje promedio con el nivel mínimo de aprendizaje considerado adecuado, equivalente a [PUNTAJE NIVEL 1], especialmente entre las escuelas rurales oficiales. La figura 1.1 ilustra la relación estrecha entre aprendizaje y condiciones de vida. Para esto usa el promedio de puntajes y el promedio del índice socioeconómico y cultural de los alumnos de cada escuela.  Este índice se construye con base en respuestas sobre las condiciones de vida de cada alumno: a mayor índice las condiciones son más cómodas. El tamaño de cada punto es proporcional al número de alumnos en la escuela que representa.   
 
 
 ```{r puntaje_isecf_rd, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
