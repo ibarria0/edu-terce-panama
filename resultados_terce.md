@@ -1,7 +1,7 @@
-
 ## Presentación de resultados del Tercer Estudio Regional Comparativo y Explicativo (TERCE) del Laboratorio Latinoamericano de Evaluación de la Calidad de la Educación (LLECE)
 
 ### 1. Resumen
+
 
 Hay grandes diferencias de oportunidades para nuestra niñez en materia educativa.   La prueba Terce está diseñada para evaluar mediante el puntaje obtenido los logros educativos de los estudiantes.    
 
@@ -160,10 +160,6 @@ Más relevante en primera instancia es saber si nuestros niños y niñas logran 
 Las niñas obtuvieron mejores resultados que los niños en lectura de tercer grado, sexto grado y en ciencias de sexto grado. En matemáticas, aunque las niñas obtuvieron mejor resultado, la diferencia es tan pequeña que no permite afirmar que sus logros de aprendizaje son mejores.   
 
 Las figuras [No. PTJ POR GNR] y [No. STD DEV GNR] comparan los puntajes promedio obtenidos por cada género, la primera, y la diferencia entre niños y niñas, la segunda, expresada en desviaciones estándar 
-
-[JEV2IBG: La figura de desviacion estandar quisiera conversarla, porque la comparacion deberia ser una sola barra.  La barra indicaría la diferencia entre los puntajes de cada género expresado en desviaciones estandar.]
-[JEV2IBG: como procesaste aquellos que respondieron N/A]
-
 
 [JEV2IBG: cambiar la leyenda del eje Y a "Puntaje promedio"]
 [JEV2IBG: cambiar la leyenda del eje X a "Género"] 

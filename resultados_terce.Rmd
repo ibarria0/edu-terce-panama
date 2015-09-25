@@ -1,3 +1,6 @@
+## Presentación de resultados del Tercer Estudio Regional Comparativo y Explicativo (TERCE) del Laboratorio Latinoamericano de Evaluación de la Calidad de la Educación (LLECE)
+
+### 1. Resumen
 ```{r init,results="hide",echo=F, message=F, warning=F}
 library(foreign)
 library(scales)
@@ -6,9 +9,6 @@ library(plyr)
 
 source('multiplot.R')
 ```
-## Presentación de resultados del Tercer Estudio Regional Comparativo y Explicativo (TERCE) del Laboratorio Latinoamericano de Evaluación de la Calidad de la Educación (LLECE)
-
-### 1. Resumen
 
 Hay grandes diferencias de oportunidades para nuestra niñez en materia educativa.   La prueba Terce está diseñada para evaluar mediante el puntaje obtenido los logros educativos de los estudiantes.    
 
@@ -263,28 +263,26 @@ Las niñas obtuvieron mejores resultados que los niños en lectura de tercer gra
 
 Las figuras [No. PTJ POR GNR] y [No. STD DEV GNR] comparan los puntajes promedio obtenidos por cada género, la primera, y la diferencia entre niños y niñas, la segunda, expresada en desviaciones estándar 
 
-[JEV2IBG: La figura de desviacion estandar quisiera conversarla, porque la comparacion deberia ser una sola barra.  La barra indicaría la diferencia entre los puntajes de cada género expresado en desviaciones estandar.]
-[JEV2IBG: como procesaste aquellos que respondieron N/A]
-
-
 [JEV2IBG: cambiar la leyenda del eje Y a "Puntaje promedio"]
 [JEV2IBG: cambiar la leyenda del eje X a "Género"] 
 [JEV2IBG: eliminar del margen derecho la etiqueta "DQASIT02"] 
 
 ```{r demo_genero_puntaje, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+p6 <- p6[p6$country == 'PAN',]
 qa6$DQA6IT02 <- as.factor(qa6$DQA6IT02)
 
 genero <- merge(p6,qa6,by='idstud')
 a <- aggregate(puntaje_estandar ~ DQA6IT02, genero, mean)
 a$dif <- (a$puntaje_estandar - mean(p6$puntaje_estandar,na.rm=T))/sd(p6$puntaje_estandar,na.rm=T)
 levels(a$DQA6IT02) <- c("Niña","Niño")
+dif <- data.frame(genero=c("Niña"),std_mean=c(a$dif[1] - a$dif[2]))
 
 ggplot(a, aes(x=DQA6IT02,y=puntaje_estandar,fill=DQA6IT02)) + geom_bar(stat='identity') + ggtitle("Puntaje promedio comparado entre géneros") + ylab("Puntaje promedio") + xlab("Género") + scale_fill_discrete(guide=F)
 ```
 [JEV2IBG: esta gráfica debería ser una sola barra de valores positivos a favor de las niñas, indicando la diferencia entre el puntaje de niñas menos el de niños expresada en desviaciones estándar]
 
 ```{r demo_genero_puntaje_desv, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-ggplot(a, aes(x=DQA6IT02,y=dif,fill=DQA6IT02)) + geom_bar(stat='identity') + ggtitle('Diferencia diminuta de puntaje promedio a favor de las niñas') + ylab("Desviaciones estandar") + xlab("Diferencia")+ scale_fill_discrete(guide=F)
+ggplot(dif, aes(x=genero,y=std_mean)) + geom_bar(stat='identity',fill="#f8766d",width=.5) + ggtitle('Diferencia diminuta de puntaje promedio a favor de las niñas') + ylab("Desviaciones estandar") + xlab("Diferencia")+ scale_fill_discrete(guide=F)
 ```
 
 ### 6.2 Logros de grupos originarios
@@ -315,7 +313,8 @@ ggplot(a, aes(x=DQA6IT06,y=puntaje_estandar,fill=DQA6IT06)) + geom_bar(stat='ide
 [JEV2IBG: eliminar del margen derecho la etiqueta "DQA6IT06"] 
 
 ```{r demo_etnia_puntaje_desv, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-ggplot(a, aes(x=DQA6IT06,y=dif,fill=DQA6IT06)) + geom_bar(stat='identity') + ggtitle('Standard Deviation from Mean')
+dif <- data.frame(genero=c("Originarios"),std_mean=c(a$dif[1] - a$dif[2]))
+ggplot(dif, aes(x=genero,y=std_mean)) + geom_bar(stat='identity',fill="#f8766d",width=.5) + ggtitle('Diferencia diminuta de puntaje promedio a favor de las niñas') + ylab("Desviaciones estandar") + xlab("Diferencia")+ scale_fill_discrete(guide=F)
 ```
 Adicionalmente, el índice socioeconómico y cultural muestra menor relación con el puntaje promedio obtenido para alumnos que se consideran miembros de grupos originarios que para aquellos que no.   Esto lo ilustra la figura [No. PTJ VS ISECF ORGN] en la que cada línea muestra la correspondencia entre puntaje promedio obtenido y el índice del alúmno.  La diferencia de puntaje entre alumnos de menor y mayor índices es más pronunciada para alumnos que se declaran no originarios.  
 
@@ -367,8 +366,6 @@ Son características o circumstancias cuantificables que podrían mostrar relaci
 [JEV2IBG: esta grafica la podemos suprimir porque la siguiente cuenta la misma historia en más detalle]
 
 ```{r puntaje_INFRAD, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-p6 <- rbind.fill(pm6,pl6,pc6)
-p6 <- p6[p6$country == 'PAN',]
 
 # load factores alumnos
 qd <- read.spss('./data/Directores/QD6.SAV', to.data.frame=T)
@@ -393,7 +390,7 @@ mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
 mean_infrad_school <- aggregate(INFRAD ~ idschool, qd, mean)
 m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
 
-ggplot(m, aes(x=INFRAD,y=puntaje_estandar)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice de infraestructura de la escuela") + ylab("Puntaje Promedio por Escuela")
+ggplot(m, aes(x=INFRAD,y=puntaje_estandar,color=rd,group=1)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", se = F) + scale_size(guide=FALSE) + xlab("Índice de infraestructura de la escuela") + ylab("Puntaje Promedio por Escuela")
 ```
 Los logros de aprendizaje, evaluados a través de los puntajes Terce, muestran una relación clara con La infraestructura de la escuela.  Esto por si solo no permite concluir que una mejor infraestructura genera mejores logros; por ejemplo, una mejor situación socioeconómica y cultural da la oportunidad de asistir a una mejor escuela tanto en infraestructura como en eficacia, sin que sea claro cual es el factor principal que logra esa eficacia. Comprender la relación entre infraestructura y logros requiere mayor análisis para determinar hasta que punto la infraestructura influye en los logros. 
 
@@ -422,7 +419,7 @@ mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
 mean_infrad_school <- aggregate(VIOLEND ~ idschool, qd, mean)
 m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
 
-ggplot(m, aes(x=VIOLEND,y=puntaje_estandar)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice de violencia en el entorno de la escuela") + ylab("Puntaje Promedio por Escuela")
+ggplot(m, aes(x=VIOLEND,y=puntaje_estandar,color=rd,group=1)) + geom_point(alpha=0.7) + geom_smooth(method = "lm",  se = F) + scale_size(guide=FALSE) + xlab("Índice de violencia en el entorno de la escuela") + ylab("Puntaje Promedio por Escuela")
 ```
 La figura siguiente ilustra que no se ve una relación clara entre la violencia del entorno escolar y los logros de aprendizaje.   
 
@@ -451,7 +448,7 @@ mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
 mean_infrad_school <- aggregate(CSOCIALD ~ idschool, qd, mean)
 m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
 
-ggplot(m, aes(x=CSOCIALD,y=puntaje_estandar)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice del capital social en el entorno de la escuela") + ylab("Puntaje Promedio por Escuela")
+ggplot(m, aes(x=CSOCIALD,y=puntaje_estandar,color=rd,group=1)) + geom_point(alpha=0.7) + geom_smooth(method = "lm",  se = F) + scale_size(guide=FALSE) + xlab("Índice del capital social en el entorno de la escuela") + ylab("Puntaje Promedio por Escuela")
 ```
 Tampoco se ve una relación clara entre el capital social en el entorno escolar y los logros de aprendizaje. 
 
@@ -479,7 +476,7 @@ mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
 mean_infrad_school <- aggregate(AUTOADD ~ idschool, qd, mean)
 m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
 
-ggplot(m, aes(x=AUTOADD,y=puntaje_estandar)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice de autonomía administrativa de la escuela") + ylab("Puntaje Promedio por Escuela")
+ggplot(m, aes(x=AUTOADD,y=puntaje_estandar,color=rd,group=1)) + geom_point(alpha=0.7) + geom_smooth(method = "lm",  se = F) + scale_size(guide=FALSE) + xlab("Índice de autonomía administrativa de la escuela") + ylab("Puntaje Promedio por Escuela")
 ```
 Sí se nota una relación entre la autonimía administrativa de la escuela y los logros de aprendizaje.  [JEV2IBG: creo que en esta figura el signo del indice de autonomiase invirtio: pensaria que las escuelas particulares tienen mas autonomia.  Sera un indice de "falta de autonomia"?]
 
@@ -507,7 +504,7 @@ mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
 mean_infrad_school <- aggregate(AUTOACD ~ idschool, qd, mean)
 m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
 
-ggplot(m, aes(x=AUTOACD,y=puntaje_estandar)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice de autonomía académica de la escuela") + ylab("Puntaje Promedio por Escuela")
+ggplot(m, aes(x=AUTOACD,y=puntaje_estandar,color=rd,group=1)) + geom_point(alpha=0.7) + geom_smooth(method = "lm",  se = F) + scale_size(guide=FALSE) + xlab("Índice de autonomía académica de la escuela") + ylab("Puntaje Promedio por Escuela")
 ```
 Hay algún grado de relación entre la autonomía académica y los logros de aprendizaje.   [JEV2IBG: tambien pienso que se invirtio el signo del indice de autonomia academica]
 
@@ -535,7 +532,7 @@ mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
 mean_infrad_school <- aggregate(CLAMBLD ~ idschool, qd, mean)
 m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
 
-ggplot(m, aes(x=CLAMBLD,y=puntaje_estandar)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice de calidad de ambiente laboral en la escuela (Director)") + ylab("Puntaje Promedio por Escuela")
+ggplot(m, aes(x=CLAMBLD,y=puntaje_estandar,color=rd,group=1)) + geom_point(alpha=0.7) + geom_smooth(method = "lm",  se = F) + scale_size(guide=FALSE) + xlab("Índice de calidad de ambiente laboral en la escuela (Director)") + ylab("Puntaje Promedio por Escuela")
 ```
 Hay relación clara entre la calidad de ambiente laboral en la escuela (Director) y los logros de aprendizaje. 
 
@@ -587,41 +584,41 @@ p6prof <- rbind.fill(pm6,pl6,pc6)
 
 ```{r puntaje_prof_MOTIVP, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 a <- aggregate(puntaje_estandar ~ idtealin + tipo + MOTIVP, p6prof, mean)
-ggplot(a, aes(x=MOTIVP,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
+ggplot(a, aes(x=MOTIVP,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm",  se = F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
 ```
 ```{r puntaje_prof_CLAMBP, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 a <- aggregate(puntaje_estandar ~ idtealin + tipo + CLAMBP, p6prof, mean)
-ggplot(a, aes(x=CLAMBP,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
+ggplot(a, aes(x=CLAMBP,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm",  se = F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
 ```
 ```{r puntaje_prof_RELSALP, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 a <- aggregate(puntaje_estandar ~ idtealin + tipo + RELSALP, p6prof, mean)
-ggplot(a, aes(x=RELSALP,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
+ggplot(a, aes(x=RELSALP,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm",  se = F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
 ```
 ```{r puntaje_prof_RELDIRP, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 a <- aggregate(puntaje_estandar ~ idtealin + tipo + RELDIRP, p6prof, mean)
-ggplot(a, aes(x=RELDIRP,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
+ggplot(a, aes(x=RELDIRP,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm",  se = F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
 ```
 ```{r puntaje_prof_VIOLENP, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 a <- aggregate(puntaje_estandar ~ idtealin + tipo + VIOLENP, p6prof, mean)
-ggplot(a, aes(x=VIOLENP,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
+ggplot(a, aes(x=VIOLENP,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm",  se = F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
 ```
 ```{r puntaje_prof_APOYOP, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 a <- aggregate(puntaje_estandar ~ idtealin + tipo + APOYOP, p6prof, mean)
-ggplot(a, aes(x=APOYOP,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
+ggplot(a, aes(x=APOYOP,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm",  se = F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
 ```
 ```{r puntaje_prof_LIDERAP, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 a <- aggregate(puntaje_estandar ~ idtealin + tipo + LIDERAP, p6prof, mean)
-ggplot(a, aes(x=LIDERAP,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
+ggplot(a, aes(x=LIDERAP,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm",  se = F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
 ```
 ```{r puntaje_prof_MONITOP, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 a <- aggregate(puntaje_estandar ~ idtealin + tipo + MONITOP, p6prof, mean)
-ggplot(a, aes(x=MONITOP,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
+ggplot(a, aes(x=MONITOP,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm",  se = F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
 ```
 
 #### 7.3.2 Datos de Profesores
 ```{r puntaje_prof_DQPIT01, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 a <- aggregate(puntaje_estandar ~ idtealin + tipo + DQPIT01, p6prof, mean)
-ggplot(a, aes(x=DQPIT01,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + xlab("Cual es su Edad?") + ylab("")
+ggplot(a, aes(x=DQPIT01,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm",  se = F) + xlab("Cual es su Edad?") + ylab("")
 ```
 
 ```{r puntaje_prof_DQPIT02, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
@@ -642,12 +639,12 @@ ggplot(a, aes(x=tipo,y=dif,fill=DQPIT03)) + geom_bar(stat='identity',position='d
 
 ```{r puntaje_prof_DQPIT04, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 a <- aggregate(puntaje_estandar ~ idtealin + tipo + DQPIT04, p6prof, mean)
-ggplot(a, aes(x=DQPIT04,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + xlab(" ¿Hace cuantos años trabaja como docente?") + ylab("")
+ggplot(a, aes(x=DQPIT04,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm",  se = F) + xlab(" ¿Hace cuantos años trabaja como docente?") + ylab("")
 ```
 
 ```{r puntaje_prof_DQPIT05, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 a <- aggregate(puntaje_estandar ~ idtealin + tipo + DQPIT05, p6prof, mean)
-ggplot(a, aes(x=DQPIT05,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + xlab("") + ylab("") + ggtitle("¿Ha recibido usted alguna vez un incentivo económico por desempeño docente?")
+ggplot(a, aes(x=DQPIT05,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm",  se = F) + xlab("¿Hace cuantos años trabaja como docente en este centro educativo?") + ylab("")
 ```
 
 ```{r puntaje_prof_DQPIT07, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
@@ -743,25 +740,25 @@ pest <- merge(p6,qf,by='idstud')
 #### 7.4.1 Indices
 
 ```{r puntaje_familia_SUPERVF, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-ggplot(pest, aes(x=SUPERVF,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + xlab("Índice de control y supervisión de estudios en el hogar") + ylab("")
+ggplot(pest, aes(x=SUPERVF,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice de control y supervisión de estudios en el hogar") + ylab("")
 ```
 ```{r puntaje_familia_MOTIVALF, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-ggplot(pest, aes(x=MOTIVALF,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + xlab("Índice de motivación de lectura en el hogar") + ylab("")
+ggplot(pest, aes(x=MOTIVALF,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice de motivación de lectura en el hogar") + ylab("")
 ```
 ```{r puntaje_familia_RECREAF, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-ggplot(pest, aes(x=RECREAF,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + xlab("Índice de actividades recreativas con la familia") + ylab("")
+ggplot(pest, aes(x=RECREAF,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice de actividades recreativas con la familia") + ylab("")
 ```
 ```{r puntaje_familia_INVOLUCF, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-ggplot(pest, aes(x=INVOLUCF,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + xlab("Índice de involucramiento de los padres en la escuela") + ylab("")
+ggplot(pest, aes(x=INVOLUCF,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice de involucramiento de los padres en la escuela") + ylab("")
 ```
 ```{r puntaje_familia_SERVBARF, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-ggplot(pest, aes(x=SERVBARF,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + xlab("Índice de servicios en el barrio") + ylab("")
+ggplot(pest, aes(x=SERVBARF,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice de servicios en el barrio") + ylab("")
 ```
 ```{r puntaje_familia_CSOCBARF, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-ggplot(pest, aes(x=CSOCBARF,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + xlab("Índice de apoyo social en el barrio") + ylab("")
+ggplot(pest, aes(x=CSOCBARF,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice de apoyo social en el barrio") + ylab("")
 ```
 ```{r puntaje_familia_VIOLBARF, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-ggplot(pest, aes(x=VIOLBARF,y=puntaje_estandar,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + xlab("Índice de violencia en el barrio") + ylab("")
+ggplot(pest, aes(x=VIOLBARF,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice de violencia en el barrio") + ylab("")
 ```
 
 #### 7.4.2 Características de interés en las familias
