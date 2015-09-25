@@ -927,3 +927,167 @@ a <- aggregate(puntaje_estandar ~ DQFIT33_05, pest, mean)
 a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
 ggplot(a, aes(x=DQFIT33_05,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('De la escuela me citan para hablar sobre el estudiante')
 ```
+
+### 6.5 Factores Asociados Alumnos
+
+```{r echo=F,messages=F,warnings=F}
+# load sexto grado puntajes
+pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
+pc6 <- read.spss('./data/Puntajes_Alumnos/PC6_all_TERCE.sav', to.data.frame=T)
+pl6 <- read.spss('./data/Puntajes_Alumnos/PL6_all_TERCE.sav', to.data.frame=T)
+
+pm6 <- pm6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+pl6 <- pl6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+pc6 <- pc6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+
+# merge matematica, lectura y ciencias
+pm6$tipo <- 'matematica'
+pl6$tipo <- 'lectura'
+pc6$tipo <- 'ciencias'
+p6 <- rbind.fill(pm6,pl6,pc6)
+
+p6 <- p6[p6$country == 'PAN',]
+
+# load factores familia
+qa <- read.spss('./data/Alumnos/QA6.SAV', to.data.frame=T)
+qa <- qa[qa$country == 'PAN',]
+
+pest <- merge(p6,qa,by='idstud')
+```
+
+#### 6.5.1 Indices
+
+```{r puntaje_alumno_CONDIA6, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+ggplot(pest, aes(x=CONDIA6,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice de condiciones de estudio en el hogar") + ylab("")
+```
+
+```{r puntaje_alumno_USOLIA6, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+ggplot(pest, aes(x=USOLIA6,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice del uso de libro en el hogar") + ylab("")
+```
+
+```{r puntaje_alumno_TMPLIBA6, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+ggplot(pest, aes(x=TMPLIBA6,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice de actividades recreativas en el hogar") + ylab("")
+```
+
+```{r puntaje_alumno_CLAMBIA6, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+ggplot(pest, aes(x=CLAMBIA6,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice de calidad de ambiente en el aula") + ylab("")
+```
+
+```{r puntaje_alumno_ASISDOA6, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+ggplot(pest, aes(x=ASISDOA6,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice de asistencia de docente") + ylab("")
+```
+
+```{r puntaje_alumno_PDORGCA6, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+ggplot(pest, aes(x=PDORGCA6,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("índice de prácticas docentes de organización y clima de aula") + ylab("")
+```
+
+```{r puntaje_alumno_PRACEDA6, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+ggplot(pest, aes(x=PRACEDA6,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice practicas educativas 1") + ylab("")
+```
+
+```{r puntaje_alumno_PRACE2A6, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+ggplot(pest, aes(x=PRACE2A6,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice practicas educativas 2") + ylab("")
+```
+
+```{r puntaje_alumno_PCEDUCA6, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+ggplot(pest, aes(x=PCEDUCA6,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice de uso de computador educativo") + ylab("")
+```
+
+```{r puntaje_alumno_PCRECRA6, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+ggplot(pest, aes(x=PCRECRA6,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice de uso de computador recreativo") + ylab("")
+```
+
+#### 6.4.2 Características de interés en las alumnos
+
+```{r puntaje_alumno_trabaja, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
+pest$trabaja <- as.factor(pest$trabaja)
+levels(pest$trabaja) <- c("No","Si")
+a <- aggregate(puntaje_estandar ~ trabaja, pest, mean)
+a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
+ggplot(a, aes(x=trabaja,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('¿Trabajas?')
+```
+
+```{r puntaje_alumno_DQA6IT26, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
+pest$DQA6IT26 <- as.factor(pest$DQA6IT26)
+levels(pest$DQA6IT26) <- c("No","Si, en casa","Si, fuera de casa")
+a <- aggregate(puntaje_estandar ~ DQA6IT26, pest, mean)
+a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
+ggplot(a, aes(x=DQA6IT26,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('Además de asistir a la escuela, ¿trabajas?')
+```
+
+```{r puntaje_alumno_DQA6IT26a, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
+pest$DQA6IT26a <- as.factor(pest$DQA6IT26a)
+levels(pest$DQA6IT26a) <- c('Lo hago solo los fines de semana','La hago la mayor parte del tiempo en que no estoy en la escuela','Lo hago por poco rato cuando no estoy en la escuela',"No Trabaja")
+a <- aggregate(puntaje_estandar ~ DQA6IT26a, pest, mean)
+a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
+ggplot(a, aes(x=DQA6IT26a,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('¿Cuándo trabajas?')
+```
+
+```{r puntaje_alumno_DQA6IT26b, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
+pest$DQA6IT26b <- as.factor(pest$DQA6IT26b)
+levels(pest$DQA6IT26b) <- c("Si","No","No, pero me dan cosas")
+a <- aggregate(puntaje_estandar ~ DQA6IT26b, pest, mean)
+a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
+ggplot(a, aes(x=DQA6IT26b,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('¿Te pagan por trabajar?')
+```
+
+#### Cuando no estás en clases, ¿qué haces con tu tiempo libre?
+
+```{r puntaje_alumno_DQA6IT25_01, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
+pest$DQA6IT25_01 <- as.factor(pest$DQA6IT25_01)
+levels(pest$DQA6IT25_01) <- c("Nunca o casi nunca","Algunas veces","Siempre o casi siempre")
+a <- aggregate(puntaje_estandar ~ DQA6IT25_01, pest, mean)
+a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
+ggplot(a, aes(x=DQA6IT25_01,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('Veo televisión')
+```
+
+```{r puntaje_alumno_DQA6IT25_02, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
+pest$DQA6IT25_02 <- as.factor(pest$DQA6IT25_02)
+levels(pest$DQA6IT25_02) <- c("Nunca o casi nunca","Algunas veces","Siempre o casi siempre")
+a <- aggregate(puntaje_estandar ~ DQA6IT25_02, pest, mean)
+a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
+ggplot(a, aes(x=DQA6IT25_02,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('Juego juegos de consola o juegos de computador')
+```
+```{r puntaje_alumno_DQA6IT25_03, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
+pest$DQA6IT25_03 <- as.factor(pest$DQA6IT25_03)
+levels(pest$DQA6IT25_03) <- c("Nunca o casi nunca","Algunas veces","Siempre o casi siempre")
+a <- aggregate(puntaje_estandar ~ DQA6IT25_03, pest, mean)
+a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
+ggplot(a, aes(x=DQA6IT25_03,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('Navego en Internet')
+```
+```{r puntaje_alumno_DQA6IT25_04, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
+pest$DQA6IT25_04 <- as.factor(pest$DQA6IT25_04)
+levels(pest$DQA6IT25_04) <- c("Nunca o casi nunca","Algunas veces","Siempre o casi siempre")
+a <- aggregate(puntaje_estandar ~ DQA6IT25_04, pest, mean)
+a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
+ggplot(a, aes(x=DQA6IT25_04,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('Juego con mis amigos')
+```
+```{r puntaje_alumno_DQA6IT25_05, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
+pest$DQA6IT25_05 <- as.factor(pest$DQA6IT25_05)
+levels(pest$DQA6IT25_05) <- c("Nunca o casi nunca","Algunas veces","Siempre o casi siempre")
+a <- aggregate(puntaje_estandar ~ DQA6IT25_05, pest, mean)
+a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
+ggplot(a, aes(x=DQA6IT25_05,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('Leo libros o revistas')
+```
+```{r puntaje_alumno_DQA6IT25_06, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
+pest$DQA6IT25_06 <- as.factor(pest$DQA6IT25_06)
+levels(pest$DQA6IT25_06) <- c("Nunca o casi nunca","Algunas veces","Siempre o casi siempre")
+a <- aggregate(puntaje_estandar ~ DQA6IT25_06, pest, mean)
+a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
+ggplot(a, aes(x=DQA6IT25_06,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('Voy al cine o al teatro')
+```
+```{r puntaje_alumno_DQA6IT25_07, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
+pest$DQA6IT25_07 <- as.factor(pest$DQA6IT25_07)
+levels(pest$DQA6IT25_07) <- c("Nunca o casi nunca","Algunas veces","Siempre o casi siempre")
+a <- aggregate(puntaje_estandar ~ DQA6IT25_07, pest, mean)
+a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
+ggplot(a, aes(x=DQA6IT25_07,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('Voy al museo o a la biblioteca')
+```
+
+```{r puntaje_alumno_DQA6IT25_08, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
+pest$DQA6IT25_08 <- as.factor(pest$DQA6IT25_08)
+levels(pest$DQA6IT25_08) <- c("Nunca o casi nunca","Algunas veces","Siempre o casi siempre")
+a <- aggregate(puntaje_estandar ~ DQA6IT25_08, pest, mean)
+a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
+ggplot(a, aes(x=DQA6IT25_08,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('Hago deportes')
+```

@@ -7,14 +7,14 @@ Hay grandes diferencias de oportunidades para nuestra niñez en materia educativ
 
 Este documento de divulgación es principalmente un llamado a analizar los datos Terce disponibles en la página Web de Meduca y un reto a la voluntad nacional por crear un sistema educativo justo, capaz de brindar igualdad de oportunidades.   
 
-Las escuelas particulares mostraron mejores logros que las oficiales y muchas de nuestras escuelas oficiales no logran un puntaje promedio con el nivel mínimo de aprendizaje considerado adecuado, equivalente a [PUNTAJE NIVEL 1], especialmente entre las escuelas rurales oficiales. La figura 1.1 ilustra la relación estrecha entre aprendizaje y condiciones de vida. Para esto usa el promedio de puntajes y el promedio del índice socioeconómico y cultural de los alumnos de cada escuela.  Este índice se construye con base en respuestas sobre las condiciones de vida de cada alumno: a mayor índice las condiciones son más cómodas. El tamaño de cada punto es proporcional al número de alumnos en la escuela que representa.   
+En el Terce las escuelas particulares mostraron mejores logros que las oficiales.  De hecho muchas de nuestras escuelas oficiales muestran niveles de aprendizaje poco adecuados para la vida esperada de sus alumnos, especialmente entre las escuelas rurales oficiales. Las diferencias de logros y la estrecha relación con las condiciones de vida se pueden ver en la figura 1.1 por ejemplo. Cada punto representa el promedio de puntajes y el promedio del índice socioeconómico y cultural de los alumnos de una escuela. El tamaño del punto es proporcional al número de alumnos en la escuela. El índice se construye con base en respuestas a cuestionarios sobre las condiciones de vida de cada alumno: a mayor índice las condiciones son más cómodas.    
 
 
 ![plot of chunk puntaje_isecf_rd](figure/puntaje_isecf_rd-1.png) 
 
-Más útil que lamentarnos por resultados débiles será analizarlos para mejorar. Por ejemplo, algunas escuelas oficiales rurales con bajo índice socioeconómico y cultural en la figura logran puntajes superiores al promedio internacional del Terce, equivalente a 700 puntos, e incluso mayores que las escuelas oficiales urbanas.   Estas escuelas podrían aportarnos lecciones importantes para el resto del sistema educativo.   
+Más importante que lamentarnos por los resultados pobres que podamos observar sería enfocarnos en oportunidades de mejora. Por ejemplo, algunas escuelas oficiales rurales con bajo índice socioeconómico y cultural lograron puntajes superiores al promedio internacional del Terce, equivalente a 700 puntos, e incluso mayores que las escuelas oficiales urbanas.   Estas escuelas podrían aportarnos lecciones importantes para el resto del sistema educativo.  Este enfoque representa la aspiración de este análisis y su divulgación.   
 
-En el contexto latinoamericano, Panamá obtiene resultados por debajo de lo esperado.  La figura 1.2 confirma la tendencia conocida de que los alumnos de países con mayor producto interno bruto per cápita obtienen mejores puntajes en promedio. La figura muestra que Panamá obtuvo 40 puntos menos de lo esperado para su PIB per cápita.   Estos resultados son consistentes con los resultados obtenidos en evaluaciones internacionales previas en las que ha participado Panamá: Serce 2006, [Sineca 2008] y Pisa 2009. Panamá puede y debe mejorar significativamente sus logros de aprendizaje.    
+En el contexto latinoamericano, Panamá obtiene resultados por debajo de lo esperado.  La figura 1.2 confirma la tendencia conocida de que los alumnos de países con mayor producto interno bruto (PIB) per cápita obtienen mejores puntajes en promedio. Panamá obtuvo 40 puntos menos de lo esperado para su PIB per cápita, usando como referencia la línea que representa la relación típica entre logros y PIB per cápita en la figura.   Estos resultados son consistentes con los resultados que obtuvimos en evaluaciones internacionales previas: Serce 2006, Sineca 2008 y Pisa 2009. Panamá puede y debe mejorar significativamente sus logros de aprendizaje.    
 
 
 ![plot of chunk puntaje_gdp](figure/puntaje_gdp-1.png) 
@@ -300,3 +300,57 @@ Estos siguientes factores estan muy asociados al indice sociocultural.
 ![plot of chunk puntaje_familia_DQFIT33_04](figure/puntaje_familia_DQFIT33_04-1.png) 
 
 ![plot of chunk puntaje_familia_DQFIT33_05](figure/puntaje_familia_DQFIT33_05-1.png) 
+
+### 6.5 Factores Asociados Alumnos
+
+
+
+#### 6.5.1 Indices
+
+![plot of chunk puntaje_alumno_CONDIA6](figure/puntaje_alumno_CONDIA6-1.png) 
+
+![plot of chunk puntaje_alumno_USOLIA6](figure/puntaje_alumno_USOLIA6-1.png) 
+
+![plot of chunk puntaje_alumno_TMPLIBA6](figure/puntaje_alumno_TMPLIBA6-1.png) 
+
+![plot of chunk puntaje_alumno_CLAMBIA6](figure/puntaje_alumno_CLAMBIA6-1.png) 
+
+![plot of chunk puntaje_alumno_ASISDOA6](figure/puntaje_alumno_ASISDOA6-1.png) 
+
+![plot of chunk puntaje_alumno_PDORGCA6](figure/puntaje_alumno_PDORGCA6-1.png) 
+
+![plot of chunk puntaje_alumno_PRACEDA6](figure/puntaje_alumno_PRACEDA6-1.png) 
+
+![plot of chunk puntaje_alumno_PRACE2A6](figure/puntaje_alumno_PRACE2A6-1.png) 
+
+![plot of chunk puntaje_alumno_PCEDUCA6](figure/puntaje_alumno_PCEDUCA6-1.png) 
+
+![plot of chunk puntaje_alumno_PCRECRA6](figure/puntaje_alumno_PCRECRA6-1.png) 
+
+#### 6.4.2 Características de interés en las alumnos
+
+![plot of chunk puntaje_alumno_trabaja](figure/puntaje_alumno_trabaja-1.png) 
+
+![plot of chunk puntaje_alumno_DQA6IT26](figure/puntaje_alumno_DQA6IT26-1.png) 
+
+![plot of chunk puntaje_alumno_DQA6IT26a](figure/puntaje_alumno_DQA6IT26a-1.png) 
+
+
+```
+## Error in `levels<-.factor`(`*tmp*`, value = c("Si", "No", "No, pero me dan cosas": number of levels differs
+```
+
+![plot of chunk puntaje_alumno_DQA6IT26b](figure/puntaje_alumno_DQA6IT26b-1.png) 
+
+#### Cuando no estás en clases, ¿qué haces con tu tiempo libre?
+
+![plot of chunk puntaje_alumno_DQA6IT25_01](figure/puntaje_alumno_DQA6IT25_01-1.png) 
+
+![plot of chunk puntaje_alumno_DQA6IT25_02](figure/puntaje_alumno_DQA6IT25_02-1.png) 
+![plot of chunk puntaje_alumno_DQA6IT25_03](figure/puntaje_alumno_DQA6IT25_03-1.png) 
+![plot of chunk puntaje_alumno_DQA6IT25_04](figure/puntaje_alumno_DQA6IT25_04-1.png) 
+![plot of chunk puntaje_alumno_DQA6IT25_05](figure/puntaje_alumno_DQA6IT25_05-1.png) 
+![plot of chunk puntaje_alumno_DQA6IT25_06](figure/puntaje_alumno_DQA6IT25_06-1.png) 
+![plot of chunk puntaje_alumno_DQA6IT25_07](figure/puntaje_alumno_DQA6IT25_07-1.png) 
+
+![plot of chunk puntaje_alumno_DQA6IT25_08](figure/puntaje_alumno_DQA6IT25_08-1.png) 
