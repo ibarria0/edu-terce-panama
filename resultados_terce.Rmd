@@ -292,9 +292,9 @@ ggplot(a, aes(x=DQA6IT06,y=puntaje_estandar,fill=DQA6IT06)) + geom_bar(stat='ide
 
 Otro aspecto importante de equidad o falta de ella tiene relación con las condiciones de vida.  La educación y la salud son determinantes para el bienestar de un individuo. Cuando los logros de aprendizaje dependen marcadamente del nivel socioeconómico y cultural de una persona es difícil argumentar que la sociedad brinda oportunidades por igual.  Este es el caso de Panamá.     
 
-Las figuras 5.5 y 5.6 muestran el puntaje promedio combinando todas las áreas de conocimiento obtenido por los alumnos de nuestras escuelas y el índice socioeconómico y cultural promedio de esos alumnos.  La figura 5.6 es la misma figura 1.1 repetida aquí por conveniencia.  El puntaje promedio internacional en el Terce fue 700 puntos para todas las áreas de conocimiento. 
+Las figuras 5.5 y 5.6 muestran el puntaje promedio, combinando todas las áreas de conocimiento, obtenido por los alumnos de nuestras escuelas y el índice socioeconómico y cultural promedio de esos alumnos.  La figura 5.6 es la misma figura 1.1 repetida aquí por conveniencia.  El puntaje promedio internacional en el Terce fue 700 puntos para todas las áreas de conocimiento. 
 
-Conviene notar que un grupo de escuelas oficiales rurales obtuvieron logros promedio iguales o superiores a los de las escuelas oficiales urbanas a pesar de tener índices socioeconómicos y culturales menores en promedio. Estas escuelas probablemente tienen lecciones que aportar para mejorar la educación en las áreas menos favorecidas del país.    
+La línea azul en estas figuras muestra que los logros reflejan en forma apreciable las diferencias socioeconómicas y culturales que se vive en las escuelas. A la vez, conviene notar que un grupo de escuelas oficiales rurales obtuvieron logros superiores al promedio internacional e incluso algunas superan en sexto grado las escuelas oficiales urbanas a pesar de tener índices socioeconómicos y culturales apreciablemente menores. Estas escuelas deben convertirse en sujeto de estudio y fuente de lecciones aprendidas.   
 
 ```{r puntaje_isecf_rd_3, fig.width=12, fig.height=10, echo=F, message=F, warning=F}		
 		
@@ -385,7 +385,7 @@ m <- merge(mean_school, mean_isecf_school, by=c('idschool'))
 ggplot(m, aes(x=ISECF,y=puntaje_estandar,color=rd,group=1,size=totalum)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice socioeconómico y cultural promedio de los alumnos de la escuela") + ylab("Puntaje promedio de los alumnos de la escuela") + ggtitle('Figura 5.6. Logros de aprendizaje por tipo de escuela, 6to grado') + scale_y_continuous(limits=c(500,850)) + scale_colour_discrete(guide=F)
 ```
 
-## 6 Relacion entre logros de aprendizaje y factores asociados seleccionados
+## 6 Otros factores asociados de interés
 
 Los factores asociados son características o circumstancias cuantificables que podrían mostrar relación con los logros de aprendizaje.  Para ser conciso, este documento muestra sólo una selección de factores que pueden resultar de interés, dejando fuera otros que seguramente también serán de interés y que deben ser explorados en estudios posteriores.   
 
