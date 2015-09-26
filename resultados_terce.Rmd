@@ -1,3 +1,6 @@
+---
+output: pdf_document
+---
 ## Presentación de resultados de Panamá en el Tercer Estudio Regional Comparativo y Explicativo (TERCE) del Laboratorio Latinoamericano de Evaluación de la Calidad de la Educación (LLECE)
 
 ### 1. Resumen
