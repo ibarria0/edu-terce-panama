@@ -1,3 +1,6 @@
+---
+output: pdf_document
+---
 ## Presentación de resultados de Panamá en el Tercer Estudio Regional Comparativo y Explicativo (TERCE) del Laboratorio Latinoamericano de Evaluación de la Calidad de la Educación (LLECE)
 
 ### 1. Resumen
@@ -90,18 +93,18 @@ Salvo en lecutra de sexto grado, cerca de 40% de nuestras niñas y niños obtien
 
 ## 5 Resultados según género, etnia originaria y nivel socioeconómico y cultural
 
-Las niñas obtuvieron ligeramente mejores resultados que los niños en lectura de tercero y sexto grado, matemáticas de tercero y sexto grado y ciencias de sexto grado, pero la ventaja no es clara.   La figura 5.1 compara los logros combinando las tres áreas de conocimiento.  
+Las niñas obtuvieron ligeramente mejores resultados que los niños en lectura de tercero y sexto grado, matemáticas de tercero y sexto grado y ciencias de sexto grado, pero la ventaja no es clara.   La figura 5.1 compara los logros combinando las tres áreas de conocimiento.  La data excluye alumnos para los cuales no se pudo obtener respuesta de género válida.     
 
 ![plot of chunk demo_genero_puntaje](figure/demo_genero_puntaje-1.png) 
 
-Los alumnos que se reconocen como miembros de etnias originarias logran menor puntaje que los que no se consideran miembros.  La figuras 5.3 compara los logros combinando las tres áreas de conocimiento y la diferencia es clara.      
+Los alumnos que se reconocen como miembros de etnias originarias logran menor puntaje que los que no se consideran miembros.  La figuras 5.2 compara los logros combinando las tres áreas de conocimiento y la diferencia es clara.   La data excluye alumnos para los cuales no se pudo obtener respuesta de etnia originaria válida.    
 
 
 ![plot of chunk demo_etnia_puntaje](figure/demo_etnia_puntaje-1.png) 
 
 Otro aspecto importante de equidad o falta de ella tiene relación con las condiciones de vida.  La educación y la salud son determinantes para el bienestar de un individuo. Cuando los logros de aprendizaje dependen marcadamente del nivel socioeconómico y cultural de una persona es difícil argumentar que la sociedad brinda oportunidades por igual.  Este es el caso de Panamá.     
 
-Las figuras 5.5 y 5.6 muestran el puntaje promedio, combinando todas las áreas de conocimiento, obtenido por los alumnos de nuestras escuelas y el índice socioeconómico y cultural promedio de esos alumnos.  La figura 5.6 es la misma figura 1.1 repetida aquí por conveniencia.  El puntaje promedio internacional en el Terce fue 700 puntos para todas las áreas de conocimiento. 
+Las figuras 5.3 y 5.4 muestran el puntaje promedio, combinando todas las áreas de conocimiento, obtenido por los alumnos de nuestras escuelas y el índice socioeconómico y cultural promedio de esos alumnos.  La figura 5.4 es la misma figura 1.1 repetida aquí por conveniencia.  El puntaje promedio internacional en el Terce fue 700 puntos para todas las áreas de conocimiento. 
 
 La línea azul en estas figuras muestra que los logros reflejan en forma apreciable las diferencias socioeconómicas y culturales que se vive en las escuelas. A la vez, conviene notar que un grupo de escuelas oficiales rurales obtuvieron logros superiores al promedio internacional e incluso algunas superan en sexto grado las escuelas oficiales urbanas a pesar de tener índices socioeconómicos y culturales apreciablemente menores. Estas escuelas deben convertirse en sujeto de estudio y fuente de lecciones aprendidas.   
 
@@ -111,44 +114,53 @@ La línea azul en estas figuras muestra que los logros reflejan en forma aprecia
 
 ## 6 Otros factores asociados de interés
 
-Los factores asociados son características o circumstancias cuantificables que podrían mostrar relación con los logros de aprendizaje.  Para ser conciso, este documento muestra sólo una selección de factores que pueden resultar de interés, dejando fuera otros que seguramente también serán de interés y que deben ser explorados en estudios posteriores.   
+Los factores asociados son características o circumstancias cuantificables que podrían mostrar una relación significativa con los logros de aprendizaje.  La información sobre factores fue recopilada durante el Terce usando cuestionarios a los alumnos, docentes, directores de escuelas y familias involucradas. Este documento sólo incluye algunos de los muchos factores que se pueden y deben explorar.  La intención es provocar un debate nacional, no crear una enciclopedia sobre el tema.     
 
-El que un factor muestre relación con los logros de aprendizaje no es prueba de que el factor sea la causa de los logros o que los garantice.   A modo de ejemplo, una mejor situación socioeconómica y cultural da la oportunidad de asistir a una mejor escuela tanto en infraestructura como en eficacia, sin que sea claro cuál de esos tres factores es el mayor responsable por los logros de aprendizaje observados.  En forma similar, varios de los factores explorados en esta sección tienen relación potencial con el índice socioeconómico y cultural.   Las relaciones observadas deberán pasar por un debate académico más extenso para llegar a conclusiones confiables.  
+El que un factor muestre relación con los logros de aprendizaje no prueba que sea la causa o síntoma de esos logros.   A modo de ejemplo, una mejor situación socioeconómica y cultural da la oportunidad de asistir a una mejor escuela, con mejor  infraestructura y más eficacia, sin que sea claro cuáles de estos tres factores merece más crédito por los aprendizajes logrados.  El lector debe tener presente que muchos de los factores explorados en esta sección tienen relación potencial con el índice socioeconómico y cultural, por tanto juzgar su importancia requerirá un debate académico más extenso y riguroso.  
 
-La figura 6.1 muestra el efecto del índice de infraestructura de la escuela, construido con base en cuestionarios al respecto. La relación es marcada: a mejor infraestructura mayor puntaje promedio de las escuelas.   Por supuesto, este es uno de los factores que puede estar reflejando el índice socioeconómico y cultural de los alumnos de las escuelas.   
+En las figuras siguientes sobre el entorno escolar, los puntos dentro de la figura representan escuelas y sus tamaños no ilustran el número de alumnos en la escuela.   La línea ilustra la relación con un modelo líneal.  La figura 6.1 muestra el efecto del índice de infraestructura de la escuela. La relación es marcada: a mejor infraestructura mayor puntaje promedio de las escuelas.   Por supuesto, este es uno de los factores que puede estar reflejando el índice socioeconómico y cultural de los alumnos de las escuelas.   
 
 ![plot of chunk puntaje_INFRAD](figure/puntaje_INFRAD-1.png) 
-La figura 6.2 sí muestra relación entre la autonomía administrativa de la escuela y los logros de aprendizaje de sus alumnos.  En este caso, el índice de autonomía actúa como un ranking: a menor índice mayor autonomía.   
+La autonomía administrativa de la escuela muestra relación con los logros de aprendizaje de sus alumnos.  El índice en la figura 6.2 procede de un ranking pero expresado con promedio 0: a menor índice mayor autonomía. Así, las escuelas particulares, de mayor autonomía, aparecen en el extremo izquierdo de la figura con los índices más bajos.   
 
 ![plot of chunk puntaje_AUTOADD](figure/puntaje_AUTOADD-1.png) 
 
-Curiosamente, los resultados del Terce muestran poca relación entre un índice de actitudes y motivación de docentes y los logros de aprendizajes.  La figura 6.3 muestra que aunque el índice varía desde valores -2 a +2, el puntaje promedio entre todas las áreas de conocimiento se mantiene cerca de 670 puntos, como indíca la línea azul.  Es decir, el índice hace poca diferencia.  Esta observación seguramente será sujeto de mayor validación y análisis.   
+En las dos figuras siguientes los puntos corresponden a docentes y muestran al promedio obtenido por sus estudiantes, en el área indicada por el color del punto, y una característica del profesor: motivación en la figura 6.3 y edad en la figura 6.4.  
+
+Curiosamente, se ve poca relación entre la motivación docente y los logros de aprendizajes.  Por ejemplo, en la figura 6.3 el valor de puntaje en la línea que modela la relación logro-motivación no varía mucho de 670 puntos aunque el índice varía de -2 a +2. Esta observación seguramente será sujeto de mayor validación y análisis.   
 
 
 
 ![plot of chunk puntaje_prof_MOTIVP](figure/puntaje_prof_MOTIVP-1.png) 
-La edad de los docentes parece hacer una diferencia en los logros de aprendizaje.    
+La edad de los docentes sí parece hacer una diferencia en los logros de aprendizaje.    
 
 ![plot of chunk puntaje_prof_DQPIT01](figure/puntaje_prof_DQPIT01-1.png) 
-La lengua [MATERNA] del docente también paree tener relación con los logros de aprendizaje y el efecto positivo es muy pronunciado en matemáticas cuando la lengua [MATERNA] es extranjera.  Este es uno de los efectos más significativos entre los distintos factores.  La siguiente figura 6.5 ilustra el efecto de la lengua [MATERNA] para las tres áreas de conocimiento indicadas. En evaluación de aprendizaje, el efecto se expresa típicamente como desviaciones estándar del puntaje promedio; en este caso el promedio obtenido por los alumnos de Panamá.  Esta desviación es una medida estándar de la diferencia estadística.   
+Las figuras siguientes ilustran el efecto de ciertas características de interés.  Por ejemplo, podríamos explorar si el subgrupo de alumnos cuyos docentes tiene alta formación obtienen mayores logros de aprendizaje.  El efecto de esa alta formación consiste en notar el puntaje promedio de ese subgrupo de alumnos y restarle el puntaje promedio del grupo total de alumnos de Panamá en el Terce.  Cuando este efecto es positivo y de suficiente magnitud, se entiende que el subgrupo obtiene mejores resultados que el promedio del grupo total.  
+
+En las figuras, para simplificar, el promedio del grupo total está representado por el valor 0 en el eje vertical y la magnitud del efecto, o diferencia entre promedios, se expresa en desviaciones estándar, que es una medida conocida de diferencias estadísticas.      
+
+Empecemos con la figura 6.5.  La lengua materna del docente parece tener relación con los logros de aprendizaje.  Cuando la lengua materna es extranjera, el efecto es positivo y muy elevado en matemáticas.  Este es uno de los efectos más significativos entre los distintos factores. Pero es importante advertir que el efecto o relación no es prueba de que esa característica del docente sea la causa o garantía de los mejores resultados de matemática obtenidos por sus alumnos.  
 
 ![plot of chunk puntaje_prof_DQPIT03](figure/puntaje_prof_DQPIT03-1.png) 
-La jornada completa también parece tener un efecto positivo importante en el logro de los aprendizajes.   
+La jornada completa también tiene un efecto positivo importante en el logro de los aprendizajes, aunque menor que la lengua materna del docente.   
 
 ![plot of chunk puntaje_prof_DQPIT07](figure/puntaje_prof_DQPIT07-1.png) 
-El nivel educativo del docente tiene un efecto positivo.   [AVERIGUAR SIGNIFICADO DE VALORES]
 
-![plot of chunk puntaje_prof_DQPIT11](figure/puntaje_prof_DQPIT11-1.png) 
-Los incentivos económicos al docente muestran un efecto positivo en los logros de aprendizaje.  
+Los incentivos económicos por desempeño para el docente muestran un efecto positivo en los logros de aprendizaje, aunque un poco menor que la jornada única.  
 
 ![plot of chunk puntaje_prof_DQPIT14](figure/puntaje_prof_DQPIT14-1.png) 
+La especialización del docente, más allá de la educación terciaria, muestra un efecto positivo, aunque menor que los incentivos por desempeño al docente.  Los niveles de formación docente corresponden a la clasificación internacional normalizada de la educación del Instituto de Estadística de la Unesco.   
+
+![plot of chunk puntaje_prof_DQPIT11](figure/puntaje_prof_DQPIT11-1.png) 
+En las dos últimas figuras, los puntos corresponden a alumnos.  Cada punto indica el puntaje obtenido en el área de conocimiento que indica su color y el valor correspondiente al alumno del índice de interés.   
 
 
-Las actividades recreativas con la familia también muestran un efecto positivo. En este caso los círculos en la figura corresponden al puntaje de un alumno en un área de conocimiento. [CONFIRMAR SI ES RANKING O MEDICION] 
+Las actividades recreativas con la familia muestran un efecto positivo, como ilustra la línea que modela la relación logros-actividades.  Es decir, a mayor índice de actividades recreativas con la familia mayor puntaje obtienen los alumnos correspondientes.  
 
 ![plot of chunk puntaje_familia_RECREAF](figure/puntaje_familia_RECREAF-1.png) 
-El uso de computador educativo parece favorable para logros de aprendizaje.  Los círculos corresponden al puntaje de un alumno en un área de conocimiento.  [VERIFICAR QUE NO ES UN RANKING]
+Finalmente, el uso de computadora para fines educativos también muestra un efecto positivo, como ilustra la línea que modela la relación logros-uso, aunque el efecto parece menos marcado que las actividades recreativas.  Como mencionamos previamente, cabe notar que estos dos factores, las actividades recreativas y el uso de computadoras, tienen relación potencial con el índice socioeconómico y cultural de los alumnos.   
 
 
 ![plot of chunk puntaje_alumno_PCEDUCA6](figure/puntaje_alumno_PCEDUCA6-1.png) 
 
+Existen muchos otros factores y datos de interés en la base de datos de resultados del Terce.  El objetivo principal de este documento ha sido provocar un debate nacional sobre la eficacia de nuestra educación y su impacto potencial en la equidad social.  Aspiramos a contribuir con esto a una cultura de información autocrítica, capaz de aprender con base en evidencias, para el bienestar sostenible de todo el país.   
