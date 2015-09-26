@@ -82,7 +82,7 @@ Más relevante en primera instancia es saber si nuestros niños y niñas logran 
 ![plot of chunk niveles_barcharts_6](figure/niveles_barcharts_6-1.png) 
 
 
-## 5 Características de los resultados en Panamá
+## 5 Resultados según género, etnia originaria y nivel socioeconómico y cultural
 
 Las niñas obtuvieron ligeramente mejores resultados que los niños en lectura de tercer grado, sexto grado y en ciencias de sexto grado. En matemáticas, las niñas también obtuvieron mejor resultados pero la diferencia es muy pequeña.   [NO TOMA EN CUENTA LOS QUE CONTESTARON N/A??] 
 
@@ -101,7 +101,7 @@ Los alumnos que se reconocen como miembros de etnias originarias logran menor pu
 
 Las oportunidades de educación y salud muestran un altísimo grado de influencia en el bienestar de un individuo. Cuándo los logros de aprendizaje dependen marcadamente del poder adquisitivo de una persona es difícil argumentar que la sociedad brinda oportunidades justas a todos sus residentes.  En Panamá, la diferencia de logros entre escuelas particulares, escuelas oficiales urbanas y escuelas oficiales rurales es muy marcada.   
 
-Las figuras 5.5 y 5.6 muestran para cada escuela participante de Panamá el puntaje promedio obtenido por sus alumnos combinando todas las áreas de conocimiento, en el eje vertical, y el índice socioeconómico y cultural promedio de sus alumnos, en el eje horizontal. El puntaje promedio entre todos los alumnos es 700 puntos para todas las áreas de conocimiento.  La figura 5.6 es la misma figura 1.1, repetida aquí por conveniencia.  
+Las figuras 5.5 y 5.6 muestran para cada escuela participante de Panamá el puntaje promedio obtenido por sus alumnos combinando todas las áreas de conocimiento y el índice socioeconómico y cultural promedio de sus alumnos. El puntaje promedio entre todos los alumnos es 700 puntos para todas las áreas de conocimiento.  La figura 5.6 es la misma figura 1.1, repetida aquí por conveniencia.  
 
 Conviene notar que un grupo de escuelas oficiales rurales obtuvieron logros promedio iguales o superiores a los de las escuelas oficiales urbanas a pesar de tener índices socioeconómicos y culturales menores en promedio. Estas escuelas probablemente tienen lecciones que aportar para mejorar la educación en las áreas menos favorecidas del país.    
 
@@ -111,143 +111,46 @@ Conviene notar que un grupo de escuelas oficiales rurales obtuvieron logros prom
 
 ## 6 Relacion entre logros de aprendizaje y factores asociados seleccionados
 
-Los factores asociados son características o circumstancias cuantificables que podrían mostrar relación con los logros de aprendizaje.  El que muestren relación con los logros no significa de por si que sean garantía ni la causa de los logros, pero sugiere que es conveniente explorar la relación.   A modo de ejemplo, una mejor situación socioeconómica y cultural da la oportunidad de asistir a una mejor escuela tanto en infraestructura como en eficacia, sin que sea claro cuál de esos tres factores explican la eficacia. 
+Los factores asociados son características o circumstancias cuantificables que podrían mostrar relación con los logros de aprendizaje.  Para ser conciso, este documento muestra sólo una selección de factores que pueden resultar de interés, dejando fuera otros que seguramente también serán de interés y que deben ser explorados en estudios posteriores.   
+
+El que un factor muestre relación con los logros de aprendizaje no es prueba de que el factor sea la causa de los logros o que los garantice.   A modo de ejemplo, una mejor situación socioeconómica y cultural da la oportunidad de asistir a una mejor escuela tanto en infraestructura como en eficacia, sin que sea claro cuál de esos tres factores es el mayor responsable por los logros de aprendizaje observados.  En forma similar, varios de los factores explorados en esta sección tienen relación potencial con el índice socioeconómico y cultural.   Las relaciones observadas deberán pasar por un debate académico más extenso para llegar a conclusiones confiables.  
+
+La figura 6.1 muestra el efecto del índice de infraestructura de la escuela, construido con base en cuestionarios al respecto. La relación es marcada: a mejor infraestructura mayor puntaje promedio de las escuelas.   Por supuesto, este es uno de los factores que puede estar reflejando el índice socioeconómico y cultural de los alumnos de las escuelas.   
 
 ![plot of chunk puntaje_INFRAD](figure/puntaje_INFRAD-1.png) 
-Los logros de aprendizaje, evaluados a través de los puntajes Terce, muestran una relación clara con La infraestructura de la escuela.  Esto por si solo no permite concluir que una mejor infraestructura genera mejores logros; por ejemplo, una mejor situación socioeconómica y cultural da la oportunidad de asistir a una mejor escuela tanto en infraestructura como en eficacia, sin que sea claro cual es el factor principal que logra esa eficacia. Comprender la relación entre infraestructura y logros requiere mayor análisis para determinar hasta que punto la infraestructura influye en los logros. 
-
-
-![plot of chunk puntaje_VIOLEND](figure/puntaje_VIOLEND-1.png) 
-La figura siguiente ilustra que no se ve una relación clara entre la violencia del entorno escolar y los logros de aprendizaje.   
-
-![plot of chunk puntaje_CSOCIALD](figure/puntaje_CSOCIALD-1.png) 
-Tampoco se ve una relación clara entre el capital social en el entorno escolar y los logros de aprendizaje. 
+La figura 6.2 sí muestra relación entre la autonomía administrativa de la escuela y los logros de aprendizaje de sus alumnos.  En este caso, el índice de autonomía actúa como un ranking: a menor índice mayor autonomía.   
 
 ![plot of chunk puntaje_AUTOADD](figure/puntaje_AUTOADD-1.png) 
-Sí se nota una relación entre la autonimía administrativa de la escuela y los logros de aprendizaje.  [JEV2IBG: creo que en esta figura el signo del indice de autonomiase invirtio: pensaria que las escuelas particulares tienen mas autonomia.  Sera un indice de "falta de autonomia"?]
 
-![plot of chunk puntaje_AUTOACD](figure/puntaje_AUTOACD-1.png) 
-Hay algún grado de relación entre la autonomía académica y los logros de aprendizaje.   [JEV2IBG: tambien pienso que se invirtio el signo del indice de autonomia academica]
-
-![plot of chunk puntaje_CLAMBLD](figure/puntaje_CLAMBLD-1.png) 
-Hay relación clara entre la calidad de ambiente laboral en la escuela (Director) y los logros de aprendizaje. 
-
-### 6.3 Factores Asociados de Profesores
-
-#### 6.3.1 Índices
+Curiosamente, los resultados del Terce muestran poca relación entre un índice de actitudes y motivación de docentes y los logros de aprendizajes.  La figura 6.3 muestra que aunque el índice varía desde valores -2 a +2, el puntaje promedio entre todas las áreas de conocimiento se mantiene cerca de 670 puntos, como indíca la línea azul.  Es decir, el índice hace poca diferencia.  Esta observación seguramente será sujeto de mayor validación y análisis.   
 
 
 
 ![plot of chunk puntaje_prof_MOTIVP](figure/puntaje_prof_MOTIVP-1.png) 
-![plot of chunk puntaje_prof_VIOLENP](figure/puntaje_prof_VIOLENP-1.png) 
+La edad de los docentes parece hacer una diferencia en los logros de aprendizaje.    
 
-#### 6.3.2 Datos de Profesores
 ![plot of chunk puntaje_prof_DQPIT01](figure/puntaje_prof_DQPIT01-1.png) 
+La lengua [MATERNA] del docente también paree tener relación con los logros de aprendizaje y el efecto positivo es muy pronunciado en matemáticas cuando la lengua [MATERNA] es extranjera.  Este es uno de los efectos más significativos entre los distintos factores.  La siguiente figura 6.5 ilustra el efecto de la lengua [MATERNA] para las tres áreas de conocimiento indicadas. En evaluación de aprendizaje, el efecto se expresa típicamente como desviaciones estándar del puntaje promedio; en este caso el promedio obtenido por los alumnos de Panamá.  Esta desviación es una medida estándar de la diferencia estadística.   
 
 ![plot of chunk puntaje_prof_DQPIT03](figure/puntaje_prof_DQPIT03-1.png) 
+La jornada completa también parece tener un efecto positivo importante en el logro de los aprendizajes.   
 
 ![plot of chunk puntaje_prof_DQPIT07](figure/puntaje_prof_DQPIT07-1.png) 
+El nivel educativo del docente tiene un efecto positivo.   [AVERIGUAR SIGNIFICADO DE VALORES]
 
 ![plot of chunk puntaje_prof_DQPIT11](figure/puntaje_prof_DQPIT11-1.png) 
+Los incentivos económicos al docente muestran un efecto positivo en los logros de aprendizaje.  
 
 ![plot of chunk puntaje_prof_DQPIT14](figure/puntaje_prof_DQPIT14-1.png) 
 
-### 6.4 Factores Asociados Familia
 
+Las actividades recreativas con la familia también muestran un efecto positivo. [CONFIRMAR SI ES RANKING O MEDICION] 
 
-
-#### 6.4.1 Indices
-
-![plot of chunk puntaje_familia_SUPERVF](figure/puntaje_familia_SUPERVF-1.png) 
-![plot of chunk puntaje_familia_MOTIVALF](figure/puntaje_familia_MOTIVALF-1.png) 
 ![plot of chunk puntaje_familia_RECREAF](figure/puntaje_familia_RECREAF-1.png) 
-![plot of chunk puntaje_familia_INVOLUCF](figure/puntaje_familia_INVOLUCF-1.png) 
-![plot of chunk puntaje_familia_SERVBARF](figure/puntaje_familia_SERVBARF-1.png) 
-![plot of chunk puntaje_familia_CSOCBARF](figure/puntaje_familia_CSOCBARF-1.png) 
-![plot of chunk puntaje_familia_VIOLBARF](figure/puntaje_familia_VIOLBARF-1.png) 
-
-#### 6.4.2 Características de interés en las familias
-
-![plot of chunk puntaje_familia_DQFIT01](figure/puntaje_familia_DQFIT01-1.png) 
-
-Estos siguientes factores estan muy asociados al indice sociocultural.
-
-![plot of chunk puntaje_familia_DQFIT15_01](figure/puntaje_familia_DQFIT15_01-1.png) 
-![plot of chunk puntaje_familia_DQFIT15_02](figure/puntaje_familia_DQFIT15_02-1.png) 
-![plot of chunk puntaje_familia_DQFIT15_03](figure/puntaje_familia_DQFIT15_03-1.png) 
-![plot of chunk puntaje_familia_DQFIT15_04](figure/puntaje_familia_DQFIT15_04-1.png) 
-![plot of chunk puntaje_familia_DQFIT15_05](figure/puntaje_familia_DQFIT15_05-1.png) 
-![plot of chunk puntaje_familia_DQFIT15_06](figure/puntaje_familia_DQFIT15_06-1.png) 
-![plot of chunk puntaje_familia_DQFIT15_07](figure/puntaje_familia_DQFIT15_07-1.png) 
+El uso de computador educativo parece favorable para logros de aprendizaje.   [VERIFICAR QUE NO ES UN RANKING]
 
 
-![plot of chunk puntaje_familia_DQFIT32_01](figure/puntaje_familia_DQFIT32_01-1.png) 
-
-![plot of chunk puntaje_familia_DQFIT32_02](figure/puntaje_familia_DQFIT32_02-1.png) 
-
-![plot of chunk puntaje_familia_DQFIT32_03](figure/puntaje_familia_DQFIT32_03-1.png) 
-
-![plot of chunk puntaje_familia_DQFIT33_01](figure/puntaje_familia_DQFIT33_01-1.png) 
-
-![plot of chunk puntaje_familia_DQFIT33_02](figure/puntaje_familia_DQFIT33_02-1.png) 
-
-![plot of chunk puntaje_familia_DQFIT33_03](figure/puntaje_familia_DQFIT33_03-1.png) 
-
-![plot of chunk puntaje_familia_DQFIT33_04](figure/puntaje_familia_DQFIT33_04-1.png) 
-
-![plot of chunk puntaje_familia_DQFIT33_05](figure/puntaje_familia_DQFIT33_05-1.png) 
- 
-		
-### 6.5 Factores Asociados Alumnos		
-		
-
-		
-#### 6.5.1 Indices		
-		
-![plot of chunk puntaje_alumno_CONDIA6](figure/puntaje_alumno_CONDIA6-1.png) 
-		
-![plot of chunk puntaje_alumno_USOLIA6](figure/puntaje_alumno_USOLIA6-1.png) 
-		
-![plot of chunk puntaje_alumno_TMPLIBA6](figure/puntaje_alumno_TMPLIBA6-1.png) 
-		
-![plot of chunk puntaje_alumno_CLAMBIA6](figure/puntaje_alumno_CLAMBIA6-1.png) 
-		
-![plot of chunk puntaje_alumno_ASISDOA6](figure/puntaje_alumno_ASISDOA6-1.png) 
-		
-![plot of chunk puntaje_alumno_PDORGCA6](figure/puntaje_alumno_PDORGCA6-1.png) 
-		
-![plot of chunk puntaje_alumno_PRACEDA6](figure/puntaje_alumno_PRACEDA6-1.png) 
-		
-![plot of chunk puntaje_alumno_PRACE2A6](figure/puntaje_alumno_PRACE2A6-1.png) 
-		
 ![plot of chunk puntaje_alumno_PCEDUCA6](figure/puntaje_alumno_PCEDUCA6-1.png) 
-		
-![plot of chunk puntaje_alumno_PCRECRA6](figure/puntaje_alumno_PCRECRA6-1.png) 
-		
-#### 6.4.2 Características de interés en las alumnos		
-		
-![plot of chunk puntaje_alumno_trabaja](figure/puntaje_alumno_trabaja-1.png) 
-		
-![plot of chunk puntaje_alumno_DQA6IT26](figure/puntaje_alumno_DQA6IT26-1.png) 
-		
-![plot of chunk puntaje_alumno_DQA6IT26a](figure/puntaje_alumno_DQA6IT26a-1.png) 
-		
+## Apéndice 1.  Niveles de logros educativos por área y grado		
 
-```
-## Error in `levels<-.factor`(`*tmp*`, value = c("Si", "No", "No, pero me dan cosas": number of levels differs
-```
-
-![plot of chunk puntaje_alumno_DQA6IT26b](figure/puntaje_alumno_DQA6IT26b-1.png) 
-		
-#### Cuando no estás en clases, ¿qué haces con tu tiempo libre?		
-		
-![plot of chunk puntaje_alumno_DQA6IT25_01](figure/puntaje_alumno_DQA6IT25_01-1.png) 
-		
-![plot of chunk puntaje_alumno_DQA6IT25_02](figure/puntaje_alumno_DQA6IT25_02-1.png) 
-![plot of chunk puntaje_alumno_DQA6IT25_03](figure/puntaje_alumno_DQA6IT25_03-1.png) 
-![plot of chunk puntaje_alumno_DQA6IT25_04](figure/puntaje_alumno_DQA6IT25_04-1.png) 
-![plot of chunk puntaje_alumno_DQA6IT25_05](figure/puntaje_alumno_DQA6IT25_05-1.png) 
-![plot of chunk puntaje_alumno_DQA6IT25_06](figure/puntaje_alumno_DQA6IT25_06-1.png) 
-![plot of chunk puntaje_alumno_DQA6IT25_07](figure/puntaje_alumno_DQA6IT25_07-1.png) 
-		
-![plot of chunk puntaje_alumno_DQA6IT25_08](figure/puntaje_alumno_DQA6IT25_08-1.png) 
+[TRANSCRIBIR DE LA INFORMACION TERCE]
