@@ -254,7 +254,7 @@ ggplot(a[a$grado == 6,], aes(x=nivel,y=dist,fill=countryp)) + geom_bar(stat="ide
 ```
 
 
-## 5 Características de los resultados en Panamá
+## 5 Resultados según género, etnia originaria y nivel socioeconómico y cultural
 
 Las niñas obtuvieron ligeramente mejores resultados que los niños en lectura de tercer grado, sexto grado y en ciencias de sexto grado. En matemáticas, las niñas también obtuvieron mejor resultados pero la diferencia es muy pequeña.   [NO TOMA EN CUENTA LOS QUE CONTESTARON N/A??] 
 
@@ -274,7 +274,7 @@ ggplot(a, aes(x=DQA6IT02,y=puntaje_estandar,fill=DQA6IT02)) + geom_bar(stat='ide
 ```
 
 ```{r demo_genero_puntaje_desv, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-ggplot(dif, aes(x=genero,y=std_mean)) + geom_bar(stat='identity',fill="#f8766d",width=0.25) + ggtitle('Diferencia diminuta de puntaje promedio a favor de las niñas') + ylab("Desviaciones estandar") + xlab("Diferencia")+ scale_fill_discrete(guide=F) + scale_y_continuous(limits=c(-0.8,0.8))
+ggplot(dif, aes(x=genero,y=std_mean)) + geom_bar(stat='identity',fill="#f8766d",width=0.25) + ggtitle('Diferencia diminuta de puntaje promedio a favor de las niñas') + ylab("Desviaciones estándar") + xlab("Diferencia")+ scale_fill_discrete(guide=F) + scale_y_continuous(limits=c(-0.8,0.8))
 ```
 
 Los alumnos que se reconocen como miembros de etnias originarias logran menor puntaje que los que no se consideran miembros.  La figuras 5.3 compara los puntajes promedio combinando las tres áreas de conocimiento de los alumnos que se consideran de grupos originarios y de los que no.  La figura 5.4 muestra la diferencia en promedios de los dos grupos, expresado en desviaciones estandar.   La diferencia negativa es importante y en contra de los grupos originarios.     
@@ -298,7 +298,7 @@ ggplot(dif, aes(x=genero,y=-std_mean)) + geom_bar(stat='identity',fill="#f8766d"
 
 Las oportunidades de educación y salud muestran un altísimo grado de influencia en el bienestar de un individuo. Cuándo los logros de aprendizaje dependen marcadamente del poder adquisitivo de una persona es difícil argumentar que la sociedad brinda oportunidades justas a todos sus residentes.  En Panamá, la diferencia de logros entre escuelas particulares, escuelas oficiales urbanas y escuelas oficiales rurales es muy marcada.   
 
-Las figuras 5.5 y 5.6 muestran para cada escuela participante de Panamá el puntaje promedio obtenido por sus alumnos combinando todas las áreas de conocimiento, en el eje vertical, y el índice socioeconómico y cultural promedio de sus alumnos, en el eje horizontal. El puntaje promedio entre todos los alumnos es 700 puntos para todas las áreas de conocimiento.  La figura 5.6 es la misma figura 1.1, repetida aquí por conveniencia.  
+Las figuras 5.5 y 5.6 muestran para cada escuela participante de Panamá el puntaje promedio obtenido por sus alumnos combinando todas las áreas de conocimiento y el índice socioeconómico y cultural promedio de sus alumnos. El puntaje promedio entre todos los alumnos es 700 puntos para todas las áreas de conocimiento.  La figura 5.6 es la misma figura 1.1, repetida aquí por conveniencia.  
 
 Conviene notar que un grupo de escuelas oficiales rurales obtuvieron logros promedio iguales o superiores a los de las escuelas oficiales urbanas a pesar de tener índices socioeconómicos y culturales menores en promedio. Estas escuelas probablemente tienen lecciones que aportar para mejorar la educación en las áreas menos favorecidas del país.    
 
@@ -393,7 +393,11 @@ ggplot(m, aes(x=ISECF,y=puntaje_estandar,color=rd,group=1,size=totalum)) + geom_
 
 ## 6 Relacion entre logros de aprendizaje y factores asociados seleccionados
 
-Los factores asociados son características o circumstancias cuantificables que podrían mostrar relación con los logros de aprendizaje.  El que muestren relación con los logros no significa de por si que sean garantía ni la causa de los logros, pero sugiere que es conveniente explorar la relación.   A modo de ejemplo, una mejor situación socioeconómica y cultural da la oportunidad de asistir a una mejor escuela tanto en infraestructura como en eficacia, sin que sea claro cuál de esos tres factores explican la eficacia. 
+Los factores asociados son características o circumstancias cuantificables que podrían mostrar relación con los logros de aprendizaje.  Para ser conciso, este documento muestra sólo una selección de factores que pueden resultar de interés, dejando fuera otros que seguramente también serán de interés y que deben ser explorados en estudios posteriores.   
+
+El que un factor muestre relación con los logros de aprendizaje no es prueba de que el factor sea la causa de los logros o que los garantice.   A modo de ejemplo, una mejor situación socioeconómica y cultural da la oportunidad de asistir a una mejor escuela tanto en infraestructura como en eficacia, sin que sea claro cuál de esos tres factores es el mayor responsable por los logros de aprendizaje observados.  En forma similar, varios de los factores explorados en esta sección tienen relación potencial con el índice socioeconómico y cultural.   Las relaciones observadas deberán pasar por un debate académico más extenso para llegar a conclusiones confiables.  
+
+La figura 6.1 muestra el efecto del índice de infraestructura de la escuela, construido con base en cuestionarios al respecto. La relación es marcada: a mejor infraestructura mayor puntaje promedio de las escuelas.   Por supuesto, este es uno de los factores que puede estar reflejando el índice socioeconómico y cultural de los alumnos de las escuelas.   
 
 ```{r puntaje_INFRAD, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 
@@ -420,67 +424,9 @@ mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
 mean_infrad_school <- aggregate(INFRAD ~ idschool, qd, mean)
 m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
 
-ggplot(m, aes(x=INFRAD,y=puntaje_estandar,color=rd,group=1)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", se = F) + scale_size(guide=FALSE) + xlab("Índice de infraestructura de la escuela") + ylab("Puntaje Promedio por Escuela")
+ggplot(m, aes(x=INFRAD,y=puntaje_estandar,color=rd,group=1)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", se = F) + scale_size(guide=FALSE) + xlab("Índice de infraestructura de la escuela") + ylab("Puntaje promedio por escuela") +  ggtitle('Figura 6.1. Logros de aprendizaje según infraestructura escolar')
 ```
-Los logros de aprendizaje, evaluados a través de los puntajes Terce, muestran una relación clara con La infraestructura de la escuela.  Esto por si solo no permite concluir que una mejor infraestructura genera mejores logros; por ejemplo, una mejor situación socioeconómica y cultural da la oportunidad de asistir a una mejor escuela tanto en infraestructura como en eficacia, sin que sea claro cual es el factor principal que logra esa eficacia. Comprender la relación entre infraestructura y logros requiere mayor análisis para determinar hasta que punto la infraestructura influye en los logros. 
-
-
-```{r puntaje_VIOLEND, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-# load factores alumnos
-qd <- read.spss('./data/Directores/QD6.SAV', to.data.frame=T)
-qd <- qd[qd$country == 'PAN',]
-
-qd$dependencia <- as.factor(qd$dependencia)
-qd$ruralidad <- as.factor(qd$ruralidad)
-levels(qd$dependencia) <- c("Oficial","Particular")
-levels(qd$ruralidad) <- c("Urbano","Rural")
-
-# load factores familia
-qf <- read.spss('./data/Familia/QF6.SAV', to.data.frame=T)
-qf <- qf[qf$country == 'PAN',]
-qf <- qf[,c("idschool","idstud","ISECF","INVOLUCF","CSOCBARF","SUPERVF","RECREAF","SERVBARF","VIOLBARF","MOTIVALF","subsgobf","padindig","madindig","DQFIT01","DQFIT25","DQFIT31","DQFIT34","DQFIT15_07","DQFIT18_02")]
-
-pe <- merge(p6,qd,by='idschool')
-escuela_tipo <- function(r,d) { if(r == 'Urbano' & d == 'Particular') { return(0) } else if (r == 'Urbano' & d == 'Oficial') { return(1) } else if (r == 'Rural' & d == 'Particular') {return(2)} else {return(3)}}
-pe$rd <- as.factor(mapply(escuela_tipo, pe$ruralidad, pe$dependencia))
-levels(pe$rd) <- c("Urbano/Particular", "Urbano/Oficial", "Rural/Particular", "Rural/Oficial")
-
-mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
-mean_infrad_school <- aggregate(VIOLEND ~ idschool, qd, mean)
-m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
-
-ggplot(m, aes(x=VIOLEND,y=puntaje_estandar,color=rd,group=1)) + geom_point(alpha=0.7) + geom_smooth(method = "lm",  se = F) + scale_size(guide=FALSE) + xlab("Índice de violencia en el entorno de la escuela") + ylab("Puntaje Promedio por Escuela")
-```
-La figura siguiente ilustra que no se ve una relación clara entre la violencia del entorno escolar y los logros de aprendizaje.   
-
-```{r puntaje_CSOCIALD, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-
-# load factores alumnos
-qd <- read.spss('./data/Directores/QD6.SAV', to.data.frame=T)
-qd <- qd[qd$country == 'PAN',]
-
-qd$dependencia <- as.factor(qd$dependencia)
-qd$ruralidad <- as.factor(qd$ruralidad)
-levels(qd$dependencia) <- c("Oficial","Particular")
-levels(qd$ruralidad) <- c("Urbano","Rural")
-
-# load factores familia
-qf <- read.spss('./data/Familia/QF6.SAV', to.data.frame=T)
-qf <- qf[qf$country == 'PAN',]
-qf <- qf[,c("idschool","idstud","ISECF","INVOLUCF","CSOCBARF","SUPERVF","RECREAF","SERVBARF","VIOLBARF","MOTIVALF","subsgobf","padindig","madindig","DQFIT01","DQFIT25","DQFIT31","DQFIT34","DQFIT15_07","DQFIT18_02")]
-
-pe <- merge(p6,qd,by='idschool')
-escuela_tipo <- function(r,d) { if(r == 'Urbano' & d == 'Particular') { return(0) } else if (r == 'Urbano' & d == 'Oficial') { return(1) } else if (r == 'Rural' & d == 'Particular') {return(2)} else {return(3)}}
-pe$rd <- as.factor(mapply(escuela_tipo, pe$ruralidad, pe$dependencia))
-levels(pe$rd) <- c("Urbano/Particular", "Urbano/Oficial", "Rural/Particular", "Rural/Oficial")
-
-mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
-mean_infrad_school <- aggregate(CSOCIALD ~ idschool, qd, mean)
-m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
-
-ggplot(m, aes(x=CSOCIALD,y=puntaje_estandar,color=rd,group=1)) + geom_point(alpha=0.7) + geom_smooth(method = "lm",  se = F) + scale_size(guide=FALSE) + xlab("Índice del capital social en el entorno de la escuela") + ylab("Puntaje Promedio por Escuela")
-```
-Tampoco se ve una relación clara entre el capital social en el entorno escolar y los logros de aprendizaje. 
+La figura 6.2 sí muestra relación entre la autonomía administrativa de la escuela y los logros de aprendizaje de sus alumnos.  En este caso, el índice de autonomía actúa como un ranking: a menor índice mayor autonomía.   
 
 ```{r puntaje_AUTOADD, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 # load factores alumnos
@@ -506,69 +452,10 @@ mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
 mean_infrad_school <- aggregate(AUTOADD ~ idschool, qd, mean)
 m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
 
-ggplot(m, aes(x=AUTOADD,y=puntaje_estandar,color=rd,group=1)) + geom_point(alpha=0.7) + geom_smooth(method = "lm",  se = F) + scale_size(guide=FALSE) + xlab("Índice de autonomía administrativa de la escuela") + ylab("Puntaje Promedio por Escuela")
+ggplot(m, aes(x=AUTOADD,y=puntaje_estandar,color=rd,group=1)) + geom_point(alpha=0.7) + geom_smooth(method = "lm",  se = F) + scale_size(guide=FALSE) + xlab("Índice de autonomía administrativa de la escuela") + ylab("Puntaje promedio por escuela") +  ggtitle('Figura 6.2. Logros de aprendizaje según autonomía administrativa')
 ```
-Sí se nota una relación entre la autonimía administrativa de la escuela y los logros de aprendizaje.  [JEV2IBG: creo que en esta figura el signo del indice de autonomiase invirtio: pensaria que las escuelas particulares tienen mas autonomia.  Sera un indice de "falta de autonomia"?]
 
-```{r puntaje_AUTOACD, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-# load factores alumnos
-qd <- read.spss('./data/Directores/QD6.SAV', to.data.frame=T)
-qd <- qd[qd$country == 'PAN',]
-
-qd$dependencia <- as.factor(qd$dependencia)
-qd$ruralidad <- as.factor(qd$ruralidad)
-levels(qd$dependencia) <- c("Oficial","Particular")
-levels(qd$ruralidad) <- c("Urbano","Rural")
-
-# load factores familia
-qf <- read.spss('./data/Familia/QF6.SAV', to.data.frame=T)
-qf <- qf[qf$country == 'PAN',]
-qf <- qf[,c("idschool","idstud","ISECF","INVOLUCF","CSOCBARF","SUPERVF","RECREAF","SERVBARF","VIOLBARF","MOTIVALF","subsgobf","padindig","madindig","DQFIT01","DQFIT25","DQFIT31","DQFIT34","DQFIT15_07","DQFIT18_02")]
-
-pe <- merge(p6,qd,by='idschool')
-escuela_tipo <- function(r,d) { if(r == 'Urbano' & d == 'Particular') { return(0) } else if (r == 'Urbano' & d == 'Oficial') { return(1) } else if (r == 'Rural' & d == 'Particular') {return(2)} else {return(3)}}
-pe$rd <- as.factor(mapply(escuela_tipo, pe$ruralidad, pe$dependencia))
-levels(pe$rd) <- c("Urbano/Particular", "Urbano/Oficial", "Rural/Particular", "Rural/Oficial")
-
-mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
-mean_infrad_school <- aggregate(AUTOACD ~ idschool, qd, mean)
-m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
-
-ggplot(m, aes(x=AUTOACD,y=puntaje_estandar,color=rd,group=1)) + geom_point(alpha=0.7) + geom_smooth(method = "lm",  se = F) + scale_size(guide=FALSE) + xlab("Índice de autonomía académica de la escuela") + ylab("Puntaje Promedio por Escuela")
-```
-Hay algún grado de relación entre la autonomía académica y los logros de aprendizaje.   [JEV2IBG: tambien pienso que se invirtio el signo del indice de autonomia academica]
-
-```{r puntaje_CLAMBLD, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-# load factores alumnos
-qd <- read.spss('./data/Directores/QD6.SAV', to.data.frame=T)
-qd <- qd[qd$country == 'PAN',]
-
-qd$dependencia <- as.factor(qd$dependencia)
-qd$ruralidad <- as.factor(qd$ruralidad)
-levels(qd$dependencia) <- c("Oficial","Particular")
-levels(qd$ruralidad) <- c("Urbano","Rural")
-
-# load factores familia
-qf <- read.spss('./data/Familia/QF6.SAV', to.data.frame=T)
-qf <- qf[qf$country == 'PAN',]
-qf <- qf[,c("idschool","idstud","ISECF","INVOLUCF","CSOCBARF","SUPERVF","RECREAF","SERVBARF","VIOLBARF","MOTIVALF","subsgobf","padindig","madindig","DQFIT01","DQFIT25","DQFIT31","DQFIT34","DQFIT15_07","DQFIT18_02")]
-
-pe <- merge(p6,qd,by='idschool')
-escuela_tipo <- function(r,d) { if(r == 'Urbano' & d == 'Particular') { return(0) } else if (r == 'Urbano' & d == 'Oficial') { return(1) } else if (r == 'Rural' & d == 'Particular') {return(2)} else {return(3)}}
-pe$rd <- as.factor(mapply(escuela_tipo, pe$ruralidad, pe$dependencia))
-levels(pe$rd) <- c("Urbano/Particular", "Urbano/Oficial", "Rural/Particular", "Rural/Oficial")
-
-mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
-mean_infrad_school <- aggregate(CLAMBLD ~ idschool, qd, mean)
-m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
-
-ggplot(m, aes(x=CLAMBLD,y=puntaje_estandar,color=rd,group=1)) + geom_point(alpha=0.7) + geom_smooth(method = "lm",  se = F) + scale_size(guide=FALSE) + xlab("Índice de calidad de ambiente laboral en la escuela (Director)") + ylab("Puntaje Promedio por Escuela")
-```
-Hay relación clara entre la calidad de ambiente laboral en la escuela (Director) y los logros de aprendizaje. 
-
-### 6.3 Factores Asociados de Profesores
-
-#### 6.3.1 Índices
+Curiosamente, los resultados del Terce muestran poca relación entre un índice de actitudes y motivación de docentes y los logros de aprendizajes.  La figura 6.3 muestra que aunque el índice varía desde valores -2 a +2, el puntaje promedio entre todas las áreas de conocimiento se mantiene cerca de 670 puntos, como indíca la línea azul.  Es decir, el índice hace poca diferencia.  Esta observación seguramente será sujeto de mayor validación y análisis.   
 
 ```{r echo=F,message=F,warning=F}
 pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
@@ -614,51 +501,49 @@ p6prof <- rbind.fill(pm6,pl6,pc6)
 
 ```{r puntaje_prof_MOTIVP, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 a <- aggregate(puntaje_estandar ~ idtealin + tipo + MOTIVP, p6prof, mean)
-ggplot(a, aes(x=MOTIVP,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm",  se = F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
+ggplot(a, aes(x=MOTIVP,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm",  se = F) + xlab("Índice de actitudes y motivación docente") + ylab("Puntaje promedio por escuela") +  ggtitle('Figura 6.3. Logros de aprendizaje según movitación docente')
 ```
-```{r puntaje_prof_VIOLENP, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-a <- aggregate(puntaje_estandar ~ idtealin + tipo + VIOLENP, p6prof, mean)
-ggplot(a, aes(x=VIOLENP,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm",  se = F) + xlab("Índice de actitudes, motivación docente") + ylab("") 
-```
+La edad de los docentes parece hacer una diferencia en los logros de aprendizaje.    
 
-#### 6.3.2 Datos de Profesores
 ```{r puntaje_prof_DQPIT01, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 a <- aggregate(puntaje_estandar ~ idtealin + tipo + DQPIT01, p6prof, mean)
-ggplot(a, aes(x=DQPIT01,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm",  se = F) + xlab("Cual es su Edad?") + ylab("")
+ggplot(a, aes(x=DQPIT01,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm",  se = F) + xlab("Edad") + ylab("Puntaje promedio por escuela")  +  ggtitle('Figura 6.4. Logros de aprendizaje según edad del docente')
 ```
+La lengua [MATERNA] del docente también paree tener relación con los logros de aprendizaje y el efecto positivo es muy pronunciado en matemáticas cuando la lengua [MATERNA] es extranjera.  Este es uno de los efectos más significativos entre los distintos factores.  La siguiente figura 6.5 ilustra el efecto de la lengua [MATERNA] para las tres áreas de conocimiento indicadas. En evaluación de aprendizaje, el efecto se expresa típicamente como desviaciones estándar del puntaje promedio; en este caso el promedio obtenido por los alumnos de Panamá.  Esta desviación es una medida estándar de la diferencia estadística.   
 
 ```{r puntaje_prof_DQPIT03, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
 p6prof$DQPIT03 <- as.factor(p6prof$DQPIT03)
-levels(p6prof$DQPIT03) <- c("Castellano","Lengua Extranjera","Lengua Indigena 1","Lengua Indigena 2", "Otra Lengua")
+levels(p6prof$DQPIT03) <- c("Castellano","Lengua extranjera","Lengua originario 1","Lengua originario 2", "Otra lengua")
 a <- aggregate(puntaje_estandar ~ DQPIT03 + tipo + DQPIT03, p6prof, mean)
 a$dif <- (a$puntaje_estandar - mean(p6prof$puntaje_estandar,na.rm=T))/sd(p6prof$puntaje_estandar,na.rm=T)
-ggplot(a, aes(x=tipo,y=dif,fill=DQPIT03)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('Puntaje Promedio por Genero de Profesor')
+ggplot(a, aes(x=tipo,y=dif,fill=DQPIT03)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("Desviación estándar") + scale_y_continuous(limits=c(-1.2,1.5)) + ggtitle('Figura 6.5. Efecto de lengua [MATERNA] del docente')
 ```
+La jornada completa también parece tener un efecto positivo importante en el logro de los aprendizajes.   
 
 ```{r puntaje_prof_DQPIT07, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
 p6prof$DQPIT07 <- as.factor(p6prof$DQPIT07)
 levels(p6prof$DQPIT07) <- c("En la mañana","En la tarde","Jornada completa","Otra jornada")
 a <- aggregate(puntaje_estandar ~ DQPIT07 + tipo + DQPIT07, p6prof, mean)
 a$dif <- (a$puntaje_estandar - mean(p6prof$puntaje_estandar,na.rm=T))/sd(p6prof$puntaje_estandar,na.rm=T)
-ggplot(a, aes(x=tipo,y=dif,fill=DQPIT07)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('¿En qué jornada asisten los estudiantes del aula evaluada?')
+ggplot(a, aes(x=tipo,y=dif,fill=DQPIT07)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("Desviación estándar") + scale_y_continuous(limits=c(-1.2,1.5)) + ggtitle('Figura 6.6. Efecto del tipo de jornada')
 ```
+El nivel educativo del docente tiene un efecto positivo.   [AVERIGUAR SIGNIFICADO DE VALORES]
 
 ```{r puntaje_prof_DQPIT11, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
 p6prof$DQPIT11 <- as.factor(p6prof$DQPIT11)
 a <- aggregate(puntaje_estandar ~ DQPIT11 + tipo + DQPIT11, p6prof, mean)
 a$dif <- (a$puntaje_estandar - mean(p6prof$puntaje_estandar,na.rm=T))/sd(p6prof$puntaje_estandar,na.rm=T)
-ggplot(a, aes(x=tipo,y=dif,fill=DQPIT11)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('¿Cuál es el nivel educativo más alto que usted ha completado?')
+ggplot(a, aes(x=tipo,y=dif,fill=DQPIT11)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("Desviación estándar") + ggtitle('Figura 6.7. Efecto del nivel de educación completado por el docente')
 ```
+Los incentivos económicos al docente muestran un efecto positivo en los logros de aprendizaje.  
 
 ```{r puntaje_prof_DQPIT14, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
 p6prof$DQPIT14 <- as.factor(p6prof$DQPIT14)
 levels(p6prof$DQPIT14) <- c("No","Si")
 a <- aggregate(puntaje_estandar ~ DQPIT14 + tipo + DQPIT14, p6prof, mean)
 a$dif <- (a$puntaje_estandar - mean(p6prof$puntaje_estandar,na.rm=T))/sd(p6prof$puntaje_estandar,na.rm=T)
-ggplot(a, aes(x=tipo,y=dif,fill=DQPIT14)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('¿Ha recibido usted alguna vez un incentivo económico por desempeño docente?')
+ggplot(a, aes(x=tipo,y=dif,fill=DQPIT14)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("Desviación estándar") + ggtitle('Figura 6.8. Efecto si el docente ha recibido o no incentivos económicos por desempeño')
 ```
-
-### 6.4 Factores Asociados Familia
 
 ```{r echo=F,messages=F,warnings=F}
 # load sexto grado puntajes
@@ -684,166 +569,18 @@ qf <- qf[qf$country == 'PAN',]
 
 pest <- merge(p6,qf,by='idstud')
 ```
+Las actividades recreativas con la familia también muestran un efecto positivo. [CONFIRMAR SI ES RANKING O MEDICION] 
 
-#### 6.4.1 Indices
-
-```{r puntaje_familia_SUPERVF, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-ggplot(pest, aes(x=SUPERVF,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice de control y supervisión de estudios en el hogar") + ylab("")
-```
-```{r puntaje_familia_MOTIVALF, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-ggplot(pest, aes(x=MOTIVALF,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice de motivación de lectura en el hogar") + ylab("")
-```
 ```{r puntaje_familia_RECREAF, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-ggplot(pest, aes(x=RECREAF,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice de actividades recreativas con la familia") + ylab("")
+ggplot(pest, aes(x=RECREAF,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice de actividades recreativas con la familia") + ylab("Desviación estándar") + ggtitle('Figura 6.9. Efecto de recreación con la familia')
 ```
-```{r puntaje_familia_INVOLUCF, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-ggplot(pest, aes(x=INVOLUCF,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice de involucramiento de los padres en la escuela") + ylab("")
-```
-```{r puntaje_familia_SERVBARF, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-ggplot(pest, aes(x=SERVBARF,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice de servicios en el barrio") + ylab("")
-```
-```{r puntaje_familia_CSOCBARF, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-ggplot(pest, aes(x=CSOCBARF,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice de apoyo social en el barrio") + ylab("")
-```
-```{r puntaje_familia_VIOLBARF, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-ggplot(pest, aes(x=VIOLBARF,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice de violencia en el barrio") + ylab("")
-```
+El uso de computador educativo parece favorable para logros de aprendizaje.   [VERIFICAR QUE NO ES UN RANKING]
 
-#### 6.4.2 Características de interés en las familias
-
-```{r puntaje_familia_DQFIT01, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-pest$DQFIT01 <- as.factor(pest$DQFIT01)
-levels(pest$DQFIT01) <- c("Madre","Padre","Abuelo","Hermano","Pareja del padre/madre", "Otro Familiar","Apoderado/Tutor")
-a <- aggregate(puntaje_estandar ~ DQFIT01, pest, mean)
-a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
-ggplot(a, aes(x=DQFIT01,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('¿Cuál es su relación con el niño/la niña que está participando en la evaluación?') + coord_flip()
-```
-
-Estos siguientes factores estan muy asociados al indice sociocultural.
-
-```{r puntaje_familia_DQFIT15_01, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
-pest$DQFIT15_01 <- as.factor(pest$DQFIT15_01)
-levels(pest$DQFIT15_01) <- c("No","Si")
-a <- aggregate(puntaje_estandar ~ DQFIT15_01, pest, mean)
-a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
-ggplot(a, aes(x=DQFIT15_01,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('¿Cuenta con alguno de los siguientes servicios en su hogar?_Luz eléctrica')
-```
-```{r puntaje_familia_DQFIT15_02, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
-pest$DQFIT15_02 <- as.factor(pest$DQFIT15_02)
-levels(pest$DQFIT15_02) <- c("No","Si")
-a <- aggregate(puntaje_estandar ~ DQFIT15_02, pest, mean)
-a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
-ggplot(a, aes(x=DQFIT15_02,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('¿Cuenta con alguno de los siguientes servicios en su hogar?_Agua Potable')
-```
-```{r puntaje_familia_DQFIT15_03, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
-pest$DQFIT15_03 <- as.factor(pest$DQFIT15_03)
-levels(pest$DQFIT15_03) <- c("No","Si")
-a <- aggregate(puntaje_estandar ~ DQFIT15_03, pest, mean)
-a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
-ggplot(a, aes(x=DQFIT15_03,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('¿Cuenta con alguno de los siguientes servicios en su hogar?_Desague o Alcantarillado')
-```
-```{r puntaje_familia_DQFIT15_04, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
-pest$DQFIT15_04 <- as.factor(pest$DQFIT15_04)
-levels(pest$DQFIT15_04) <- c("No","Si")
-a <- aggregate(puntaje_estandar ~ DQFIT15_04, pest, mean)
-a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
-ggplot(a, aes(x=DQFIT15_04,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('¿Cuenta con alguno de los siguientes servicios en su hogar?_Recoleccion de Basura')
-```
-```{r puntaje_familia_DQFIT15_05, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
-pest$DQFIT15_05 <- as.factor(pest$DQFIT15_05)
-levels(pest$DQFIT15_05) <- c("No","Si")
-a <- aggregate(puntaje_estandar ~ DQFIT15_05, pest, mean)
-a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
-ggplot(a, aes(x=DQFIT15_05,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('¿Cuenta con alguno de los siguientes servicios en su hogar?_Telefono Fijo')
-```
-```{r puntaje_familia_DQFIT15_06, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
-pest$DQFIT15_06 <- as.factor(pest$DQFIT15_06)
-levels(pest$DQFIT15_06) <- c("No","Si")
-a <- aggregate(puntaje_estandar ~ DQFIT15_06, pest, mean)
-a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
-ggplot(a, aes(x=DQFIT15_06,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('¿Cuenta con alguno de los siguientes servicios en su hogar?_Television por Cable o Satelital')
-```
-```{r puntaje_familia_DQFIT15_07, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
-pest$DQFIT15_07 <- as.factor(pest$DQFIT15_07)
-levels(pest$DQFIT15_07) <- c("No","Si")
-a <- aggregate(puntaje_estandar ~ DQFIT15_07, pest, mean)
-a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
-ggplot(a, aes(x=DQFIT15_07,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('¿Cuenta con alguno de los siguientes servicios en su hogar?_Internet')
-```
-
-
-```{r puntaje_familia_DQFIT32_01, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
-pest$DQFIT32_01 <- as.factor(pest$DQFIT32_01)
-levels(pest$DQFIT32_01) <- c("Nunca o casi nunca","Algunas veces","Siempre o casi siempre")
-a <- aggregate(puntaje_estandar ~ DQFIT32_01, pest, mean)
-a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
-ggplot(a, aes(x=DQFIT32_01,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('Me aseguro que el estudiante haya hecho todas las tareas escolares')
-```
-
-```{r puntaje_familia_DQFIT32_02, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
-pest$DQFIT32_02 <- as.factor(pest$DQFIT32_02)
-levels(pest$DQFIT32_02) <- c("Nunca o casi nunca","Algunas veces","Siempre o casi siempre")
-a <- aggregate(puntaje_estandar ~ DQFIT32_02, pest, mean)
-a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
-ggplot(a, aes(x=DQFIT32_02,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('Le pregunto al estudiante qué hizo en la escuela')
-```
-
-```{r puntaje_familia_DQFIT32_03, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
-pest$DQFIT32_03 <- as.factor(pest$DQFIT32_03)
-levels(pest$DQFIT32_03) <- c("Nunca o casi nunca","Algunas veces","Siempre o casi siempre")
-a <- aggregate(puntaje_estandar ~ DQFIT32_03, pest, mean)
-a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
-ggplot(a, aes(x=DQFIT32_03,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('Le pregunto al estudiante qué notas ha obtenido en la escuela')
-```
-
-```{r puntaje_familia_DQFIT33_01, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
-pest$DQFIT33_01 <- as.factor(pest$DQFIT33_01)
-levels(pest$DQFIT33_01) <- c("Nunca o casi nunca","Algunas veces","Siempre o casi siempre")
-a <- aggregate(puntaje_estandar ~ DQFIT33_01, pest, mean)
-a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
-ggplot(a, aes(x=DQFIT33_01,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('Recibo informes con las notas del estudiante')
-```
-
-```{r puntaje_familia_DQFIT33_02, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
-pest$DQFIT33_02 <- as.factor(pest$DQFIT33_02)
-levels(pest$DQFIT33_02) <- c("Nunca o casi nunca","Algunas veces","Siempre o casi siempre")
-a <- aggregate(puntaje_estandar ~ DQFIT33_02, pest, mean)
-a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
-ggplot(a, aes(x=DQFIT33_02,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('Recibo informes o comunicaciones sobre la conducta')
-```
-
-```{r puntaje_familia_DQFIT33_03, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
-pest$DQFIT33_03 <- as.factor(pest$DQFIT33_03)
-levels(pest$DQFIT33_03) <- c("Nunca o casi nunca","Algunas veces","Siempre o casi siempre")
-a <- aggregate(puntaje_estandar ~ DQFIT33_03, pest, mean)
-a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
-ggplot(a, aes(x=DQFIT33_03,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('Recibo informes sobre el desempeño de la escuela en pruebas..')
-```
-
-```{r puntaje_familia_DQFIT33_04, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
-pest$DQFIT33_04 <- as.factor(pest$DQFIT33_04)
-levels(pest$DQFIT33_04) <- c("Nunca o casi nunca","Algunas veces","Siempre o casi siempre")
-a <- aggregate(puntaje_estandar ~ DQFIT33_04, pest, mean)
-a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
-ggplot(a, aes(x=DQFIT33_04,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('Debo firmar las pruebas del estudiante')
-```
-
-```{r puntaje_familia_DQFIT33_05, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
-pest$DQFIT33_05 <- as.factor(pest$DQFIT33_05)
-levels(pest$DQFIT33_05) <- c("Nunca o casi nunca","Algunas veces","Siempre o casi siempre")
-a <- aggregate(puntaje_estandar ~ DQFIT33_05, pest, mean)
-a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)
-ggplot(a, aes(x=DQFIT33_05,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('De la escuela me citan para hablar sobre el estudiante')
-```
- 
-		
-### 6.5 Factores Asociados Alumnos		
-		
 ```{r echo=F,messages=F,warnings=F}		
 # load sexto grado puntajes		
 pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)		
 pc6 <- read.spss('./data/Puntajes_Alumnos/PC6_all_TERCE.sav', to.data.frame=T)		
-pl6 <- read.spss('./data/Puntajes_Alumnos/PL6_all_TERCE.sav', to.data.frame=T)		
+pl6 <- read.spss('./data/Puntajes_Alumnos/PL6_all_TERCE.sav', to.data.frame=T)			
 		
 pm6 <- pm6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]		
 pl6 <- pl6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]		
@@ -863,140 +600,9 @@ qa <- qa[qa$country == 'PAN',]
 		
 pest <- merge(p6,qa,by='idstud')		
 ```		
-		
-#### 6.5.1 Indices		
-		
-```{r puntaje_alumno_CONDIA6, fig.width=12, fig.height=10, echo=F, message=F, warning=F}		
-ggplot(pest, aes(x=CONDIA6,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice de condiciones de estudio en el hogar") + ylab("")		
-```		
-		
-```{r puntaje_alumno_USOLIA6, fig.width=12, fig.height=10, echo=F, message=F, warning=F}		
-ggplot(pest, aes(x=USOLIA6,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice del uso de libro en el hogar") + ylab("")		
-```		
-		
-```{r puntaje_alumno_TMPLIBA6, fig.width=12, fig.height=10, echo=F, message=F, warning=F}		
-ggplot(pest, aes(x=TMPLIBA6,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice de actividades recreativas en el hogar") + ylab("")		
-```		
-		
-```{r puntaje_alumno_CLAMBIA6, fig.width=12, fig.height=10, echo=F, message=F, warning=F}		
-ggplot(pest, aes(x=CLAMBIA6,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice de calidad de ambiente en el aula") + ylab("")		
-```		
-		
-```{r puntaje_alumno_ASISDOA6, fig.width=12, fig.height=10, echo=F, message=F, warning=F}		
-ggplot(pest, aes(x=ASISDOA6,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice de asistencia de docente") + ylab("")		
-```		
-		
-```{r puntaje_alumno_PDORGCA6, fig.width=12, fig.height=10, echo=F, message=F, warning=F}		
-ggplot(pest, aes(x=PDORGCA6,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("índice de prácticas docentes de organización y clima de aula") + ylab("")		
-```		
-		
-```{r puntaje_alumno_PRACEDA6, fig.width=12, fig.height=10, echo=F, message=F, warning=F}		
-ggplot(pest, aes(x=PRACEDA6,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice practicas educativas 1") + ylab("")		
-```		
-		
-```{r puntaje_alumno_PRACE2A6, fig.width=12, fig.height=10, echo=F, message=F, warning=F}		
-ggplot(pest, aes(x=PRACE2A6,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice practicas educativas 2") + ylab("")		
-```		
-		
 ```{r puntaje_alumno_PCEDUCA6, fig.width=12, fig.height=10, echo=F, message=F, warning=F}		
-ggplot(pest, aes(x=PCEDUCA6,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice de uso de computador educativo") + ylab("")		
+ggplot(pest, aes(x=PCEDUCA6,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice de uso de computador educativo") + ylab("Puntaje promedio de los alumnos")		
 ```		
-		
-```{r puntaje_alumno_PCRECRA6, fig.width=12, fig.height=10, echo=F, message=F, warning=F}		
-ggplot(pest, aes(x=PCRECRA6,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice de uso de computador recreativo") + ylab("")		
-```		
-		
-#### 6.4.2 Características de interés en las alumnos		
-		
-```{r puntaje_alumno_trabaja, fig.width=12, fig.height=5, echo=F, message=F, warning=F}		
-pest$trabaja <- as.factor(pest$trabaja)		
-levels(pest$trabaja) <- c("No","Si")		
-a <- aggregate(puntaje_estandar ~ trabaja, pest, mean)		
-a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)		
-ggplot(a, aes(x=trabaja,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('¿Trabajas?')		
-```		
-		
-```{r puntaje_alumno_DQA6IT26, fig.width=12, fig.height=5, echo=F, message=F, warning=F}		
-pest$DQA6IT26 <- as.factor(pest$DQA6IT26)		
-levels(pest$DQA6IT26) <- c("No","Si, en casa","Si, fuera de casa")		
-a <- aggregate(puntaje_estandar ~ DQA6IT26, pest, mean)		
-a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)		
-ggplot(a, aes(x=DQA6IT26,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('Además de asistir a la escuela, ¿trabajas?')		
-```		
-		
-```{r puntaje_alumno_DQA6IT26a, fig.width=12, fig.height=5, echo=F, message=F, warning=F}		
-pest$DQA6IT26a <- as.factor(pest$DQA6IT26a)		
-levels(pest$DQA6IT26a) <- c('Lo hago solo los fines de semana','La hago la mayor parte del tiempo en que no estoy en la escuela','Lo hago por poco rato cuando no estoy en la escuela',"No Trabaja")		
-a <- aggregate(puntaje_estandar ~ DQA6IT26a, pest, mean)		
-a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)		
-ggplot(a, aes(x=DQA6IT26a,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('¿Cuándo trabajas?')		
-```		
-		
-```{r puntaje_alumno_DQA6IT26b, fig.width=12, fig.height=5, echo=F, message=F, warning=F}		
-pest$DQA6IT26b <- as.factor(pest$DQA6IT26b)		
-levels(pest$DQA6IT26b) <- c("Si","No","No, pero me dan cosas")		
-a <- aggregate(puntaje_estandar ~ DQA6IT26b, pest, mean)		
-a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)		
-ggplot(a, aes(x=DQA6IT26b,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('¿Te pagan por trabajar?')		
-```		
-		
-#### Cuando no estás en clases, ¿qué haces con tu tiempo libre?		
-		
-```{r puntaje_alumno_DQA6IT25_01, fig.width=12, fig.height=5, echo=F, message=F, warning=F}		
-pest$DQA6IT25_01 <- as.factor(pest$DQA6IT25_01)		
-levels(pest$DQA6IT25_01) <- c("Nunca o casi nunca","Algunas veces","Siempre o casi siempre")		
-a <- aggregate(puntaje_estandar ~ DQA6IT25_01, pest, mean)		
-a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)		
-ggplot(a, aes(x=DQA6IT25_01,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('Veo televisión')		
-```		
-		
-```{r puntaje_alumno_DQA6IT25_02, fig.width=12, fig.height=5, echo=F, message=F, warning=F}		
-pest$DQA6IT25_02 <- as.factor(pest$DQA6IT25_02)		
-levels(pest$DQA6IT25_02) <- c("Nunca o casi nunca","Algunas veces","Siempre o casi siempre")		
-a <- aggregate(puntaje_estandar ~ DQA6IT25_02, pest, mean)		
-a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)		
-ggplot(a, aes(x=DQA6IT25_02,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('Juego juegos de consola o juegos de computador')		
-```		
-```{r puntaje_alumno_DQA6IT25_03, fig.width=12, fig.height=5, echo=F, message=F, warning=F}		
-pest$DQA6IT25_03 <- as.factor(pest$DQA6IT25_03)		
-levels(pest$DQA6IT25_03) <- c("Nunca o casi nunca","Algunas veces","Siempre o casi siempre")		
-a <- aggregate(puntaje_estandar ~ DQA6IT25_03, pest, mean)		
-a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)		
-ggplot(a, aes(x=DQA6IT25_03,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('Navego en Internet')		
-```		
-```{r puntaje_alumno_DQA6IT25_04, fig.width=12, fig.height=5, echo=F, message=F, warning=F}		
-pest$DQA6IT25_04 <- as.factor(pest$DQA6IT25_04)		
-levels(pest$DQA6IT25_04) <- c("Nunca o casi nunca","Algunas veces","Siempre o casi siempre")		
-a <- aggregate(puntaje_estandar ~ DQA6IT25_04, pest, mean)		
-a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)		
-ggplot(a, aes(x=DQA6IT25_04,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('Juego con mis amigos')		
-```		
-```{r puntaje_alumno_DQA6IT25_05, fig.width=12, fig.height=5, echo=F, message=F, warning=F}		
-pest$DQA6IT25_05 <- as.factor(pest$DQA6IT25_05)		
-levels(pest$DQA6IT25_05) <- c("Nunca o casi nunca","Algunas veces","Siempre o casi siempre")		
-a <- aggregate(puntaje_estandar ~ DQA6IT25_05, pest, mean)		
-a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)		
-ggplot(a, aes(x=DQA6IT25_05,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('Leo libros o revistas')		
-```		
-```{r puntaje_alumno_DQA6IT25_06, fig.width=12, fig.height=5, echo=F, message=F, warning=F}		
-pest$DQA6IT25_06 <- as.factor(pest$DQA6IT25_06)		
-levels(pest$DQA6IT25_06) <- c("Nunca o casi nunca","Algunas veces","Siempre o casi siempre")		
-a <- aggregate(puntaje_estandar ~ DQA6IT25_06, pest, mean)		
-a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)		
-ggplot(a, aes(x=DQA6IT25_06,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('Voy al cine o al teatro')		
-```		
-```{r puntaje_alumno_DQA6IT25_07, fig.width=12, fig.height=5, echo=F, message=F, warning=F}		
-pest$DQA6IT25_07 <- as.factor(pest$DQA6IT25_07)		
-levels(pest$DQA6IT25_07) <- c("Nunca o casi nunca","Algunas veces","Siempre o casi siempre")		
-a <- aggregate(puntaje_estandar ~ DQA6IT25_07, pest, mean)		
-a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)		
-ggplot(a, aes(x=DQA6IT25_07,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('Voy al museo o a la biblioteca')		
-```		
-		
-```{r puntaje_alumno_DQA6IT25_08, fig.width=12, fig.height=5, echo=F, message=F, warning=F}		
-pest$DQA6IT25_08 <- as.factor(pest$DQA6IT25_08)		
-levels(pest$DQA6IT25_08) <- c("Nunca o casi nunca","Algunas veces","Siempre o casi siempre")		
-a <- aggregate(puntaje_estandar ~ DQA6IT25_08, pest, mean)		
-a$dif <- (a$puntaje_estandar - mean(pest$puntaje_estandar,na.rm=T))/sd(pest$puntaje_estandar,na.rm=T)		
-ggplot(a, aes(x=DQA6IT25_08,y=dif)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("") + ggtitle('Hago deportes')		
-```
+## Apéndice 1.  Niveles de logros educativos por área y grado		
+
+[TRANSCRIBIR DE LA INFORMACION TERCE]
