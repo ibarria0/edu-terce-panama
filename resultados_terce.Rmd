@@ -14,7 +14,7 @@ Hay grandes diferencias de oportunidades para nuestra niñez en materia educativ
 
 Este documento de divulgación es principalmente un llamado a analizar los datos Terce disponibles en la página Web de Meduca y un reto a la voluntad nacional por crear un sistema educativo justo, capaz de brindar igualdad de oportunidades.   
 
-En el Terce las escuelas particulares mostraron mejores logros que las oficiales.  De hecho muchas de nuestras escuelas oficiales muestran niveles de aprendizaje poco adecuados para la vida esperada de sus alumnos, especialmente entre las escuelas rurales oficiales. Las diferencias de logros y la estrecha relación con las condiciones de vida se pueden ver en la figura 1.1 por ejemplo. Cada punto representa el promedio de puntajes y el promedio del índice socioeconómico y cultural de los alumnos de una escuela. El tamaño del punto es proporcional al número de alumnos en la escuela. El índice se construye con base en respuestas a cuestionarios sobre las condiciones de vida de cada alumno: a mayor índice las condiciones son más cómodas.    
+En el Terce las escuelas particulares mostraron mejores logros que las oficiales.  De hecho muchas de nuestras escuelas oficiales muestran niveles de aprendizaje poco adecuados para la vida esperada de sus alumnos, especialmente entre las escuelas rurales oficiales. Las diferencias de logros y la estrecha relación con las condiciones de vida se pueden ver en la figura 1.1 por ejemplo. El centro de cada círculo representa el promedio de puntajes y el promedio del índice socioeconómico y cultural de los alumnos de una escuela. El tamaño del círculo es proporcional al número de alumnos en la escuela. El índice se construye con base en respuestas a cuestionarios sobre las condiciones de vida de cada alumno: a mayor índice las condiciones son más cómodas.    
 
 
 ```{r puntaje_isecf_rd, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
@@ -61,7 +61,7 @@ mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
 mean_isecf_school <- aggregate(ISECF ~ idschool, qf, mean)
 m <- merge(mean_school, mean_isecf_school, by=c('idschool'))
 
-ggplot(m, aes(x=ISECF,y=puntaje_estandar,color=rd,group=1,size=totalum)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice de estatus socioeconómico y cultural promedio de los alumnos de la escuela") + ylab("Puntaje promedio de los alumnos de la escuela") + ggtitle('Logros de aprendizaje por tipo de escuela') + scale_y_continuous(limits=c(500,850))
+ggplot(m, aes(x=ISECF,y=puntaje_estandar,color=rd,group=1,size=totalum)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice socioeconómico y cultural promedio de los alumnos de la escuela") + ylab("Puntaje promedio de los alumnos de la escuela") + ggtitle('Figura 1.1. Logros de aprendizaje por tipo de escuela, 6to grado') + scale_y_continuous(limits=c(500,850))
 ```
 
 Más importante que lamentarnos por los resultados pobres que podamos observar es enfocarnos en oportunidades de mejora. Por ejemplo, algunas escuelas oficiales rurales con bajo índice socioeconómico y cultural lograron puntajes superiores al promedio internacional del Terce, equivalente a 700 puntos, e incluso mayores que las escuelas oficiales urbanas.   Estas escuelas podrían aportarnos lecciones importantes para el resto del sistema educativo.  Este enfoque representa la aspiración de este análisis y su divulgación.   
@@ -77,7 +77,7 @@ gdp <- read.csv('./data/suplemental/gdp.csv')
 names(gdp) <- c("Country_Name","country","gdp_2013")
 m <- merge(p6,gdp,by="country")
 a <- aggregate( puntaje_estandar ~ country + gdp_2013, m, mean)
-ggplot(a, aes(x=gdp_2013, y=puntaje_estandar, fill=country, color=country, group=1)) + geom_point() + geom_smooth(method = "lm", se = F) + geom_text(aes(label=country)) + xlab("Producto (PIB) per cápita") + ylab("Puntaje promedio") + ggtitle("Figura 1.2. Logros de aprendizaje en 6to grado según producto (PIB) per cápita por país") + scale_x_continuous(label=dollar) + scale_y_continuous(limits=c(500,850))
+ggplot(a, aes(x=gdp_2013, y=puntaje_estandar, fill=country, color=country, group=1)) + geom_point() + geom_smooth(method = "lm", se = F) + geom_text(aes(label=country)) + xlab("Producto (PIB) per cápita") + ylab("Puntaje promedio") + ggtitle("Figura 1.2. Logros de aprendizaje en 6to grado según producto (PIB) per cápita por país") + scale_x_continuous(label=dollar) + scale_y_continuous(limits=c(600,810))
 
 ```
 
@@ -117,16 +117,16 @@ ggplot(a, aes(x=dependencia, y=ruralidad)) + geom_bar(fill='#0072B2',stat="ident
 a <- aggregate(dependencia ~ ruralidad, qd, length)
 ggplot(a, aes(x=ruralidad, y=dependencia)) + geom_bar(fill='#0072B2',stat="identity",width=.5) + ylab("Cantidad de escuelas") + ggtitle("Figura 3.2. Distribución de escuelas por ruralidad") + xlab("Ruralidad") + scale_y_continuous(limits=c(0,150))
 ```
-Las escuelas de Panamá representan el caso típico de América Latina en cuanto a condiciones de vida.  Por ejemplo, la figura 3.3 compara nuestra situación con la de cuatro países de interés.  La distribución de nuestras escuelas según el índice socioeconómico y cultural promedio de sus alumnos se concentra alrededor del promedio de la región, es decir, en torno al valor 0.0 del índice. [EDITAR FIGURA: TITULO Y LEYENDAS]
+Las escuelas de Panamá representan el caso típico de América Latina en cuanto a condiciones de vida.  Por ejemplo, la figura 3.3 compara nuestra situación con la de cuatro países de interés.  La distribución de nuestras escuelas según el índice socioeconómico y cultural promedio de sus alumnos se concentra alrededor del promedio de la región, es decir, en torno al valor 0.0 del índice. 
 
 ```{r demo_isecf, fig.width=12, fig.height=12, echo=F, message=F, warning=F}
 
 # load factores familia
 qf <- read.spss('./data/Familia/QF6.SAV', to.data.frame=T)
-ggplot(qf[qf$country %in% c("CHL","CRI","URU","PAN","NIC"),], aes(x=ISECF)) + geom_histogram(fill='#0072B2') + ylab("Cantidad de Escuelas") + facet_grid(country ~ ., scales='free_y') + scale_y_continuous(breaks=NULL) + geom_vline(x=0, colour="red", linetype = "longdash") + ggtitle("Concentración de escuelas (distribución) según índice socioeconómico y cultural para tres países de la prueba") + xlab("Índice socioeconómico y cultural")
+ggplot(qf[qf$country %in% c("CHL","CRI","URU","PAN","NIC"),], aes(x=ISECF)) + geom_histogram(fill='#0072B2') + ylab("Cantidad de escuelas") + facet_grid(country ~ ., scales='free_y') + scale_y_continuous(breaks=NULL) + geom_vline(x=0, colour="red", linetype = "longdash") + ggtitle("Figura 3.3. Distribución de escuelas según índice socioeconómico y cultural, comparada") + xlab("Índice socioeconómico y cultural")
 ```
 
-Las edades de los participantes de tercero y sexto grado muestran un grupo importante sobre la edad esperada para el grado.   [AÑADIR LEYENDA DE COLORES DE GENERO Y DEPURAR LEYENDAS DE LOS EJES.  INTENTAR USAR % EN VEZ DE NUMEROS] 
+Las edades de los participantes de tercero y sexto grado muestran un grupo importante sobre la edad esperada para el grado.    
 
 ```{r demo_genero_edad_3, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 qa3 <- read.spss('./data/Alumnos/QA3.SAV', to.data.frame=T)
@@ -136,7 +136,7 @@ qa3$DQA3IT02 <- as.factor(qa3$DQA3IT02)
 levels(qa3$DQA3IT01) <- c("7 años o menos","8 años","9 años", "10 años", "11 años", "12 años o mas", "NA")
 levels(qa3$DQA3IT02) <- c("Niña","Niño")
 
-ggplot(qa3, aes(x=DQA3IT01, fill=DQA3IT02)) + geom_histogram(aes(y = (..count..)/sum(..count..)), alpha=.5, position="dodge") + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + ylab("Cantidad de Estudiantes")  + xlab("Edad") + ggtitle("Número de estudiantes de tercer grado por edad") + scale_y_continuous(labels = percent)
+ggplot(qa3, aes(x=DQA3IT01, fill=DQA3IT02)) + geom_histogram(aes(y = (..count..)/sum(..count..)), alpha=.5, position="dodge") + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + ylab("Cantidad de estudiantes")  + xlab("Edad") + ggtitle("Número de estudiantes de 3er grado por edad") + scale_y_continuous(labels = percent)
 ```
 
 ```{r demo_genero_edad_6, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
@@ -147,10 +147,10 @@ qa6$DQA6IT02 <- as.factor(qa6$DQA6IT02)
 levels(qa6$DQA6IT01) <- c("10 años o menos","11 años","12 años", "13 años", "14 años", "15 años o mas", "NA")
 levels(qa6$DQA6IT02) <- c("Niña","Niño")
 
-ggplot(qa6, aes(x=DQA6IT01, fill=DQA6IT02)) + geom_histogram(aes(y = (..count..)/sum(..count..)), alpha=.5, position="dodge") + scale_x_discrete(labels=c("10 años o menos","11 años","12 años", "13 años", "14 años", "15 años o mas", "NA")) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + ylab("Cantidad de Estudiantes") + xlab("Edad") + ggtitle("Número de estudiantes de sexto grado por edad")  + scale_y_continuous(labels = percent)
+ggplot(qa6, aes(x=DQA6IT01, fill=DQA6IT02)) + geom_histogram(aes(y = (..count..)/sum(..count..)), alpha=.5, position="dodge") + scale_x_discrete(labels=c("10 años o menos","11 años","12 años", "13 años", "14 años", "15 años o mas", "NA")) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + ylab("Cantidad de estudiantes") + xlab("Edad") + ggtitle("Número de estudiantes de 6to grado por edad")  + scale_y_continuous(labels = percent)
 ```
 
-Las figuras 3.6 y 3.7 muestran las respuestas a las preguntas de a qué genero pertenecen y si pertenecen a una etnia originaria de Panamá.  [INTENTAR UTILIZAR EJE VERTICAL CON PORCENTAJES]
+Las figuras 3.6 y 3.7 muestran las respuestas a las preguntas de a qué genero pertenecen y si pertenecen a una etnia originaria de Panamá.  
 
 ```{r demo_genelaro, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 qa6 <- read.spss('./data/Alumnos/QA6.SAV', to.data.frame=T)
@@ -158,7 +158,7 @@ qa6 <- qa6[qa6$country == 'PAN',]
 qa6$DQA6IT02 <- as.factor(qa6$DQA6IT02)
 levels(qa6$DQA6IT02) <- c("Niña","Niño")
 
-ggplot(qa6, aes(x=DQA6IT02)) + geom_histogram(aes(y = (..count..)/sum(..count..)),fill='#0072B2',width=0.5,position="dodge")  + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + ylab("Cantidad de Estudiantes") + xlab("¿Eres niña o niño?") + ggtitle("Respuesta a la pertenencia de género") + scale_y_continuous(labels = percent,limits=c(0,0.75))
+ggplot(qa6, aes(x=DQA6IT02)) + geom_histogram(aes(y = (..count..)/sum(..count..)),fill='#0072B2',width=0.5,position="dodge")  + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + ylab("Cantidad de estudiantes") + xlab("¿Eres niña o niño?") + ggtitle("Figura 3.6. Respuesta a la pertenencia de género") + scale_y_continuous(labels = percent,limits=c(0,0.75))
 ```
 
 ```{r etnia, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
@@ -167,7 +167,7 @@ qa6 <- qa6[qa6$country == 'PAN',]
 qa6$DQA6IT06 <- as.factor(qa6$DQA6IT06)
 levels(qa6$DQA6IT06) <- c("No","Si")
 
-ggplot(qa6, aes(x=DQA6IT06)) + geom_histogram(aes(y = (..count..)/sum(..count..)),fill='#0072B2',width=0.5, position="dodge")  + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + ylab("Cantidad de Estudiantes") + xlab("¿Perteneces a alguna etnia indígena?") + ggtitle("Respuesta a la pertenencia de etnia originaria") + scale_y_continuous(labels = percent,limits=c(0,0.75))
+ggplot(qa6, aes(x=DQA6IT06)) + geom_histogram(aes(y = (..count..)/sum(..count..)),fill='#0072B2',width=0.5, position="dodge")  + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + ylab("Cantidad de estudiantes") + xlab("¿Perteneces a alguna etnia indígena?") + ggtitle("Figura 3.7. Respuesta a la pertenencia de etnia originaria") + scale_y_continuous(labels = percent,limits=c(0,0.75))
 ```
 
 ## 4. Comparación con América Latina
@@ -189,12 +189,8 @@ gdp <- read.csv('./data/suplemental/gdp.csv')
 names(gdp) <- c("Country_Name","country","gdp_2013")		
 m <- merge(p3,gdp,by="country")		
 a <- aggregate( puntaje_estandar ~ country + gdp_2013, m, mean)		
-ggplot(a, aes(x=gdp_2013, y=puntaje_estandar, fill=country, color=country, group=1)) + geom_point() + geom_smooth(method = "lm", se = F) + geom_text(aes(label=country)) + xlab("Producto (PIB) per cápita") + ylab("Puntaje promedio") + ggtitle("Puntaje promedio según producto (PIB) per cápita por país, tercer grado") + scale_x_continuous(label=dollar) + scale_y_continuous(limits=c(500,850))
+ggplot(a, aes(x=gdp_2013, y=puntaje_estandar, fill=country, color=country, group=1)) + geom_point() + geom_smooth(method = "lm", se = F) + geom_text(aes(label=country)) + xlab("Producto (PIB) per cápita") + ylab("Puntaje promedio") + ggtitle("Figura 4.1. Logros de aprendizaje en 3er grado según producto (PIB) per cápita por país") + scale_x_continuous(label=dollar) + scale_y_continuous(limits=c(600,810))
 ``` 
-Más relevante en primera instancia es saber si nuestros niños y niñas logran un aprendiza útil para su propio bienestar y la prosperidad de la nación. La evaluación Terce define cuatro niveles de logros de aprendizaje.  El nivel 1 se considera poca  preparación para la vida esperada de los participantes y el nivel 4 la mejor preparación.  Corresponden a un dominio progresivamente más eficaz del área de conocimiento de interés y están explicados en el apéndice 1.  
-
-[22?]% de nuestras niñas y niños muestran un logro de aprendizaje de nivel 1.   Para ciencias son [45?]% y para matemáticas [65?]%.   La figura 4.3 muestra como se comparan los porcentajes de alumnos de Panamá para cada nivel con los del resto de los alumnos de otros países. [INCLUIR TAMBIEN TERCER GRADO]
-
 ```{r puntaje_gdp_6, fig.width=12, fig.height=10, echo=F, message=F, warning=F}		
 	
 # load sexto grado puntajes
@@ -219,9 +215,12 @@ gdp <- read.csv('./data/suplemental/gdp.csv')
 names(gdp) <- c("Country_Name","country","gdp_2013")
 m <- merge(p6,gdp,by="country")
 a <- aggregate( puntaje_estandar ~ country + gdp_2013, m, mean)
-ggplot(a, aes(x=gdp_2013, y=puntaje_estandar, fill=country, color=country, group=1)) + geom_point() + geom_smooth(method = "lm", se = F) + geom_text(aes(label=country)) + xlab("Producto (PIB) per cápita") + ylab("Puntaje promedio") + ggtitle("Figura 1.2. Logros de aprendizaje en 6to grado según producto (PIB) per cápita por país") + scale_x_continuous(label=dollar) + scale_y_continuous(limits=c(500,850))
-
+ggplot(a, aes(x=gdp_2013, y=puntaje_estandar, fill=country, color=country, group=1)) + geom_point() + geom_smooth(method = "lm", se = F) + geom_text(aes(label=country)) + xlab("Producto (PIB) per cápita") + ylab("Puntaje promedio") + ggtitle("Figura 4.2. Logros de aprendizaje en 6to grado según producto (PIB) per cápita por país") + scale_x_continuous(label=dollar) + scale_y_continuous(limits=c(600,810))
 ``` 
+
+Más relevante en primera instancia es saber si nuestros niños y niñas logran un aprendiza útil para su propio bienestar y la prosperidad de la nación. La evaluación Terce define cuatro niveles de logros de aprendizaje.  El nivel 1 se considera poca  preparación para la vida esperada de los participantes y el nivel 4 la mejor preparación.  Corresponden a un dominio progresivamente más eficaz del área de conocimiento de interés y están explicados en el apéndice 1.  
+
+Salvo en lecutra de sexto grado, más de 40% de nuestras niñas y niños no pasan del nivel 1 de logros de aprendizaje, y en matemáticas de sexto grado esa cifra excede 60%.  Las figuras 4.3 y 4.4 muestran como se comparan los porcentajes de alumnos de Panamá para cada grado y área de conocimiento con los del resto de los alumnos de otros países. 
 
 ```{r niveles_barcharts_3, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 p6 <- rbind.fill(pm6,pl6,pc6)
@@ -230,7 +229,7 @@ p6$grado <- '6'
 pm3 <- read.spss('./data/Puntajes_Alumnos/PM3_all_TERCE.sav', to.data.frame=T)
 pl3 <- read.spss('./data/Puntajes_Alumnos/PL3_all_TERCE.sav', to.data.frame=T)
 
-pm3$tipo <- 'matematica'
+pm3$tipo <- 'matemática'
 pl3$tipo <- 'lectura'
 
 p3 <- rbind.fill(pm3,pl3)
@@ -246,11 +245,11 @@ calc_percent <- function(c,t,g,x) { return((x/sum(a[a$countryp == c & a$tipo == 
 a$dist <- mapply(calc_percent, a$countryp, a$tipo, a$grado, a$puntaje_estandar)
 
 #####
-ggplot(a[a$grado == 3,], aes(x=nivel,y=dist,fill=countryp)) + geom_bar(stat="identity", position=position_dodge(), colour="black") + ggtitle("Cantidad de Estudiantes por Nivel (3ro Grado)") + facet_grid(tipo ~ .) + scale_fill_brewer(palette="Spectral") + scale_y_continuous(labels = percent, limits=c(0,0.7))
+ggplot(a[a$grado == 3,], aes(x=nivel,y=dist,fill=countryp)) + geom_bar(stat="identity", position=position_dodge(), colour="black") + xlab("Nivel de logros de aprendizaje") + ylab("Porcentaje de estudiantes") + ggtitle("Figura 4.3. Cantidad de estudiantes por nivel de logros, 3er grado") + facet_grid(tipo ~ .) + scale_fill_brewer(palette="Spectral") + scale_y_continuous(labels = percent, limits=c(0,0.7))
 ```
 
-```{r niveles_barcharts_6, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-ggplot(a[a$grado == 6,], aes(x=nivel,y=dist,fill=countryp)) + geom_bar(stat="identity", position=position_dodge(), colour="black") + ggtitle("Cantidad de Estudiantes por Nivel (6to Grado)") + facet_grid(tipo ~ .) + scale_fill_brewer(palette="Spectral") + scale_y_continuous(labels = percent, limits=c(0,0.7))
+```{r niveles_barcharts_6, fig.width=12, fig.height=15, echo=F, message=F, warning=F}
+ggplot(a[a$grado == 6,], aes(x=nivel,y=dist,fill=countryp)) + geom_bar(stat="identity", position=position_dodge(), colour="black") + xlab("Nivel de logros de aprendizaje") + ylab("Porcentaje de estudiantes") + ggtitle("Figura 4.4. Cantidad de estudiantes por nivel de logros, 6to grado") + facet_grid(tipo ~ .) + scale_fill_brewer(palette="Spectral") + scale_y_continuous(labels = percent, limits=c(0,0.7))
 ```
 
 
@@ -270,14 +269,14 @@ a$dif <- (a$puntaje_estandar - mean(p6$puntaje_estandar,na.rm=T))/sd(p6$puntaje_
 levels(a$DQA6IT02) <- c("Niña","Niño")
 dif <- data.frame(genero=c("Niña"),std_mean=c(a$dif[1] - a$dif[2]))
 
-ggplot(a, aes(x=DQA6IT02,y=puntaje_estandar,fill=DQA6IT02)) + geom_bar(stat='identity',width=0.25) + ggtitle("Puntaje promedio comparado entre géneros") + ylab("Puntaje promedio") + xlab("Género") + scale_fill_discrete(guide=F)
+ggplot(a, aes(x=DQA6IT02,y=puntaje_estandar,fill=DQA6IT02)) + geom_bar(stat='identity',width=0.25) + ggtitle("Figura 5.1.  Puntaje promedio comparado entre géneros") + ylab("Puntaje promedio") + xlab("Género") + scale_fill_discrete(guide=F)
 ```
 
 ```{r demo_genero_puntaje_desv, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-ggplot(dif, aes(x=genero,y=std_mean)) + geom_bar(stat='identity',fill="#f8766d",width=0.25) + ggtitle('Diferencia diminuta de puntaje promedio a favor de las niñas') + ylab("Desviaciones estándar") + xlab("Diferencia")+ scale_fill_discrete(guide=F) + scale_y_continuous(limits=c(-0.8,0.8))
+ggplot(dif, aes(x=genero,y=std_mean)) + geom_bar(stat='identity',fill="#f8766d",width=0.15) + ggtitle('Figura 5.2. Diferencia pequeña de puntaje promedio a favor de las niñas') + ylab("Desviación estándar") + xlab("Diferencia")+ scale_fill_discrete(guide=F) + scale_y_continuous(limits=c(-0.8,0.8))
 ```
 
-Los alumnos que se reconocen como miembros de etnias originarias logran menor puntaje que los que no se consideran miembros.  La figuras 5.3 compara los puntajes promedio combinando las tres áreas de conocimiento de los alumnos que se consideran de grupos originarios y de los que no.  La figura 5.4 muestra la diferencia en promedios de los dos grupos, expresado en desviaciones estandar.   La diferencia negativa es importante y en contra de los grupos originarios.     
+Los alumnos que se reconocen como miembros de etnias originarias logran menor puntaje que los que no se consideran miembros.  La figuras 5.3 compara los puntajes promedio combinando las tres áreas de conocimiento de los alumnos que se consideran de grupos originarios y de los que no.  La figura 5.4 muestra la diferencia en promedios de los dos grupos, expresado en desviaciones estandar.   La diferencia negativa es importante y en contra de los grupos originarios.       
 
 
 ```{r demo_etnia_puntaje, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
@@ -288,7 +287,7 @@ a <- aggregate(puntaje_estandar ~ DQA6IT06, genero, mean)
 a$dif <- (a$puntaje_estandar - mean(p6$puntaje_estandar,na.rm=T))/sd(p6$puntaje_estandar,na.rm=T)
 levels(a$DQA6IT06) <- c("No originarios","Originarios")
 
-ggplot(a, aes(x=DQA6IT06,y=puntaje_estandar,fill=DQA6IT06)) + geom_bar(stat='identity',width=0.25) + ggtitle("Puntaje promedio comparado según pertenencia a grupos originarios") + ylab("Puntaje promedio") + xlab("Etnia") + scale_fill_discrete(guide=F)
+ggplot(a, aes(x=DQA6IT06,y=puntaje_estandar,fill=DQA6IT06)) + geom_bar(stat='identity',width=0.25) + ggtitle("Figura 5.3. Puntaje promedio comparado según pertenencia a grupos originarios") + ylab("Puntaje promedio") + xlab("Etnia") + scale_fill_discrete(guide=F)
 ```
 
 ```{r demo_etnia_puntaje_desv, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
@@ -341,7 +340,7 @@ mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
 mean_isecf_school <- aggregate(ISECF ~ idschool, qf, mean)		
 m <- merge(mean_school, mean_isecf_school, by=c('idschool'))		
 		
-ggplot(m, aes(x=ISECF,y=puntaje_estandar,color=rd,group=1,size=totalum)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice de estatus socioeconómico y cultural promedio de los alumnos de la escuela") + ylab("Puntaje promedio de los alumnos de la escuela") + ggtitle('Logros de aprendizaje de escuelas particulares y oficiales, urbanas y rurales, tercer grado') + scale_colour_discrete(guide=F)		
+ggplot(m, aes(x=ISECF,y=puntaje_estandar,color=rd,group=1,size=totalum)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice socioeconómico y cultural promedio de los alumnos de la escuela") + ylab("Puntaje promedio de los alumnos de la escuela") + ggtitle('Figura 5.5. Logros de aprendizaje por tipo de escuela, 3er grado') + scale_y_continuous(limits=c(500,850)) + scale_colour_discrete(guide=F)		
 ```
 
 ```{r puntaje_isecf_rd_6, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
@@ -388,7 +387,7 @@ mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
 mean_isecf_school <- aggregate(ISECF ~ idschool, qf, mean)
 m <- merge(mean_school, mean_isecf_school, by=c('idschool'))
 
-ggplot(m, aes(x=ISECF,y=puntaje_estandar,color=rd,group=1,size=totalum)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice de estatus socioeconómico y cultural promedio de los alumnos de la escuela") + ylab("Puntaje promedio de los alumnos de la escuela") + ggtitle('Logros de aprendizaje por tipo de escuela') + scale_y_continuous(limits=c(500,850)) + scale_colour_discrete(guide=F)
+ggplot(m, aes(x=ISECF,y=puntaje_estandar,color=rd,group=1,size=totalum)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice socioeconómico y cultural promedio de los alumnos de la escuela") + ylab("Puntaje promedio de los alumnos de la escuela") + ggtitle('Figura 5.6. Logros de aprendizaje por tipo de escuela, 6to grado') + scale_y_continuous(limits=c(500,850)) + scale_colour_discrete(guide=F)
 ```
 
 ## 6 Relacion entre logros de aprendizaje y factores asociados seleccionados
@@ -424,7 +423,7 @@ mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
 mean_infrad_school <- aggregate(INFRAD ~ idschool, qd, mean)
 m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
 
-ggplot(m, aes(x=INFRAD,y=puntaje_estandar,color=rd,group=1)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", se = F) + scale_size(guide=FALSE) + xlab("Índice de infraestructura de la escuela") + ylab("Puntaje promedio por escuela") +  ggtitle('Figura 6.1. Logros de aprendizaje según infraestructura escolar')
+ggplot(m, aes(x=INFRAD,y=puntaje_estandar,color=rd,group=1)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", se = F) + scale_size(guide=FALSE) + xlab("Índice de infraestructura de la escuela") + ylab("Puntaje promedio por escuela") +  ggtitle('Figura 6.1. Logros de aprendizaje según infraestructura escolar') + scale_y_continuous(limits=c(500,850))
 ```
 La figura 6.2 sí muestra relación entre la autonomía administrativa de la escuela y los logros de aprendizaje de sus alumnos.  En este caso, el índice de autonomía actúa como un ranking: a menor índice mayor autonomía.   
 
@@ -452,7 +451,7 @@ mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
 mean_infrad_school <- aggregate(AUTOADD ~ idschool, qd, mean)
 m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
 
-ggplot(m, aes(x=AUTOADD,y=puntaje_estandar,color=rd,group=1)) + geom_point(alpha=0.7) + geom_smooth(method = "lm",  se = F) + scale_size(guide=FALSE) + xlab("Índice de autonomía administrativa de la escuela") + ylab("Puntaje promedio por escuela") +  ggtitle('Figura 6.2. Logros de aprendizaje según autonomía administrativa')
+ggplot(m, aes(x=AUTOADD,y=puntaje_estandar,color=rd,group=1)) + geom_point(alpha=0.7) + geom_smooth(method = "lm",  se = F) + scale_size(guide=FALSE) + xlab("Índice de autonomía administrativa de la escuela") + ylab("Puntaje promedio por escuela") +  ggtitle('Figura 6.2. Logros de aprendizaje según autonomía administrativa') + scale_y_continuous(limits=c(500,850))
 ```
 
 Curiosamente, los resultados del Terce muestran poca relación entre un índice de actitudes y motivación de docentes y los logros de aprendizajes.  La figura 6.3 muestra que aunque el índice varía desde valores -2 a +2, el puntaje promedio entre todas las áreas de conocimiento se mantiene cerca de 670 puntos, como indíca la línea azul.  Es decir, el índice hace poca diferencia.  Esta observación seguramente será sujeto de mayor validación y análisis.   
@@ -501,19 +500,19 @@ p6prof <- rbind.fill(pm6,pl6,pc6)
 
 ```{r puntaje_prof_MOTIVP, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 a <- aggregate(puntaje_estandar ~ idtealin + tipo + MOTIVP, p6prof, mean)
-ggplot(a, aes(x=MOTIVP,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm",  se = F) + xlab("Índice de actitudes y motivación docente") + ylab("Puntaje promedio por escuela") +  ggtitle('Figura 6.3. Logros de aprendizaje según movitación docente')
+ggplot(a, aes(x=MOTIVP,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm",  se = F) + xlab("Índice de actitudes y motivación docente") + ylab("Puntaje promedio por escuela") +  ggtitle('Figura 6.3. Logros de aprendizaje según movitación docente') + scale_y_continuous(limits=c(475,850))
 ```
 La edad de los docentes parece hacer una diferencia en los logros de aprendizaje.    
 
 ```{r puntaje_prof_DQPIT01, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 a <- aggregate(puntaje_estandar ~ idtealin + tipo + DQPIT01, p6prof, mean)
-ggplot(a, aes(x=DQPIT01,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm",  se = F) + xlab("Edad") + ylab("Puntaje promedio por escuela")  +  ggtitle('Figura 6.4. Logros de aprendizaje según edad del docente')
+ggplot(a, aes(x=DQPIT01,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm",  se = F) + xlab("Edad") + ylab("Puntaje promedio por escuela")  +  ggtitle('Figura 6.4. Logros de aprendizaje según edad del docente') + scale_y_continuous(limits=c(475,850))
 ```
 La lengua [MATERNA] del docente también paree tener relación con los logros de aprendizaje y el efecto positivo es muy pronunciado en matemáticas cuando la lengua [MATERNA] es extranjera.  Este es uno de los efectos más significativos entre los distintos factores.  La siguiente figura 6.5 ilustra el efecto de la lengua [MATERNA] para las tres áreas de conocimiento indicadas. En evaluación de aprendizaje, el efecto se expresa típicamente como desviaciones estándar del puntaje promedio; en este caso el promedio obtenido por los alumnos de Panamá.  Esta desviación es una medida estándar de la diferencia estadística.   
 
 ```{r puntaje_prof_DQPIT03, fig.width=12, fig.height=5, echo=F, message=F, warning=F}
 p6prof$DQPIT03 <- as.factor(p6prof$DQPIT03)
-levels(p6prof$DQPIT03) <- c("Castellano","Lengua extranjera","Lengua originario 1","Lengua originario 2", "Otra lengua")
+levels(p6prof$DQPIT03) <- c("Castellano","Lengua extranjera","Lengua indígena 1","Lengua indígena 2", "Otra lengua")
 a <- aggregate(puntaje_estandar ~ DQPIT03 + tipo + DQPIT03, p6prof, mean)
 a$dif <- (a$puntaje_estandar - mean(p6prof$puntaje_estandar,na.rm=T))/sd(p6prof$puntaje_estandar,na.rm=T)
 ggplot(a, aes(x=tipo,y=dif,fill=DQPIT03)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("Desviación estándar") + scale_y_continuous(limits=c(-1.2,1.5)) + ggtitle('Figura 6.5. Efecto de lengua [MATERNA] del docente')
@@ -533,7 +532,7 @@ El nivel educativo del docente tiene un efecto positivo.   [AVERIGUAR SIGNIFICAD
 p6prof$DQPIT11 <- as.factor(p6prof$DQPIT11)
 a <- aggregate(puntaje_estandar ~ DQPIT11 + tipo + DQPIT11, p6prof, mean)
 a$dif <- (a$puntaje_estandar - mean(p6prof$puntaje_estandar,na.rm=T))/sd(p6prof$puntaje_estandar,na.rm=T)
-ggplot(a, aes(x=tipo,y=dif,fill=DQPIT11)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("Desviación estándar") + ggtitle('Figura 6.7. Efecto del nivel de educación completado por el docente')
+ggplot(a, aes(x=tipo,y=dif,fill=DQPIT11)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("Desviación estándar") + ggtitle('Figura 6.7. Efecto del nivel de educación completado por el docente') + scale_y_continuous(limits=c(-1.2,1.5))
 ```
 Los incentivos económicos al docente muestran un efecto positivo en los logros de aprendizaje.  
 
@@ -542,7 +541,7 @@ p6prof$DQPIT14 <- as.factor(p6prof$DQPIT14)
 levels(p6prof$DQPIT14) <- c("No","Si")
 a <- aggregate(puntaje_estandar ~ DQPIT14 + tipo + DQPIT14, p6prof, mean)
 a$dif <- (a$puntaje_estandar - mean(p6prof$puntaje_estandar,na.rm=T))/sd(p6prof$puntaje_estandar,na.rm=T)
-ggplot(a, aes(x=tipo,y=dif,fill=DQPIT14)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("Desviación estándar") + ggtitle('Figura 6.8. Efecto si el docente ha recibido o no incentivos económicos por desempeño')
+ggplot(a, aes(x=tipo,y=dif,fill=DQPIT14)) + geom_bar(stat='identity',position='dodge') + xlab("¿Ha recibido usted alguna vez un incentivo económico por desempeño docente") + ylab("Desviación estándar") + ggtitle('Figura 6.8. Efecto si el docente ha recibido o no incentivos económicos por desempeño') + scale_y_continuous(limits=c(-1.2,1.5))
 ```
 
 ```{r echo=F,messages=F,warnings=F}
@@ -569,12 +568,12 @@ qf <- qf[qf$country == 'PAN',]
 
 pest <- merge(p6,qf,by='idstud')
 ```
-Las actividades recreativas con la familia también muestran un efecto positivo. [CONFIRMAR SI ES RANKING O MEDICION] 
+Las actividades recreativas con la familia también muestran un efecto positivo. En este caso los círculos en la figura corresponden al puntaje de un alumno en un área de conocimiento. [CONFIRMAR SI ES RANKING O MEDICION] 
 
 ```{r puntaje_familia_RECREAF, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-ggplot(pest, aes(x=RECREAF,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice de actividades recreativas con la familia") + ylab("Desviación estándar") + ggtitle('Figura 6.9. Efecto de recreación con la familia')
+ggplot(pest, aes(x=RECREAF,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice de actividades recreativas con la familia") + ylab("Desviación estándar") + ggtitle('Figura 6.9. Efecto de recreación con la familia') + scale_y_continuous(limits=c(200,1200))
 ```
-El uso de computador educativo parece favorable para logros de aprendizaje.   [VERIFICAR QUE NO ES UN RANKING]
+El uso de computador educativo parece favorable para logros de aprendizaje.  Los círculos corresponden al puntaje de un alumno en un área de conocimiento.  [VERIFICAR QUE NO ES UN RANKING]
 
 ```{r echo=F,messages=F,warnings=F}		
 # load sexto grado puntajes		
@@ -601,7 +600,7 @@ qa <- qa[qa$country == 'PAN',]
 pest <- merge(p6,qa,by='idstud')		
 ```		
 ```{r puntaje_alumno_PCEDUCA6, fig.width=12, fig.height=10, echo=F, message=F, warning=F}		
-ggplot(pest, aes(x=PCEDUCA6,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice de uso de computador educativo") + ylab("Puntaje promedio de los alumnos")		
+ggplot(pest, aes(x=PCEDUCA6,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice de uso de computador educativo") + ylab("Puntaje promedio de los alumnos")	+  ggtitle('Figura 6.10. Logros de aprendizaje según uso de computador educativo') + scale_y_continuous(limits=c(200,1200))
 ```		
 ## Apéndice 1.  Niveles de logros educativos por área y grado		
 
