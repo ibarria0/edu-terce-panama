@@ -51,44 +51,18 @@ El Terce incluyó cuestionarios a los alumnos, docentes y hogares de cada alumno
 Las escuelas de Panamá representan el caso típico de América Latina en cuanto a condiciones de vida.  Por ejemplo, la figura 3.3 compara nuestra situación con la de cuatro países de interés.  La distribución de nuestras escuelas según el índice socioeconómico y cultural promedio de sus alumnos se concentra alrededor del promedio de la región, es decir, en torno al valor 0.0 del índice. [EDITAR FIGURA: TITULO Y LEYENDAS]
 
 ![plot of chunk demo_isecf](figure/demo_isecf-1.png) 
-Las edades de los participantes de tercero y sexto grado muestran un grupo importante sobre la edad esperada para el grado.   [AÑADIR LEYENDA DE COLORES DE GENERO Y DEPURAR LEYENDAS DE LOS EJES.  INTENTAR USAR % EN VEZ DE NUMEROS] 
 
-![plot of chunk demo_genero_edad_6](figure/demo_genero_edad_6-1.png) 
+Las edades de los participantes de tercero y sexto grado muestran un grupo importante sobre la edad esperada para el grado.   [AÑADIR LEYENDA DE COLORES DE GENERO Y DEPURAR LEYENDAS DE LOS EJES.  INTENTAR USAR % EN VEZ DE NUMEROS] 
 
 ![plot of chunk demo_genero_edad_3](figure/demo_genero_edad_3-1.png) 
 
+![plot of chunk demo_genero_edad_6](figure/demo_genero_edad_6-1.png) 
 
-
-|                | porcentaje|
-|:---------------|----------:|
-|10 años o menos |  0.5298013|
-|11 años         | 30.6754967|
-|12 años         | 46.6490066|
-|13 años         |  8.3973510|
-|14 años         |  3.0728477|
-|15 años o mas   |  1.5894040|
-|NA              |  0.0000000|
-|NA's            |  9.0860927|
 Las figuras 3.6 y 3.7 muestran las respuestas a las preguntas de a qué genero pertenecen y si pertenecen a una etnia originaria de Panamá.  [INTENTAR UTILIZAR EJE VERTICAL CON PORCENTAJES]
 
 ![plot of chunk demo_genelaro](figure/demo_genelaro-1.png) 
 
-
-|     | porcentaje|
-|:----|----------:|
-|Niña |  46.437086|
-|Niño |  44.476821|
-|NA's |   9.086093|
-
 ![plot of chunk etnia](figure/etnia-1.png) 
-
-
-|     | porcentajes|
-|:----|-----------:|
-|No   |    71.92053|
-|Si   |    11.65563|
-|NA's |    16.42384|
-
 
 ## 4. Comparación con América Latina
 
@@ -101,12 +75,16 @@ Más relevante en primera instancia es saber si nuestros niños y niñas logran 
 
 [22?]% de nuestras niñas y niños muestran un logro de aprendizaje de nivel 1.   Para ciencias son [45?]% y para matemáticas [65?]%.   La figura 4.3 muestra como se comparan los porcentajes de alumnos de Panamá para cada nivel con los del resto de los alumnos de otros países. [INCLUIR TAMBIEN TERCER GRADO]
 
+![plot of chunk puntaje_gdp_6](figure/puntaje_gdp_6-1.png) 
 
-![plot of chunk niveles_barcharts](figure/niveles_barcharts-1.png) 
+![plot of chunk niveles_barcharts_3](figure/niveles_barcharts_3-1.png) 
+
+![plot of chunk niveles_barcharts_6](figure/niveles_barcharts_6-1.png) 
+
 
 ## 5 Características de los resultados en Panamá
 
-Las niñas obtuvieron ligeramente mejores resultados que los niños en lectura de tercer grado, sexto grado y en ciencias de sexto grado. En matemáticas, las niñas también obtuvieron mejor resultados pero la diferencia es muy pequeña.   [NO TOMA EN CUENTA LOS QUE CONTESTARON N/A??]
+Las niñas obtuvieron ligeramente mejores resultados que los niños en lectura de tercer grado, sexto grado y en ciencias de sexto grado. En matemáticas, las niñas también obtuvieron mejor resultados pero la diferencia es muy pequeña.   [NO TOMA EN CUENTA LOS QUE CONTESTARON N/A??] 
 
 La figura 5.1 compara los puntajes promedio obtenidos por cada género combinando todas las tres áreas de conocimiento.  La figura 5.2 muestra la diferencia en promedios de las niñas comparadas con los niños expresada en desviaciones estándar, una medida común de diferencia estadística.  La diferencia positiva, es decir a favor de las niñas, es pequeña.    
 
@@ -129,7 +107,7 @@ Conviene notar que un grupo de escuelas oficiales rurales obtuvieron logros prom
 
 ![plot of chunk puntaje_isecf_rd_3](figure/puntaje_isecf_rd_3-1.png) 
 
-[JEV2IBG: AQUI VA LA FIGURA 5.6 EQUIVALENTE A LA FIGURA 1.1 QUE ES LA VERSION DE 6TO GRADO]
+![plot of chunk puntaje_isecf_rd_6](figure/puntaje_isecf_rd_6-1.png) 
 
 ## 6 Relacion entre logros de aprendizaje y factores asociados seleccionados
 
@@ -161,38 +139,16 @@ Hay relación clara entre la calidad de ambiente laboral en la escuela (Director
 
 
 ![plot of chunk puntaje_prof_MOTIVP](figure/puntaje_prof_MOTIVP-1.png) 
-![plot of chunk puntaje_prof_CLAMBP](figure/puntaje_prof_CLAMBP-1.png) 
-![plot of chunk puntaje_prof_RELSALP](figure/puntaje_prof_RELSALP-1.png) 
-![plot of chunk puntaje_prof_RELDIRP](figure/puntaje_prof_RELDIRP-1.png) 
 ![plot of chunk puntaje_prof_VIOLENP](figure/puntaje_prof_VIOLENP-1.png) 
-![plot of chunk puntaje_prof_APOYOP](figure/puntaje_prof_APOYOP-1.png) 
-![plot of chunk puntaje_prof_LIDERAP](figure/puntaje_prof_LIDERAP-1.png) 
-![plot of chunk puntaje_prof_MONITOP](figure/puntaje_prof_MONITOP-1.png) 
 
 #### 6.3.2 Datos de Profesores
 ![plot of chunk puntaje_prof_DQPIT01](figure/puntaje_prof_DQPIT01-1.png) 
 
-![plot of chunk puntaje_prof_DQPIT02](figure/puntaje_prof_DQPIT02-1.png) 
-
 ![plot of chunk puntaje_prof_DQPIT03](figure/puntaje_prof_DQPIT03-1.png) 
-
-![plot of chunk puntaje_prof_DQPIT04](figure/puntaje_prof_DQPIT04-1.png) 
-
-![plot of chunk puntaje_prof_DQPIT05](figure/puntaje_prof_DQPIT05-1.png) 
 
 ![plot of chunk puntaje_prof_DQPIT07](figure/puntaje_prof_DQPIT07-1.png) 
 
-![plot of chunk puntaje_prof_DQPIT08](figure/puntaje_prof_DQPIT08-1.png) 
-
 ![plot of chunk puntaje_prof_DQPIT11](figure/puntaje_prof_DQPIT11-1.png) 
-
-![plot of chunk puntaje_prof_DQPIT12_01](figure/puntaje_prof_DQPIT12_01-1.png) 
-
-![plot of chunk puntaje_prof_DQPIT12_02](figure/puntaje_prof_DQPIT12_02-1.png) 
-
-![plot of chunk puntaje_prof_DQPIT12_07](figure/puntaje_prof_DQPIT12_07-1.png) 
-
-![plot of chunk puntaje_prof_DQPIT13](figure/puntaje_prof_DQPIT13-1.png) 
 
 ![plot of chunk puntaje_prof_DQPIT14](figure/puntaje_prof_DQPIT14-1.png) 
 
