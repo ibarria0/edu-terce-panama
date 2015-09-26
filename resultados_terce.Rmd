@@ -290,7 +290,7 @@ a <- aggregate(puntaje_estandar ~ DQA6IT06, genero, mean)
 a$dif <- (a$puntaje_estandar - mean(p6$puntaje_estandar,na.rm=T))/sd(p6$puntaje_estandar,na.rm=T)
 levels(a$DQA6IT06) <- c("No originarios","Originarios")
 
-ggplot(a, aes(x=DQA6IT06,y=puntaje_estandar,fill=DQA6IT06)) + geom_bar(stat='identity') + ggtitle("Puntaje promedio comparado según pertenencia a grupos originarios") + ylab("Puntaje promedio") + xlab("Etnia") + scale_fill_discrete(guide=F) + scale_y_continuous(limits=c(-0.8,0.8))
+ggplot(a, aes(x=DQA6IT06,y=puntaje_estandar,fill=DQA6IT06)) + geom_bar(stat='identity') + ggtitle("Puntaje promedio comparado según pertenencia a grupos originarios") + ylab("Puntaje promedio") + xlab("Etnia") + scale_fill_discrete(guide=F)
 ```
 [JEV2IBG: título "Diferencia de puntaje promedio desfavorece a los grupos originarios"]
 [JEV2IBG: esta gráfica debería ser una sola barra de valores negativos en contra  de los grupos originarios, indicando la diferencia entre el puntaje de originarios menos el de los no originarios expresada en desviaciones estándar]

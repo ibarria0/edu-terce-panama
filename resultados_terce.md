@@ -137,10 +137,7 @@ Los alumnos que se reconocen como miembros de etnias originarias logran menor pu
 [JEV2IBG: eliminar del margen derecho la etiqueta "DQA6IT06"] 
 [JEV2IBG: como procesaste aquellos que respondieron N/A]
 
-
-```
-## Error in matrix(value, n, p): 'data' must be of a vector type, was 'NULL'
-```
+![plot of chunk demo_etnia_puntaje](figure/demo_etnia_puntaje-1.png) 
 [JEV2IBG: título "Diferencia de puntaje promedio desfavorece a los grupos originarios"]
 [JEV2IBG: esta gráfica debería ser una sola barra de valores negativos en contra  de los grupos originarios, indicando la diferencia entre el puntaje de originarios menos el de los no originarios expresada en desviaciones estándar]
 [JEV2IBG: cambiar la leyenda del eje Y a "Desviaciones estandar"]
