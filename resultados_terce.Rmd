@@ -126,7 +126,7 @@ ggplot(qf[qf$country %in% c("CHL","PAN","NIC"),], aes(x=ISECF)) + geom_histogram
 ```
 Las edades de los participantes de tercero y sexto grado muestran un grupo importante sobre la edad esperada para el grado.   [AÑADIR LEYENDA DE COLORES DE GENERO Y DEPURAR LEYENDAS DE LOS EJES.  INTENTAR USAR % EN VEZ DE NUMEROS] 
 
-```{r demo_genero_edad, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+```{r demo_genero_edad_6, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 qa6 <- read.spss('./data/Alumnos/QA6.SAV', to.data.frame=T)
 qa6 <- qa6[qa6$country == 'PAN',]
 qa6$DQA6IT01 <- as.factor(qa6$DQA6IT01)
@@ -134,8 +134,20 @@ qa6$DQA6IT02 <- as.factor(qa6$DQA6IT02)
 levels(qa6$DQA6IT01) <- c("10 años o menos","11 años","12 años", "13 años", "14 años", "15 años o mas", "NA")
 levels(qa6$DQA6IT02) <- c("Niña","Niño")
 
-ggplot(qa6, aes(x=DQA6IT01, fill=DQA6IT02)) + geom_histogram(alpha=.5, position="dodge") + scale_x_discrete(labels=c("10 años o menos","11 años","12 años", "13 años", "14 años", "15 años o mas", "NA")) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + scale_fill_discrete(labels=c("Niña","Niño")) + ylab("Cantidad de Estudiantes") + scale_fill_discrete(guide=FALSE) + xlab("Edad") + ggtitle("Número de estudiantes de sexto grado por edad")
+ggplot(qa6, aes(x=DQA6IT01, fill=DQA6IT02)) + geom_histogram(aes(y = (..count..)/sum(..count..)), alpha=.5, position="dodge") + scale_x_discrete(labels=c("10 años o menos","11 años","12 años", "13 años", "14 años", "15 años o mas", "NA")) + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + ylab("Cantidad de Estudiantes") + scale_fill_discrete(guide=FALSE) + xlab("Edad") + ggtitle("Número de estudiantes de sexto grado por edad")  + scale_y_continuous(labels = percent)
 ```
+
+```{r demo_genero_edad_3, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+qa3 <- read.spss('./data/Alumnos/QA3.SAV', to.data.frame=T)
+qa3 <- qa3[qa3$country == 'PAN',]
+qa3$DQA3IT01 <- as.factor(qa3$DQA3IT01)
+qa3$DQA3IT02 <- as.factor(qa3$DQA3IT02)
+levels(qa3$DQA3IT01) <- c("7 años o menos","8 años","9 años", "10 años", "11 años", "12 años o mas", "NA")
+levels(qa3$DQA3IT02) <- c("Niña","Niño")
+
+ggplot(qa3, aes(x=DQA3IT01, fill=DQA3IT02)) + geom_histogram(aes(y = (..count..)/sum(..count..)), alpha=.5, position="dodge") + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + ylab("Cantidad de Estudiantes") + scale_fill_discrete(guide=FALSE) + xlab("Edad") + ggtitle("Número de estudiantes de sexto grado por edad") + scale_y_continuous(labels = percent)
+```
+
 
 ```{r edad_summary, echo=F, message=F, warning=F}
 my.summary <- (summary(qa6$DQA6IT01)/sum(summary(qa6$DQA6IT01)))*100
@@ -149,7 +161,7 @@ qa6 <- qa6[qa6$country == 'PAN',]
 qa6$DQA6IT02 <- as.factor(qa6$DQA6IT02)
 levels(qa6$DQA6IT02) <- c("Niña","Niño")
 
-ggplot(qa6, aes(x=DQA6IT02)) + geom_histogram(fill='#0072B2',width=0.5,position="dodge")  + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + ylab("Cantidad de Estudiantes") + xlab("¿Eres niña o niño?") + ggtitle("Respuesta a la pertenencia de género")
+ggplot(qa6, aes(x=DQA6IT02)) + geom_histogram(aes(y = (..count..)/sum(..count..)),fill='#0072B2',width=0.5,position="dodge")  + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + ylab("Cantidad de Estudiantes") + xlab("¿Eres niña o niño?") + ggtitle("Respuesta a la pertenencia de género") + scale_y_continuous(labels = percent)
 ```
 
 ```{r genero_summary, echo=F, message=F, warning=F}
@@ -163,7 +175,7 @@ qa6 <- qa6[qa6$country == 'PAN',]
 qa6$DQA6IT06 <- as.factor(qa6$DQA6IT06)
 levels(qa6$DQA6IT06) <- c("No","Si")
 
-ggplot(qa6, aes(x=DQA6IT06)) + geom_histogram(fill='#0072B2',width=0.5, position="dodge")  + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + ylab("Cantidad de Estudiantes") + xlab("¿Perteneces a alguna etnia indígena?") + ggtitle("Respuesta a la pertenencia de etnia originaria")
+ggplot(qa6, aes(x=DQA6IT06)) + geom_histogram(aes(y = (..count..)/sum(..count..)),fill='#0072B2',width=0.5, position="dodge")  + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + ylab("Cantidad de Estudiantes") + xlab("¿Perteneces a alguna etnia indígena?") + ggtitle("Respuesta a la pertenencia de etnia originaria") + scale_y_continuous(labels = percent)
 ```
 
 ```{r etnia_summary, echo=F, message=F, warning=F}

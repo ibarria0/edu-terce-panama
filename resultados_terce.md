@@ -53,7 +53,10 @@ Las escuelas de Panamá representan el caso típico de América Latina en cuanto
 ![plot of chunk demo_isecf](figure/demo_isecf-1.png) 
 Las edades de los participantes de tercero y sexto grado muestran un grupo importante sobre la edad esperada para el grado.   [AÑADIR LEYENDA DE COLORES DE GENERO Y DEPURAR LEYENDAS DE LOS EJES.  INTENTAR USAR % EN VEZ DE NUMEROS] 
 
-![plot of chunk demo_genero_edad](figure/demo_genero_edad-1.png) 
+![plot of chunk demo_genero_edad_6](figure/demo_genero_edad_6-1.png) 
+
+![plot of chunk demo_genero_edad_3](figure/demo_genero_edad_3-1.png) 
+
 
 
 |                | porcentaje|
