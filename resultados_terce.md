@@ -14,7 +14,7 @@ En el Terce las escuelas particulares mostraron mejores logros que las oficiales
 
 Más importante que lamentarnos por los resultados pobres que podamos observar es enfocarnos en oportunidades de mejora. Por ejemplo, algunas escuelas oficiales rurales con bajo índice socioeconómico y cultural lograron puntajes superiores al promedio internacional del Terce, equivalente a 700 puntos, e incluso mayores que las escuelas oficiales urbanas.   Estas escuelas podrían aportarnos lecciones importantes para el resto del sistema educativo.  Este enfoque representa la aspiración de este análisis y su divulgación.   
 
-En el contexto latinoamericano, Panamá obtiene resultados por debajo de lo esperado.  La figura 1.2 confirma la tendencia conocida de que los alumnos de países con mayor producto interno bruto (PIB) per cápita obtienen mejores puntajes en promedio. Panamá obtuvo 40 puntos menos de lo esperado para su PIB per cápita, usando como referencia la línea que representa la relación típica entre logros y PIB per cápita en la figura.   Estos resultados son consistentes con los resultados que obtuvimos en evaluaciones internacionales previas: Serce 2006, Sineca 2008 y Pisa 2009. Es decir, Panamá puede y debe mejorar significativamente sus logros de aprendizaje.    
+En el contexto latinoamericano, Panamá obtiene resultados por debajo de lo esperado.  La figura 1.2 confirma la tendencia conocida de que los alumnos de países con mayor producto interno bruto (PIB) per cápita obtienen mejores puntajes en promedio. Panamá obtuvo 40 puntos menos de lo esperado para su PIB per cápita, usando como referencia la línea que representa la relación típica entre logros y PIB per cápita en la figura.   Estos resultados son consistentes con los resultados que obtuvimos en evaluaciones internacionales previas: Serce 2006, Sineca 2008 y Pisa 2009. Es decir, Panamá puede y debe mejorar significativamente sus logros de aprendizaje.      
 
 
 ![plot of chunk puntaje_gdp](figure/puntaje_gdp-1.png) 
@@ -90,100 +90,50 @@ Las figuras 3.6 y 3.7 muestran las respuestas a las preguntas de a qué genero p
 |NA's |    16.42384|
 
 
-## 4. Comparacion con América Latina
+## 4. Comparación con América Latina
 
-Comparar resultados entre países es útil pero no lo principal. El Terce no es una competencia por el mayor puntaje promedio.   Su valor principal está en comprender la dinámica educativa para tomar acción.   
+Comparar resultados entre países es útil pero no lo principal. El Terce no es una competencia por el mayor puntaje promedio.  Su valor principal está en comprender la dinámica educativa para tomar acción.   
 
 Entre los países participantes Chile obtuvo el mejor resultado seguido de Costa Rica y México, como muestran las figuras 4.1 y 4.2 para tercero y sexto grado respectivamente. La figura 4.2 es la figura 1.2, repetida aquí por conveniencia.  Panamá obtiene resulados inferiores a lo esperado para su PIB per cápita y estos resultados son consistentes con los que obtuvimos en las evaluaciones Serce 2006 y Pisa 2009. El efecto es más pronunciado para sexto grado que para tercer grado.   En esas figuras, Costa Rica sirve como ejemplo de que un país de escala y ubicación similar a la nuestra puede obtener mejores resultados.     Por tanto parece razonable confiar que con nuestra riqueza nacional podemos lograr mejores resultados, siempre y cuando le demos la prioridad social necesaria.   
 
 ![plot of chunk puntaje_gdp_3](figure/puntaje_gdp_3-1.png) 
 Más relevante en primera instancia es saber si nuestros niños y niñas logran un aprendiza útil para su propio bienestar y la prosperidad de la nación. La evaluación Terce define cuatro niveles de logros de aprendizaje.  El nivel 1 se considera poca  preparación para la vida esperada de los participantes y el nivel 4 la mejor preparación.  Corresponden a un dominio progresivamente más eficaz del área de conocimiento de interés y están explicados en el apéndice 1.  
 
-[22?]% de nuestras niñas y niños muestran un logro de aprendizaje en el nivel inferior, o nivel 1, considerado inadecuado como preparación para su vida.   Para ciencias son [45?]% y para matemáticas [65?]%.   La figura 4.3 muestra como se comparan los porcentajes de alumnos de Panamá para cada nivel con los del resto de los alumnos de otros países. 
+[22?]% de nuestras niñas y niños muestran un logro de aprendizaje de nivel 1.   Para ciencias son [45?]% y para matemáticas [65?]%.   La figura 4.3 muestra como se comparan los porcentajes de alumnos de Panamá para cada nivel con los del resto de los alumnos de otros países. [INCLUIR TAMBIEN TERCER GRADO]
 
-[JEV2IBG: título "Niveles de logros de aprendizaje por área de conocimiento, comparados"]
-[JEV2IBG: cambiar la leyenda del eje Y a "Porcentaje de alumnos"]
-[JEV2IBG: cambiar la leyenda del eje X a "Niveles de logro de aprendizaje"]
-[JEV2IBG: verificar que las leyendas del eje X y Y empiezan con mayúscula]
-[JEV2IBG: eliminar del margen derecho la etiqueta "countryp"]
-[JEV2IBG: si es posible, usar colores menos intensos para las barras, especialmente el rojo (asusta ;)]
 
 ![plot of chunk niveles_barcharts](figure/niveles_barcharts-1.png) 
 
 ## 5 Características de los resultados en Panamá
-### 5.1 Logros por Genero 
 
-Las niñas obtuvieron mejores resultados que los niños en lectura de tercer grado, sexto grado y en ciencias de sexto grado. En matemáticas, aunque las niñas obtuvieron mejor resultado, la diferencia es tan pequeña que no permite afirmar que sus logros de aprendizaje son mejores.   
+Las niñas obtuvieron ligeramente mejores resultados que los niños en lectura de tercer grado, sexto grado y en ciencias de sexto grado. En matemáticas, las niñas también obtuvieron mejor resultados pero la diferencia es muy pequeña.   [NO TOMA EN CUENTA LOS QUE CONTESTARON N/A??]
 
-Las figuras [No. PTJ POR GNR] y [No. STD DEV GNR] comparan los puntajes promedio obtenidos por cada género, la primera, y la diferencia entre niños y niñas, la segunda, expresada en desviaciones estándar 
-
-[JEV2IBG: cambiar la leyenda del eje Y a "Puntaje promedio"]
-[JEV2IBG: cambiar la leyenda del eje X a "Género"] 
-[JEV2IBG: eliminar del margen derecho la etiqueta "DQASIT02"] 
+La figura 5.1 compara los puntajes promedio obtenidos por cada género combinando todas las tres áreas de conocimiento.  La figura 5.2 muestra la diferencia en promedios de las niñas comparadas con los niños expresada en desviaciones estándar, una medida común de diferencia estadística.  La diferencia positiva, es decir a favor de las niñas, es pequeña.    
 
 ![plot of chunk demo_genero_puntaje](figure/demo_genero_puntaje-1.png) 
-[JEV2IBG: esta gráfica debería ser una sola barra de valores positivos a favor de las niñas, indicando la diferencia entre el puntaje de niñas menos el de niños expresada en desviaciones estándar]
 
 ![plot of chunk demo_genero_puntaje_desv](figure/demo_genero_puntaje_desv-1.png) 
 
-### 5.2 Logros de grupos originarios
+Los alumnos que se reconocen como miembros de etnias originarias logran menor puntaje que los que no se consideran miembros.  La figuras 5.3 compara los puntajes promedio combinando las tres áreas de conocimiento de los alumnos que se consideran de grupos originarios y de los que no.  La figura 5.4 muestra la diferencia en promedios de los dos grupos, expresado en desviaciones estandar.   La diferencia negativa es importante y en contra de los grupos originarios.     
 
-Los alumnos que se reconocen como miembros de etnias originarias logran menor puntaje que los que no se consideran miembros.  Las figuras [No. PTJ POR ETN] y [No. STD DEV ETN] comparan los puntajes promedio y diferencia según si la alumna o alumno se reconoce o no como miembro de grupos originarios.    
-
-[JEV2IBG: título "Puntaje promedio comparado según pertenencia a grupos originarios"]
-[JEV2IBG: cambiar la leyenda del eje Y a "Puntaje promedio"]
-[JEV2IBG: cambiar "DQA6IT06" en la leyenda del eje X por "Etnia"] 
-[JEV2IBG: cambiar las etiquetas en el eje X por "No originarios" y "Originarios"]
-[JEV2IBG: eliminar del margen derecho la etiqueta "DQA6IT06"] 
-[JEV2IBG: como procesaste aquellos que respondieron N/A]
 
 ![plot of chunk demo_etnia_puntaje](figure/demo_etnia_puntaje-1.png) 
-[JEV2IBG: título "Diferencia de puntaje promedio desfavorece a los grupos originarios"]
-[JEV2IBG: esta gráfica debería ser una sola barra de valores negativos en contra  de los grupos originarios, indicando la diferencia entre el puntaje de originarios menos el de los no originarios expresada en desviaciones estándar]
-[JEV2IBG: cambiar la leyenda del eje Y a "Desviaciones estandar"]
-[JEV2IBG: cambiar la leyenda del eje X a "Diferencia"] 
-[JEV2IBG: eliminar del margen derecho la etiqueta "DQA6IT06"] 
 
 ![plot of chunk demo_etnia_puntaje_desv](figure/demo_etnia_puntaje_desv-1.png) 
-Adicionalmente, el índice socioeconómico y cultural muestra menor relación con el puntaje promedio obtenido para alumnos que se consideran miembros de grupos originarios que para aquellos que no.   Esto lo ilustra la figura [No. PTJ VS ISECF ORGN] en la que cada línea muestra la correspondencia entre puntaje promedio obtenido y el índice del alúmno.  La diferencia de puntaje entre alumnos de menor y mayor índices es más pronunciada para alumnos que se declaran no originarios.  
-
-[JEV2IBG: título "Relación entre logros e índice socioeconómico y cultural según etnia"]
-[JEV2IBG: cambiar la leyenda del eje Y a "Puntaje promedio"]
-[JEV2IBG: cambiar la leyenda del eje X a "Índice socioeconómico y cultural"] 
-[JEV2IBG: eliminar del margen derecho la etiqueta "DQA6IT06"] 
-
-![plot of chunk demo_etnia_puntaje_isecf](figure/demo_etnia_puntaje_isecf-1.png) 
-### 5.3 Logros según tipo de escuela
 
 Las oportunidades de educación y salud muestran un altísimo grado de influencia en el bienestar de un individuo. Cuándo los logros de aprendizaje dependen marcadamente del poder adquisitivo de una persona es difícil argumentar que la sociedad brinda oportunidades justas a todos sus residentes.  En Panamá, la diferencia de logros entre escuelas particulares, escuelas oficiales urbanas y escuelas oficiales rurales es muy marcada.   
 
-Las figuras [No. PTJ VS ISEC 3ero] y [No. PTJ VS ISEC 6to] muestran para cada escuela participante de Panamá el puntaje promedio obtenido por sus alumnos en el eje vertical y el índice socioeconómico y cultural promedio de sus alumnos en el eje horizontal. Las líneas representan el puntaje promedio de alumnos de todos los países, incluyendo Panamá, en la prueba Terce y el puntaje debajo del cual se define el nivel 1 de aprendizaje, considerado inadecuado para las situaciones de vida esperadas. [PORCENTAJE NIVEL 1]% de las niñas y niños obtuvieron puntajes correspondientes al nivel 1.   
+Las figuras 5.5 y 5.6 muestran para cada escuela participante de Panamá el puntaje promedio obtenido por sus alumnos combinando todas las áreas de conocimiento, en el eje vertical, y el índice socioeconómico y cultural promedio de sus alumnos, en el eje horizontal. El puntaje promedio entre todos los alumnos es 700 puntos para todas las áreas de conocimiento.  La figura 5.6 es la misma figura 1.1, repetida aquí por conveniencia.  
 
-[JEV2IBG: las 2 figuras aqui son las versiones de 3ero y 6to grado de la figura 1 en el resumen ejecutivo]
-[JEV2IBG: Pregunta: las figuras de puntaje vs isec por escuela pueden indcar un solo puntaje para definir el nivel 1 de todas las áreas de conocimiento, o el puntaje que define el nivel 1 cambia de área a área]
-
-Una observación de suma importancia es que hay un grupo de escuelas oficiales rurales cuyos logros promedio son iguales o superiores a los de las escuelas oficiales urbanas a pesar de tener índices socioeconómicos y culturales menores en promedio. Estas escuelas probablemente tienen lecciones que aportar en cuanto a cómo mejorar los logros educativos en las áreas menos favorecidas del país.    
+Conviene notar que un grupo de escuelas oficiales rurales obtuvieron logros promedio iguales o superiores a los de las escuelas oficiales urbanas a pesar de tener índices socioeconómicos y culturales menores en promedio. Estas escuelas probablemente tienen lecciones que aportar para mejorar la educación en las áreas menos favorecidas del país.    
 
 ![plot of chunk puntaje_isecf_rd_3](figure/puntaje_isecf_rd_3-1.png) 
 
-[JEV2IBG: titulo "logros de aprendizaje de escuelas particulares y oficiales, urbanas y rurales, tercer grado]
-[JEV2IBG: cambiar la leyenda del eje Y a "Puntaje promedio"]
-[JEV2IBG: cambiar la leyenda del eje X a "Índice socioeconómico y cultural"]
-[JEV2IBG: intentar incluir los niveles de aprendizaje, o al menos el nivel 1]
+[JEV2IBG: AQUI VA LA FIGURA 5.6 EQUIVALENTE A LA FIGURA 1.1 QUE ES LA VERSION DE 6TO GRADO]
 
-[JEV2IBG: titulo "logros de aprendizaje de escuelas particulares y oficiales, urbanas y rurales, sexto grado]
-[JEV2IBG: cambiar la leyenda del eje Y a "Puntaje promedio"]
-[JEV2IBG: cambiar la leyenda del eje X a "Índice socioeconómico y cultural"]
-[JEV2IBG: intentar incluir los niveles de aprendizaje, o al menos el nivel 1]
+## 6 Relacion entre logros de aprendizaje y factores asociados seleccionados
 
-## 6 Relacion entre desempeño y factores típicamente asociados al proceso de aprendizaje
-## 6.1 ¿Qué son factores asociados?
-
-Son características o circumstancias cuantificables que podrían mostrar relación con los logros de aprendizaje.  El que muestren relación no significa por si solo que sea garantía ni causa de los logros, pero sugiere que es conveniente explorar la relación.   
-
-## 6.2 Logros según factores asociados a la escuela
-
-[JEV2IBG: esta grafica la podemos suprimir porque la siguiente cuenta la misma historia en más detalle]
+Los factores asociados son características o circumstancias cuantificables que podrían mostrar relación con los logros de aprendizaje.  El que muestren relación con los logros no significa de por si que sean garantía ni la causa de los logros, pero sugiere que es conveniente explorar la relación.   A modo de ejemplo, una mejor situación socioeconómica y cultural da la oportunidad de asistir a una mejor escuela tanto en infraestructura como en eficacia, sin que sea claro cuál de esos tres factores explican la eficacia. 
 
 ![plot of chunk puntaje_INFRAD](figure/puntaje_INFRAD-1.png) 
 Los logros de aprendizaje, evaluados a través de los puntajes Terce, muestran una relación clara con La infraestructura de la escuela.  Esto por si solo no permite concluir que una mejor infraestructura genera mejores logros; por ejemplo, una mejor situación socioeconómica y cultural da la oportunidad de asistir a una mejor escuela tanto en infraestructura como en eficacia, sin que sea claro cual es el factor principal que logra esa eficacia. Comprender la relación entre infraestructura y logros requiere mayor análisis para determinar hasta que punto la infraestructura influye en los logros. 
