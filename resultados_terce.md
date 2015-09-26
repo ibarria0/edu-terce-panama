@@ -7,7 +7,7 @@ Hay grandes diferencias de oportunidades para nuestra niñez en materia educativ
 
 Este documento de divulgación es principalmente un llamado a analizar los datos Terce disponibles en la página Web de Meduca y un reto a la voluntad nacional por crear un sistema educativo justo, capaz de brindar igualdad de oportunidades.   
 
-En el Terce las escuelas particulares mostraron mejores logros que las oficiales.  De hecho muchas de nuestras escuelas oficiales muestran niveles de aprendizaje poco adecuados para la vida esperada de sus alumnos, especialmente entre las escuelas rurales oficiales. Las diferencias de logros y la estrecha relación con las condiciones de vida se pueden ver en la figura 1.1 por ejemplo. Cada punto representa el promedio de puntajes y el promedio del índice socioeconómico y cultural de los alumnos de una escuela. El tamaño del punto es proporcional al número de alumnos en la escuela. El índice se construye con base en respuestas a cuestionarios sobre las condiciones de vida de cada alumno: a mayor índice las condiciones son más cómodas.    
+En el Terce las escuelas particulares mostraron mejores logros que las oficiales.  De hecho muchas de nuestras escuelas oficiales muestran niveles de aprendizaje poco adecuados para la vida esperada de sus alumnos, especialmente entre las escuelas rurales oficiales. Las diferencias de logros y la estrecha relación con las condiciones de vida se pueden ver en la figura 1.1 por ejemplo. El centro de cada círculo representa el promedio de puntajes y el promedio del índice socioeconómico y cultural de los alumnos de una escuela. El tamaño del círculo es proporcional al número de alumnos en la escuela. El índice se construye con base en respuestas a cuestionarios sobre las condiciones de vida de cada alumno: a mayor índice las condiciones son más cómodas.    
 
 
 ![plot of chunk puntaje_isecf_rd](figure/puntaje_isecf_rd-1.png) 
@@ -48,17 +48,17 @@ El Terce incluyó cuestionarios a los alumnos, docentes y hogares de cada alumno
 ![plot of chunk demo_pub_priv](figure/demo_pub_priv-1.png) 
 
 ![plot of chunk demo_ruralidad](figure/demo_ruralidad-1.png) 
-Las escuelas de Panamá representan el caso típico de América Latina en cuanto a condiciones de vida.  Por ejemplo, la figura 3.3 compara nuestra situación con la de cuatro países de interés.  La distribución de nuestras escuelas según el índice socioeconómico y cultural promedio de sus alumnos se concentra alrededor del promedio de la región, es decir, en torno al valor 0.0 del índice. [EDITAR FIGURA: TITULO Y LEYENDAS]
+Las escuelas de Panamá representan el caso típico de América Latina en cuanto a condiciones de vida.  Por ejemplo, la figura 3.3 compara nuestra situación con la de cuatro países de interés.  La distribución de nuestras escuelas según el índice socioeconómico y cultural promedio de sus alumnos se concentra alrededor del promedio de la región, es decir, en torno al valor 0.0 del índice. 
 
 ![plot of chunk demo_isecf](figure/demo_isecf-1.png) 
 
-Las edades de los participantes de tercero y sexto grado muestran un grupo importante sobre la edad esperada para el grado.   [AÑADIR LEYENDA DE COLORES DE GENERO Y DEPURAR LEYENDAS DE LOS EJES.  INTENTAR USAR % EN VEZ DE NUMEROS] 
+Las edades de los participantes de tercero y sexto grado muestran un grupo importante sobre la edad esperada para el grado.    
 
 ![plot of chunk demo_genero_edad_3](figure/demo_genero_edad_3-1.png) 
 
 ![plot of chunk demo_genero_edad_6](figure/demo_genero_edad_6-1.png) 
 
-Las figuras 3.6 y 3.7 muestran las respuestas a las preguntas de a qué genero pertenecen y si pertenecen a una etnia originaria de Panamá.  [INTENTAR UTILIZAR EJE VERTICAL CON PORCENTAJES]
+Las figuras 3.6 y 3.7 muestran las respuestas a las preguntas de a qué genero pertenecen y si pertenecen a una etnia originaria de Panamá.  
 
 ![plot of chunk demo_genelaro](figure/demo_genelaro-1.png) 
 
@@ -71,11 +71,11 @@ Comparar resultados entre países es útil pero no lo principal. El Terce no es 
 Entre los países participantes Chile obtuvo el mejor resultado seguido de Costa Rica y México, como muestran las figuras 4.1 y 4.2 para tercero y sexto grado respectivamente. La figura 4.2 es la figura 1.2, repetida aquí por conveniencia.  Panamá obtiene resulados inferiores a lo esperado para su PIB per cápita y estos resultados son consistentes con los que obtuvimos en las evaluaciones Serce 2006 y Pisa 2009. El efecto es más pronunciado para sexto grado que para tercer grado.   En esas figuras, Costa Rica sirve como ejemplo de que un país de escala y ubicación similar a la nuestra puede obtener mejores resultados.     Por tanto parece razonable confiar que con nuestra riqueza nacional podemos lograr mejores resultados, siempre y cuando le demos la prioridad social necesaria.   
 
 ![plot of chunk puntaje_gdp_3](figure/puntaje_gdp_3-1.png) 
+![plot of chunk puntaje_gdp_6](figure/puntaje_gdp_6-1.png) 
+
 Más relevante en primera instancia es saber si nuestros niños y niñas logran un aprendiza útil para su propio bienestar y la prosperidad de la nación. La evaluación Terce define cuatro niveles de logros de aprendizaje.  El nivel 1 se considera poca  preparación para la vida esperada de los participantes y el nivel 4 la mejor preparación.  Corresponden a un dominio progresivamente más eficaz del área de conocimiento de interés y están explicados en el apéndice 1.  
 
-[22?]% de nuestras niñas y niños muestran un logro de aprendizaje de nivel 1.   Para ciencias son [45?]% y para matemáticas [65?]%.   La figura 4.3 muestra como se comparan los porcentajes de alumnos de Panamá para cada nivel con los del resto de los alumnos de otros países. [INCLUIR TAMBIEN TERCER GRADO]
-
-![plot of chunk puntaje_gdp_6](figure/puntaje_gdp_6-1.png) 
+Salvo en lecutra de sexto grado, más de 40% de nuestras niñas y niños no pasan del nivel 1 de logros de aprendizaje, y en matemáticas de sexto grado esa cifra excede 60%.  Las figuras 4.3 y 4.4 muestran como se comparan los porcentajes de alumnos de Panamá para cada grado y área de conocimiento con los del resto de los alumnos de otros países. 
 
 ![plot of chunk niveles_barcharts_3](figure/niveles_barcharts_3-1.png) 
 
@@ -92,7 +92,7 @@ La figura 5.1 compara los puntajes promedio obtenidos por cada género combinand
 
 ![plot of chunk demo_genero_puntaje_desv](figure/demo_genero_puntaje_desv-1.png) 
 
-Los alumnos que se reconocen como miembros de etnias originarias logran menor puntaje que los que no se consideran miembros.  La figuras 5.3 compara los puntajes promedio combinando las tres áreas de conocimiento de los alumnos que se consideran de grupos originarios y de los que no.  La figura 5.4 muestra la diferencia en promedios de los dos grupos, expresado en desviaciones estandar.   La diferencia negativa es importante y en contra de los grupos originarios.     
+Los alumnos que se reconocen como miembros de etnias originarias logran menor puntaje que los que no se consideran miembros.  La figuras 5.3 compara los puntajes promedio combinando las tres áreas de conocimiento de los alumnos que se consideran de grupos originarios y de los que no.  La figura 5.4 muestra la diferencia en promedios de los dos grupos, expresado en desviaciones estandar.   La diferencia negativa es importante y en contra de los grupos originarios.       
 
 
 ![plot of chunk demo_etnia_puntaje](figure/demo_etnia_puntaje-1.png) 
@@ -144,10 +144,10 @@ Los incentivos económicos al docente muestran un efecto positivo en los logros 
 ![plot of chunk puntaje_prof_DQPIT14](figure/puntaje_prof_DQPIT14-1.png) 
 
 
-Las actividades recreativas con la familia también muestran un efecto positivo. [CONFIRMAR SI ES RANKING O MEDICION] 
+Las actividades recreativas con la familia también muestran un efecto positivo. En este caso los círculos en la figura corresponden al puntaje de un alumno en un área de conocimiento. [CONFIRMAR SI ES RANKING O MEDICION] 
 
 ![plot of chunk puntaje_familia_RECREAF](figure/puntaje_familia_RECREAF-1.png) 
-El uso de computador educativo parece favorable para logros de aprendizaje.   [VERIFICAR QUE NO ES UN RANKING]
+El uso de computador educativo parece favorable para logros de aprendizaje.  Los círculos corresponden al puntaje de un alumno en un área de conocimiento.  [VERIFICAR QUE NO ES UN RANKING]
 
 
 ![plot of chunk puntaje_alumno_PCEDUCA6](figure/puntaje_alumno_PCEDUCA6-1.png) 
