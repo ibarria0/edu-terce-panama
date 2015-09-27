@@ -17,7 +17,7 @@ Las diferencias de logros y su estrecha relación con las condiciones de vida se
 
 ![plot of chunk puntaje_isecf_rd](figure/puntaje_isecf_rd-1.png) 
 
-Más importante que lamentar las debilidadeds observadas en estos logros es enfocarnos en oportunidades de mejora. Por ejemplo, algunas escuelas oficiales rurales con bajo índice socioeconómico y cultural lograron puntajes superiores al promedio internacional de 700 puntos en el Terce y superiores al de las escuelas oficiales urbanas.   Estas escuelas tienen lecciones importantes para nuestro sistema educativo.  Enfocarnos mejorar es el mensaje que desea plantar este documento.   
+Más importante que lamentar las debilidadeds observadas en estos logros es enfocarnos en oportunidades de mejora. Por ejemplo, algunas escuelas oficiales rurales con bajo índice socioeconómico y cultural lograron puntajes superiores al promedio internacional de 700 puntos en el Terce y superiores al de las escuelas oficiales urbanas.   Estas escuelas tienen lecciones importantes para nuestro sistema educativo.  Enfocarnos en mejorar es el mensaje que desea plantar este documento.   
 
 En el contexto latinoamericano, Panamá obtuvo resultados por debajo de lo esperado para sus recursos.  La figura 1.2 confirma la tendencia conocida de que los alumnos de países con mayor producto interno bruto (PIB) per cápita obtienen mejores logros. Panamá obtuvo 39 puntos por debajo de la línea que modela los logros según el PIB per cápita de los países.   Estos resultados son similares a los que obtuvimos en evaluaciones internacionales previas: Serce 2006, Sineca 2008 y Pisa 2009. Es decir, Panamá puede y debe mejorar significativamente sus logros de aprendizaje.      
 
@@ -94,11 +94,11 @@ Salvo en lecutra de sexto grado, cerca de 40% de nuestras niñas y niños obtien
 
 ## 5 Resultados según género, etnia originaria y nivel socioeconómico y cultural
 
-Las niñas obtuvieron ligeramente mejores resultados que los niños en lectura de tercero y sexto grado, matemáticas de tercero y sexto grado y ciencias de sexto grado, pero la ventaja no es clara.   La figura 5.1 compara los logros combinando las tres áreas de conocimiento.  La data excluye alumnos para los cuales no se pudo obtener respuesta de género válida.     
+Las niñas obtuvieron ligeramente mejores resultados que los niños en lectura de tercero y sexto grado, matemáticas de tercero y sexto grado y ciencias de sexto grado, pero la ventaja no es clara.   La figura 5.1 compara los logros combinando las tres áreas de conocimiento.  Los datos excluyen alumnos para los cuales no se pudo obtener respuesta de género válida.     
 
 ![plot of chunk demo_genero_puntaje](figure/demo_genero_puntaje-1.png) 
 
-Los alumnos que se reconocen como miembros de etnias originarias logran menor puntaje que los que no se consideran miembros.  La figuras 5.2 compara los logros combinando las tres áreas de conocimiento y la diferencia es clara.   La data excluye alumnos para los cuales no se pudo obtener respuesta de etnia originaria válida.    
+Los alumnos que se reconocen como miembros de etnias originarias logran menor puntaje que los que no se consideran miembros.  La figuras 5.2 compara los logros combinando las tres áreas de conocimiento y la diferencia es clara.   Los datos excluyen alumnos para los cuales no se pudo obtener respuesta de etnia originaria válida.    
 
 
 ![plot of chunk demo_etnia_puntaje](figure/demo_etnia_puntaje-1.png) 
@@ -126,7 +126,7 @@ La autonomía administrativa de la escuela muestra relación con los logros de a
 
 ![plot of chunk puntaje_AUTOADD](figure/puntaje_AUTOADD-1.png) 
 
-En las dos figuras siguientes los puntos corresponden a docentes y muestran al promedio obtenido por sus estudiantes, en el área indicada por el color del punto, y una característica del profesor: motivación en la figura 6.3 y edad en la figura 6.4.  
+En las dos figuras siguientes los puntos corresponden a docentes de sexto grado y muestran al promedio obtenido por sus estudiantes, en el área indicada por el color del punto, y una característica del profesor: motivación en la figura 6.3 y edad en la figura 6.4.  
 
 Curiosamente, se ve poca relación entre la motivación docente y los logros de aprendizajes.  Por ejemplo, en la figura 6.3 el valor de puntaje en la línea que modela la relación logro-motivación no varía mucho de 670 puntos aunque el índice varía de -2 a +2. Esta observación seguramente será sujeto de mayor validación y análisis.   
 
@@ -136,7 +136,7 @@ Curiosamente, se ve poca relación entre la motivación docente y los logros de 
 La edad de los docentes sí parece hacer una diferencia en los logros de aprendizaje.    
 
 ![plot of chunk puntaje_prof_DQPIT01](figure/puntaje_prof_DQPIT01-1.png) 
-Las figuras siguientes ilustran el efecto de ciertas características de interés.  Por ejemplo, podríamos explorar si el subgrupo de alumnos cuyos docentes tiene alta formación obtienen mayores logros de aprendizaje.  El efecto de esa alta formación consiste en notar el puntaje promedio de ese subgrupo de alumnos y restarle el puntaje promedio del grupo total de alumnos de Panamá en el Terce.  Cuando este efecto es positivo y de suficiente magnitud, se entiende que el subgrupo obtiene mejores resultados que el promedio del grupo total.  
+Las figuras siguientes ilustran el efecto de ciertas características de interés relacionadas con docentes de sexto grado.  Por ejemplo, podríamos explorar si el subgrupo de alumnos cuyos docentes tiene alta formación obtienen mayores logros de aprendizaje.  El efecto de esa alta formación consiste en notar el puntaje promedio de ese subgrupo de alumnos y restarle el puntaje promedio del grupo total de alumnos de Panamá en el Terce.  Cuando este efecto es positivo y de suficiente magnitud, se entiende que el subgrupo obtiene mejores resultados que el promedio del grupo total.  
 
 En las figuras, para simplificar, el promedio del grupo total está representado por el valor 0 en el eje vertical y la magnitud del efecto, o diferencia entre promedios, se expresa en desviaciones estándar, que es una medida conocida de diferencias estadísticas.      
 
