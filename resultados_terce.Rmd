@@ -223,7 +223,7 @@ gdp <- read.csv('./data/suplemental/gdp.csv')
 names(gdp) <- c("Country_Name","country","gdp_2013")
 m <- merge(p6,gdp,by="country")
 a <- aggregate( puntaje_estandar ~ country + gdp_2013, m, mean)
-ggplot(a, aes(x=gdp_2013, y=puntaje_estandar, color=country, group=1)) + geom_point() + geom_smooth(method = "lm", se = F) + geom_text(aes(label=country)) + xlab("Producto (PIB) per cápita") + ylab("Puntaje promedio") + ggtitle("Figura 4.2. Logros de aprendizaje en 6to grado según producto (PIB) per cápita por país") + scale_x_continuous(label=dollar) + scale_y_continuous(limits=c(600,810)) + scale_color_discrete(guides=F)
+ggplot(a, aes(x=gdp_2013, y=puntaje_estandar, color=country, group=1)) + geom_point() + geom_smooth(method = "lm", se = F) + geom_text(aes(label=country)) + xlab("Producto (PIB) per cápita") + ylab("Puntaje promedio") + ggtitle("Figura 4.2. Logros de aprendizaje en 6to grado según producto (PIB) per cápita por país") + scale_x_continuous(label=dollar) + scale_y_continuous(limits=c(600,810)) + scale_color_discrete(guide=F)
 ``` 
 
 Más relevante que nuestra posición relativa es saber si nuestros niños y niñas logran un aprendiza útil para su propio bienestar y la prosperidad de la nación. La evaluación Terce define cuatro niveles de logros de aprendizaje.  El nivel 1 se considera poca  preparación para la vida esperada de los participantes y el nivel 4 la mejor preparación.  Corresponden a un dominio progresivamente más eficaz del área de conocimiento de interés.  
