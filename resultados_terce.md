@@ -78,7 +78,11 @@ Entre los países participantes Chile obtuvo el mejor resultado seguido de Costa
 Costa Rica sirve como ejemplo de que un país de escala y ubicación similar a la nuestra puede obtener mejores logros.  Con esta observación y nuestra riqueza nacional parece razonable confiar que podemos mejorar resultados si le damos la prioridad social necesaria a nuestra educación.   
 
 ![plot of chunk puntaje_gdp_3](figure/puntaje_gdp_3-1.png) 
-![plot of chunk puntaje_gdp_6](figure/puntaje_gdp_6-1.png) 
+
+
+```
+## Error in discrete_scale("colour", "hue", hue_pal(h, c, l, h.start, direction), : unused argument (guides = FALSE)
+```
 
 Más relevante que nuestra posición relativa es saber si nuestros niños y niñas logran un aprendiza útil para su propio bienestar y la prosperidad de la nación. La evaluación Terce define cuatro niveles de logros de aprendizaje.  El nivel 1 se considera poca  preparación para la vida esperada de los participantes y el nivel 4 la mejor preparación.  Corresponden a un dominio progresivamente más eficaz del área de conocimiento de interés.  
 
