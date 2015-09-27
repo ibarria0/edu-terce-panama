@@ -128,7 +128,9 @@ Las escuelas de Panamá representan condiciones típicas de América Latina como
 
 # load factores familia
 qf <- read.spss('./data/Familia/QF6.SAV', to.data.frame=T)
-ggplot(qf[qf$country %in% c("CHL","CRI","URU","PAN","NIC"),], aes(x=ISECF)) + geom_histogram(fill='#0072B2') + ylab("Cantidad de escuelas") + facet_grid(country ~ ., scales='free_y') + scale_y_continuous(breaks=NULL) + geom_vline(x=0, colour="red", linetype = "longdash") + ggtitle("Figura 3.3. Distribución de escuelas según índice socioeconómico y cultural, comparada") + xlab("Índice socioeconómico y cultural")
+af <- qf[qf$country %in% c("CHL","CRI","URU","PAN","NIC"),]
+af$country <- factor(af$country, levels = c("CHL","URU","CRI","PAN","NIC"))
+ggplot(af, aes(x=ISECF)) + geom_histogram(fill='#0072B2') + ylab("Cantidad de escuelas") + facet_grid(country ~ ., scales='free_y') + scale_y_continuous(breaks=NULL) + geom_vline(x=0, colour="red", linetype = "longdash") + ggtitle("Figura 3.3. Distribución de escuelas según índice socioeconómico y cultural, comparada") + xlab("Índice socioeconómico y cultural")
 ```
 
 Las edades de los participantes de tercero y sexto grado muestran que un grupo importante de ellos está sobre la edad esperada para su grado.    
