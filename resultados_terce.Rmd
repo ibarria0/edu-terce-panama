@@ -582,7 +582,7 @@ pest <- merge(p6,qf,by='idstud')
 Las actividades recreativas con la familia muestran un efecto positivo, como ilustra la línea que modela la relación logros-actividades.  Es decir, a mayor índice de actividades recreativas con la familia mayor puntaje obtienen los alumnos correspondientes.  
 
 ```{r puntaje_familia_RECREAF, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
-ggplot(pest, aes(x=RECREAF,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice de actividades recreativas con la familia") + ylab("Puntaje de los alumnos") + ggtitle('Figura 6.9. Efecto de recreación con la familia') + scale_y_continuous(limits=c(200,1200)) + scale_fill_discrete(name="Área")
+ggplot(pest, aes(x=RECREAF,y=puntaje_estandar,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice de actividades recreativas con la familia") + ylab("Puntaje de los alumnos") + ggtitle('Figura 6.9. Efecto de recreación con la familia') + scale_y_continuous(limits=c(200,1200)) + scale_color_discrete(name="Área")
 ```
 Finalmente, el uso de computadora para fines educativos también muestra un efecto positivo, como ilustra la línea que modela la relación logros-uso, aunque el efecto parece menos marcado que las actividades recreativas.  Como mencionamos previamente, cabe notar que estos dos factores, las actividades recreativas y el uso de computadoras, tienen relación potencial con el índice socioeconómico y cultural de los alumnos.   
 
@@ -611,7 +611,7 @@ qa <- qa[qa$country == 'PAN',]
 pest <- merge(p6,qa,by='idstud')		
 ```		
 ```{r puntaje_alumno_PCEDUCA6, fig.width=12, fig.height=10, echo=F, message=F, warning=F}		
-ggplot(pest, aes(x=PCEDUCA6,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice de uso de computador educativo") + ylab("Puntaje de los alumnos")	+  ggtitle('Figura 6.10. Logros de aprendizaje según uso de computador educativo') + scale_y_continuous(limits=c(200,1200)) + scale_fill_discrete(name="Área")
+ggplot(pest, aes(x=PCEDUCA6,y=puntaje_estandar,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice de uso de computador educativo") + ylab("Puntaje de los alumnos")	+  ggtitle('Figura 6.10. Logros de aprendizaje según uso de computador educativo') + scale_y_continuous(limits=c(200,1200)) + scale_color_discrete(name="Área")
 ```		
 
 Existen muchos otros factores y datos de interés en la base de datos de resultados del Terce.  El objetivo principal de este documento ha sido provocar un debate nacional sobre la eficacia de nuestra educación y su impacto potencial en la equidad social.  Aspiramos a contribuir con esto a una cultura de información autocrítica, capaz de aprender con base en evidencias, para el bienestar sostenible de todo el país.   
