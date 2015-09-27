@@ -267,7 +267,7 @@ ggplot(a[a$grado == 6,], aes(x=nivel,y=dist,fill=countryp)) + geom_bar(stat="ide
 
 ## 5 Resultados según género, etnia originaria y nivel socioeconómico y cultural
 
-Las niñas obtuvieron ligeramente mejores resultados que los niños en lectura de tercero y sexto grado, matemáticas de tercero y sexto grado y ciencias de sexto grado, pero la ventaja no es clara.   La figura 5.1 compara los logros combinando las tres áreas de conocimiento.  La data excluye alumnos para los cuales no se pudo obtener respuesta de género válida.     
+Las niñas obtuvieron ligeramente mejores resultados que los niños en lectura de tercero y sexto grado, matemáticas de tercero y sexto grado y ciencias de sexto grado, pero la ventaja no es clara.   La figura 5.1 compara los logros combinando las tres áreas de conocimiento.  Los datos excluyen alumnos para los cuales no se pudo obtener respuesta de género válida.     
 
 ```{r demo_genero_puntaje, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 p6 <- p6[p6$country == 'PAN',]
@@ -282,7 +282,7 @@ dif <- data.frame(genero=c("Niña"),std_mean=c(a$dif[1] - a$dif[2]))
 ggplot(a, aes(x=DQA6IT02,y=puntaje_estandar,fill=DQA6IT02)) + geom_bar(stat='identity',width=0.25) + ggtitle("Figura 5.1.  Puntaje promedio comparado entre géneros") + ylab("Puntaje promedio") + xlab("Género") + scale_fill_discrete(guide=F)
 ```
 
-Los alumnos que se reconocen como miembros de etnias originarias logran menor puntaje que los que no se consideran miembros.  La figuras 5.2 compara los logros combinando las tres áreas de conocimiento y la diferencia es clara.   La data excluye alumnos para los cuales no se pudo obtener respuesta de etnia originaria válida.    
+Los alumnos que se reconocen como miembros de etnias originarias logran menor puntaje que los que no se consideran miembros.  La figuras 5.2 compara los logros combinando las tres áreas de conocimiento y la diferencia es clara.   Los datos excluyen alumnos para los cuales no se pudo obtener respuesta de etnia originaria válida.    
 
 
 ```{r demo_etnia_puntaje, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
@@ -455,7 +455,7 @@ m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
 ggplot(m, aes(x=AUTOADD,y=puntaje_estandar,color=rd,group=1)) + geom_point(alpha=0.7) + geom_smooth(method = "lm",  se = F) + scale_size(guide=FALSE) + xlab("Índice de autonomía administrativa de la escuela (menor índice = mayor autonomía)") + ylab("Puntaje promedio por escuela") +  ggtitle('Figura 6.2. Logros de aprendizaje según autonomía administrativa') + scale_y_continuous(limits=c(500,850)) + scale_colour_discrete(name="Tipo de escuela")
 ```
 
-En las dos figuras siguientes los puntos corresponden a docentes y muestran al promedio obtenido por sus estudiantes, en el área indicada por el color del punto, y una característica del profesor: motivación en la figura 6.3 y edad en la figura 6.4.  
+En las dos figuras siguientes los puntos corresponden a docentes de sexto grado y muestran al promedio obtenido por sus estudiantes, en el área indicada por el color del punto, y una característica del profesor: motivación en la figura 6.3 y edad en la figura 6.4.  
 
 Curiosamente, se ve poca relación entre la motivación docente y los logros de aprendizajes.  Por ejemplo, en la figura 6.3 el valor de puntaje en la línea que modela la relación logro-motivación no varía mucho de 670 puntos aunque el índice varía de -2 a +2. Esta observación seguramente será sujeto de mayor validación y análisis.   
 
@@ -512,7 +512,7 @@ La edad de los docentes sí parece hacer una diferencia en los logros de aprendi
 a <- aggregate(puntaje_estandar ~ idtealin + tipo + DQPIT01, p6prof, mean)
 ggplot(a, aes(x=DQPIT01,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm",  se = F) + xlab("Edad del docente") + ylab("Puntaje promedio de los alumnos del docente")  +  ggtitle('Figura 6.4. Logros de aprendizaje según edad del docente') + scale_y_continuous(limits=c(475,850)) + scale_colour_discrete(name="Área")
 ```
-Las figuras siguientes ilustran el efecto de ciertas características de interés.  Por ejemplo, podríamos explorar si el subgrupo de alumnos cuyos docentes tiene alta formación obtienen mayores logros de aprendizaje.  El efecto de esa alta formación consiste en notar el puntaje promedio de ese subgrupo de alumnos y restarle el puntaje promedio del grupo total de alumnos de Panamá en el Terce.  Cuando este efecto es positivo y de suficiente magnitud, se entiende que el subgrupo obtiene mejores resultados que el promedio del grupo total.  
+Las figuras siguientes ilustran el efecto de ciertas características de interés relacionadas con docentes de sexto grado.  Por ejemplo, podríamos explorar si el subgrupo de alumnos cuyos docentes tiene alta formación obtienen mayores logros de aprendizaje.  El efecto de esa alta formación consiste en notar el puntaje promedio de ese subgrupo de alumnos y restarle el puntaje promedio del grupo total de alumnos de Panamá en el Terce.  Cuando este efecto es positivo y de suficiente magnitud, se entiende que el subgrupo obtiene mejores resultados que el promedio del grupo total.  
 
 En las figuras, para simplificar, el promedio del grupo total está representado por el valor 0 en el eje vertical y la magnitud del efecto, o diferencia entre promedios, se expresa en desviaciones estándar, que es una medida conocida de diferencias estadísticas.      
 
