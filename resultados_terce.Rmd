@@ -257,11 +257,11 @@ calc_percent <- function(c,t,g,x) { return((x/sum(a[a$countryp == c & a$tipo == 
 a$dist <- mapply(calc_percent, a$countryp, a$tipo, a$grado, a$puntaje_estandar)
 
 #####
-ggplot(a[a$grado == 3,], aes(x=nivel,y=dist,fill=countryp)) + geom_bar(stat="identity", position=position_dodge(), colour="black") + xlab("Nivel de logros de aprendizaje") + ylab("Porcentaje de estudiantes") + ggtitle("Figura 4.3. Porcentaje de estudiantes por nivel de logros, 3er grado") + facet_grid(tipo ~ .) + scale_fill_brewer(palette="Spectral") + scale_y_continuous(labels = percent, limits=c(0,0.7)) + scale_fill_discrete(name="País")
+ggplot(a[a$grado == 3,], aes(x=nivel,y=dist,fill=countryp)) + geom_bar(stat="identity", position=position_dodge(), colour="black") + xlab("Nivel de logros de aprendizaje") + ylab("Porcentaje de estudiantes") + ggtitle("Figura 4.3. Porcentaje de estudiantes por nivel de logros, 3er grado") + facet_grid(tipo ~ .) + scale_fill_manual(values=c("#FFCB00","#FFA100"),name="País") + scale_y_continuous(labels = percent, limits=c(0,0.7))
 ```
 
 ```{r niveles_barcharts_6, fig.width=12, fig.height=15, echo=F, message=F, warning=F}
-ggplot(a[a$grado == 6,], aes(x=nivel,y=dist,fill=countryp)) + geom_bar(stat="identity", position=position_dodge(), colour="black") + xlab("Nivel de logros de aprendizaje") + ylab("Porcentaje de estudiantes") + ggtitle("Figura 4.4. Porcentaje de estudiantes por nivel de logros, 6to grado") + facet_grid(tipo ~ .) + scale_fill_brewer(palette="Spectral") + scale_y_continuous(labels = percent, limits=c(0,0.7)) + scale_fill_discrete(name="País")
+ggplot(a[a$grado == 6,], aes(x=nivel,y=dist,fill=countryp)) + geom_bar(stat="identity", position=position_dodge(), colour="black") + xlab("Nivel de logros de aprendizaje") + ylab("Porcentaje de estudiantes") + ggtitle("Figura 4.4. Porcentaje de estudiantes por nivel de logros, 6to grado") + facet_grid(tipo ~ .) + scale_fill_manual(values=c("#FFCB00","#FFA100"),name="País") + scale_y_continuous(labels = percent, limits=c(0,0.7))
 ```
 
 
