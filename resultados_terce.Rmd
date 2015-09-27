@@ -497,6 +497,7 @@ pm6$tipo <- 'matemática'
 pl6$tipo <- 'lectura'
 pc6$tipo <- 'ciencias'
 p6prof <- rbind.fill(pm6,pl6,pc6)
+p6prof <- p6prof[!is.na(p6prof$idtealin),]
 ```
 
 ```{r puntaje_prof_MOTIVP, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
