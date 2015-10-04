@@ -13,13 +13,13 @@ library(plyr)
 source('multiplot.R')
 ```
 
-Hay grandes diferencias de oportunidades para nuestra niñez en materia educativa.   El Tercer Estudio Regional Comparativo y Explicativo (Terce, 2013) está diseñado para evaluar los logros educativos de los estudiantes mediante el puntaje obtenido en preguntas sobre lenguaje, matemáticas y ciencias.  Ese estudio muestra que las diferencias de logros entre nuestros alumnos reflejan en forma marcada sus diferencias socioeconómicas y culturales, es decir, la inequidad.    
+Hay grandes diferencias de oportunidades para nuestra niñez en materia educativa.   El Tercer Estudio Regional Comparativo y Explicativo (Terce, 2013) está diseñado para evaluar los logros educativos de los estudiantes mediante el puntaje obtenido en preguntas sobre lenguaje, matemáticas y ciencias.  Este estudio muestra que las diferencias de logros entre nuestros alumnos reflejan en forma marcada sus diferencias socioeconómicas y culturales, es decir, la inequidad.    
 
 Este documento de divulgación es principalmente un llamado público a analizar los datos Terce disponibles en la página Web de Meduca y un reto a la voluntad nacional por crear un sistema educativo justo, capaz de brindar igualdad de oportunidades para todos.   
 
 En el Terce las escuelas particulares mostraron mejores logros que las oficiales.  De nuestras escuelas oficiales, muchas muestran niveles de aprendizaje poco adecuados para la vida esperada de sus alumnos, especialmente entre las rurales. Esta divulgación se enfocará en explorar el efecto de factores del entorno que pueden incidir en los resultados educativos.  
 
-Las diferencias de logros y su estrecha relación con las condiciones de vida se pueden ver en la figura 1.1 por ejemplo. Cada pequeño círculo representa el puntaje promedio y el promedio del índice socioeconómico y cultural de los alumnos de una escuela. A mayor índice, más cómoda la situación de vida.  El tamaño de cada círculo es proporcional al número de alumnos en la escuela.  
+Las diferencias de logros y su estrecha relación con las condiciones de vida se pueden ver en la figura 1.1 por ejemplo. Cada pequeño círculo representa el puntaje promedio y el índice socioeconómico y cultural promedio de los alumnos de una escuela. A mayor índice, más cómoda la situación de vida.  El tamaño de cada círculo es proporcional al número de alumnos en la escuela.  
 
 
 ```{r puntaje_isecf_rd, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
@@ -69,7 +69,7 @@ m <- merge(mean_school, mean_isecf_school, by=c('idschool'))
 ggplot(m, aes(x=ISECF,y=puntaje_estandar,color=rd,group=1,size=totalum)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice socioeconómico y cultural promedio de los alumnos de la escuela") + ylab("Puntaje promedio de los alumnos de la escuela") + ggtitle('Figura 1.1. Logros de aprendizaje por tipo de escuela, 6to grado') + scale_y_continuous(limits=c(500,850)) + scale_color_discrete(name = "Tipo de escuela")
 ```
 
-Más importante que lamentar las debilidadeds observadas en estos logros es enfocarnos en oportunidades de mejora. Por ejemplo, algunas escuelas oficiales rurales con bajo índice socioeconómico y cultural lograron puntajes superiores al promedio internacional de 700 puntos en el Terce y superiores al de las escuelas oficiales urbanas.   Estas escuelas tienen lecciones importantes para nuestro sistema educativo.  Enfocarnos en mejorar es el mensaje que desea comunicar este documento.   
+Más importante que lamentar las debilidadeds observadas en estos logros es enfocarnos en oportunidades de mejora. Este es un mensaje central de este documento.  Por ejemplo, algunas escuelas oficiales rurales con bajo índice socioeconómico y cultural lograron puntajes superiores al promedio internacional de 700 puntos en el Terce y superiores al de las escuelas oficiales urbanas.   Estas escuelas tienen lecciones importantes para nuestro sistema educativo.     
 
 En el contexto latinoamericano, Panamá obtuvo resultados por debajo de lo esperado para sus recursos.  La figura 1.2 confirma la tendencia conocida de que los alumnos de países con mayor producto interno bruto (PIB) per cápita obtienen mejores logros. Panamá obtuvo 39 puntos por debajo de la línea que modela los logros según el PIB per cápita de los países.   Estos resultados son similares a los que obtuvimos en evaluaciones internacionales previas: Serce 2006 y Pisa 2009. Es decir, Panamá puede y debe mejorar significativamente sus logros de aprendizaje.      
 
@@ -93,9 +93,9 @@ La educación nacional debe servir como un gran equalizador hacia las mejores op
 
 Nuestro sistema educativo dista mucho de este ideal.   Afortunadamente es posible evaluar los logros del sistema con métodos científicos que permitan recomendaciones confiables de cómo mejorar.   Una cultura que valora la información puede aprender de sus propios errores.    
 
-Evaluaciones como el Terce tienen limitaciones propias del esquema de ítems, o preguntas que utilizan, y habrá que perfeccionar los métodos de evaluación.  Sin embargo el Terce y otras evaluaciones estandarizadas son insumos valiosos de política educativa, especialmente cuando se analizan con conocimiento íntimo del contexto local.    
+Evaluaciones como el Terce tienen limitaciones propias del esquema de ítems, o preguntas que utilizan, y habrá que perfeccionar los métodos de evaluación a disposición de Panamá.  Sin embargo el Terce y otras evaluaciones estandarizadas son insumos valiosos de política educativa, especialmente cuando se analizan con conocimiento íntimo del contexto local.    
 
-Esta es la segunda divulgación en torno al Terce y nuestro objetivo es mostrar la relación entre los logros obtenidos y ciertos factores de contexto que pueden ayudar a comprender la dinámica educativa, sin intentar ser exhaustivos.  Previamente, en 2014, Unesco y Meduca divulgaron la comparación de resultados entre el Segundo Estudio Regional Comparativo y Explicativo, o Serce 2006, y el Terce 2013.   
+Esta es la segunda divulgación en torno al Terce y nuestro objetivo es mostrar la relación entre los logros obtenidos y ciertos factores de contexto que pueden ayudar a comprender la dinámica educativa, sin intentar ser exhaustivos.  Previamente, a fines de 2014, Unesco y Meduca divulgaron la comparación de resultados entre el Segundo Estudio Regional Comparativo y Explicativo, o Serce 2006, y el Terce 2013.   
 
 Con esta divulgación Meduca invita a todos los interesados, especialmente aquellos familiarizados con métodos de análisis de evaluaciones educativas, a iniciar un gran movimiento de exploración de los datos educativos disponibles, especialmente los resultados de las evaluaciones Serce 2006, Sineca 2008, Pisa 2009 y Terce 2013.   
 
