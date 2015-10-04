@@ -119,24 +119,24 @@ La línea azul en estas figuras muestra que los logros reflejan en forma aprecia
 
 El que un factor muestre relación con los logros de aprendizaje no prueba que sea la causa o síntoma de esos logros.   A modo de ejemplo, una mejor situación socioeconómica y cultural da la oportunidad de asistir a una mejor escuela, con mejor  infraestructura y más eficacia, sin que sea claro cuáles de estos tres factores merece más crédito por los aprendizajes logrados.  El lector debe tener presente que muchos de los factores explorados en esta sección tienen relación potencial con el índice socioeconómico y cultural, por tanto juzgar su importancia requerirá un debate académico más extenso y riguroso.  
 
-**Infraestructura y autonomía.** En las figuras siguientes sobre el entorno escolar, los puntos dentro de la figura representan escuelas y sus tamaños esta vez no son proporcionales al número de alumnos en la escuela.   Las líneas ilustran un modelo líneal de relación entre logros y el factor de interés.  La figura 6.1 muestra el efecto del índice de infraestructura de la escuela. La relación es marcada: a mejor infraestructura mayor puntaje promedio de las escuelas.   Por supuesto, este es uno de los factores que puede estar reflejando el índice socioeconómico y cultural de los alumnos de las escuelas.   
+**Infraestructura y autonomía.** En las figuras siguientes sobre el entorno escolar, los puntos dentro de la figura representan escuelas y sus tamaños esta vez no son proporcionales al número de alumnos en la escuela.   Las líneas ilustran un modelo líneal de relación entre logros y el factor de interés.  La figura 6.1 muestra el efecto del índice de infraestructura de la escuela. La relación es marcada: a mejor infraestructura mayor puntaje promedio de las escuelas.   Por supuesto, éste es uno de los factores que puede estar reflejando el índice socioeconómico y cultural de los alumnos de las escuelas.   
 
 ![plot of chunk puntaje_INFRAD](figure/puntaje_INFRAD-1.png) 
 La autonomía administrativa de la escuela muestra relación con los logros de aprendizaje de sus alumnos.  El índice en la figura 6.2 procede de un ranking pero expresado con promedio 0: a menor índice mayor autonomía. Así, las escuelas particulares, de mayor autonomía, aparecen en el extremo izquierdo de la figura con los índices más bajos.   
 
 ![plot of chunk puntaje_AUTOADD](figure/puntaje_AUTOADD-1.png) 
 
-**Motivación y edad docente.** En las dos figuras siguientes los puntos corresponden a docentes de sexto grado y muestran el promedio obtenido por sus estudiantes y una característica del profesor: motivación en la figura 6.3 y edad en la figura 6.4. , El color del punto indica el área de conocimiento.  
+**Motivación y edad docente.** En las dos figuras siguientes los puntos corresponden a docentes de sexto grado y muestran el promedio obtenido por sus estudiantes contra una característica del profesor: motivación en la figura 6.3 y edad en la figura 6.4. El color del punto indica el área de conocimiento.  
 
 Curiosamente, se ve poca relación entre la motivación docente y los logros de aprendizajes.  Por ejemplo, en la figura 6.3 el valor de puntaje en la línea que modela la relación logro-motivación no varía mucho de 670 puntos, aunque el índice varía de -2 a +2. Esta observación seguramente será sujeto de mayor validación y análisis.   
 
 
 
 ![plot of chunk puntaje_prof_MOTIVP](figure/puntaje_prof_MOTIVP-1.png) 
-La edad de los docentes sí parece hacer una diferencia en los logros de aprendizaje.    
+La edad de los docentes sí parece relevante en las diferencias de logros de los aprendizajes.    
 
 ![plot of chunk puntaje_prof_DQPIT01](figure/puntaje_prof_DQPIT01-1.png) 
-**Efecto de factores asociados.** Las figuras 6.5 a 6.8 siguientes ilustran el efecto de ciertas características de interés relacionadas con docentes de sexto grado y las jornadas a su disposición.  Por ejemplo, podríamos explorar si el subgrupo de alumnos cuyos docentes tiene alta formación obtienen mayores logros de aprendizaje.  El efecto de esa alta formación consiste en notar el puntaje promedio de ese subgrupo de alumnos y restarle el puntaje promedio del grupo total de alumnos de Panamá en el Terce.  Cuando este efecto es positivo y de suficiente magnitud se entiende que el subgrupo obtiene mejores resultados que el promedio del grupo total.  
+**Efecto de factores asociados.** Las figuras 6.5 a 6.8 siguientes ilustran el efecto de ciertas características de interés relacionadas con docentes de sexto grado y las jornadas a su disposición.  Por ejemplo, podríamos explorar si el subgrupo de alumnos cuyos docentes tienen alta formación obtiene mayores logros de aprendizaje.  El *efecto* de esa alta formación consiste en notar el puntaje promedio de ese subgrupo de alumnos y restarle el puntaje promedio del grupo total de alumnos de Panamá en el Terce.  Cuando este efecto es positivo y de suficiente magnitud se entiende que el subgrupo obtiene mejores resultados que el promedio del grupo total.  
 
 Para simplificar, el promedio del grupo total está representado en las figuras por el valor 0 en el eje vertical y la magnitud del efecto, o diferencia entre promedios, se expresa en desviaciones estándar, que es una medida conocida de diferencias estadísticas.  Es importante tomar en cuenta que las características ilustradas por las distintas figuras pueden tener dependencias no evidentes entre si y que las categorías comparadas en una misma figura pueden reflejar otras dinámicas subyacentes como la naturaleza de escuelas particulares versus oficiales.  Los resultados en las figuras deben sirvir como punto de partida para investigar con rigurosidad sus implicaciones o explicaciones en lugar de ser interpretados como conclusiones.    
 
@@ -153,13 +153,13 @@ Para simplificar, el promedio del grupo total está representado en las figuras 
 **Nivel de formación docente.** La especialización del docente más allá de la educación terciaria muestra un efecto positivo, aunque menor que los incentivos por desempeño al docente.  Los niveles de formación docente corresponden a la clasificación internacional normalizada de la educación del Instituto de Estadística de la Unesco.   
 
 ![plot of chunk puntaje_prof_DQPIT11](figure/puntaje_prof_DQPIT11-1.png) 
-**Recreación con la familia.** En las dos últimas figuras, los puntos corresponden a alumnos.  Cada punto indica el puntaje obtenido en el área de conocimiento que indica su color y el valor correspondiente al alumno del índice de interés.   
+**Recreación con la familia.** En las dos últimas figuras, los puntos corresponden a alumnos.  Cada punto indica el puntaje obtenido en un área de conocimiento y el valor del índice de interés correspondiente al alumno.   
 
 
 Las actividades recreativas con la familia muestran un efecto positivo, como ilustra la línea que modela la relación logros-actividades.  Es decir, a mayor índice de actividades recreativas con la familia mayor puntaje obtienen los alumnos correspondientes.  
 
 ![plot of chunk puntaje_familia_RECREAF](figure/puntaje_familia_RECREAF-1.png) 
-**Uso de computadora para fines educativos.** Finalmente, el uso de computadora para fines educativos también muestra un efecto positivo, como ilustra la línea que modela la relación logros-uso, aunque el efecto parece menos marcado que el de las actividades recreativas.  Como mencionamos previamente, debemos notar que estos dos factores, las actividades recreativas y el uso de computadoras, tienen relación potencial con el índice socioeconómico y cultural de los alumnos.   
+**Uso de computadora para fines educativos.** Finalmente, el uso de computadora para fines educativos también muestra un efecto positivo, como ilustra la línea que modela la relación logros-uso, aunque el efecto parece menos marcado que el de las actividades recreativas.  Como mencionamos previamente, debemos notar que el factor *actividades recreativas* y el factor *uso de computadora para fines educativos* tienen relación potencial con el índice socioeconómico y cultural de los alumnos, entre otras consideraciones.   
 
 
 ![plot of chunk puntaje_alumno_PCEDUCA6](figure/puntaje_alumno_PCEDUCA6-1.png) 
