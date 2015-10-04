@@ -397,7 +397,7 @@ ggplot(m, aes(x=ISECF,y=puntaje_estandar,color=rd,group=1,size=totalum)) + geom_
 
 El que un factor muestre relación con los logros de aprendizaje no prueba que sea la causa o síntoma de esos logros.   A modo de ejemplo, una mejor situación socioeconómica y cultural da la oportunidad de asistir a una mejor escuela, con mejor  infraestructura y más eficacia, sin que sea claro cuáles de estos tres factores merece más crédito por los aprendizajes logrados.  El lector debe tener presente que muchos de los factores explorados en esta sección tienen relación potencial con el índice socioeconómico y cultural, por tanto juzgar su importancia requerirá un debate académico más extenso y riguroso.  
 
-**Infraestructura y autonomía.** En las figuras siguientes sobre el entorno escolar, los puntos dentro de la figura representan escuelas y sus tamaños esta vez no son proporcionales al número de alumnos en la escuela.   Las líneas ilustran un modelo líneal de relación entre logros y el factor de interés.  La figura 6.1 muestra el efecto del índice de infraestructura de la escuela. La relación es marcada: a mejor infraestructura mayor puntaje promedio de las escuelas.   Por supuesto, este es uno de los factores que puede estar reflejando el índice socioeconómico y cultural de los alumnos de las escuelas.   
+**Infraestructura y autonomía.** En las figuras siguientes sobre el entorno escolar, los puntos dentro de la figura representan escuelas y sus tamaños esta vez no son proporcionales al número de alumnos en la escuela.   Las líneas ilustran un modelo líneal de relación entre logros y el factor de interés.  La figura 6.1 muestra el efecto del índice de infraestructura de la escuela. La relación es marcada: a mejor infraestructura mayor puntaje promedio de las escuelas.   Por supuesto, éste es uno de los factores que puede estar reflejando el índice socioeconómico y cultural de los alumnos de las escuelas.   
 
 ```{r puntaje_INFRAD, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 
@@ -455,7 +455,7 @@ m <- merge(mean_school, mean_infrad_school, by=c('idschool'))
 ggplot(m, aes(x=AUTOADD,y=puntaje_estandar,color=rd,group=1)) + geom_point(alpha=0.7) + geom_smooth(method = "lm",  se = F) + scale_size(guide=FALSE) + xlab("Índice de autonomía administrativa de la escuela (menor índice = mayor autonomía)") + ylab("Puntaje promedio por escuela") +  ggtitle('Figura 6.2. Logros de aprendizaje según autonomía administrativa') + scale_y_continuous(limits=c(500,850)) + scale_colour_discrete(name="Tipo de escuela")
 ```
 
-**Motivación y edad docente.** En las dos figuras siguientes los puntos corresponden a docentes de sexto grado y muestran el promedio obtenido por sus estudiantes y una característica del profesor: motivación en la figura 6.3 y edad en la figura 6.4. , El color del punto indica el área de conocimiento.  
+**Motivación y edad docente.** En las dos figuras siguientes los puntos corresponden a docentes de sexto grado y muestran el promedio obtenido por sus estudiantes contra una característica del profesor: motivación en la figura 6.3 y edad en la figura 6.4. El color del punto indica el área de conocimiento.  
 
 Curiosamente, se ve poca relación entre la motivación docente y los logros de aprendizajes.  Por ejemplo, en la figura 6.3 el valor de puntaje en la línea que modela la relación logro-motivación no varía mucho de 670 puntos, aunque el índice varía de -2 a +2. Esta observación seguramente será sujeto de mayor validación y análisis.   
 
@@ -506,13 +506,13 @@ p6prof <- p6prof[!is.na(p6prof$idtealin),]
 a <- aggregate(puntaje_estandar ~ idtealin + tipo + MOTIVP, p6prof, mean)
 ggplot(a, aes(x=MOTIVP,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm",  se = F) + xlab("Índice de actitudes y motivación del docente") + ylab("Puntaje promedio de los alumnos del docente") +  ggtitle('Figura 6.3. Logros de aprendizaje según movitación docente') + scale_y_continuous(limits=c(475,850)) + scale_colour_discrete(name="Área")
 ```
-La edad de los docentes sí parece hacer una diferencia en los logros de aprendizaje.    
+La edad de los docentes sí parece relevante en las diferencias de logros de los aprendizajes.    
 
 ```{r puntaje_prof_DQPIT01, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 a <- aggregate(puntaje_estandar ~ idtealin + tipo + DQPIT01, p6prof, mean)
 ggplot(a, aes(x=DQPIT01,y=puntaje_estandar,,group=1,color=tipo)) + geom_point(alpha=0.7) + geom_smooth(method = "lm",  se = F) + xlab("Edad del docente") + ylab("Puntaje promedio de los alumnos del docente")  +  ggtitle('Figura 6.4. Logros de aprendizaje según edad del docente') + scale_y_continuous(limits=c(475,850)) + scale_colour_discrete(name="Área")
 ```
-**Efecto de factores asociados.** Las figuras 6.5 a 6.8 siguientes ilustran el efecto de ciertas características de interés relacionadas con docentes de sexto grado y las jornadas a su disposición.  Por ejemplo, podríamos explorar si el subgrupo de alumnos cuyos docentes tiene alta formación obtienen mayores logros de aprendizaje.  El efecto de esa alta formación consiste en notar el puntaje promedio de ese subgrupo de alumnos y restarle el puntaje promedio del grupo total de alumnos de Panamá en el Terce.  Cuando este efecto es positivo y de suficiente magnitud se entiende que el subgrupo obtiene mejores resultados que el promedio del grupo total.  
+**Efecto de factores asociados.** Las figuras 6.5 a 6.8 siguientes ilustran el efecto de ciertas características de interés relacionadas con docentes de sexto grado y las jornadas a su disposición.  Por ejemplo, podríamos explorar si el subgrupo de alumnos cuyos docentes tienen alta formación obtiene mayores logros de aprendizaje.  El *efecto* de esa alta formación consiste en notar el puntaje promedio de ese subgrupo de alumnos y restarle el puntaje promedio del grupo total de alumnos de Panamá en el Terce.  Cuando este efecto es positivo y de suficiente magnitud se entiende que el subgrupo obtiene mejores resultados que el promedio del grupo total.  
 
 Para simplificar, el promedio del grupo total está representado en las figuras por el valor 0 en el eje vertical y la magnitud del efecto, o diferencia entre promedios, se expresa en desviaciones estándar, que es una medida conocida de diferencias estadísticas.  Es importante tomar en cuenta que las características ilustradas por las distintas figuras pueden tener dependencias no evidentes entre si y que las categorías comparadas en una misma figura pueden reflejar otras dinámicas subyacentes como la naturaleza de escuelas particulares versus oficiales.  Los resultados en las figuras deben sirvir como punto de partida para investigar con rigurosidad sus implicaciones o explicaciones en lugar de ser interpretados como conclusiones.    
 
@@ -553,7 +553,7 @@ a <- aggregate(puntaje_estandar ~ DQPIT11 + tipo + DQPIT11, p6prof, mean)
 a$dif <- (a$puntaje_estandar - mean(p6prof$puntaje_estandar,na.rm=T))/sd(p6prof$puntaje_estandar,na.rm=T)
 ggplot(a, aes(x=tipo,y=dif,fill=DQPIT11)) + geom_bar(stat='identity',position='dodge') + xlab("") + ylab("Desviación estándar") + ggtitle('Figura 6.8. Efecto del nivel de educación completado por el docente') + scale_y_continuous(limits=c(-1.2,1.5)) + scale_fill_discrete(name="Nivel")
 ```
-**Recreación con la familia.** En las dos últimas figuras, los puntos corresponden a alumnos.  Cada punto indica el puntaje obtenido en el área de conocimiento que indica su color y el valor correspondiente al alumno del índice de interés.   
+**Recreación con la familia.** En las dos últimas figuras, los puntos corresponden a alumnos.  Cada punto indica el puntaje obtenido en un área de conocimiento y el valor del índice de interés correspondiente al alumno.   
 
 ```{r echo=F,messages=F,warnings=F}
 # load sexto grado puntajes
@@ -584,7 +584,7 @@ Las actividades recreativas con la familia muestran un efecto positivo, como ilu
 ```{r puntaje_familia_RECREAF, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
 ggplot(pest, aes(x=RECREAF,y=puntaje_estandar,group=1,color=tipo)) + geom_point(alpha=0.2) + geom_smooth(method = "lm",  se = F) + xlab("Índice de actividades recreativas con la familia") + ylab("Puntaje de los alumnos") + ggtitle('Figura 6.9. Efecto de recreación con la familia') + scale_y_continuous(limits=c(200,1200)) + scale_color_discrete(name="Área")
 ```
-**Uso de computadora para fines educativos.** Finalmente, el uso de computadora para fines educativos también muestra un efecto positivo, como ilustra la línea que modela la relación logros-uso, aunque el efecto parece menos marcado que el de las actividades recreativas.  Como mencionamos previamente, debemos notar que estos dos factores, las actividades recreativas y el uso de computadoras, tienen relación potencial con el índice socioeconómico y cultural de los alumnos.   
+**Uso de computadora para fines educativos.** Finalmente, el uso de computadora para fines educativos también muestra un efecto positivo, como ilustra la línea que modela la relación logros-uso, aunque el efecto parece menos marcado que el de las actividades recreativas.  Como mencionamos previamente, debemos notar que el factor *actividades recreativas* y el factor *uso de computadora para fines educativos* tienen relación potencial con el índice socioeconómico y cultural de los alumnos, entre otras consideraciones.   
 
 ```{r echo=F,messages=F,warnings=F}		
 # load sexto grado puntajes		
