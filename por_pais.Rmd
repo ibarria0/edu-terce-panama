@@ -1,0 +1,748 @@
+---
+output: pdf_document
+---
+
+```{r init,results="hide",echo=F, message=F, warning=F}
+library(foreign)
+library(scales)
+library(ggplot2)
+library(plyr)
+
+source('multiplot.R')
+```
+
+
+## CHILE
+
+```{r puntaje_isecf_rd_CHL, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+
+# load sexto grado puntajes
+pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
+pc6 <- read.spss('./data/Puntajes_Alumnos/PC6_all_TERCE.sav', to.data.frame=T)
+pl6 <- read.spss('./data/Puntajes_Alumnos/PL6_all_TERCE.sav', to.data.frame=T)
+
+pm6 <- pm6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+pl6 <- pl6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+pc6 <- pc6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+
+# merge matematica, lectura y ciencias
+pm6$tipo <- 'matematica'
+pl6$tipo <- 'lectura'
+pc6$tipo <- 'ciencias'
+p6 <- rbind.fill(pm6,pl6,pc6)
+p6$promedio_global <- mean(p6$puntaje_estandar, na.rm=T)
+p6$sd_global <- sd(p6$puntaje_estandar, na.rm=T)
+
+p6 <- p6[p6$country == 'CHL',]
+
+# load factores alumnos
+qd <- read.spss('./data/Directores/QD6.SAV', to.data.frame=T)
+qd <- qd[qd$country == 'CHL',]
+
+qd$dependencia <- as.factor(qd$dependencia)
+qd$ruralidad <- as.factor(qd$ruralidad)
+levels(qd$dependencia) <- c("Oficial","Particular")
+levels(qd$ruralidad) <- c("Urbano","Rural")
+
+# load factores familia
+qf <- read.spss('./data/Familia/QF6.SAV', to.data.frame=T)
+qf <- qf[qf$country == 'CHL',]
+qf <- qf[,c("idschool","idstud","ISECF","INVOLUCF","CSOCBARF","SUPERVF","RECREAF","SERVBARF","VIOLBARF","MOTIVALF","subsgobf","padindig","madindig","DQFIT01","DQFIT25","DQFIT31","DQFIT34","DQFIT15_07","DQFIT18_02")]
+
+pe <- merge(p6,qd,by='idschool')
+escuela_tipo <- function(r,d) { if(r == 'Urbano' & d == 'Particular') { return(0) } else if (r == 'Urbano' & d == 'Oficial') { return(1) } else if (r == 'Rural' & d == 'Particular') {return(2)} else {return(3)}}
+pe$rd <- as.factor(mapply(escuela_tipo, pe$ruralidad, pe$dependencia))
+levels(pe$rd) <- c("Urbano/Particular", "Urbano/Oficial", "Rural/Particular", "Rural/Oficial")
+
+mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
+mean_isecf_school <- aggregate(ISECF ~ idschool, qf, mean)
+m <- merge(mean_school, mean_isecf_school, by=c('idschool'))
+
+ggplot(m, aes(x=ISECF,y=puntaje_estandar,color=rd,group=1,size=totalum)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice socioeconómico y cultural promedio de los alumnos de la escuela") + ylab("Puntaje promedio de los alumnos de la escuela") + ggtitle('Figura 1.1. Logros de aprendizaje por tipo de escuela, 6to grado') + scale_y_continuous(limits=c(500,850)) + scale_color_discrete(name = "Tipo de escuela")
+```
+
+## URUGUAY
+
+```{r puntaje_isecf_rd_URU, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+
+# load sexto grado puntajes
+pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
+pc6 <- read.spss('./data/Puntajes_Alumnos/PC6_all_TERCE.sav', to.data.frame=T)
+pl6 <- read.spss('./data/Puntajes_Alumnos/PL6_all_TERCE.sav', to.data.frame=T)
+
+pm6 <- pm6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+pl6 <- pl6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+pc6 <- pc6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+
+# merge matematica, lectura y ciencias
+pm6$tipo <- 'matematica'
+pl6$tipo <- 'lectura'
+pc6$tipo <- 'ciencias'
+p6 <- rbind.fill(pm6,pl6,pc6)
+p6$promedio_global <- mean(p6$puntaje_estandar, na.rm=T)
+p6$sd_global <- sd(p6$puntaje_estandar, na.rm=T)
+
+p6 <- p6[p6$country == 'URU',]
+
+# load factores alumnos
+qd <- read.spss('./data/Directores/QD6.SAV', to.data.frame=T)
+qd <- qd[qd$country == 'URU',]
+
+qd$dependencia <- as.factor(qd$dependencia)
+qd$ruralidad <- as.factor(qd$ruralidad)
+levels(qd$dependencia) <- c("Oficial","Particular")
+levels(qd$ruralidad) <- c("Urbano","Rural")
+
+# load factores familia
+qf <- read.spss('./data/Familia/QF6.SAV', to.data.frame=T)
+qf <- qf[qf$country == 'URU',]
+qf <- qf[,c("idschool","idstud","ISECF","INVOLUCF","CSOCBARF","SUPERVF","RECREAF","SERVBARF","VIOLBARF","MOTIVALF","subsgobf","padindig","madindig","DQFIT01","DQFIT25","DQFIT31","DQFIT34","DQFIT15_07","DQFIT18_02")]
+
+pe <- merge(p6,qd,by='idschool')
+escuela_tipo <- function(r,d) { if(r == 'Urbano' & d == 'Particular') { return(0) } else if (r == 'Urbano' & d == 'Oficial') { return(1) } else if (r == 'Rural' & d == 'Particular') {return(2)} else {return(3)}}
+pe$rd <- as.factor(mapply(escuela_tipo, pe$ruralidad, pe$dependencia))
+levels(pe$rd) <- c("Urbano/Particular", "Urbano/Oficial", "Rural/Particular", "Rural/Oficial")
+
+mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
+mean_isecf_school <- aggregate(ISECF ~ idschool, qf, mean)
+m <- merge(mean_school, mean_isecf_school, by=c('idschool'))
+
+ggplot(m, aes(x=ISECF,y=puntaje_estandar,color=rd,group=1,size=totalum)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice socioeconómico y cultural promedio de los alumnos de la escuela") + ylab("Puntaje promedio de los alumnos de la escuela") + ggtitle('Figura 1.1. Logros de aprendizaje por tipo de escuela, 6to grado') + scale_y_continuous(limits=c(500,850)) + scale_color_discrete(name = "Tipo de escuela")
+```
+
+## ARGENTINA
+
+```{r puntaje_isecf_rd_ARG, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+
+# load sexto grado puntajes
+pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
+pc6 <- read.spss('./data/Puntajes_Alumnos/PC6_all_TERCE.sav', to.data.frame=T)
+pl6 <- read.spss('./data/Puntajes_Alumnos/PL6_all_TERCE.sav', to.data.frame=T)
+
+pm6 <- pm6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+pl6 <- pl6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+pc6 <- pc6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+
+# merge matematica, lectura y ciencias
+pm6$tipo <- 'matematica'
+pl6$tipo <- 'lectura'
+pc6$tipo <- 'ciencias'
+p6 <- rbind.fill(pm6,pl6,pc6)
+p6$promedio_global <- mean(p6$puntaje_estandar, na.rm=T)
+p6$sd_global <- sd(p6$puntaje_estandar, na.rm=T)
+
+p6 <- p6[p6$country == 'ARG',]
+
+# load factores alumnos
+qd <- read.spss('./data/Directores/QD6.SAV', to.data.frame=T)
+qd <- qd[qd$country == 'ARG',]
+
+qd$dependencia <- as.factor(qd$dependencia)
+qd$ruralidad <- as.factor(qd$ruralidad)
+levels(qd$dependencia) <- c("Oficial","Particular")
+levels(qd$ruralidad) <- c("Urbano","Rural")
+
+# load factores familia
+qf <- read.spss('./data/Familia/QF6.SAV', to.data.frame=T)
+qf <- qf[qf$country == 'ARG',]
+qf <- qf[,c("idschool","idstud","ISECF","INVOLUCF","CSOCBARF","SUPERVF","RECREAF","SERVBARF","VIOLBARF","MOTIVALF","subsgobf","padindig","madindig","DQFIT01","DQFIT25","DQFIT31","DQFIT34","DQFIT15_07","DQFIT18_02")]
+
+pe <- merge(p6,qd,by='idschool')
+escuela_tipo <- function(r,d) { if(r == 'Urbano' & d == 'Particular') { return(0) } else if (r == 'Urbano' & d == 'Oficial') { return(1) } else if (r == 'Rural' & d == 'Particular') {return(2)} else {return(3)}}
+pe$rd <- as.factor(mapply(escuela_tipo, pe$ruralidad, pe$dependencia))
+levels(pe$rd) <- c("Urbano/Particular", "Urbano/Oficial", "Rural/Particular", "Rural/Oficial")
+
+mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
+mean_isecf_school <- aggregate(ISECF ~ idschool, qf, mean)
+m <- merge(mean_school, mean_isecf_school, by=c('idschool'))
+
+ggplot(m, aes(x=ISECF,y=puntaje_estandar,color=rd,group=1,size=totalum)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice socioeconómico y cultural promedio de los alumnos de la escuela") + ylab("Puntaje promedio de los alumnos de la escuela") + ggtitle('Figura 1.1. Logros de aprendizaje por tipo de escuela, 6to grado') + scale_y_continuous(limits=c(500,850)) + scale_color_discrete(name = "Tipo de escuela")
+```
+
+## BRASIL
+
+```{r puntaje_isecf_rd_BRA, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+
+# load sexto grado puntajes
+pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
+pc6 <- read.spss('./data/Puntajes_Alumnos/PC6_all_TERCE.sav', to.data.frame=T)
+pl6 <- read.spss('./data/Puntajes_Alumnos/PL6_all_TERCE.sav', to.data.frame=T)
+
+pm6 <- pm6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+pl6 <- pl6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+pc6 <- pc6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+
+# merge matematica, lectura y ciencias
+pm6$tipo <- 'matematica'
+pl6$tipo <- 'lectura'
+pc6$tipo <- 'ciencias'
+p6 <- rbind.fill(pm6,pl6,pc6)
+p6$promedio_global <- mean(p6$puntaje_estandar, na.rm=T)
+p6$sd_global <- sd(p6$puntaje_estandar, na.rm=T)
+
+p6 <- p6[p6$country == 'BRA',]
+
+# load factores alumnos
+qd <- read.spss('./data/Directores/QD6.SAV', to.data.frame=T)
+qd <- qd[qd$country == 'BRA',]
+
+qd$dependencia <- as.factor(qd$dependencia)
+qd$ruralidad <- as.factor(qd$ruralidad)
+levels(qd$dependencia) <- c("Oficial","Particular")
+levels(qd$ruralidad) <- c("Urbano","Rural")
+
+# load factores familia
+qf <- read.spss('./data/Familia/QF6.SAV', to.data.frame=T)
+qf <- qf[qf$country == 'BRA',]
+qf <- qf[,c("idschool","idstud","ISECF","INVOLUCF","CSOCBARF","SUPERVF","RECREAF","SERVBARF","VIOLBARF","MOTIVALF","subsgobf","padindig","madindig","DQFIT01","DQFIT25","DQFIT31","DQFIT34","DQFIT15_07","DQFIT18_02")]
+
+pe <- merge(p6,qd,by='idschool')
+escuela_tipo <- function(r,d) { if(r == 'Urbano' & d == 'Particular') { return(0) } else if (r == 'Urbano' & d == 'Oficial') { return(1) } else if (r == 'Rural' & d == 'Particular') {return(2)} else {return(3)}}
+pe$rd <- as.factor(mapply(escuela_tipo, pe$ruralidad, pe$dependencia))
+levels(pe$rd) <- c("Urbano/Particular", "Urbano/Oficial", "Rural/Particular", "Rural/Oficial")
+
+mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
+mean_isecf_school <- aggregate(ISECF ~ idschool, qf, mean)
+m <- merge(mean_school, mean_isecf_school, by=c('idschool'))
+
+ggplot(m, aes(x=ISECF,y=puntaje_estandar,color=rd,group=1,size=totalum)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice socioeconómico y cultural promedio de los alumnos de la escuela") + ylab("Puntaje promedio de los alumnos de la escuela") + ggtitle('Figura 1.1. Logros de aprendizaje por tipo de escuela, 6to grado') + scale_y_continuous(limits=c(500,850)) + scale_color_discrete(name = "Tipo de escuela")
+```
+
+## PANAMA
+ 
+```{r puntaje_isecf_rd_PAN, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+
+# load sexto grado puntajes
+pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
+pc6 <- read.spss('./data/Puntajes_Alumnos/PC6_all_TERCE.sav', to.data.frame=T)
+pl6 <- read.spss('./data/Puntajes_Alumnos/PL6_all_TERCE.sav', to.data.frame=T)
+
+pm6 <- pm6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+pl6 <- pl6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+pc6 <- pc6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+
+# merge matematica, lectura y ciencias
+pm6$tipo <- 'matematica'
+pl6$tipo <- 'lectura'
+pc6$tipo <- 'ciencias'
+p6 <- rbind.fill(pm6,pl6,pc6)
+p6$promedio_global <- mean(p6$puntaje_estandar, na.rm=T)
+p6$sd_global <- sd(p6$puntaje_estandar, na.rm=T)
+
+p6 <- p6[p6$country == 'PAN',]
+
+# load factores alumnos
+qd <- read.spss('./data/Directores/QD6.SAV', to.data.frame=T)
+qd <- qd[qd$country == 'PAN',]
+
+qd$dependencia <- as.factor(qd$dependencia)
+qd$ruralidad <- as.factor(qd$ruralidad)
+levels(qd$dependencia) <- c("Oficial","Particular")
+levels(qd$ruralidad) <- c("Urbano","Rural")
+
+# load factores familia
+qf <- read.spss('./data/Familia/QF6.SAV', to.data.frame=T)
+qf <- qf[qf$country == 'PAN',]
+qf <- qf[,c("idschool","idstud","ISECF","INVOLUCF","CSOCBARF","SUPERVF","RECREAF","SERVBARF","VIOLBARF","MOTIVALF","subsgobf","padindig","madindig","DQFIT01","DQFIT25","DQFIT31","DQFIT34","DQFIT15_07","DQFIT18_02")]
+
+pe <- merge(p6,qd,by='idschool')
+escuela_tipo <- function(r,d) { if(r == 'Urbano' & d == 'Particular') { return(0) } else if (r == 'Urbano' & d == 'Oficial') { return(1) } else if (r == 'Rural' & d == 'Particular') {return(2)} else {return(3)}}
+pe$rd <- as.factor(mapply(escuela_tipo, pe$ruralidad, pe$dependencia))
+levels(pe$rd) <- c("Urbano/Particular", "Urbano/Oficial", "Rural/Particular", "Rural/Oficial")
+
+mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
+mean_isecf_school <- aggregate(ISECF ~ idschool, qf, mean)
+m <- merge(mean_school, mean_isecf_school, by=c('idschool'))
+
+ggplot(m, aes(x=ISECF,y=puntaje_estandar,color=rd,group=1,size=totalum)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice socioeconómico y cultural promedio de los alumnos de la escuela") + ylab("Puntaje promedio de los alumnos de la escuela") + ggtitle('Figura 1.1. Logros de aprendizaje por tipo de escuela, 6to grado') + scale_y_continuous(limits=c(500,850)) + scale_color_discrete(name = "Tipo de escuela")
+```
+
+## MEXICO
+
+```{r puntaje_isecf_rd_MEX, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+
+# load sexto grado puntajes
+pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
+pc6 <- read.spss('./data/Puntajes_Alumnos/PC6_all_TERCE.sav', to.data.frame=T)
+pl6 <- read.spss('./data/Puntajes_Alumnos/PL6_all_TERCE.sav', to.data.frame=T)
+
+pm6 <- pm6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+pl6 <- pl6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+pc6 <- pc6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+
+# merge matematica, lectura y ciencias
+pm6$tipo <- 'matematica'
+pl6$tipo <- 'lectura'
+pc6$tipo <- 'ciencias'
+p6 <- rbind.fill(pm6,pl6,pc6)
+p6$promedio_global <- mean(p6$puntaje_estandar, na.rm=T)
+p6$sd_global <- sd(p6$puntaje_estandar, na.rm=T)
+
+p6 <- p6[p6$country == 'MEX',]
+
+# load factores alumnos
+qd <- read.spss('./data/Directores/QD6.SAV', to.data.frame=T)
+qd <- qd[qd$country == 'MEX',]
+
+qd$dependencia <- as.factor(qd$dependencia)
+qd$ruralidad <- as.factor(qd$ruralidad)
+levels(qd$dependencia) <- c("Oficial","Particular")
+levels(qd$ruralidad) <- c("Urbano","Rural")
+
+# load factores familia
+qf <- read.spss('./data/Familia/QF6.SAV', to.data.frame=T)
+qf <- qf[qf$country == 'MEX',]
+qf <- qf[,c("idschool","idstud","ISECF","INVOLUCF","CSOCBARF","SUPERVF","RECREAF","SERVBARF","VIOLBARF","MOTIVALF","subsgobf","padindig","madindig","DQFIT01","DQFIT25","DQFIT31","DQFIT34","DQFIT15_07","DQFIT18_02")]
+
+pe <- merge(p6,qd,by='idschool')
+escuela_tipo <- function(r,d) { if(r == 'Urbano' & d == 'Particular') { return(0) } else if (r == 'Urbano' & d == 'Oficial') { return(1) } else if (r == 'Rural' & d == 'Particular') {return(2)} else {return(3)}}
+pe$rd <- as.factor(mapply(escuela_tipo, pe$ruralidad, pe$dependencia))
+levels(pe$rd) <- c("Urbano/Particular", "Urbano/Oficial", "Rural/Particular", "Rural/Oficial")
+
+mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
+mean_isecf_school <- aggregate(ISECF ~ idschool, qf, mean)
+m <- merge(mean_school, mean_isecf_school, by=c('idschool'))
+
+ggplot(m, aes(x=ISECF,y=puntaje_estandar,color=rd,group=1,size=totalum)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice socioeconómico y cultural promedio de los alumnos de la escuela") + ylab("Puntaje promedio de los alumnos de la escuela") + ggtitle('Figura 1.1. Logros de aprendizaje por tipo de escuela, 6to grado') + scale_y_continuous(limits=c(500,850)) + scale_color_discrete(name = "Tipo de escuela")
+```
+
+## COSTA RICA
+
+```{r puntaje_isecf_rd_CRI, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+
+# load sexto grado puntajes
+pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
+pc6 <- read.spss('./data/Puntajes_Alumnos/PC6_all_TERCE.sav', to.data.frame=T)
+pl6 <- read.spss('./data/Puntajes_Alumnos/PL6_all_TERCE.sav', to.data.frame=T)
+
+pm6 <- pm6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+pl6 <- pl6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+pc6 <- pc6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+
+# merge matematica, lectura y ciencias
+pm6$tipo <- 'matematica'
+pl6$tipo <- 'lectura'
+pc6$tipo <- 'ciencias'
+p6 <- rbind.fill(pm6,pl6,pc6)
+p6$promedio_global <- mean(p6$puntaje_estandar, na.rm=T)
+p6$sd_global <- sd(p6$puntaje_estandar, na.rm=T)
+
+p6 <- p6[p6$country == 'CRI',]
+
+# load factores alumnos
+qd <- read.spss('./data/Directores/QD6.SAV', to.data.frame=T)
+qd <- qd[qd$country == 'CRI',]
+
+qd$dependencia <- as.factor(qd$dependencia)
+qd$ruralidad <- as.factor(qd$ruralidad)
+levels(qd$dependencia) <- c("Oficial","Particular")
+levels(qd$ruralidad) <- c("Urbano","Rural")
+
+# load factores familia
+qf <- read.spss('./data/Familia/QF6.SAV', to.data.frame=T)
+qf <- qf[qf$country == 'CRI',]
+qf <- qf[,c("idschool","idstud","ISECF","INVOLUCF","CSOCBARF","SUPERVF","RECREAF","SERVBARF","VIOLBARF","MOTIVALF","subsgobf","padindig","madindig","DQFIT01","DQFIT25","DQFIT31","DQFIT34","DQFIT15_07","DQFIT18_02")]
+
+pe <- merge(p6,qd,by='idschool')
+escuela_tipo <- function(r,d) { if(r == 'Urbano' & d == 'Particular') { return(0) } else if (r == 'Urbano' & d == 'Oficial') { return(1) } else if (r == 'Rural' & d == 'Particular') {return(2)} else {return(3)}}
+pe$rd <- as.factor(mapply(escuela_tipo, pe$ruralidad, pe$dependencia))
+levels(pe$rd) <- c("Urbano/Particular", "Urbano/Oficial", "Rural/Particular", "Rural/Oficial")
+
+mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
+mean_isecf_school <- aggregate(ISECF ~ idschool, qf, mean)
+m <- merge(mean_school, mean_isecf_school, by=c('idschool'))
+
+ggplot(m, aes(x=ISECF,y=puntaje_estandar,color=rd,group=1,size=totalum)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice socioeconómico y cultural promedio de los alumnos de la escuela") + ylab("Puntaje promedio de los alumnos de la escuela") + ggtitle('Figura 1.1. Logros de aprendizaje por tipo de escuela, 6to grado') + scale_y_continuous(limits=c(500,850)) + scale_color_discrete(name = "Tipo de escuela")
+```
+
+## COLOMBIA
+
+```{r puntaje_isecf_rd_COL, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+
+# load sexto grado puntajes
+pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
+pc6 <- read.spss('./data/Puntajes_Alumnos/PC6_all_TERCE.sav', to.data.frame=T)
+pl6 <- read.spss('./data/Puntajes_Alumnos/PL6_all_TERCE.sav', to.data.frame=T)
+
+pm6 <- pm6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+pl6 <- pl6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+pc6 <- pc6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+
+# merge matematica, lectura y ciencias
+pm6$tipo <- 'matematica'
+pl6$tipo <- 'lectura'
+pc6$tipo <- 'ciencias'
+p6 <- rbind.fill(pm6,pl6,pc6)
+p6$promedio_global <- mean(p6$puntaje_estandar, na.rm=T)
+p6$sd_global <- sd(p6$puntaje_estandar, na.rm=T)
+
+p6 <- p6[p6$country == 'COL',]
+
+# load factores alumnos
+qd <- read.spss('./data/Directores/QD6.SAV', to.data.frame=T)
+qd <- qd[qd$country == 'COL',]
+
+qd$dependencia <- as.factor(qd$dependencia)
+qd$ruralidad <- as.factor(qd$ruralidad)
+levels(qd$dependencia) <- c("Oficial","Particular")
+levels(qd$ruralidad) <- c("Urbano","Rural")
+
+# load factores familia
+qf <- read.spss('./data/Familia/QF6.SAV', to.data.frame=T)
+qf <- qf[qf$country == 'COL',]
+qf <- qf[,c("idschool","idstud","ISECF","INVOLUCF","CSOCBARF","SUPERVF","RECREAF","SERVBARF","VIOLBARF","MOTIVALF","subsgobf","padindig","madindig","DQFIT01","DQFIT25","DQFIT31","DQFIT34","DQFIT15_07","DQFIT18_02")]
+
+pe <- merge(p6,qd,by='idschool')
+escuela_tipo <- function(r,d) { if(r == 'Urbano' & d == 'Particular') { return(0) } else if (r == 'Urbano' & d == 'Oficial') { return(1) } else if (r == 'Rural' & d == 'Particular') {return(2)} else {return(3)}}
+pe$rd <- as.factor(mapply(escuela_tipo, pe$ruralidad, pe$dependencia))
+levels(pe$rd) <- c("Urbano/Particular", "Urbano/Oficial", "Rural/Particular", "Rural/Oficial")
+
+mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
+mean_isecf_school <- aggregate(ISECF ~ idschool, qf, mean)
+m <- merge(mean_school, mean_isecf_school, by=c('idschool'))
+
+ggplot(m, aes(x=ISECF,y=puntaje_estandar,color=rd,group=1,size=totalum)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice socioeconómico y cultural promedio de los alumnos de la escuela") + ylab("Puntaje promedio de los alumnos de la escuela") + ggtitle('Figura 1.1. Logros de aprendizaje por tipo de escuela, 6to grado') + scale_y_continuous(limits=c(500,850)) + scale_color_discrete(name = "Tipo de escuela")
+```
+
+## PERU
+
+```{r puntaje_isecf_rd_PER, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+
+# load sexto grado puntajes
+pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
+pc6 <- read.spss('./data/Puntajes_Alumnos/PC6_all_TERCE.sav', to.data.frame=T)
+pl6 <- read.spss('./data/Puntajes_Alumnos/PL6_all_TERCE.sav', to.data.frame=T)
+
+pm6 <- pm6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+pl6 <- pl6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+pc6 <- pc6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+
+# merge matematica, lectura y ciencias
+pm6$tipo <- 'matematica'
+pl6$tipo <- 'lectura'
+pc6$tipo <- 'ciencias'
+p6 <- rbind.fill(pm6,pl6,pc6)
+p6$promedio_global <- mean(p6$puntaje_estandar, na.rm=T)
+p6$sd_global <- sd(p6$puntaje_estandar, na.rm=T)
+
+p6 <- p6[p6$country == 'PER',]
+
+# load factores alumnos
+qd <- read.spss('./data/Directores/QD6.SAV', to.data.frame=T)
+qd <- qd[qd$country == 'PER',]
+
+qd$dependencia <- as.factor(qd$dependencia)
+qd$ruralidad <- as.factor(qd$ruralidad)
+levels(qd$dependencia) <- c("Oficial","Particular")
+levels(qd$ruralidad) <- c("Urbano","Rural")
+
+# load factores familia
+qf <- read.spss('./data/Familia/QF6.SAV', to.data.frame=T)
+qf <- qf[qf$country == 'PER',]
+qf <- qf[,c("idschool","idstud","ISECF","INVOLUCF","CSOCBARF","SUPERVF","RECREAF","SERVBARF","VIOLBARF","MOTIVALF","subsgobf","padindig","madindig","DQFIT01","DQFIT25","DQFIT31","DQFIT34","DQFIT15_07","DQFIT18_02")]
+
+pe <- merge(p6,qd,by='idschool')
+escuela_tipo <- function(r,d) { if(r == 'Urbano' & d == 'Particular') { return(0) } else if (r == 'Urbano' & d == 'Oficial') { return(1) } else if (r == 'Rural' & d == 'Particular') {return(2)} else {return(3)}}
+pe$rd <- as.factor(mapply(escuela_tipo, pe$ruralidad, pe$dependencia))
+levels(pe$rd) <- c("Urbano/Particular", "Urbano/Oficial", "Rural/Particular", "Rural/Oficial")
+
+mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
+mean_isecf_school <- aggregate(ISECF ~ idschool, qf, mean)
+m <- merge(mean_school, mean_isecf_school, by=c('idschool'))
+
+ggplot(m, aes(x=ISECF,y=puntaje_estandar,color=rd,group=1,size=totalum)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice socioeconómico y cultural promedio de los alumnos de la escuela") + ylab("Puntaje promedio de los alumnos de la escuela") + ggtitle('Figura 1.1. Logros de aprendizaje por tipo de escuela, 6to grado') + scale_y_continuous(limits=c(500,850)) + scale_color_discrete(name = "Tipo de escuela")
+```
+
+## ECUADOR
+
+```{r puntaje_isecf_rd_ECU, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+
+# load sexto grado puntajes
+pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
+pc6 <- read.spss('./data/Puntajes_Alumnos/PC6_all_TERCE.sav', to.data.frame=T)
+pl6 <- read.spss('./data/Puntajes_Alumnos/PL6_all_TERCE.sav', to.data.frame=T)
+
+pm6 <- pm6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+pl6 <- pl6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+pc6 <- pc6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+
+# merge matematica, lectura y ciencias
+pm6$tipo <- 'matematica'
+pl6$tipo <- 'lectura'
+pc6$tipo <- 'ciencias'
+p6 <- rbind.fill(pm6,pl6,pc6)
+p6$promedio_global <- mean(p6$puntaje_estandar, na.rm=T)
+p6$sd_global <- sd(p6$puntaje_estandar, na.rm=T)
+
+p6 <- p6[p6$country == 'ECU',]
+
+# load factores alumnos
+qd <- read.spss('./data/Directores/QD6.SAV', to.data.frame=T)
+qd <- qd[qd$country == 'ECU',]
+
+qd$dependencia <- as.factor(qd$dependencia)
+qd$ruralidad <- as.factor(qd$ruralidad)
+levels(qd$dependencia) <- c("Oficial","Particular")
+levels(qd$ruralidad) <- c("Urbano","Rural")
+
+# load factores familia
+qf <- read.spss('./data/Familia/QF6.SAV', to.data.frame=T)
+qf <- qf[qf$country == 'ECU',]
+qf <- qf[,c("idschool","idstud","ISECF","INVOLUCF","CSOCBARF","SUPERVF","RECREAF","SERVBARF","VIOLBARF","MOTIVALF","subsgobf","padindig","madindig","DQFIT01","DQFIT25","DQFIT31","DQFIT34","DQFIT15_07","DQFIT18_02")]
+
+pe <- merge(p6,qd,by='idschool')
+escuela_tipo <- function(r,d) { if(r == 'Urbano' & d == 'Particular') { return(0) } else if (r == 'Urbano' & d == 'Oficial') { return(1) } else if (r == 'Rural' & d == 'Particular') {return(2)} else {return(3)}}
+pe$rd <- as.factor(mapply(escuela_tipo, pe$ruralidad, pe$dependencia))
+levels(pe$rd) <- c("Urbano/Particular", "Urbano/Oficial", "Rural/Particular", "Rural/Oficial")
+
+mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
+mean_isecf_school <- aggregate(ISECF ~ idschool, qf, mean)
+m <- merge(mean_school, mean_isecf_school, by=c('idschool'))
+
+ggplot(m, aes(x=ISECF,y=puntaje_estandar,color=rd,group=1,size=totalum)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice socioeconómico y cultural promedio de los alumnos de la escuela") + ylab("Puntaje promedio de los alumnos de la escuela") + ggtitle('Figura 1.1. Logros de aprendizaje por tipo de escuela, 6to grado') + scale_y_continuous(limits=c(500,850)) + scale_color_discrete(name = "Tipo de escuela")
+```
+
+## REPUBLICA DOMINICANA
+
+```{r puntaje_isecf_rd_REP, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+
+# load sexto grado puntajes
+pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
+pc6 <- read.spss('./data/Puntajes_Alumnos/PC6_all_TERCE.sav', to.data.frame=T)
+pl6 <- read.spss('./data/Puntajes_Alumnos/PL6_all_TERCE.sav', to.data.frame=T)
+
+pm6 <- pm6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+pl6 <- pl6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+pc6 <- pc6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+
+# merge matematica, lectura y ciencias
+pm6$tipo <- 'matematica'
+pl6$tipo <- 'lectura'
+pc6$tipo <- 'ciencias'
+p6 <- rbind.fill(pm6,pl6,pc6)
+p6$promedio_global <- mean(p6$puntaje_estandar, na.rm=T)
+p6$sd_global <- sd(p6$puntaje_estandar, na.rm=T)
+
+p6 <- p6[p6$country == 'REP',]
+
+# load factores alumnos
+qd <- read.spss('./data/Directores/QD6.SAV', to.data.frame=T)
+qd <- qd[qd$country == 'REP',]
+
+qd$dependencia <- as.factor(qd$dependencia)
+qd$ruralidad <- as.factor(qd$ruralidad)
+levels(qd$dependencia) <- c("Oficial","Particular")
+levels(qd$ruralidad) <- c("Urbano","Rural")
+
+# load factores familia
+qf <- read.spss('./data/Familia/QF6.SAV', to.data.frame=T)
+qf <- qf[qf$country == 'REP',]
+qf <- qf[,c("idschool","idstud","ISECF","INVOLUCF","CSOCBARF","SUPERVF","RECREAF","SERVBARF","VIOLBARF","MOTIVALF","subsgobf","padindig","madindig","DQFIT01","DQFIT25","DQFIT31","DQFIT34","DQFIT15_07","DQFIT18_02")]
+
+pe <- merge(p6,qd,by='idschool')
+escuela_tipo <- function(r,d) { if(r == 'Urbano' & d == 'Particular') { return(0) } else if (r == 'Urbano' & d == 'Oficial') { return(1) } else if (r == 'Rural' & d == 'Particular') {return(2)} else {return(3)}}
+pe$rd <- as.factor(mapply(escuela_tipo, pe$ruralidad, pe$dependencia))
+levels(pe$rd) <- c("Urbano/Particular", "Urbano/Oficial", "Rural/Particular", "Rural/Oficial")
+
+mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
+mean_isecf_school <- aggregate(ISECF ~ idschool, qf, mean)
+m <- merge(mean_school, mean_isecf_school, by=c('idschool'))
+
+ggplot(m, aes(x=ISECF,y=puntaje_estandar,color=rd,group=1,size=totalum)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice socioeconómico y cultural promedio de los alumnos de la escuela") + ylab("Puntaje promedio de los alumnos de la escuela") + ggtitle('Figura 1.1. Logros de aprendizaje por tipo de escuela, 6to grado') + scale_y_continuous(limits=c(500,850)) + scale_color_discrete(name = "Tipo de escuela")
+```
+
+## PARAGUAY
+
+```{r puntaje_isecf_rd_PAR, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+
+# load sexto grado puntajes
+pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
+pc6 <- read.spss('./data/Puntajes_Alumnos/PC6_all_TERCE.sav', to.data.frame=T)
+pl6 <- read.spss('./data/Puntajes_Alumnos/PL6_all_TERCE.sav', to.data.frame=T)
+
+pm6 <- pm6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+pl6 <- pl6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+pc6 <- pc6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+
+# merge matematica, lectura y ciencias
+pm6$tipo <- 'matematica'
+pl6$tipo <- 'lectura'
+pc6$tipo <- 'ciencias'
+p6 <- rbind.fill(pm6,pl6,pc6)
+p6$promedio_global <- mean(p6$puntaje_estandar, na.rm=T)
+p6$sd_global <- sd(p6$puntaje_estandar, na.rm=T)
+
+p6 <- p6[p6$country == 'PAR',]
+
+# load factores alumnos
+qd <- read.spss('./data/Directores/QD6.SAV', to.data.frame=T)
+qd <- qd[qd$country == 'PAR',]
+
+qd$dependencia <- as.factor(qd$dependencia)
+qd$ruralidad <- as.factor(qd$ruralidad)
+levels(qd$dependencia) <- c("Oficial","Particular")
+levels(qd$ruralidad) <- c("Urbano","Rural")
+
+# load factores familia
+qf <- read.spss('./data/Familia/QF6.SAV', to.data.frame=T)
+qf <- qf[qf$country == 'PAR',]
+qf <- qf[,c("idschool","idstud","ISECF","INVOLUCF","CSOCBARF","SUPERVF","RECREAF","SERVBARF","VIOLBARF","MOTIVALF","subsgobf","padindig","madindig","DQFIT01","DQFIT25","DQFIT31","DQFIT34","DQFIT15_07","DQFIT18_02")]
+
+pe <- merge(p6,qd,by='idschool')
+escuela_tipo <- function(r,d) { if(r == 'Urbano' & d == 'Particular') { return(0) } else if (r == 'Urbano' & d == 'Oficial') { return(1) } else if (r == 'Rural' & d == 'Particular') {return(2)} else {return(3)}}
+pe$rd <- as.factor(mapply(escuela_tipo, pe$ruralidad, pe$dependencia))
+levels(pe$rd) <- c("Urbano/Particular", "Urbano/Oficial", "Rural/Particular", "Rural/Oficial")
+
+mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
+mean_isecf_school <- aggregate(ISECF ~ idschool, qf, mean)
+m <- merge(mean_school, mean_isecf_school, by=c('idschool'))
+
+ggplot(m, aes(x=ISECF,y=puntaje_estandar,color=rd,group=1,size=totalum)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice socioeconómico y cultural promedio de los alumnos de la escuela") + ylab("Puntaje promedio de los alumnos de la escuela") + ggtitle('Figura 1.1. Logros de aprendizaje por tipo de escuela, 6to grado') + scale_y_continuous(limits=c(500,850)) + scale_color_discrete(name = "Tipo de escuela")
+```
+
+## GUATEMALA
+
+```{r puntaje_isecf_rd_GTM, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+
+# load sexto grado puntajes
+pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
+pc6 <- read.spss('./data/Puntajes_Alumnos/PC6_all_TERCE.sav', to.data.frame=T)
+pl6 <- read.spss('./data/Puntajes_Alumnos/PL6_all_TERCE.sav', to.data.frame=T)
+
+pm6 <- pm6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+pl6 <- pl6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+pc6 <- pc6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+
+# merge matematica, lectura y ciencias
+pm6$tipo <- 'matematica'
+pl6$tipo <- 'lectura'
+pc6$tipo <- 'ciencias'
+p6 <- rbind.fill(pm6,pl6,pc6)
+p6$promedio_global <- mean(p6$puntaje_estandar, na.rm=T)
+p6$sd_global <- sd(p6$puntaje_estandar, na.rm=T)
+
+p6 <- p6[p6$country == 'GTM',]
+
+# load factores alumnos
+qd <- read.spss('./data/Directores/QD6.SAV', to.data.frame=T)
+qd <- qd[qd$country == 'GTM',]
+
+qd$dependencia <- as.factor(qd$dependencia)
+qd$ruralidad <- as.factor(qd$ruralidad)
+levels(qd$dependencia) <- c("Oficial","Particular")
+levels(qd$ruralidad) <- c("Urbano","Rural")
+
+# load factores familia
+qf <- read.spss('./data/Familia/QF6.SAV', to.data.frame=T)
+qf <- qf[qf$country == 'GTM',]
+qf <- qf[,c("idschool","idstud","ISECF","INVOLUCF","CSOCBARF","SUPERVF","RECREAF","SERVBARF","VIOLBARF","MOTIVALF","subsgobf","padindig","madindig","DQFIT01","DQFIT25","DQFIT31","DQFIT34","DQFIT15_07","DQFIT18_02")]
+
+pe <- merge(p6,qd,by='idschool')
+escuela_tipo <- function(r,d) { if(r == 'Urbano' & d == 'Particular') { return(0) } else if (r == 'Urbano' & d == 'Oficial') { return(1) } else if (r == 'Rural' & d == 'Particular') {return(2)} else {return(3)}}
+pe$rd <- as.factor(mapply(escuela_tipo, pe$ruralidad, pe$dependencia))
+levels(pe$rd) <- c("Urbano/Particular", "Urbano/Oficial", "Rural/Particular", "Rural/Oficial")
+
+mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
+mean_isecf_school <- aggregate(ISECF ~ idschool, qf, mean)
+m <- merge(mean_school, mean_isecf_school, by=c('idschool'))
+
+ggplot(m, aes(x=ISECF,y=puntaje_estandar,color=rd,group=1,size=totalum)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice socioeconómico y cultural promedio de los alumnos de la escuela") + ylab("Puntaje promedio de los alumnos de la escuela") + ggtitle('Figura 1.1. Logros de aprendizaje por tipo de escuela, 6to grado') + scale_y_continuous(limits=c(500,850)) + scale_color_discrete(name = "Tipo de escuela")
+```
+
+## HONDURAS
+
+```{r puntaje_isecf_rd_HON, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+
+# load sexto grado puntajes
+pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
+pc6 <- read.spss('./data/Puntajes_Alumnos/PC6_all_TERCE.sav', to.data.frame=T)
+pl6 <- read.spss('./data/Puntajes_Alumnos/PL6_all_TERCE.sav', to.data.frame=T)
+
+pm6 <- pm6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+pl6 <- pl6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+pc6 <- pc6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+
+# merge matematica, lectura y ciencias
+pm6$tipo <- 'matematica'
+pl6$tipo <- 'lectura'
+pc6$tipo <- 'ciencias'
+p6 <- rbind.fill(pm6,pl6,pc6)
+p6$promedio_global <- mean(p6$puntaje_estandar, na.rm=T)
+p6$sd_global <- sd(p6$puntaje_estandar, na.rm=T)
+
+p6 <- p6[p6$country == 'HON',]
+
+# load factores alumnos
+qd <- read.spss('./data/Directores/QD6.SAV', to.data.frame=T)
+qd <- qd[qd$country == 'HON',]
+
+qd$dependencia <- as.factor(qd$dependencia)
+qd$ruralidad <- as.factor(qd$ruralidad)
+levels(qd$dependencia) <- c("Oficial","Particular")
+levels(qd$ruralidad) <- c("Urbano","Rural")
+
+# load factores familia
+qf <- read.spss('./data/Familia/QF6.SAV', to.data.frame=T)
+qf <- qf[qf$country == 'HON',]
+qf <- qf[,c("idschool","idstud","ISECF","INVOLUCF","CSOCBARF","SUPERVF","RECREAF","SERVBARF","VIOLBARF","MOTIVALF","subsgobf","padindig","madindig","DQFIT01","DQFIT25","DQFIT31","DQFIT34","DQFIT15_07","DQFIT18_02")]
+
+pe <- merge(p6,qd,by='idschool')
+escuela_tipo <- function(r,d) { if(r == 'Urbano' & d == 'Particular') { return(0) } else if (r == 'Urbano' & d == 'Oficial') { return(1) } else if (r == 'Rural' & d == 'Particular') {return(2)} else {return(3)}}
+pe$rd <- as.factor(mapply(escuela_tipo, pe$ruralidad, pe$dependencia))
+levels(pe$rd) <- c("Urbano/Particular", "Urbano/Oficial", "Rural/Particular", "Rural/Oficial")
+
+mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
+mean_isecf_school <- aggregate(ISECF ~ idschool, qf, mean)
+m <- merge(mean_school, mean_isecf_school, by=c('idschool'))
+
+ggplot(m, aes(x=ISECF,y=puntaje_estandar,color=rd,group=1,size=totalum)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice socioeconómico y cultural promedio de los alumnos de la escuela") + ylab("Puntaje promedio de los alumnos de la escuela") + ggtitle('Figura 1.1. Logros de aprendizaje por tipo de escuela, 6to grado') + scale_y_continuous(limits=c(500,850)) + scale_color_discrete(name = "Tipo de escuela")
+```
+
+## NICARAGUA
+
+```{r puntaje_isecf_rd_NIC, fig.width=12, fig.height=10, echo=F, message=F, warning=F}
+
+# load sexto grado puntajes
+pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
+pc6 <- read.spss('./data/Puntajes_Alumnos/PC6_all_TERCE.sav', to.data.frame=T)
+pl6 <- read.spss('./data/Puntajes_Alumnos/PL6_all_TERCE.sav', to.data.frame=T)
+
+pm6 <- pm6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+pl6 <- pl6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+pc6 <- pc6[,c("sID","puntaje_estandar","nivel","idstud","country","idschool")]
+
+# merge matematica, lectura y ciencias
+pm6$tipo <- 'matematica'
+pl6$tipo <- 'lectura'
+pc6$tipo <- 'ciencias'
+p6 <- rbind.fill(pm6,pl6,pc6)
+p6$promedio_global <- mean(p6$puntaje_estandar, na.rm=T)
+p6$sd_global <- sd(p6$puntaje_estandar, na.rm=T)
+
+p6 <- p6[p6$country == 'NIC',]
+
+# load factores alumnos
+qd <- read.spss('./data/Directores/QD6.SAV', to.data.frame=T)
+qd <- qd[qd$country == 'NIC',]
+
+qd$dependencia <- as.factor(qd$dependencia)
+qd$ruralidad <- as.factor(qd$ruralidad)
+levels(qd$dependencia) <- c("Oficial","Particular")
+levels(qd$ruralidad) <- c("Urbano","Rural")
+
+# load factores familia
+qf <- read.spss('./data/Familia/QF6.SAV', to.data.frame=T)
+qf <- qf[qf$country == 'NIC',]
+qf <- qf[,c("idschool","idstud","ISECF","INVOLUCF","CSOCBARF","SUPERVF","RECREAF","SERVBARF","VIOLBARF","MOTIVALF","subsgobf","padindig","madindig","DQFIT01","DQFIT25","DQFIT31","DQFIT34","DQFIT15_07","DQFIT18_02")]
+
+pe <- merge(p6,qd,by='idschool')
+escuela_tipo <- function(r,d) { if(r == 'Urbano' & d == 'Particular') { return(0) } else if (r == 'Urbano' & d == 'Oficial') { return(1) } else if (r == 'Rural' & d == 'Particular') {return(2)} else {return(3)}}
+pe$rd <- as.factor(mapply(escuela_tipo, pe$ruralidad, pe$dependencia))
+levels(pe$rd) <- c("Urbano/Particular", "Urbano/Oficial", "Rural/Particular", "Rural/Oficial")
+
+mean_school <- aggregate(puntaje_estandar ~ idschool + rd + totalum , pe, mean)
+mean_isecf_school <- aggregate(ISECF ~ idschool, qf, mean)
+m <- merge(mean_school, mean_isecf_school, by=c('idschool'))
+
+ggplot(m, aes(x=ISECF,y=puntaje_estandar,color=rd,group=1,size=totalum)) + geom_point(alpha=0.7) + geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = F) + scale_size(guide=FALSE) + xlab("Índice socioeconómico y cultural promedio de los alumnos de la escuela") + ylab("Puntaje promedio de los alumnos de la escuela") + ggtitle('Figura 1.1. Logros de aprendizaje por tipo de escuela, 6to grado') + scale_y_continuous(limits=c(500,850)) + scale_color_discrete(name = "Tipo de escuela")
+```
