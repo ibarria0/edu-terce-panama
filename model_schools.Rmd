@@ -1,0 +1,152 @@
+---
+## Multilevel modeling with R and lme4
+
+The purpose of this document is to explore a few models that attempt to describe how school level variables affect student's test scores for the 2013 TERCE study.
+
+```{r init,results="hide",echo=F, message=F, warning=F}
+library(foreign)
+library(scales)
+library(lme4)
+library(ggplot2)
+library(plyr)
+```
+### Preparing the data
+
+First we need to load the data into R from the SAV files. This dataset contains individual question/answers and we will drop those columns (and a few more) so that we have a new dataframe with only the data that we need.
+```{r load,results="hide",echo=T, message=F, warning=F}
+# load sexto grado puntajes
+pm6 <- read.spss('./data/Puntajes_Alumnos/PM6_all_TERCE.sav', to.data.frame=T)
+pc6 <- read.spss('./data/Puntajes_Alumnos/PC6_all_TERCE.sav', to.data.frame=T)
+pl6 <- read.spss('./data/Puntajes_Alumnos/PL6_all_TERCE.sav', to.data.frame=T)
+
+pm6 <- pm6[,c('idstud',"puntaje_estandar","idschool","country")]
+pl6 <- pl6[,c('idstud',"puntaje_estandar","idschool","country")]
+pc6 <- pc6[,c('idstud',"puntaje_estandar","idschool","country")]
+
+# merge matematica, lectura y ciencias
+pm6$tipo <- 'matematica'
+pl6$tipo <- 'lectura'
+pc6$tipo <- 'ciencias'
+p6 <- rbind.fill(pm6,pl6,pc6)
+```
+
+We will also drop anything that is not PANAMA
+```{r subset_pan,results="hide",echo=T, message=F, warning=F}
+p6 <- p6[p6$country == 'PAN',]
+```
+
+This data has scores for math, science and reading. A single student will be represented by 3 rows in the dataframe. We will average the scores across the three tests for each student so that each student is a single row in the data frame.
+```{r group,results="hide",echo=T, message=F, warning=F}
+p6 <- aggregate(puntaje_estandar ~ idstud + idschool + country , p6, mean)
+```
+
+Now we load the data from the schools and make sure R reads them as FACTOR variables for when it is necesary.
+```{r directores,results="hide",echo=T, message=F, warning=F}
+# load factores directores (escuelas)
+qd <- read.spss('./data/Directores/QD6.SAV', to.data.frame=T)
+qd <- qd[qd$country == 'PAN',]
+
+#prep factores
+qd$DQDIT14_01 <- as.factor(qd$DQDIT14_01)
+qd$DQDIT15_01 <- as.factor(qd$DQDIT15_01)
+qd$DQDIT16_01 <- as.factor(qd$DQDIT16_01)
+qd$DQDIT16_02 <- as.factor(qd$DQDIT16_02)
+qd$DQDIT17_01 <- as.factor(qd$DQDIT17_01)
+qd$DQDIT17_01 <- as.factor(qd$DQDIT17_07)
+qd$DQDIT17_01 <- as.factor(qd$DQDIT17_09)
+qd$DQDIT18_01 <- as.factor(qd$DQDIT18_01)
+qd$DQDIT18_02 <- as.factor(qd$DQDIT18_02)
+qd$DQDIT18_03 <- as.factor(qd$DQDIT18_03)
+qd$DQDIT18_04 <- as.factor(qd$DQDIT18_04)
+qd$DQDIT19_01 <- as.factor(qd$DQDIT19_01)
+qd$DQDIT21a <- as.factor(qd$DQDIT21a)
+qd$DQDIT22_01 <- as.factor(qd$DQDIT22_01)
+qd$DQDIT22_02 <- as.factor(qd$DQDIT22_02)
+qd$DQDIT23 <- as.factor(qd$DQDIT23)
+qd$DQDIT24_02<- as.factor(qd$DQDIT24_02)
+qd$DQDIT25_02 <- as.factor(qd$DQDIT25_02)
+qd$DQDIT27a <- as.factor(qd$DQDIT27a)
+qd$hrsescue <- as.factor(qd$hrsescue)
+qd$dependencia <- as.factor(qd$dependencia)
+qd$ruralidad <- as.factor(qd$ruralidad)
+levels(qd$dependencia) <- c("Oficial","Particular")
+levels(qd$ruralidad) <- c("Urbano","Rural")
+```
+
+Now we will merge this data to the student score data using the field "idschool".
+```{r dir_merge,results="hide",echo=T, message=F, warning=F}
+pe <- merge(p6,qd,by='idschool')
+pe$idschool <- factor(pe$idschool)
+pe$idstud <- factor(pe$idstud)
+```
+
+Lastly, we need to remove missing data for the columns that we are going to look at
+```{r fofit,results="hide",echo=T, message=F, warning=F}
+fofit <- na.omit(pe[,c("puntaje_estandar",'idstud','idschool',"dependencia","ruralidad","DQDIT01","DQDIT14_01","DQDIT15_01","DQDIT16_01","DQDIT17_01","DQDIT16_02","DQDIT17_07","DQDIT17_09","DQDIT18_01","DQDIT18_02","DQDIT18_03","DQDIT18_04","DQDIT19_01","DQDIT21a","DQDIT22_01","DQDIT22_02","DQDIT23","DQDIT24_02","DQDIT25_02","DQDIT27a",'INFRAD','VIOLEND','CSOCIALD','AUTOADD','AUTOACD','CLAMBLD','hrsescue')])
+```
+
+### Building the models
+
+First we will build the null model with a random effects grouping structure but no fixed predictors, we will compare all other models to this.
+```{r models_null, echo=T,message=F, warning=F}
+fit.lmer_null <- lmer(puntaje_estandar ~ 1 + (1|idschool), data=fofit)
+summary(fit.lmer_null)
+```
+
+We will also build a similar model but with dependencia (public/private) and ruralidad (urban/rural) nested at the school level and also at the subject (student) level.
+```{r models_null_nest, echo=T,message=F, warning=F}
+fit.lmer_null_nest <- lmer(puntaje_estandar ~ 1 + dependencia + ruralidad + (dependencia + ruralidad |idschool), data=fofit)
+summary(fit.lmer_null_nest)
+```
+
+Lets compare the two real quick....
+```{r models_null_nest_comp, echo=T,message=F, warning=F}
+anova(fit.lmer_null,fit.lmer_null_nest)
+```
+
+Next we will build a model using the INFRAD as a fixed-effect predictor. We choose to test this variable first because it is tightly related to the socioeconomic factor.
+```{r models_INFRAD, echo=T,message=F, warning=F}
+fit.lmer_infrad <- lmer(puntaje_estandar ~ INFRAD + (1|idschool), data=fofit)
+summary(fit.lmer_infrad)
+```
+Lets look at a model with more predictors
+
+```{r models_full, echo=T,message=F, warning=F}
+fit.lmer_full_fact <- lmer(puntaje_estandar ~ dependencia + ruralidad + DQDIT01 + DQDIT14_01 + DQDIT15_01 + DQDIT16_01 + DQDIT17_01 + DQDIT18_01 + DQDIT18_02 + DQDIT18_03 + DQDIT18_04 + DQDIT19_01 + DQDIT21a + DQDIT27a + DQDIT16_02 + DQDIT17_07 + DQDIT17_09 + DQDIT23 + DQDIT22_01 + DQDIT22_02 + DQDIT27a + INFRAD + VIOLEND + CSOCIALD + AUTOADD + AUTOACD + CLAMBLD + hrsescue + (1|idschool), data=fofit)
+summary(fit.lmer_full_fact)
+```
+
+Now lets compare those models using anova
+```{r models_anova, echo=T,message=F, warning=F}
+anova(fit.lmer_null,fit.lmer_infrad,fit.lmer_full_fact)
+```
+
+In parallel, we will also compare the same models but with the dependencia and ruralidad vars nested at the school level
+
+```{r schools_nested, echo=F,message=F, warning=F}
+
+fit.lmer_null_nest <- lmer(puntaje_estandar ~ 1 + (dependencia + ruralidad|idschool), data=fofit)
+fit.lmer_infrad_nest <- lmer(puntaje_estandar ~ INFRAD + (dependencia + ruralidad|idschool), data=fofit)
+fit.lmer_full_nest <- lmer(puntaje_estandar ~ INFRAD + VIOLEND + CSOCIALD + AUTOADD + AUTOACD + CLAMBLD + dependencia + ruralidad + (dependencia + ruralidad|idschool), data=fofit)
+fit.lmer_full_hrs_nest <- lmer(puntaje_estandar ~ INFRAD + VIOLEND + CSOCIALD + AUTOADD + AUTOACD + CLAMBLD + dependencia + ruralidad + hrsescue + (dependencia + ruralidad|idschool), data=fofit)
+fit.lmer_full_fact_nest <- lmer(puntaje_estandar ~ dependencia + ruralidad + DQDIT01 + DQDIT14_01 + DQDIT15_01 + DQDIT16_01 + DQDIT17_01 + DQDIT18_01 + DQDIT18_02 + DQDIT18_03 + DQDIT18_04 + DQDIT19_01 + DQDIT21a + DQDIT27a + DQDIT16_02 + DQDIT17_07 + DQDIT17_09 + DQDIT23 + DQDIT22_01 + DQDIT22_02 + DQDIT27a + INFRAD + VIOLEND + CSOCIALD + AUTOADD + AUTOACD + CLAMBLD + hrsescue + (dependencia + ruralidad|idschool), data=fofit)
+anova(fit.lmer_null_nest,fit.lmer_infrad_nest,fit.lmer_full_fact_nest)
+```
+
+### Some tests on the full model
+
+The full model includes a few fixed-effect predictors and will do nesting of dependencia and ruralidad on the school level. Here are some plots for the model:
+
+```{r tests, echo=T,message=F, warning=F}
+shapiro.test(fofit$puntaje_estandar)
+```
+```{r tests1, echo=T,message=F, warning=F}
+plot(fit.lmer_full_fact_nest)
+```
+```{r tests2, echo=T,message=F, warning=F}
+m <- fit.lmer_full_fact_nest
+qqnorm(residuals(m)); qqline(residuals(m));
+```
+```{r tests3, echo=T,message=F, warning=F}
+hist(fofit$puntaje_estandar)
+```
